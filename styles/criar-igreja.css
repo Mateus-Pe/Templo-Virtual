@@ -1,0 +1,159 @@
+body{
+    background-color: white
+}
+
+
+
+ main{
+    display: block;
+    background-color: white; 
+    padding-top: 50px;
+ }
+
+
+.adicionar{
+    padding: 20px; 
+    display: block;
+}
+
+.adicionar_input{
+    border: 0;
+    outline: 0;
+    background: transparent;  
+    border-bottom: 1px solid darkred; 
+    width: 80%;
+    padding-left: 4rem;
+    height: 3.5rem;
+    font-family: Exo !important;
+}
+
+
+.div_header{
+    background-color: darkred;
+    border-bottom: 1px solid darkred;
+    top: 0px;
+    width: 100%;
+    height: 55px; 
+    z-index: 2; 
+    position: fixed; 
+}
+
+.div_botao-salvar{
+    font-family: Exo; 
+    border: 1px solid darkred!important; 
+    background-color: white; 
+    color: darkred; 
+    width: 70%; 
+    border-radius: 10px; 
+    height: 4.5rem;
+    font-size: 2rem;
+}
+
+.span_criar-igreja{
+    font-size: 2rem; 
+    color: #fff; 
+    position: relative; 
+    right: 2.0rem; 
+    padding: 1.5rem;
+    font-family: Exo;
+}
+
+.div_input{
+    margin-top: 3%;
+}
+
+.span_input{
+    color: lightgray !important; 
+    margin-top: 0.5rem;
+}
+
+.span_div{
+    font-family: Exo;
+}
+
+.div_btn-salvar{
+    bottom: 30px; display: block;
+}
+
+.container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  .overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+
+  .lista{
+    margin-top: 0px; 
+    background-color: white;
+    color:solid darkred;
+    border-bottom: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    height: 50vh;
+    overflow: hidden;
+    font-family: Exo !important;
+    overflow-y: scroll;
+  }
+
+.divLista{
+    outline: 0;
+    background: transparent;   
+    width: 80%;
+    padding-left: 4rem;
+    height: 2rem;
+    font-family: Exo !important;
+    display: none;
+    position: relative;
+    padding-right: 0px; 
+    padding-left: 0px;
+    color: darkred;
+    z-index: 100;
+}
+
+
+.input-with-icon {
+    position: relative;
+    padding-left: 1vh; 
+}
+
+.input-icon {
+    position: absolute;
+    left: 11%; 
+    top: 40%; 
+    transform: translateY(-50%);
+}
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto 8%; 
+    align-items: center; 
+    margin-top: -7%;
+}
+
+
+.matriz_checkbox {
+    grid-column: 1; 
+    margin-left: 85%; 
+    margin-top: -3%;
+    font-family: EXO;
+}
+
+.input_checkbox{
+    margin-top: 12%;
+    margin-left: 65%;
+}
+
+
+
+
+  

@@ -1,0 +1,326 @@
+var myJson; 
+
+var myJsonPesq; 
+
+getCidades();
+
+
+$('#btn_salvar').click(function(e){
+    
+    if($('#nome_instituicao').val() == ''){
+      $('.cadastro__alert').text('Para prosseguir coloque uma instituição');
+    }
+    else if($('#cep_instituicao').val() == ''){
+        $('.cadastro__alert').text('Para prosseguir coloque o CEP');
+    }
+    else if($('#cidade_instituicao').val() == ''){
+      $('.cadastro__alert').text('Para prosseguir coloque a cidade');
+    }
+    else if($('#bairro_instituicao').val() == ''){
+      $('.cadastro__alert').text('Para prosseguir coloque o bairro');
+    }
+    else if($('#logradouro_instituicao').val() == ''){
+        $('.cadastro__alert').text('Para prosseguir coloque um logradouro');
+    }
+    else if($('#numero_instituicao').val() == ''){
+         $('.cadastro__alert').text('Para prosseguir coloque o número');
+    }
+       
+    else{
+      salvar();
+     // window.location = 'lista-igreja.html';
+    }       
+}); 
+
+
+
+    $(document).ready(function() {
+        $('#cep_instituicao').mask('00000000');
+    });
+
+
+
+$('.tab_input').keyup(function (e) {
+  if (e.which == 13){
+    proximo = parseInt($(this).attr('tabindex')) + 1;
+    $('.div_form').show();
+    $('[tabindex=' + proximo + ']').focus();
+  }
+});
+
+
+
+/*$('.adicionar_input').focus(function(e) {
+  desabilita_campos($(this).parent());
+});*/
+
+
+/*$('.adicionar_input').blur(function(e) {
+  habilita_campos();
+});*/
+
+
+
+function desabilita_campos(elemento){
+  $('.div_form').hide();
+  elemento.show();
+  
+
+}
+
+function habilita_campos(){
+  $('.div_form').show();
+ 
+}
+
+
+$('#cidade_instituicao').focus(function(e) {
+  
+  $('.div_form').hide();
+  $('#div_cidade_instituicao').show();  
+  $('#divLista').show();
+ 
+
+  
+});
+
+
+
+
+
+
+
+function getCidades(){
+
+  $.ajax({
+
+      type: "GET",
+
+      url: "https://pedeoferta.com.br/oferta/welcome/get_cities",
+
+      cache: false,
+
+      data: { 'importancia': '12'},
+
+      dataType: 'json',
+
+      success: function (data) {
+        
+        myJson = data;
+        myJsonPesq = data;
+
+        montaCidades(data);
+        
+        configurarEventos();
+
+      }
+
+  });
+
+}
+
+function montaCidades(data){
+
+  $('.cadastro .container .lista').html('');
+
+
+
+  var rows = JSON.parse(data.length);
+
+
+
+  html = "";
+
+  for (var i = 0; i < rows; i++) {
+
+    html +=      '<div class="divPesq" data-id="'+data[i].id+'" data-name="'+data[i].nickname+'" style="max-height:40px;margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid darkred;">';
+
+         
+
+    
+
+                   
+
+                    
+
+    html +=       '<div style="margin-top: 10px;">' +
+
+                     '<span style="font-size:1.4rem;">'+ data[i].nickname +' - '+data[i].uf+ '</span>'+
+
+                  '</div>' +
+
+                                      
+
+                    
+
+                 '</div>';
+
+
+
+    //$('.cadastro .container .lista').append(html);
+    $('.lista').show();
+
+
+  }
+  $('.cadastro .container .lista').html(html);
+};
+
+
+
+
+$('#cidade_instituicao').keyup(function (e) {
+
+
+
+
+
+  if($('#cidade_instituicao').val().length >= 2){
+
+    myJson = myJsonPesq.filter(function(a, b) {
+
+        return a['name'].toLowerCase().indexOf($('#cidade_instituicao').val().toLowerCase()) >= 0;
+
+    });
+
+    
+      $('html,body').scrollTop(0);
+
+  }else{
+    myJson = myJsonPesq;
+  }
+
+
+
+  $('#divLista').hide();
+
+  montaCidades(myJson);// this.value);
+
+  configurarEventos();
+
+  
+
+  
+
+});
+
+
+$('#cep_instituicao').keyup(function (e) {
+  if (e.which == 13){
+    //obj = mock_cep($('#cep_instituicao').val());
+    url = "http://viacep.com.br/ws/"+$('#cep_instituicao').val()+"/json/";
+   
+    $.ajax({
+      method: "GET",
+      url: url
+      
+    })
+    .done(function (ret) {
+        
+      if(ret != null){
+
+        if(ret.erro){
+          $('#cidade_instituicao').focus();
+        }
+        else{
+          monta_endereco_cep(ret);
+        }
+        
+  
+      }else{
+        $('#cidade_instituicao').focus();
+        
+      }    
+    });
+  
+
+    
+  }  
+});
+
+
+function monta_endereco_cep(obj){
+
+  cidade = obj.localidade +" - "+obj.uf;
+   $('#cidade_instituicao').val(cidade) .prop('disabled', true);
+  $('#bairro_instituicao').val(obj.bairro) .prop('disabled', true);
+  $('#logradouro_instituicao').val(obj.logradouro) .prop('disabled', true);
+  $('.div_form').show();
+
+  $('#numero_instituicao').focus();
+
+}
+function mock_cep(cep){
+  var enderecos = [{
+    "cep": "18076010",
+    "cidade": "Sorocaba - SP",
+    "logradouro": "Carlos Smith",
+    "bairro": "Maria Antonia Prado"
+  },
+  {
+    "cep": "18215100",
+    "cidade": "Itapetininga - SP",
+    "logradouro": "João Maurício",
+    "bairro": "Monte Santo"
+  },
+  {
+    "cep": "12345678",
+    "cidade": "Nothing hills",
+    "logradouro": "Wall street",
+    "bairro": "brookling"
+  }]
+
+  //console.log(enderecos);
+
+  objReturn = null;
+  jQuery.each( enderecos, function( i, obj ) {
+    if(cep == obj.cep){
+      objReturn = obj;
+    }
+  });
+
+    return objReturn;
+
+
+}
+
+function salvar(){
+  $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/incluir_igreja",
+    data: {
+      endereco_cep : $('#cep_instituicao').val(),
+      endereco_logradouro: $('#logradouro_instituicao').val(),
+      endereco_numero: $('#numero_instituicao').val(),
+      endereco_bairro: $('#bairro_instituicao').val(),
+      endereco_cidade: $('#cidade_instituicao').val(),
+      endereco_cidade_id: $('#cidade_id_instituicao').val(),
+      igreja_nome : $('#nome_instituicao').val(),
+      igreja_logo_url : "/img/SPA.jpg",
+      igreja_matriz : "1",
+     
+    }
+  })
+    .done(function (ret) {
+      var obj = jQuery.parseJSON(ret);
+      alert(obj.status);
+      
+    });
+}
+
+function configurarEventos(){
+
+
+  console.log('pre chegou aqui');
+  $( ".divPesq" ).on( "click", function() {
+    $('#divLista').hide();
+    $('#cidade_instituicao').val($(this).data('name'));
+    $('#cidade_id_instituicao').val($(this).data('id'));
+    habilita_campos()
+    $('#bairro_instituicao').focus();
+
+  });
+}
+
+
+
+

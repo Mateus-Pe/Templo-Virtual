@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <meta name="theme-color" content="#5b318a" />
+
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+
+    <meta charset="utf-8">
+
+    <meta name="description" content="Vitrine de Ofertas">
+
+    <meta name="robots" content="index,follow">
+
+    <title>Criar igreja</title>
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:title" content="Pé de Oferta">
+
+    <meta property="og:description" content="Vitrine de Ofertas">
+
+    <meta property="og:url" content="http://pedeoferta.com.br/">
+
+    <meta property="og:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Pé de Oferta">
+
+    <meta name="twitter:description" content="Vitrine de Ofertas">
+
+    <meta name="twitter:url" content="http://pedeoferta.com.br/">
+
+    <meta name="twitter:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
+
+    <link rel="stylesheet" href="styles/main.css">
+
+    <link rel="stylesheet" href="styles/criar-igreja.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+
+    
+    
+
+
+
+</head>
+
+<body>
+
+<div id="divHeader" class="div_header">
+    
+    <div class="page-menu">
+
+        <header class="div_header">
+  
+          <a class="page-menu--toggle page-menu__hamburger" href="#">
+  
+            <span class="page-menu__item"></span>
+  
+            <span class="page-menu__item"></span>
+  
+            <span class="page-menu__item"></span>
+  
+          </a>
+
+          <span class="span_criar-igreja">CRIAR IGREJA</span><br>
+  
+        </header>
+    </div>
+
+
+</div>
+
+<main class="cadastro" id="gSignInWrapper">
+
+    
+    <div>
+        <div class="div_input">
+            <span class="cadastro__alert is-alert span_div"></span>
+        </div>
+
+        <div class="div_input div_form input-with-icon">
+
+            <span class="material-symbols-outlined input-icon span_input"> church</span>
+
+            <input class="adicionar_input tab_input" id="nome_instituicao" type="text" name="nome_instituicao" autocomplete="off" tabindex="1"  placeholder="Nome instituição">
+        </div>
+        
+
+        <div>
+    
+            <div class="div_input div_form input-with-icon">
+    
+                <span class="material-symbols-outlined input-icon span_input"> location_on</span>
+    
+                <input class="adicionar_input" id="cep_instituicao" type="number" name="cep_instituicao" autocomplete="off" tabindex="2" placeholder="CEP">
+            </div>
+        </div>
+
+    
+        <div>
+                
+            <div class="div_input div_form input-with-icon" id="div_cidade_instituicao">
+    
+                <span class="material-symbols-outlined input-icon span_input"> location_city</span>
+        
+                <input class="adicionar_input tab_input" id="cidade_instituicao" type="text" name="cidade_instituicao" autocomplete="off" tabindex="3" placeholder="Cidade">
+                <input id="cidade_id_instituicao" type="hidden" name="cidade_id_instituicao">
+            </div>
+
+        </div>    
+        <div>
+              
+            <div class="div_input div_form input-with-icon">
+    
+                <span class="material-symbols-outlined input-icon span_input"> add_location</span>
+        
+                <input class="adicionar_input tab_input" id="bairro_instituicao" type="text" name="bairro_instituicao" autocomplete="off" tabindex="4" placeholder="Bairro">
+            </div>
+        </div>
+
+
+        <div>
+    
+            <div class="div_input div_form input-with-icon">
+    
+                <span class="material-symbols-outlined input-icon span_input"> add_location</span>
+        
+                <input class="adicionar_input tab_input" id="logradouro_instituicao" type="text" name="logradouro_instituicao" autocomplete="off" tabindex="5" placeholder="Logradouro">
+            </div>
+        </div>
+
+
+        <div>
+                
+            <div class="div_input div_form input-with-icon">
+    
+                <span class="material-symbols-outlined input-icon span_input"> add</span>
+        
+                <input class="adicionar_input tab_input" id="numero_instituicao" type="number" name="numero_instituicao" autocomplete="off" tabindex="6" placeholder="Número">
+            </div>
+        </div>
+
+
+        <!--<div>
+            <div class="grid-container" >
+                
+                <input type="checkbox" id="matriz_checkbox" name="matriz_checkbox" class="input_checkbox">
+                
+                <label class="matriz_checkbox">MATRIZ</label>
+            </div>
+        </div>-->
+
+        
+    </div>
+
+
+    <div class="checkout-entrega__buttons div_btn-salvar div_form" id="divBotoes">
+
+        <button class="div_botao-salvar" id="btn_salvar" tabindex="7">SALVAR</button>
+
+    </div>
+
+    <div class="container divLista" id="divLista">
+
+        <div class="lista"></div>
+
+    </div>  
+
+</main>
+
+<footer>
+
+
+
+    <script src="scripts/jquery/jquery-3.2.1.min.js"></script>
+
+    <script src="scripts/jquery/jquery.maskedinput.min.js"></script>
+    
+    <script src="scripts/criar-igreja.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    
+</footer>
+
+</body>
+
+</html>

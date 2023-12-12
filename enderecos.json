@@ -1,0 +1,18 @@
+[{
+    "cep": "18076010",
+    "cidade": "Sorocaba - SP",
+    "logradouro": "Carlos Smith",
+    "bairro": "Maria Antonia Prado"
+  },
+  {
+    "cep": "18215100",
+    "cidade": "Itapetininga - SP",
+    "logradouro": "João Maurício",
+    "bairro": "Monte Santo"
+  },
+  {
+    "cep": "12345678",
+    "cidade": "Nothing hills",
+    "logradouro": "Wall street",
+    "bairro": "brookling"
+  }]
