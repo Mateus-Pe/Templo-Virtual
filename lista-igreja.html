@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <title>Pé de Oferta</title>
+    <meta name="theme-color" content="#5b318a" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="description" content="Vitrine de Ofertas">
+    <meta name="robots" content="index,follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Pé de Oferta">
+    <meta property="og:description" content="Vitrine de Ofertas">
+    <meta property="og:url" content="http://pedeoferta.com.br/">
+    <meta property="og:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pé de Oferta">
+    <meta name="twitter:description" content="Vitrine de Ofertas">
+    <meta name="twitter:url" content="http://pedeoferta.com.br/">
+    <meta name="twitter:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
+
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/lista-igreja.css">
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+
+    <script src="https://apis.google.com/js/api:client.js"></script>
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+</head>
+
+<body id="idbody" style="font-family: Exo;">
+
+    
+
+    <div id="divHeader">
+        <div id="divVoltar">
+            <span class="page-menu__cart ion-android-arrow-back" id="btnVoltar-listas"></span>
+        </div>
+        <div id="descricao">
+            <p>Atualize sua lista de compras marcando os produtos que já estão no carrinho!<br>
+                Toque em expandir para ter mais<br> informações.
+            </p>
+        </div>
+        <div id="checagem">
+            <span class="ion-android-checkbox-outline" style="font-size: 5rem;color: #5b318a;"></span>
+            <span id="legenda">Checar</span>
+        </div>
+    </div>
+
+    <div id="divCorpo" style="font-family: sans-serif; height: 100%; left: 0; overflow: auto; width: 100%; margin-top: 45px; position: fixed;">
+        <div id="divListaPrincipal">
+        </div>
+    </div>
+
+    <footer>
+        <div id="adicionar">
+            <div id="add">
+                <span class="plus">+</span>
+            </div>
+        </div>
+
+
+        <script src="./scripts/lista-igreja.js"></script>
+    </footer>
+</body>
+
+</html>

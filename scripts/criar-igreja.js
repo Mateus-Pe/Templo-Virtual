@@ -296,13 +296,15 @@ function salvar(){
       endereco_cidade_id: $('#cidade_id_instituicao').val(),
       igreja_nome : $('#nome_instituicao').val(),
       igreja_logo_url : "/img/SPA.jpg",
-      igreja_matriz : "1",
+      igreja_matriz : "0",
      
     }
   })
     .done(function (ret) {
       var obj = jQuery.parseJSON(ret);
-      alert(obj.status);
+      if(obj.status == '1'){
+        window.location = "lista-igreja.html";
+      }
       
     });
 }
