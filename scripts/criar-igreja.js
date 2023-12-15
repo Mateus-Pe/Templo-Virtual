@@ -4,9 +4,13 @@ var myJsonPesq;
 
 var igrejaId = null;
 
+var matriz = null;
+
 
 $(document).ready(function() {
 
+
+  existeMatriz();
   getCidades();
   igrejaId = window.sessionStorage.getItem('igreja_id');
   
@@ -393,6 +397,50 @@ function atualizar(){
     });
 }
 
+function existeMatriz(){
+  $.ajax({
+    method: "GET",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/existe_matriz"
+    
+  })
+    .done(function (ret) {
+      var obj = jQuery.parseJSON(ret);
+      
+      if(obj.status == '1'){
+        if(obj.matriz != null && obj.matriz != '' && obj.matriz.igreja_nome != ''){
+          matriz = obj.matriz.igreja_nome;
+        } 
+        else{
+          $('#chk_matriz').attr('checked',true);
+        } 
+
+        
+      }
+       
+    });
+}
+$('#chk_matriz').click(function (e) {
+  
+  if($('#chk_matriz').is(':checked')){
+    
+    if(matriz != null){
+      
+      texto_modal = "A Matriz atual é a <b>"+ matriz +"</b>.,<br>";
+      texto_modal += "Deseja tornar a <b>"+ $('#nome_instituicao').val() +"</b> a Matriz?";
+      
+      $('#texto_confirmacao').html(texto_modal);
+    }
+    else{
+
+      texto_modal = "<h1>Deseja tornar a <b>"+ $('#nome_instituicao').val()+"</b> a Matriz?</h1>";
+      
+      $('#texto_confirmacao').html(texto_modal);
+    }  
+    $('#modalConfirmacao').show();
+  }
+
+  
+});
 
 
 
