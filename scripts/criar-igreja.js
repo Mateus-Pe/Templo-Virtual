@@ -2,7 +2,24 @@ var myJson;
 
 var myJsonPesq; 
 
-getCidades();
+var igrejaId = null;
+
+
+$(document).ready(function() {
+
+  getCidades();
+  igrejaId = window.sessionStorage.getItem('igreja_id');
+  
+  if(igrejaId != null && igrejaId != ''){
+    carregarIgreja(igrejaId);
+  }
+  
+
+
+  
+
+});
+
 
 
 $('#btn_salvar').click(function(e){
@@ -27,7 +44,13 @@ $('#btn_salvar').click(function(e){
     }
        
     else{
-      salvar();
+      if(igrejaId != null && igrejaId != ''){
+        atualizar();
+      }
+      else{
+        salvar();
+      }
+      
      // window.location = 'lista-igreja.html';
     }       
 }); 
@@ -321,6 +344,53 @@ function configurarEventos(){
     $('#bairro_instituicao').focus();
 
   });
+}
+
+function carregarIgreja(){
+  $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_igreja_by_id",
+    data: {
+      igreja_id : igrejaId
+     
+    }
+  })
+    .done(function (ret) {
+      var obj = jQuery.parseJSON(ret);
+      
+      if(obj.status == '1'){
+        $('#nome_instituicao').val(obj.igreja.igreja_nome);
+        $('#logradouro_instituicao').val(obj.igreja.igreja_endereco_logradouro).prop('disabled', true);
+        $('#numero_instituicao').val(obj.igreja.igreja_endereco_numero).prop('disabled', true);
+        $('#bairro_instituicao').val(obj.igreja.igreja_endereco_bairro).prop('disabled', true);
+        $('#cidade_instituicao').val(obj.igreja.igreja_endereco_cidade).prop('disabled', true);
+        $('#cep_instituicao').val(obj.igreja.igreja_endereco_cep).prop('disabled', true);
+      
+      }
+       
+    });
+}
+
+function atualizar(){
+  $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_igreja",
+    data: {
+      igreja_id : igrejaId,
+      igreja_nome : $('#nome_instituicao').val()
+     
+    }
+  })
+    .done(function (ret) {
+      var obj = jQuery.parseJSON(ret);
+      
+      if(obj.status == '1'){
+        window.sessionStorage.setItem('igreja_id', '');
+        window.location = "lista-igreja.html";
+      
+      }
+       
+    });
 }
 
 

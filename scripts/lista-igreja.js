@@ -23,6 +23,7 @@ function get_listaitem() {
             }
             else {
                 listaEscolhida(data);
+                configurarEventos();
                 $('#divHeader').show();
 
             }
@@ -41,8 +42,8 @@ function listaEscolhida(data) {
     categoria_cod = 0;
     for (var i = 0; i < rows; i++) {
         
-        html += '<div style="height:40px; font-family: Exo; line-height:40px; border-bottom: 1px solid #643296; width: 100%;text-align: left; background-color:#643296">' +
-                    '<span style="font-size:1.5rem; font-style: italic; padding-left: 15px; color:white;">' + data[i].tipo + '</span>' +
+        html += '<div class="div-igreja">' +
+                    '<span class="span-igreja">' + data[i].tipo + '</span>' +
                     '</div>';
 
         html += '<div class="accordion" style="font-family: Exo;">';
@@ -51,9 +52,8 @@ function listaEscolhida(data) {
 
             html += '<h3 style="border: 1px solid #ddd; border-radius:0px; display: block; color: #484848; font-weight: bold; cursor: pointer; position: relative; margin-top:0px; padding: 1.5em .5em 1.5em .7em; background: white;">' +
                  '<div class="list-line">'+
-                 '<label for="itens-check" style="font-size:1.5rem;">' +
-                 '<input style="margin-right: 10px;" type="checkbox" id="itens-check" name="itens-check" value="" style="z-index: 100;">'+
-                 '<p style="display:inline;">'+l.igreja_nome+'</p>' +
+                 '<label for="itens-check" class="label-lista">' +
+                 '<p style="display:inline; padding:10px;">'+l.igreja_nome+'</p>' +
                  
                  '</label>' +
                  '<p class="list-quantidade">1</p>' + 
@@ -61,17 +61,44 @@ function listaEscolhida(data) {
                  '</div>'+
                  '</h3>' +
                  '<div class="columns">' +
-                 '<div class="modal__container-img" style="margin-top: 0px;" >' +
-                 '<h6>' + l.igreja_endereco_logradouro + '</h6>' +
+                 '<div class="list-line">'+
+                 '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle editar-igreja">edit</span>' +
+                 '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle remove-igreja">delete</span>' +
                  '</div>' +
-                 '</div>';
-                        
+                 '<div class="modal-container endereco-lista" >' +
+                    '<div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 9px;">' +
+                    '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_logradouro +', '+ l.igreja_endereco_numero + '</p>' +
+                    '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_bairro + '</p>' +
+                    '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_cidade + '</p>' +
+                   '</div>' +
+                 '</div>' +
+               '</div>';
+               
+
+                 
+                 
         });
 
         html += '</div>';
     }
     
     $('#divListaPrincipal').html(html);
+
+   
+};
+
+function configurarEventos(){
+
+    $('.editar-igreja').click(function () {
+        window.sessionStorage.setItem('igreja_id', $(this).data('id'));
+        window.location = 'criar-igreja.html';
+    });
+
+    $('.remove-igreja').click(function () {
+
+        var id = $(this).data('id');
+        remover(id);
+    });
 
     $('.check_lista').click(function () {
         if ($(this).data('listaitem_check') == 0)
@@ -115,8 +142,46 @@ function listaEscolhida(data) {
             this.checked = !this.checked;
         }.bind(this), 100);
     });
-};
+}
 
 $('#add').click(function () {
+    window.sessionStorage.setItem('igreja_id', '');
     window.location = 'criar-igreja.html';
 });
+
+
+function remover(id){
+    
+    $('#modalConfirmacao').show();
+
+    $('#cancelarRemocao, .modal-background .modal-close').click(function(){
+        $('#modalConfirmacao').hide();
+    })
+
+    $('#confirmarRemocao').click(function(){
+
+        $.ajax({
+            method: "POST",
+            url: "https://pedeoferta.com.br/templo/index.php/welcome/remove_igreja",
+            data: {
+                igreja_id : id
+                
+            }
+        })
+
+        .done(function (ret) {
+            var obj = jQuery.parseJSON(ret);
+            
+            if(obj.status == '1'){
+                
+                window.location = "lista-igreja.html";
+            
+                $('#modalConfirmacao').hide();
+                window.location = "lista-igreja.html";
+            }
+            
+        });
+    });
+
+   
+}
