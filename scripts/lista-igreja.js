@@ -56,22 +56,21 @@ function listaEscolhida(data) {
                  '<p style="display:inline; padding:10px;">'+l.igreja_nome+'</p>' +
                  
                  '</label>' +
-                 '<p class="list-quantidade">1</p>' + 
                  '<span class="ion-android-arrow-dropleft-circle acToggle"></span>' +
                  '</div>'+
                  '</h3>' +
-                 '<div class="columns">' +
-                 '<div class="list-line">'+
-                 '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle editar-igreja">edit</span>' +
-                 '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle remove-igreja">delete</span>' +
-                 '</div>' +
                  '<div class="modal-container endereco-lista" >' +
-                    '<div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 9px;">' +
+                    '<div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 9px; font-size: 10px;">' +
                     '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_logradouro +', '+ l.igreja_endereco_numero + '</p>' +
                     '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_bairro + '</p>' +
                     '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_cidade + '</p>' +
-                   '</div>' +
-                 '</div>' +
+                    '</div>' +
+                    '<div class="list-line">'+
+                    '<div class="columns">' +
+                    '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle editar-igreja">edit</span>' +
+                    '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle remove-igreja">delete</span>' +
+                    '</div>' +
+                    '</div>'+
                '</div>';
                
 

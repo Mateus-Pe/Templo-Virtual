@@ -414,7 +414,8 @@ function existeMatriz(){
           $('#chk_matriz').attr('checked',true);
         } 
 
-        
+        verificarNome();
+
       }
        
     });
@@ -425,14 +426,14 @@ $('#chk_matriz').click(function (e) {
     
     if(matriz != null){
       
-      texto_modal = "A Matriz atual é a <b>"+ matriz +"</b>.,<br>";
-      texto_modal += "Deseja tornar a <b>"+ $('#nome_instituicao').val() +"</b> a Matriz?";
+      texto_modal = "<p> A Matriz atual é a <b>"+ matriz +"</b>.</p><br>";
+      texto_modal += "<p> Deseja tornar a <b>"+ $('#nome_instituicao').val() +"</b> Matriz? </p>";
       
       $('#texto_confirmacao').html(texto_modal);
     }
     else{
 
-      texto_modal = "<h1>Deseja tornar a <b>"+ $('#nome_instituicao').val()+"</b> a Matriz?</h1>";
+      texto_modal = "<p>Deseja tornar a <b>"+ $('#nome_instituicao').val()+"</b> Matriz?</p>";
       
       $('#texto_confirmacao').html(texto_modal);
     }  
@@ -441,6 +442,25 @@ $('#chk_matriz').click(function (e) {
 
   
 });
+
+$('#nome_instituicao').on('input', function(){
+  verificarNome()
+
+});
+
+
+
+function verificarNome(){
+  var nomeInst = $('#nome_instituicao').val();
+
+  if (nomeInst.trim() === ''){
+    $('#chk_matriz').prop('disabled', true);
+  }
+  else{
+    $('#chk_matriz').prop('disabled', false);
+  }
+};
+
 
 
 

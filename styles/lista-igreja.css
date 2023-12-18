@@ -2,9 +2,16 @@
     display: none !important;
 }
 
+.columns{
+    position:absolute;
+    display: flex;
+    right: 2%;
+    gap: 15px;
+}
+
 .list-line {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     width: 100%;
     justify-content: space-between;
 }
@@ -67,6 +74,7 @@
 .modal-container {
     align-items: left;
     display: flex;
+    position: relative;
     justify-content: center;
     flex-flow: column;
     height: 10rem;
@@ -105,15 +113,6 @@
     color: darkred;
     border: 1px solid darkred;
     border-radius: 30px;
-}
-
-.editar-igreja{
-    margin-left: 89%;
-    display: inline-block;
-}
-.remove-igreja {
-    margin-right: 0%;
-    display: inline-block;
 }
 
 .div-igreja{

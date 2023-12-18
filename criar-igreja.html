@@ -81,8 +81,8 @@
     <div class="modal-content">
         <div id="texto_confirmacao"></div>
         <div class="modal-footer">
-            <button href="#!" id="cancelarRemocao" class="modal-close">Cancelar</button>
-            <button href="#!" id="confirmarRemocao">Confirmar</button>
+            <button href="#!" id="cancelarTransicao" class="modal-close">Cancelar</button>
+            <button href="#!" id="confirmarTransicao">Confirmar</button>
         </div>
     </div>
 </div>
@@ -147,52 +147,50 @@
         </div>
 
 
-        <div>
+        <div class="containerCheckbox">
+            <div>
+                    
+                <div class="div_input div_form input-with-icon">
+                        
+                    <span class="material-symbols-outlined input-icon span_input"> add</span>
+                        
+                    <input class="adicionar_input tab_input" id="numero_instituicao" type="number" name="numero_instituicao" autocomplete="off" tabindex="6" placeholder="Número">
                 
-            <div class="div_input div_form input-with-icon">
-    
-                <span class="material-symbols-outlined input-icon span_input"> add</span>
-        
-                <input class="adicionar_input tab_input" id="numero_instituicao" type="number" name="numero_instituicao" autocomplete="off" tabindex="6" placeholder="Número">
+                </div>
+            </div>
+
+
+
+
+            <div id="div_checkbox" class="div_checkbox">
+                    
+                <div class="list-line">
+                
+                    <input class="input_chk" type="checkbox" id="chk_matriz">
+                
+                    <label for="itens-check" class="itens_check">MATRIZ</label>
+                
+                </div>            
             </div>
         </div>
-
-
-        <div id="div_checkbox" style=" width: 100%; text-align: left;padding-top: 15px;display: flex;">
-            
-           
-            
-                    <div style="width: 70%;">
-                        <sṕan id="label_matriz" style="color: lightgray;">sdfsdfsd fsdf fsdfds</span>
-                    </div>   
-                    <div class="list-line" style="display: flex; align-items: center; width: 30%;">
-            
-                        <input style="margin-right: 10px; z-index: 100;" type="checkbox" id="chk_matriz">
-            
-                        <label for="itens-check" style="font-size: 1.5rem; margin: 0;">MATRIZ</label>
-            
-                    </div>
-               
-            
-        </div>
-
-
+                
+                
+                
         
+        
+        <div class="checkout-entrega__buttons div_btn-salvar div_form" id="divBotoes">
+                
+            <button class="div_botao-salvar" id="btn_salvar" tabindex="7">SALVAR</button>
+                
+        </div>
+            
+        <div class="container divLista" id="divLista">
+                
+            <div class="lista"></div>
+                
+        </div>  
     </div>
-
-
-    <div class="checkout-entrega__buttons div_btn-salvar div_form" id="divBotoes">
-
-        <button class="div_botao-salvar" id="btn_salvar" tabindex="7">SALVAR</button>
-
-    </div>
-
-    <div class="container divLista" id="divLista">
-
-        <div class="lista"></div>
-
-    </div>  
-
+            
 </main>
 
 <footer>
