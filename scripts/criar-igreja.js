@@ -8,6 +8,8 @@ var matriz = null;
 
 var status_matriz_inicial = 0;
 
+alteracao_matriz = false;
+
 
 $(document).ready(function() {
 
@@ -18,6 +20,9 @@ $(document).ready(function() {
   
   if(igrejaId != null && igrejaId != ''){
     carregarIgreja(igrejaId);
+  }
+  else{
+    verificarNome()
   }
   
 
@@ -375,6 +380,7 @@ function carregarIgreja(){
         $('#bairro_instituicao').val(obj.igreja.igreja_endereco_bairro).prop('disabled', true);
         $('#cidade_instituicao').val(obj.igreja.igreja_endereco_cidade).prop('disabled', true);
         $('#cep_instituicao').val(obj.igreja.igreja_endereco_cep).prop('disabled', true);
+        verificarNome();
       
       }
        
@@ -430,6 +436,7 @@ function existeMatriz(){
           matriz = obj.matriz.igreja_nome;
           if(igrejaId != null && igrejaId == obj.matriz.igreja_id){
             $('#chk_matriz').prop('checked',true);
+            alteracao_matriz = true;
             status_matriz_inicial = 1;
           }
         } 
@@ -476,7 +483,7 @@ $('#nome_instituicao').on('input', function(){
 function verificarNome(){
   var nomeInst = $('#nome_instituicao').val();
 
-  if (nomeInst.trim() === ''){
+  if (nomeInst.trim() === '' || alteracao_matriz){
     $('#chk_matriz').prop('disabled', true);
   }
   else{

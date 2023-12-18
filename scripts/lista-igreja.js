@@ -41,6 +41,8 @@ function listaEscolhida(data) {
 
     categoria_cod = 0;
     for (var i = 0; i < rows; i++) {
+
+        
         
         html += '<div class="div-igreja">' +
                     '<span class="span-igreja">' + data[i].tipo + '</span>' +
@@ -49,6 +51,11 @@ function listaEscolhida(data) {
         html += '<div class="accordion" style="font-family: Exo;">';
 
         $.each(data[i].listabycat, function (k, l) {
+            var span_remove = '';
+            if(data[i].tipo != 'MATRIZ'){
+            
+                span_remove = '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle remove-igreja">delete</span>' ;              
+            }
 
             html += '<h3 style="border: 1px solid #ddd; border-radius:0px; display: block; color: #484848; font-weight: bold; cursor: pointer; position: relative; margin-top:0px; padding: 1.5em .5em 1.5em .7em; background: white;">' +
                  '<div class="list-line">'+
@@ -68,7 +75,7 @@ function listaEscolhida(data) {
                     '<div class="list-line">'+
                     '<div class="columns">' +
                     '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle editar-igreja">edit</span>' +
-                    '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle remove-igreja">delete</span>' +
+                    span_remove +
                     '</div>' +
                     '</div>'+
                '</div>';
