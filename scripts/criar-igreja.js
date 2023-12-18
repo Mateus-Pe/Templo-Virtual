@@ -6,6 +6,8 @@ var igrejaId = null;
 
 var matriz = null;
 
+var status_matriz_inicial = 0;
+
 
 $(document).ready(function() {
 
@@ -17,9 +19,6 @@ $(document).ready(function() {
   if(igrejaId != null && igrejaId != ''){
     carregarIgreja(igrejaId);
   }
-  
-
-
   
 
 });
@@ -330,7 +329,14 @@ function salvar(){
     .done(function (ret) {
       var obj = jQuery.parseJSON(ret);
       if(obj.status == '1'){
-        window.location = "lista-igreja.html";
+        
+        if($('#chk_matriz').is(':checked')){
+          igrejaId = obj.igreja_id;
+           atualizar_matriz();
+        }
+        else{
+          window.location = "lista-igreja.html";
+        }  
       }
       
     });
@@ -390,7 +396,20 @@ function atualizar(){
       
       if(obj.status == '1'){
         window.sessionStorage.setItem('igreja_id', '');
-        window.location = "lista-igreja.html";
+        
+        if($('#chk_matriz').is(':checked')){
+          if(status_matriz_inicial == 1){
+            window.location = "lista-igreja.html";
+          }
+            
+          else{
+            atualizar_matriz();
+          }
+        }
+        else{
+          window.location = "lista-igreja.html";
+        }  
+      
       
       }
        
@@ -409,9 +428,13 @@ function existeMatriz(){
       if(obj.status == '1'){
         if(obj.matriz != null && obj.matriz != '' && obj.matriz.igreja_nome != ''){
           matriz = obj.matriz.igreja_nome;
+          if(igrejaId != null && igrejaId == obj.matriz.igreja_id){
+            $('#chk_matriz').prop('checked',true);
+            status_matriz_inicial = 1;
+          }
         } 
         else{
-          $('#chk_matriz').attr('checked',true);
+          $('#chk_matriz').prop('checked',true);
         } 
 
         verificarNome();
@@ -464,3 +487,32 @@ function verificarNome(){
 
 
 
+$('#confirmarTransicao').click(function (e) {
+  $('#chk_matriz').prop('checked',true);
+  $('#modalConfirmacao').hide();
+  
+});
+$('#cancelarTransicao').click(function (e) {
+  $('#chk_matriz').prop('checked',false);
+  $('#modalConfirmacao').hide();
+});
+
+function atualizar_matriz(){
+  if(igrejaId != null){
+    $.ajax({
+      method: "POST",
+      url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_matriz",
+      data: {
+        igreja_id : igrejaId
+       
+      }
+    })
+      .done(function (ret) {
+        var obj = jQuery.parseJSON(ret);
+        if(obj.status == '1'){
+          window.location = "lista-igreja.html";
+        }
+        
+      });
+  }
+}
