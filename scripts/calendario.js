@@ -17,6 +17,8 @@ var currentMonth = new Date().getMonth() + 1;
 
 
 
+
+
 function letsCheck(year, month) {
     var mes = month -1;
     var daysInMonth = new Date(year, month, 0).getDate();
@@ -44,6 +46,7 @@ function makeCalendar(year, month) {
     monthName = months.find(x => x.id === month).name;
     $('#yearMonth').text(year + ' ' + monthName);
     configuraEventos();
+    carregarCalendario();
 }
 
 makeCalendar(currentYear, currentMonth);
@@ -79,10 +82,135 @@ function configuraEventos(){
     
 
         $('.calendarList2 li').click(function (e) {
-            data = $(this).attr('id') +'/'+currentMonth+"/"+currentYear;
+            data =currentYear +'-'+currentMonth+"-"+$(this).attr('id') ;
             alert(data);
+            get_calendario_hora(data);
           });    
 
     
+}
+
+function carregarCalendario(){
+    $.ajax({
+        method: "POST",
+        url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_calendario",
+        data : {igreja_id: '42'}
+      })
+      .done(function(ret) {
+  
+        var obj = jQuery.parseJSON(ret);
+  
+        
+        if(obj.status == 1){
+            $.each(obj.calendario, function (k, o) {
+                dia = o.agenda_data.substr(0,2);
+                mes = o.agenda_data.substr(3,2);
+                ano = o.agenda_data.substr(6,4);
+        
+                
+                if(ano = currentYear && mes == currentMonth){
+                    $('#'+parseInt(dia)).css("color", "red")
+                }
+        
+            });
+        }
+      });
+}
+
+function mock_agenda(){
+    var agenda = [{
+      "agenda_id": "1",
+      "agenda_data_inicio": "21/12/2023",
+     
+    },
+    {
+        "agenda_id": "12",
+        "agenda_data_inicio": "25/12/2023",
+    },
+    {
+        "agenda_id": "1",
+        "agenda_data_inicio": "31/12/2023",
+    },
+    {
+        "agenda_id": "3",
+        "agenda_data_inicio": "08/11/2023",
+       
+      },
+      {
+          "agenda_id": "4",
+          "agenda_data_inicio": "14/01/2024",
+      },
+      {
+          "agenda_id": "5",
+          "agenda_data_inicio": "30/06/2024",
+      }]
+  
+    console.log(agenda);
+  
+    objReturn = null;
+    jQuery.each( agenda, function( i, obj ) {
+        dia = obj.agenda_data_inicio.substr(0,2);
+        mes = obj.agenda_data_inicio.substr(3,2);
+        ano = obj.agenda_data_inicio.substr(6,4);
+
+        
+        if(ano = currentYear && mes == currentMonth){
+            $('#'+parseInt(dia)).css("color", "red")
+        }
+
+
+        console.log(obj.agenda_data_inicio);
+    });
+  
+      
+  
+  
+  }
+
+  function get_calendario_hora(dtReferencia){
+
+	$.ajax({
+	   method: "POST",
+	   url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_calendario_hora",
+	   data: {  'igreja_id': 42, 
+                data_referencia: dtReferencia
+			 }
+	 })
+	   .done(function(ret) {
+
+
+			var obj = jQuery.parseJSON(ret);
+
+			$('#divLista').html('');
+
+            
+
+            var total_checked = 0;
+			$.each(obj.calendario_hora, function (k, ch) {
+				checked = '';
+
+				
+				html =  '<div class="pesq" style="background-color: white;height:50px;line-height:50px; padding-bottom: 10px; border-bottom: 1px solid #5b318a36">';
+
+				html +=     '<div class="add" style="display: flex;" data-agenda_id="'+ ch.agenda_id +'">' +
+								'<div style="width: 40%; text-align: left;">'+
+									'<span style="font-size:1.0rem; color: black; margin-left: 15px;">'+ ch.agenda_hora +'</span>'+
+								'</div>'+
+                                '<div style="width: 40%; text-align: left;">'+
+									'<span style="font-size:1.0rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
+								'</div>'+
+                                    '<input type="checkbox" class="ids" name="ids[]" value="'+ ch.agenda_id +'" >'+
+							'</div>' +
+
+					   '</div>';
+
+				$('#divLista').append(html);
+			});
+
+			
+
+
+
+	   });
 }
 
