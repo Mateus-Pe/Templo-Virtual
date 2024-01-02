@@ -1,5 +1,22 @@
 var imageFile;
 var atual_evento_cod = 0;
+function getImgSize(imgSrc) {
+  var newImg = new Image();
+  newImg.src = imgSrc;
+  var height = newImg.height;
+  var width = newImg.width;
+  p = $(newImg).ready(function() {
+      return {width: newImg.width, height: newImg.height};
+  });
+
+  newHeight = Math.round((($( document ).width() * height) / width)+1);
+
+  $("#divImg").css("height", newHeight+"px");
+}
+
+
+getImgSize("./imgs/imgs-igreja/missa1.jpg");
+
 
 
 evento_agenda();
