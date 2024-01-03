@@ -82,4 +82,8 @@ evento_agenda();
 
   }
 
+  $('#fonte').change(function() {
+    var option = $('#fonte').find(":selected").text();
+    $("#divImg").css("font-family", $(this).find('option:selected').val());
+    });
   

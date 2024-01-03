@@ -1,3 +1,54 @@
 .perfil_ec_selected {
     opacity: 1 !important;
 }
+
+input[type="checkbox"] {
+    -webkit-appearance: initial;
+    appearance: initial;
+    background: #ddd;
+    border-radius: 3px;
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    border: 1px solid #ddd;
+    margin: 10px 10px 0 0;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:focus {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-user-modify: read-write-plaintext-only;
+}
+
+input[type="checkbox"]:checked::before {
+    --webkit-appearance: initial;
+    border-radius: 3px;
+    display: inline-block;
+    height: 19px;
+    margin: -7px 0px 10px 4px;
+    vertical-align: middle;
+    content: '\2713';
+    font-size: 3rem;
+    color: darkred;
+}
+
+.pesq {
+    background-color: white;
+    height: 41px;
+    line-height: 45px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #5b318a36
+}
+
+.span_chk_dia {
+    font-size: 2rem;
+    color: black;
+    margin-left: 15px;
+}
+
+.inputs_agenda {
+    position: relative;
+    top: 40px;
+}
