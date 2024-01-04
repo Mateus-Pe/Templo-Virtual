@@ -66,24 +66,23 @@
 <body style="background-color: white">
     <div id="divImg" style='background-size: contain;background-color: white; background-image: url("./imgs/imgs-igreja/missa1.jpg");width: 100%; position: relative; font-family: "Dancing Script", cursive;'>
         <div id="evento" >
-            <span>
-                MISSA
+            <span id="txt_evento">
             </span>
         </div>
 
         <div id="data" >
-            <div id="dia" >
+            <div id="data_master" >
                 <span>
                     22
                 </span>
             </div>
             
 
-                <div id="mes" >
+                <div id="data_slave1" >
                     <span>JAN</span>
                 </div>
                 
-                <div id="hora" >
+                <div id="data_slave2" >
                     <span>22H</span>
                 </div>
         </div>
@@ -113,20 +112,11 @@
                 <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
 
                 <select class="cadastro__input" id="layout" name="layout" placeholder="Layout" style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 80%" required>
-                    <option value="" disabled selected>Layout</option>
-                    <option value="3">Missa</option>
-                    <option value="9">Confissão</option>
-                    <option value="7"></option>
-                    <option value="14">2 Semanas</option>
-                    <option value="21">3 Semanas</option>
-                    <option value="30">1 Mes</option>
-                    <option value="60">2 Meses</option>
-                    <option value="90">3 Meses</option>
-                    <option value="120">4 Meses</option>
-                    <option value="150">5 Meses</option>
-                    <option value="180">6 Meses</option>
-                    <option value="365">1 Ano</option>
-
+                    <option value="" disabled selected>Layout data</option>
+                    <option value="dia">Destaque dia</option>
+                    <option value="hora">Destaque hora</option>
+                    <option value="dia_semana">Destaque dia semana</option>
+                    
                 </select>
             </div>
 
