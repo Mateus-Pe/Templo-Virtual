@@ -83,7 +83,6 @@ function configuraEventos(){
 
         $('.calendarList2 li').click(function (e) {
             data =currentYear +'-'+currentMonth+"-"+$(this).attr('id') ;
-            alert(data);
             get_calendario_hora(data);
           });    
 
@@ -199,7 +198,7 @@ function mock_agenda(){
                                 '<div style="width: 40%; text-align: left;">'+
 									'<span style="font-size:1.0rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
 								'</div>'+
-                                    '<input type="checkbox" class="ids" name="ids[]" value="'+ ch.agenda_id +'" >'+
+                                '<span data-agenda_hora="'+ ch.agenda_hora +'"  class="material-symbols-outlined acToggle configurar_layout">edit</span>'+
 							'</div>' +
 
 					   '</div>';
@@ -208,7 +207,11 @@ function mock_agenda(){
 			});
 
 			
-
+            $('.configurar_layout').click(function () {
+                var str_data_referencia =  dtReferencia + '-' + $(this).data('agenda_hora');
+                window.sessionStorage.setItem('data_referencia', str_data_referencia);
+                window.location = 'configurar-layout.html';
+            });
 
 
 	   });
