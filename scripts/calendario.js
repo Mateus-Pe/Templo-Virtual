@@ -79,8 +79,8 @@ function prevMonth() {
 
 
 function configuraEventos(){
-    
 
+    
         $('.calendarList2 li').click(function (e) {
             data =currentYear +'-'+currentMonth+"-"+$(this).attr('id') ;
             get_calendario_hora(data);
@@ -108,7 +108,7 @@ function carregarCalendario(){
         
                 
                 if(ano = currentYear && mes == currentMonth){
-                    $('#'+parseInt(dia)).css("color", "red")
+                    $('#'+parseInt(dia)).addClass("dia_eventos")
                 }
         
             });
@@ -198,8 +198,10 @@ function mock_agenda(){
                                 '<div style="width: 40%; text-align: left;">'+
 									'<span style="font-size:1.0rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
 								'</div>'+
+                                '<div class="columns">' +
                                 '<span data-agenda_hora="'+ ch.agenda_hora +'"  class="material-symbols-outlined acToggle configurar_layout">edit</span>'+
-							'</div>' +
+                                '</div>'+
+                            '</div>' +
 
 					   '</div>';
 

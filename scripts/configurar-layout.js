@@ -102,7 +102,7 @@ evento_agenda();
       $.each(obj.lista_layout_evento, function (k, lpp) {
           html += '<a id="'+k+'" data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-data_css="'+lpp.layout_data_css+'" data-dia_css="'+lpp.layout_dia_css+'" data-mes_css="'+lpp.layout_mes_css+'" data-hora_css="'+lpp.layout_hora_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" class="layout_css"><div  class="divPerfilEC" style="opacity: 0.5;height: 90px; display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
               html += '<div style="display: grid;">';
-          html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.layout_background_icone+'" style="height:50px"/></div>';
+          html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.layout_background_icone+'" style="height:55px;width:60px;border-radius:50%;"/></div>';
                 html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;"></span></div>';
               html += '</div></a>';
       });
@@ -112,6 +112,14 @@ evento_agenda();
 
       slick();
       $('#carregando').hide();
+
+      $('.layout_css').click(function(e){
+        $('.divPerfilEC').removeClass('perfil_ec_selected');
+        $(this).children().addClass('perfil_ec_selected');
+                    
+        atual_evento_cod = $(this).data('evento_cod');
+      });
+
       $('.layout_css').click(function(e){
          $("#divImg").css("background-image", "url("+$(this).data('img_background')+")");
          $("#txt_evento").html($(this).data('evento_nome'));
@@ -139,6 +147,7 @@ evento_agenda();
     
    
       if(option == "dia"){
+        $("#data_master").css("font-size","6em");
         $("#data_master").html("<span>"+ dia +"</span>");
         $("#data_slave1").html("<span>"+ mes +"</span>");
         $("#data_slave2").html("<span>"+ hora +"</span>");
@@ -193,4 +202,8 @@ evento_agenda();
         var texto = $(this).val();
         $exibirTexto.text(texto);
       });
+    });
+
+    document.getElementById('btn_salvar').addEventListener('click',function(){
+      alert('salvou');
     });
