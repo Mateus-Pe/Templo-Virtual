@@ -185,7 +185,7 @@ evento_agenda();
     $(".regular").slick({
       dots: false,
       infinite: true,
-      slidesToShow: 3,
+      slidesToShow: 4,
       slidesToScroll: 2
     });
 

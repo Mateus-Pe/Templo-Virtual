@@ -1,6 +1,7 @@
 var imageFile;
 var ids_remove = [];
 var atual_evento_cod = 0;
+dias_checked = [];
 
 var searchParams = new URLSearchParams(window.location.search);
 
@@ -8,10 +9,61 @@ evento_agenda();
 
 
   $('#btn_seguir').click(function(e){
+    validacao_evento_agenda();
     
-    gerar_agenda();
-
   });
+
+
+  function validacao_evento_agenda(){
+    var erro = false;
+    $('.dias:checked').each(function(i, e) {
+      dias_checked.push($(this).val());
+      
+    });
+
+    if($('#agenda_ate').val() == '0'){
+      texto_modal = "<p> Selecione quando o evento terminará. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
+    }
+    if($('#agenda_de').val() == '0'){
+      texto_modal = "<p> Selecione quando o evento iniciará.. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
+    }
+    if($('#tempo_duracao').val() == '0'){
+      texto_modal = "<p> Selecione o tempo de duração do evento. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
+    }
+    if($('#agenda_dias').val() == '0'){
+      texto_modal = "<p> Selecione para quais dias deseja agendar. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
+    }
+    if (dias_checked.length == 0) {
+      texto_modal = "<p> Selecione o(s) dia(s) que deseja agendar. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
+    } 
+    if (atual_evento_cod == 0) {
+      texto_modal = "<p> Selecione o evento que deseja. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
+    } 
+
+    $('#modalConfirmacao').show();
+    
+    $('#confirmar').click(function (e) {
+      $('#modalConfirmacao').hide();
+      
+    });
+    
+    
+    if(!erro) {
+      gerar_agenda();
+    }
+  }
 
   function evento_agenda(){
     $.ajax({
@@ -60,17 +112,14 @@ evento_agenda();
   }
 
   function gerar_agenda(){
-    var dias = [];
-    $('.dias:checked').each(function(i, e) {
-      dias.push($(this).val());
-    });
+    
 
 
     $.ajax({
       method: "POST",
       url: "https://pedeoferta.com.br/templo/index.php/welcome/gerar_agenda",
       data: { 
-          'dias': dias.join(),
+          'dias': dias_checked.join(),
           'agenda_igreja_id': 42,
           'agenda_evento_id': atual_evento_cod,
           'agenda_dias': $('#agenda_dias').val(),

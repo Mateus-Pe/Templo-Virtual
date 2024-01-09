@@ -350,7 +350,6 @@ function salvar(){
 function configurarEventos(){
 
 
-  console.log('pre chegou aqui');
   $( ".divPesq" ).on( "click", function() {
     $('#divLista').hide();
     $('#cidade_instituicao').val($(this).data('name'));
