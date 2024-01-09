@@ -1,0 +1,152 @@
+.slider {}
+
+.slick-slide {
+    margin: 0px 30px;
+}
+
+.slick-slide img {}
+
+.slick-prev {
+    left: 0px;
+}
+
+.slick-next {
+    right: 0px;
+}
+
+.slick-prev:before {
+    content: "<";
+    color: black;
+    font-size: 30px;
+}
+
+.slick-next:before {
+    content: ">";
+    color: black;
+    font-size: 30px;
+}
+
+
+
+.perfil_ec_selected {
+    opacity: 1 !important;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: initial;
+    appearance: initial;
+    background: #ddd;
+    border-radius: 3px;
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    border: 1px solid #ddd;
+    margin: 10px 10px 0 0;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:focus {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-user-modify: read-write-plaintext-only;
+}
+
+input[type="checkbox"]:checked::before {
+    --webkit-appearance: initial;
+    border-radius: 3px;
+    display: inline-block;
+    height: 19px;
+    margin: -7px 0px 10px 4px;
+    vertical-align: middle;
+    content: '\2713';
+    font-size: 3rem;
+    color: darkred;
+}
+
+.pesq {
+    background-color: white;
+    height: 41px;
+    line-height: 45px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #5b318a36
+}
+
+.span_chk_dia {
+    font-size: 1.5rem;
+    color: black;
+    margin-left: 15px;
+}
+
+.inputs_agenda {
+    position: relative;
+    top: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.div_input {
+    margin-top: 3%;
+}
+
+.span_div {
+    font-family: Exo;
+}
+
+.modal-content {
+    background-color: white;
+    margin: auto;
+    padding: 0px;
+    border: 1px solid #888;
+    border-radius: 30px;
+    width: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-content p {
+    font-family: Exo;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-footer button {
+    margin: 0 10px;
+    padding: 8px 10px;
+    font-size: 1rem;
+    background-color: white;
+    color: darkred;
+    border: 1px solid darkred;
+    border-radius: 30px;
+    width: 40%;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12%; 
+    top: 17%; 
+    transform: translateY(-50%);
+}
+
+.span_input{
+    position: absolute;
+    color: lightgray !important; 
+    margin-top: 0.5rem;
+    left: 12%;
+}
+
+.span_input_ate{
+    position: absolute;
+    color: lightgray !important; 
+    margin-top: 0.5rem;
+    right: 32%;
+}

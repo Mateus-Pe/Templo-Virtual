@@ -141,3 +141,7 @@ evento_agenda();
 
       });
   }
+
+  $('#especifica').click(function(e){
+    window.location = "criar-agenda-especifica.html";
+  });
