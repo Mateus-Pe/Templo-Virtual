@@ -65,6 +65,109 @@
 </head>
 
 <body style="background-color: white">
+
+    <div id="modal_evento" class="modal">
+        <div class="modal-content cadastro">
+            
+        <div style="position: absolute; top: 6%; left: 16%;">
+
+            <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
+
+            <input class="cadastro__input" id="descricao" name="descricao" placeholder="Descrição"
+                style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                required>
+        </div>
+
+        <div style="position: absolute; top: 30%; left: 16%; width: 225px;">
+
+            <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
+
+            <select class="cadastro__input" id="fonte" name="fonte" placeholder="Fonte"
+                style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                required>
+                <option value="" disabled selected>Fonte</option>
+                <option value="arial">Arial</option>
+                <option value="'Dancing Script', cursive">Cursiva</option>
+                <option value="sans-serif">Sans-serif</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="serif">Serif</option>
+                <option value="initial">Initial</option>
+                <option value="math">Math</option>
+
+            </select>
+        </div>
+            <div class="modal-footer">
+                <button href="#!" id="confirmar">OK</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modal_data" class="modal">
+        <div class="modal-content">
+            <div class="cadastro">
+
+                <div style="position: absolute; top: 6%; left: 16%;">
+        
+                    <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
+        
+                    <select class="cadastro__input" id="layout" name="layout" placeholder="Layout"
+                        style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                        required>
+                        <option value="" disabled selected>Layout data</option>
+                        <option value="dia">Destaque dia</option>
+                        <option value="hora">Destaque hora</option>
+                        <option value="dia_semana">Destaque dia semana</option>
+        
+                    </select>
+                </div>
+            </div>
+        
+            <div class="modal-footer">
+                <button href="#!" id="confirmar2">OK</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <div id="modal_rodape" class="modal">
+        <div class="modal-content2 cadastro">
+            
+            <div style="position: absolute; top: 6%; left: 16%;">
+    
+                <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
+    
+                <input class="cadastro__input" id="descricao_rodape" name="descricao_rodape" placeholder="Descrição adicional"
+                    style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                    required>
+            </div>
+    
+            <div style="position: absolute; top: 30%; left: 16%; width: 225px;">
+    
+                <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
+    
+                <select class="cadastro__input" id="fonte" name="fonte" placeholder="Fonte"
+                    style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                    required>
+                    <option value="" disabled selected>Fonte</option>
+                    <option value="arial">Arial</option>
+                    <option value="'Dancing Script', cursive">Cursiva</option>
+                    <option value="sans-serif">Sans-serif</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="serif">Serif</option>
+                    <option value="initial">Initial</option>
+                    <option value="math">Math</option>
+    
+                </select>
+            </div>
+            
+            <div class="modal-footer">
+                <button href="#!" id="confirmar3">OK</button>
+            </div>
+        </div>
+    </div>
+
+
     <div id="divImg"
         style='background-size: contain;background-color: white; background-image: url("./imgs/imgs-igreja/missa1.jpg");width: 100%; position: relative; font-family: "Dancing Script", cursive;'>
         <div id="evento">
@@ -91,69 +194,21 @@
 
         <div id="rodape"
             style="position:absolute; bottom: 6%; right: 3%; font-size: 1.8rem; width:48%;text-align:center;; color: brown;">
-                <span>
+                <span id="txt_rodape">
                     1º Domingo Tempo Comum
                 </span>
             
         </div>
 
         <div
-            style="height: 60px; position: absolute; top: 100%; width: 100%; border-bottom:1px solid lightgray; background-color: white;">
+            style="height: 80px; position: absolute; top: 100%; width: 100%; border-bottom:1px solid lightgray; background-color: white;">
 
-            <div id="divHistoria" style="height: 60px; width: 100%;">
+            <div id="divHistoria" style="height: 80px; width: 100%;">
             </div>
 
         </div>
     </div>
 
-
-
-    <div class="inputs_agenda cadastro">
-
-        <div style="margin-top: 10px;">
-
-            <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
-
-            <select class="cadastro__input" id="layout" name="layout" placeholder="Layout"
-                style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 80%"
-                required>
-                <option value="" disabled selected>Layout data</option>
-                <option value="dia">Destaque dia</option>
-                <option value="hora">Destaque hora</option>
-                <option value="dia_semana">Destaque dia semana</option>
-
-            </select>
-        </div>
-
-        <div style="margin-top: 10px;">
-
-            <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
-
-            <select class="cadastro__input" id="fonte" name="fonte" placeholder="Fonte"
-                style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 80%"
-                required>
-                <option value="" disabled selected>Fonte</option>
-                <option value="arial">Arial</option>
-                <option value="'Dancing Script', cursive">Cursiva</option>
-                <option value="sans-serif">Sans-serif</option>
-                <option value="fantasy">Fantasy</option>
-                <option value="serif">Serif</option>
-                <option value="initial">Initial</option>
-                <option value="math">Math</option>
-
-            </select>
-        </div>
-
-        <div style="margin-top: 10px; float:left;width: 100%;">
-
-            <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
-
-            <input class="cadastro__input" id="descricao" name="descricao" placeholder="Descrição adicional"
-                style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 80%"
-                required>
-
-        </div>
-    </div>
 
 
     <div class="checkout-entrega__buttons div_btn-salvar div_form cadastro" id="divBotoes">

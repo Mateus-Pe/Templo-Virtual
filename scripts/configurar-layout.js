@@ -99,7 +99,7 @@ evento_agenda();
       html += '<section class="regular slider">';
       console.log(obj);
       $.each(obj.lista_layout_evento, function (k, lpp) {
-          html += '<a id="'+k+'" data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-slave2_css="'+lpp.layout_data_slave2_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" class="layout_css"><div  class="divPerfilEC" style="opacity: 0.5;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
+          html += '<a id="'+k+'" data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-slave2_css="'+lpp.layout_data_slave2_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" class="layout_css"><div  class="divPerfilEC" style="opacity: 0.5;height: 80px;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
               html += '<div style="display: grid;">';
           html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.layout_background_icone+'" style="height:55px;width:60px;border-radius:50%;"/></div>';
                 html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;"></span></div>';
@@ -205,6 +205,42 @@ evento_agenda();
       });
     });
 
+    $(function() {
+      var $exibirTexto = $("#rodape");
+      $("#descricao_rodape").on("keyup", function () {
+        var texto = $(this).val();
+        $exibirTexto.text(texto);
+      });
+    });
+
     document.getElementById('btn_salvar').addEventListener('click',function(){
       alert('salvou');
     });
+
+
+    $('#evento').click(function(e){
+      $('#modal_evento').show();
+    
+      $('#confirmar').click(function (e) {
+      $('#modal_evento').hide();
+      
+      });
+    });
+
+    $('#data').click(function(e){
+      $('#modal_data').show();
+    
+      $('#confirmar2').click(function (e) {
+      $('#modal_data').hide();
+      
+      });
+    });
+
+    $('#rodape').click(function(e){
+      $('#modal_rodape').show();
+  
+      $('#confirmar3').click(function (e) {
+          $('#modal_rodape').hide();
+      });
+  });
+  
