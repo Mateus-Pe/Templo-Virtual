@@ -47,12 +47,11 @@ function carregarDatas(){
   diff_days = diff/1000/60/60/24;
   diaName = dias.find(x => x.id === dia_semana).name;
   mes = months.find(x => x.id == mes).name;
-
     if(Math.floor(diff_days) < 2){
-      if(dia == hoje.getDay()){
+      if(dia == hoje.getDate()){
         diaName = 'Hoje';
       }
-      if(parseInt(dia) == parseInt(hoje.getDay()) + 1){
+      if(parseInt(dia) == parseInt(hoje.getDate()) + 1){
         diaName = 'Amanhã';
       }
     }
@@ -100,7 +99,7 @@ evento_agenda();
       html += '<section class="regular slider">';
       console.log(obj);
       $.each(obj.lista_layout_evento, function (k, lpp) {
-          html += '<a id="'+k+'" data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-data_css="'+lpp.layout_data_css+'" data-dia_css="'+lpp.layout_dia_css+'" data-mes_css="'+lpp.layout_mes_css+'" data-hora_css="'+lpp.layout_hora_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" class="layout_css"><div  class="divPerfilEC" style="opacity: 0.5;height: 90px; display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
+          html += '<a id="'+k+'" data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-slave2_css="'+lpp.layout_data_slave2_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" class="layout_css"><div  class="divPerfilEC" style="opacity: 0.5;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
               html += '<div style="display: grid;">';
           html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.layout_background_icone+'" style="height:55px;width:60px;border-radius:50%;"/></div>';
                 html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;"></span></div>';
@@ -126,9 +125,10 @@ evento_agenda();
          $("#descricao").val($(this).data('evento_nome'));
          set_style($(this).data('evento_css'), 'evento');
          set_style($(this).data('data_css'), 'data');
-         set_style($(this).data('dia_css'), 'data_master');
-         set_style($(this).data('mes_css'), 'data_slave1');
-         set_style($(this).data('hora_css'), 'data_slave2');
+         set_style($(this).data('master_css'), 'data_master');
+         set_style($(this).data('slave1_css'), 'data_slave1');
+         set_style($(this).data('slave2_css'), 'data_slave2');
+         set_style($(this).data('rodape_css'), 'rodape');
       });
       $('#0').click();
       troca_layout('dia');
@@ -147,25 +147,25 @@ evento_agenda();
     
    
       if(option == "dia"){
-        $("#data_master").css("font-size","6em");
+        $("#data_master").css("font-size","6.5em");
         $("#data_master").html("<span>"+ dia +"</span>");
         $("#data_slave1").html("<span>"+ mes +"</span>");
         $("#data_slave2").html("<span>"+ hora +"</span>");
       }
   
       if(option == "hora"){
-        $("#data_master").css("font-size","5em");
+        $("#data_master").css("font-size","5.5em");
         $("#data_master").html("<span>"+ hora +"</span>");
-        $("#data_slave1").html("<span>"+ dia +"</span>");
-        $("#data_slave2").html("<span>"+ mes +"</span>");
+        $("#data_slave1").html("<span> dia "+ dia +"</span>");
+        $("#data_slave2").html("<span> de "+ mes +"</span>");
         
       }
   
       if(option == "dia_semana"){
-        $("#data_master").css("font-size","3.8em");
+        $("#data_master").css("font-size","4.8em");
         $("#data_master").html("<span>"+ diaName +"</span>");
-        $("#data_slave1").html("<span>"+ dia +"</span>");
-        $("#data_slave2").html("<span>"+ hora +"</span>");
+        $("#data_slave1").html("<span>dia "+ dia +"</span>");
+        $("#data_slave2").html("<span> às "+ hora +"</span>");
         
       }
     }
