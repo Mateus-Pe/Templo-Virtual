@@ -98,7 +98,7 @@ evento_agenda();
 
       var html = '';
       html += '<section class="regular slider">';
-
+      console.log(obj);
       $.each(obj.lista_layout_evento, function (k, lpp) {
           html += '<a id="'+k+'" data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-data_css="'+lpp.layout_data_css+'" data-dia_css="'+lpp.layout_dia_css+'" data-mes_css="'+lpp.layout_mes_css+'" data-hora_css="'+lpp.layout_hora_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" class="layout_css"><div  class="divPerfilEC" style="opacity: 0.5;height: 90px; display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
               html += '<div style="display: grid;">';
@@ -172,6 +172,7 @@ evento_agenda();
 
   function set_style(strStyle, divElement){
       arrStyle = strStyle.split(";");
+      $("#"+divElement).removeAttr("style")
       $.each(arrStyle, function(index, value) { 
         var hashmap = value.split(":");
         $("#"+divElement).css(hashmap[0], hashmap[1]);        
