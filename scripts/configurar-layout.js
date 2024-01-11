@@ -30,6 +30,7 @@ const months = [
 ];
 
 $(document).ready(function() {
+  button_edit_hide();
   carregarDatas();
 });
 
@@ -196,6 +197,11 @@ evento_agenda();
     var option = $('#fonte').find(":selected").text();
     $("#divImg").css("font-family", $(this).find('option:selected').val());
     });
+
+    $('#fonte1').change(function() {
+      var option = $('#fonte1').find(":selected").text();
+      $("#rodape").css("font-family", $(this).find('option:selected').val());
+      });
   
     $(function() {
       var $exibirTexto = $("#evento");
@@ -214,33 +220,89 @@ evento_agenda();
     });
 
     document.getElementById('btn_salvar').addEventListener('click',function(){
-      alert('salvou');
+      print();
     });
 
 
     $('#evento').click(function(e){
-      $('#modal_evento').show();
-    
-      $('#confirmar').click(function (e) {
-      $('#modal_evento').hide();
-      
-      });
+      modalHeader();
     });
 
     $('#data').click(function(e){
+      modalData()
+    });
+    $('#modalData').click(function(e){
+      modalData()
+    });
+    function modalData(){
       $('#modal_data').show();
     
       $('#confirmar2').click(function (e) {
-      $('#modal_data').hide();
-      
+        $('#modal_data').hide();      
       });
-    });
+    }
 
     $('#rodape').click(function(e){
-      $('#modal_rodape').show();
-  
-      $('#confirmar3').click(function (e) {
-          $('#modal_rodape').hide();
-      });
+     modalFooter();
   });
+  $('#modalFooter').click(function(e){
+    modalFooter();
+  });
+
+  $('#modalHeader').click(function(e){
+    modalHeader();
+  });
+  function modalFooter(){
+    $('#modal_rodape').show();
   
+    $('#confirmar3').click(function (e) {
+        $('#modal_rodape').hide();
+    });
+  }
+  function modalHeader(){
+    $('#modal_evento').show();
+    $('#confirmar').click(function (e) {
+      $('#modal_evento').hide();
+      
+      });
+  }
+  
+  var popup_edit = 0;
+
+  function button_edit(){
+    if(popup_edit % 2 == 0){
+      button_edit_hide();
+    }else{
+      button_edit_show();
+    }
+    popup_edit++;
+  }
+
+  function button_edit_show(){
+    $('#modalHeader').show();
+    $('#modalData').show();
+    $('#modalFooter').show();
+  }
+  function button_edit_hide(){
+    $('#modalHeader').hide();
+    $('#modalData').hide();
+    $('#modalFooter').hide();
+  }
+  setInterval(button_edit,5000);
+
+
+  function print(){
+   
+    html2canvas(document.querySelector("#divImg"), {
+     logging: true, letterRendering: 1, allowTaint: false, useCORS: true
+  }).then(canvas => {
+
+        var anchorTag = document.createElement("a");
+        document.body.appendChild(anchorTag);
+        anchorTag.download = "filename.jpg";
+        anchorTag.href = canvas.toDataURL("image/jpg");
+        anchorTag.target = '_blank';
+        anchorTag.click();
+                
+    });
+}

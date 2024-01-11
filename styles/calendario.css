@@ -121,7 +121,7 @@ body {
     position:relative;
     display: flex;
     align-items: center;
-    right: 0%;
+    left: 10%;
     color: darkred;
 }
 
