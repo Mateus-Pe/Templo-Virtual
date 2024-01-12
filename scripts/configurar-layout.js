@@ -221,6 +221,7 @@ evento_agenda();
 
     document.getElementById('btn_salvar').addEventListener('click',function(){
       print();
+     // PrintElem('divImg');
     });
 
 
@@ -294,7 +295,8 @@ evento_agenda();
   function print(){
    
     html2canvas(document.querySelector("#divImg"), {
-     logging: true, letterRendering: 1, allowTaint: false, useCORS: true
+     logging: true, letterRendering: 1, //allowTaint: false,
+      useCORS: true
   }).then(canvas => {
 
         var anchorTag = document.createElement("a");
@@ -305,4 +307,27 @@ evento_agenda();
         anchorTag.click();
                 
     });
+}
+
+
+function PrintElem(elem) {
+  var element = document.getElementById(elem);
+
+  html2canvas(element).then(function (canvas) {
+      var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+      mywindow.document.write('<html><head><title>' + ''  + '</title>');
+      mywindow.document.write('</head><body >');
+      mywindow.document.write('<h1>' + '#divImg' + '</h1>');
+      mywindow.document.write('<img src="' + canvas.toDataURL("image/png") + '" style="width:100%;">');
+      mywindow.document.write('</body></html>');
+
+      mywindow.document.close(); // necessary for IE >= 10
+      mywindow.focus(); // necessary for IE >= 10*/
+
+      mywindow.print();
+      mywindow.close();
+
+      return true;
+  });
 }
