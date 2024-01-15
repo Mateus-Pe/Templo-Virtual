@@ -5,6 +5,7 @@ var mes = '0';//$('#data_slave1').children().html().trim();
 var hora = '0';//$('#data_slave2').children().html().trim();
 var diaName = '';
 var layout_id = 0;
+var agenda_id = 0;
 const dias = [
   { 'id': 1, 'name': 'Segunda' },
   { 'id': 2, 'name': 'Terça' },
@@ -32,6 +33,7 @@ const months = [
 
 
 $(document).ready(function() {
+  agenda_id = window.sessionStorage.getItem('agenda_id');
   button_edit_hide();
   carregarDatas();
 });
@@ -228,7 +230,7 @@ evento_agenda();
         method: "POST",
         url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_layout_agenda",
         data: {
-              agenda_id: "138",
+              agenda_id: agenda_id,
               agenda_desc_head : "Santa Missa",
               agenda_font_head : "font-family:arial;",
               agenda_layout_data : "S",

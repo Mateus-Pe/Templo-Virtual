@@ -211,6 +211,7 @@ function mock_agenda(){
 			
             $('.configurar_layout').click(function () {
                 var str_data_referencia =  dtReferencia + '-' + $(this).data('agenda_hora');
+                window.sessionStorage.setItem('agenda_id', $(this).data('agenda_id'));
                 window.sessionStorage.setItem('data_referencia', str_data_referencia);
                 window.location = 'configurar-layout.html';
             });
