@@ -82,7 +82,7 @@ function getImgSize(imgSrc) {
 }
 
 
-getImgSize("./imgs/imgs-igreja/missa1.jpg");
+
 
 
 
@@ -97,7 +97,7 @@ evento_agenda();
       data: {evento_id: "1"}
     })
     .done(function(ret) {
-
+      getImgSize("./imgs/imgs-igreja/missa1.jpg");
       var obj = jQuery.parseJSON(ret);
 
       var html = '';
@@ -319,7 +319,7 @@ evento_agenda();
     $('#modalData').hide();
     $('#modalFooter').hide();
   }
-  setInterval(button_edit,5000);
+  //setInterval(button_edit,5000);
 
 
   function print(){

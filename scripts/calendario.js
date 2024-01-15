@@ -199,7 +199,7 @@ function mock_agenda(){
 									'<span style="font-size:1.0rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
 								'</div>'+
                                 '<div class="columns">' +
-                                '<span data-agenda_hora="'+ ch.agenda_hora +'"  class="material-symbols-outlined acToggle configurar_layout">edit</span>'+
+                                '<span data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'"  class="material-symbols-outlined acToggle configurar_layout">edit</span>'+
                                 '</div>'+
                             '</div>' +
 
