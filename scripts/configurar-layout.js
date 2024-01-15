@@ -1,8 +1,8 @@
 var imageFile;
 var atual_evento_cod = 0;
-var dia = '0';// $('#data_master').children().html().trim();
+var D = '0';// $('#data_master').children().html().trim();
 var mes = '0';//$('#data_slave1').children().html().trim();
-var hora = '0';//$('#data_slave2').children().html().trim();
+var H = '0';//$('#data_slave2').children().html().trim();
 var diaName = '';
 var layout_id = 0;
 var agenda_id = 0;
@@ -43,26 +43,26 @@ function carregarDatas(){
   var hashdata = data.split("-");
   ano = hashdata[0];
   mes = hashdata[1];
-  dia = hashdata[2];
-  hora = hashdata[3];
+  D = hashdata[2];
+  H = hashdata[3];
   hoje = new Date();
-  dia_semana = new Date(ano,mes -1,dia).getUTCDay();
-  date_ref = new  Date(ano,mes -1,dia);
+  S = new Date(ano,mes -1,D).getUTCDay();
+  date_ref = new  Date(ano,mes -1,D);
   diff = new Date(date_ref - hoje);
   diff_days = diff/1000/60/60/24;
-  diaName = dias.find(x => x.id === dia_semana).name;
+  diaName = dias.find(x => x.id === S).name;
   mes = months.find(x => x.id == mes).name;
     if(Math.floor(diff_days) < 2){
-      if(dia == hoje.getDate()){
+      if(D == hoje.getDate()){
         diaName = 'Hoje';
       }
-      if(parseInt(dia) == parseInt(hoje.getDate()) + 1){
+      if(parseInt(D) == parseInt(hoje.getDate()) + 1){
         diaName = 'Amanhã';
       }
     }
   
-    if(parseInt(dia) < 10){
-      dia = '0'+ dia;
+    if(parseInt(D) < 10){
+      D = '0'+ D;
     }
 }
 
@@ -132,7 +132,7 @@ evento_agenda();
          set_style($(this).data('rodape_css'), 'rodape');
       });
       $('#0').click();
-      troca_layout('dia');
+      troca_layout('D');
     });
   }
 
@@ -147,26 +147,26 @@ evento_agenda();
       
     
    
-      if(option == "dia"){
+      if(option == "D"){
         $("#data_master").css("font-size","6.5em");
-        $("#data_master").html("<span>"+ dia +"</span>");
+        $("#data_master").html("<span>"+ D +"</span>");
         $("#data_slave1").html("<span>"+ mes +"</span>");
-        $("#data_slave2").html("<span>"+ hora +"</span>");
+        $("#data_slave2").html("<span>"+ H +"</span>");
       }
   
-      if(option == "hora"){
+      if(option == "H"){
         $("#data_master").css("font-size","5.5em");
-        $("#data_master").html("<span>"+ hora +"</span>");
-        $("#data_slave1").html("<span> dia "+ dia +"</span>");
+        $("#data_master").html("<span>"+ H +"</span>");
+        $("#data_slave1").html("<span> dia "+ D +"</span>");
         $("#data_slave2").html("<span> de "+ mes +"</span>");
         
       }
   
-      if(option == "dia_semana"){
+      if(option == "S"){
         $("#data_master").css("font-size","4.8em");
         $("#data_master").html("<span>"+ diaName +"</span>");
-        $("#data_slave1").html("<span>dia "+ dia +"</span>");
-        $("#data_slave2").html("<span> às "+ hora +"</span>");
+        $("#data_slave1").html("<span>dia "+ D +"</span>");
+        $("#data_slave2").html("<span> às "+ H +"</span>");
         
       }
     }
@@ -204,7 +204,7 @@ evento_agenda();
       });
   
     $(function() {
-      var $exibirTexto = $("#evento");
+      var $exibirTexto = $("#txt_evento");
       $("#descricao").on("keyup", function () {
         var texto = $(this).val();
         $exibirTexto.text(texto);
@@ -212,7 +212,7 @@ evento_agenda();
     });
 
     $(function() {
-      var $exibirTexto = $("#rodape");
+      var $exibirTexto = $("#txt_rodape");
       $("#descricao_rodape").on("keyup", function () {
         var texto = $(this).val();
         $exibirTexto.text(texto);
@@ -223,6 +223,7 @@ evento_agenda();
       //print();
      // PrintElem('divImg');
      salvar();
+     
     });
 
     function salvar(){
@@ -231,11 +232,11 @@ evento_agenda();
         url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_layout_agenda",
         data: {
               agenda_id: agenda_id,
-              agenda_desc_head : "Santa Missa",
-              agenda_font_head : "font-family:arial;",
-              agenda_layout_data : "S",
-              agenda_desc_footer : "Solenidade São José",
-              agenda_font_footer : "font-family:arial;",
+              agenda_desc_head : $("#txt_evento").html(),
+              agenda_font_head : "font-family:" + $('#fonte').find(":selected").val() ,
+              agenda_layout_data : $('#layout').find(":selected").val(),
+              agenda_desc_footer : $("#txt_rodape").html(),
+              agenda_font_footer : "font-family:" + $('#fonte1').find(":selected").val(),
               agenda_layout_id: layout_id
             }
       })
