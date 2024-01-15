@@ -4,6 +4,7 @@ var dia = '0';// $('#data_master').children().html().trim();
 var mes = '0';//$('#data_slave1').children().html().trim();
 var hora = '0';//$('#data_slave2').children().html().trim();
 var diaName = '';
+var layout_id = 0;
 const dias = [
   { 'id': 1, 'name': 'Segunda' },
   { 'id': 2, 'name': 'Terça' },
@@ -28,6 +29,7 @@ const months = [
   { 'id': 11, 'name': 'Nov' },
   { 'id': 12, 'name': 'Dez' },
 ];
+
 
 $(document).ready(function() {
   button_edit_hide();
@@ -100,7 +102,7 @@ evento_agenda();
       html += '<section class="regular slider">';
       console.log(obj);
       $.each(obj.lista_layout_evento, function (k, lpp) {
-          html += '<a id="'+k+'" data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-slave2_css="'+lpp.layout_data_slave2_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" class="layout_css"><div  class="divPerfilEC" style="opacity: 0.5;height: 80px;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
+          html += '<a id="'+k+'"  data-layout_id="'+lpp.layout_id+'"  data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-slave2_css="'+lpp.layout_data_slave2_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" class="layout_css"><div  class="divPerfilEC" style="opacity: 0.5;height: 80px;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
               html += '<div style="display: grid;">';
           html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.layout_background_icone+'" style="height:55px;width:60px;border-radius:50%;"/></div>';
                 html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;"></span></div>';
@@ -113,14 +115,10 @@ evento_agenda();
       slick();
       $('#carregando').hide();
 
-      $('.layout_css').click(function(e){
-        $('.divPerfilEC').removeClass('perfil_ec_selected');
-        $(this).children().addClass('perfil_ec_selected');
-                    
-        atual_evento_cod = $(this).data('evento_cod');
-      });
+      
 
       $('.layout_css').click(function(e){
+        layout_id = $(this).data('layout_id');
          $("#divImg").css("background-image", "url("+$(this).data('img_background')+")");
          $("#txt_evento").html($(this).data('evento_nome'));
          $("#descricao").val($(this).data('evento_nome'));
@@ -220,9 +218,38 @@ evento_agenda();
     });
 
     document.getElementById('btn_salvar').addEventListener('click',function(){
-      print();
+      //print();
      // PrintElem('divImg');
+     salvar();
     });
+
+    function salvar(){
+      $.ajax({
+        method: "POST",
+        url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_layout_agenda",
+        data: {
+              agenda_id: "138",
+              agenda_desc_head : "Santa Missa",
+              agenda_font_head : "font-family:arial;",
+              agenda_layout_data : "S",
+              agenda_desc_footer : "Solenidade São José",
+              agenda_font_footer : "font-family:arial;",
+              agenda_layout_id: layout_id
+            }
+      })
+      .done(function(ret) {
+  
+        var obj = jQuery.parseJSON(ret);
+  
+
+        if(obj.status == '1'){
+          alert("atualizouuuuu");
+        }
+       
+  
+        
+      });
+    }
 
 
     $('#evento').click(function(e){
