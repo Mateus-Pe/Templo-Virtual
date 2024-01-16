@@ -135,7 +135,9 @@ evento_agenda();
       var obj = jQuery.parseJSON(ret);
 
         if(obj.status ==1){
-            window.location = "calendario.html";
+            alert(obj.agenda_id);
+            window.sessionStorage.setItem('agenda_id', obj.agenda_id);
+            window.location = "configurar-layout.html";
         }
 
 

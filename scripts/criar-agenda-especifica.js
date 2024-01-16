@@ -122,7 +122,7 @@ function formata_data(day){
 
 
   $('#btn_seguir').click(function(e){
-    validacao_evento_agenda();
+    gerar_agenda_especifica();
     
   });
 
@@ -172,19 +172,17 @@ function formata_data(day){
 
   }
 
-  function gerar_agenda(){
+  function gerar_agenda_especifica(){
     
 
 
     $.ajax({
       method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/gerar_agenda",
+      url: "https://pedeoferta.com.br/templo/index.php/welcome/gerar_agenda_especifica",
       data: { 
-          'dias': dias_checked.join(),
           'agenda_igreja_id': 42,
-          'agenda_evento_id': atual_evento_cod,
-          'agenda_dias': $('#agenda_dias').val(),
-          'tempo_duracao': $('#tempo_duracao').val(),
+          'agenda_evento_id': atual_evento_cod,    
+          'agenda_data': $('#data_evento').val(),     
           'agenda_de': $('#agenda_de').val(),
           'agenda_ate': $('#agenda_ate').val()
           
@@ -192,11 +190,12 @@ function formata_data(day){
     })
       .done(function(ret) {
 
-
+        console.log(ret);
       var obj = jQuery.parseJSON(ret);
-
+        
         if(obj.status ==1){
-            window.location = "calendario.html";
+            window.sessionStorage.setItem('agenda_id', obj.agenda_id);
+            window.location = "configurar-layout.html";
         }
 
 
