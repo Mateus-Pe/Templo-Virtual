@@ -225,9 +225,8 @@ evento_agenda();
     });
 
     document.getElementById('btn_salvar').addEventListener('click',function(){
-      //print();
-     // PrintElem('divImg');
-     salvar();
+     print();
+     //salvar();
      
     });
 
@@ -326,43 +325,64 @@ evento_agenda();
   }
   //setInterval(button_edit,5000);
 
+  function upload_layout(){
+    
 
-  function print(){
-   
-    html2canvas(document.querySelector("#divImg"), {
-     logging: true, letterRendering: 1, //allowTaint: false,
-      useCORS: true
-  }).then(canvas => {
+    $.ajax({
 
-        var anchorTag = document.createElement("a");
-        document.body.appendChild(anchorTag);
-        anchorTag.download = "filename.jpg";
-        anchorTag.href = canvas.toDataURL("image/jpg");
-        anchorTag.target = '_blank';
-        anchorTag.click();
-                
+        type: "POST",
+
+        url: "https://pedeoferta.com.br/templo/index.php/welcome/upload_layout",
+
+        data: {'imagem': imageFile},
+
+        cache: false,
+
+        dataType: 'json',
+
+        success: function (data) {
+
+          console.log(data);
+
+        }
+
     });
 }
 
 
-function PrintElem(elem) {
-  var element = document.getElementById(elem);
+  function loadImage() {
+    return new Promise((resolve, reject) => {
+        var img = new Image();
+        img.crossOrigin = "Anonymous";  // Configurar para tratar CORS
+        img.onload = function() {
+            resolve(img);
+        };
+        img.onerror = function() {
+            reject("Erro ao carregar a imagem");
+        };
+        img.src = "imgs/imgs-igreja/missa1.jpg";  // Substitua pelo caminho real da sua imagem no servidor local
+    });
+}
 
-  html2canvas(element).then(function (canvas) {
-      var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+async function print() {
+    try {
+        var image = await loadImage();
+        document.getElementById("divImg").style.backgroundImage = `url(${image.src})`;
 
-      mywindow.document.write('<html><head><title>' + ''  + '</title>');
-      mywindow.document.write('</head><body >');
-      mywindow.document.write('<h1>' + '#divImg' + '</h1>');
-      mywindow.document.write('<img src="' + canvas.toDataURL("image/png") + '" style="width:100%;">');
-      mywindow.document.write('</body></html>');
-
-      mywindow.document.close(); // necessary for IE >= 10
-      mywindow.focus(); // necessary for IE >= 10*/
-
-      mywindow.print();
-      mywindow.close();
-
-      return true;
-  });
+        html2canvas(document.getElementById("divImg"), {
+            logging: true,
+            letterRendering: 1,
+            allowTaint: true
+        }).then(canvas => {
+            var anchorTag = document.createElement("a");
+            document.body.appendChild(anchorTag);
+            document.body.appendChild(canvas);
+            //anchorTag.download = "filename.png";
+            imageFile = canvas.toDataURL("image/jpg");
+            //anchorTag.click();
+        });
+    } catch (error) {
+        console.error(error);
+    }
+    upload_layout();
 }
