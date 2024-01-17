@@ -91,6 +91,8 @@ function configuraEventos(){
 
     
         $('.calendarList2 li').click(function (e) {
+            $('.calendarList2 li').removeClass('selected');
+            $(this).addClass('selected');
             $('#data_evento').val(formata_data($(this).attr('id')));
             $('#modalCalendario').hide();
           });    
@@ -122,8 +124,7 @@ function formata_data(day){
 
 
   $('#btn_seguir').click(function(e){
-    gerar_agenda_especifica();
-    
+    validacao_evento_agenda();
   });
 
   function evento_agenda(){
@@ -209,5 +210,50 @@ function formata_data(day){
   $('#data_evento').focus(function(e){
     $('#modalCalendario').show();
   });
-
   
+
+  function validacao_evento_agenda(){
+    var erro = false;
+
+    if($('#agenda_ate').val() == '0'){
+      texto_modal = "<p> Selecione quando o evento terminará. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
+    }
+    if($('#agenda_de').val() == '0'){
+      texto_modal = "<p> Selecione quando o evento iniciará. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
+    }
+    if($('#data_evento').val() == ''){
+      texto_modal = "<p> Selecione o dia que deseja agendar. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
+    }
+    if (atual_evento_cod == 0) {
+      texto_modal = "<p> Selecione o evento que deseja. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
+    } 
+    if(!erro){
+
+      if ($('#agenda_de').val() >= $('#agenda_ate').val()){
+        texto_modal = "<p> A hora de início deve ser menor que a hora do fim. </p><br>";
+        $('#texto_confirmacao').html(texto_modal);
+        erro = true;
+      }
+    }
+
+    $('#modalConfirmacao').show();
+    
+    $('#confirmar').click(function (e) {
+      $('#modalConfirmacao').hide();
+      
+    });
+
+    if(!erro){
+      $('#modalConfirmacao').hide();
+      gerar_agenda_especifica();
+    }
+  }
+
