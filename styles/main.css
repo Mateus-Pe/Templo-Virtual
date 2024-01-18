@@ -4574,11 +4574,12 @@ main {
 
 .vitrine-geral__product {
   border-radius: 10px;
-  border: 1px solid #5b318a;
+  border: 1px solid white;
   margin-left: 0.2rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.1rem;
   margin-right: 0.2rem;
   padding: 10px;
+  background-color: white;
 }
 
 .vitrine-geral__market-link, .vitrine-geral__data {
@@ -4622,7 +4623,7 @@ main {
 
 .vitrine-geral__product-name {
   height: 2.5rem;
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
 }
 
 .vitrine-geral__product-price {
@@ -4635,12 +4636,12 @@ main {
 .vitrine-geral__market-name {
   align-self: center;
   color: #363636;
-  margin-left: 0.5rem;
+  margin-left: 0.6rem;
 }
 
 .vitrine-geral__product-img {
   align-self: center;
-  max-height: 150px;
+  max-height: 200px;
   max-width: 100%;
 }
 
