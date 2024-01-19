@@ -1,5 +1,4 @@
-var origem_lote = true;
-var dias_agenda = [0,1,2,3];
+var dias_agenda = [];
 var atual_evento_cod = 0;
 var D = '0';// $('#data_master').children().html().trim();
 var mes = '0';//$('#data_slave1').children().html().trim();
@@ -103,7 +102,15 @@ function busca_agenda(agenda_id ){
     }
 
     carregarDatas(obj.agenda.data_referencia);
-    evento_agenda()
+    str_dias_escolhidos = obj.agenda.agenda_dias_escolhidos.split(",");
+   
+    str_dias_escolhidos.forEach(function(element, index) {
+      
+      dias_agenda.push(parseInt(element));
+    });
+    console.log(origem_lote);
+    console.log(dias_agenda);
+    evento_agenda(origem_lote);
   });
 }
 
@@ -111,7 +118,7 @@ function busca_agenda(agenda_id ){
 
 
 
-  function evento_agenda(){
+  function evento_agenda(origem_lote){
     $.ajax({
       method: "POST",
       url: "https://pedeoferta.com.br/templo/index.php/welcome/get_layout_evento",
@@ -158,7 +165,7 @@ function busca_agenda(agenda_id ){
          set_style($(this).data('rodape_css'), 'rodape');
       });
       $('#0').click();
-      troca_layout('S');
+      troca_layout('S', origem_lote);
     });
   }
 
@@ -166,42 +173,35 @@ function busca_agenda(agenda_id ){
 
   $('#layout').change(function() {
     var option = $('#layout').find(":selected").val();
-    troca_layout(option);
+    troca_layout(option, false);
     });
 
-    function troca_layout(option){
+    function troca_layout(option, origem_lote){
       
     if(origem_lote){
       $('#layout').hide();
-      $('#data').css('pointer-events', 'none');
-     
-
-    if(array_sequencial()){
-      dia_inicio = dias.find(x => x.id === dias_agenda[0]).name;
-      dia_fim = dias.find(x => x.id === dias_agenda[dias_agenda.length-1]).name;
-      $("#data_master").css("font-size","4.8em");
-      $("#data_master").html("<span>"+dia_inicio+" à "+dia_fim+"</span>");
-      $("#data_slave1").html("<span>Das 14:00</span>");
-      $("#data_slave2").html("<span>às 15:00</span>");
-    }else{
-      str_dias = "";
-      dias_agenda.forEach(function(element, index) {
-        if(index < dias_agenda.length-1 )
-          str_dias += dias.find(x => x.id === element).name.substring(0,3)+'/';
-        else
-           str_dias += dias.find(x => x.id === element).name.substring(0,3)
-      });
-      $("#data_master").css("font-size","3.1em");
-      $("#data_master").html("<span>"+str_dias+"</span>");
-      $("#data_slave1").html("<span>Das 14:00</span>");
-      $("#data_slave2").html("<span>às 15:00</span>");
-    }
-     
-
-
-      
-       
-     
+      $('#data').css('pointer-events', 'none');     
+   
+      if(array_sequencial()){
+        dia_inicio = dias.find(x => x.id == dias_agenda[0]).name;
+        dia_fim = dias.find(x => x.id == dias_agenda[dias_agenda.length-1]).name;
+        $("#data_master").css("font-size","4.8em");
+        $("#data_master").html("<span>"+dia_inicio+" à "+dia_fim+"</span>");
+        $("#data_slave1").html("<span>Das 14:00</span>");
+        $("#data_slave2").html("<span>às 15:00</span>");
+      }else{
+        str_dias = "";
+        dias_agenda.forEach(function(element, index) {
+          if(index < dias_agenda.length-1 )
+            str_dias += dias.find(x => x.id == element).name.substring(0,3)+'/';
+          else
+            str_dias += dias.find(x => x.id == element).name.substring(0,3)
+        });
+        $("#data_master").css("font-size","3.1em");
+        $("#data_master").html("<span>"+str_dias+"</span>");
+        $("#data_slave1").html("<span>Das 14:00</span>");
+        $("#data_slave2").html("<span>às 15:00</span>");
+      }
     }else{
       
    
@@ -448,7 +448,7 @@ async function print() {
 function array_sequencial(){
   var retorno =1;
   var pos1= parseInt(dias_agenda[0]);
-  console.log(pos1);
+  console.log(dias_agenda);
   dias_agenda.forEach(function(element, index) {
     console.log(pos1);
     if(dias_agenda.includes(pos1)){
