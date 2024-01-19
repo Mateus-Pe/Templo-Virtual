@@ -1,6 +1,5 @@
 var origem_lote = true;
 var dias_agenda = [0,1,2,3];
-var imageFile;
 var atual_evento_cod = 0;
 var D = '0';// $('#data_master').children().html().trim();
 var mes = '0';//$('#data_slave1').children().html().trim();
@@ -267,11 +266,12 @@ evento_agenda();
      
     });
 
-    function salvar(){
+    function salvar(imageFile){
       $.ajax({
         method: "POST",
         url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_layout_agenda",
         data: {
+              'imagem': imageFile,
               agenda_id: agenda_id,
               agenda_desc_head : $("#txt_evento").html(),
               agenda_font_head : "font-family:" + $('#fonte').find(":selected").val() ,
@@ -362,7 +362,7 @@ evento_agenda();
   }
   //setInterval(button_edit,5000);
 
-  function upload_layout(){
+  function upload_layout(imageFile){
     
 
     $.ajax({
@@ -402,26 +402,27 @@ evento_agenda();
 }
 
 async function print() {
-    try {
-        var image = await loadImage();
-        document.getElementById("divImg").style.backgroundImage = `url(${image.src})`;
+  try {
+      var image = await loadImage();
+      document.getElementById("divImg").style.backgroundImage = `url(${image.src})`;
 
-        html2canvas(document.getElementById("divImg"), {
-            logging: true,
-            letterRendering: 1,
-            allowTaint: true
-        }).then(canvas => {
-            var anchorTag = document.createElement("a");
-            document.body.appendChild(anchorTag);
-            document.body.appendChild(canvas);
-            //anchorTag.download = "filename.png";
-            imageFile = canvas.toDataURL("image/jpg");
-            //anchorTag.click();
-        });
-    } catch (error) {
-        console.error(error);
-    }
-    upload_layout();
+      html2canvas(document.getElementById("divImg"), {
+          logging: true,
+          letterRendering: 1,
+          allowTaint: true
+      }).then(canvas => {
+          var anchorTag = document.createElement("a");
+          document.body.appendChild(anchorTag);
+          document.body.appendChild(canvas);
+          //anchorTag.download = "filename.png";
+          imageFile = canvas.toDataURL("image/jpeg");
+          //anchorTag.click();
+          salvar(imageFile);
+      });
+  } catch (error) {
+      console.error(error);
+  }
+  
 }
 
 function array_sequencial(){
