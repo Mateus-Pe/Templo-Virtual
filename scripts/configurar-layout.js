@@ -1,3 +1,5 @@
+var origem_lote = true;
+var dias_agenda = [0,1,2,3];
 var imageFile;
 var atual_evento_cod = 0;
 var D = '0';// $('#data_master').children().html().trim();
@@ -150,7 +152,39 @@ evento_agenda();
 
     function troca_layout(option){
       
-    
+    if(origem_lote){
+      $('#layout').hide();
+      $('#data').css('pointer-events', 'none');
+     
+
+    if(array_sequencial()){
+      dia_inicio = dias.find(x => x.id === dias_agenda[0]).name;
+      dia_fim = dias.find(x => x.id === dias_agenda[dias_agenda.length-1]).name;
+      $("#data_master").css("font-size","4.8em");
+      $("#data_master").html("<span>"+dia_inicio+" à "+dia_fim+"</span>");
+      $("#data_slave1").html("<span>Das 14:00</span>");
+      $("#data_slave2").html("<span>às 15:00</span>");
+    }else{
+      str_dias = "";
+      dias_agenda.forEach(function(element, index) {
+        if(index < dias_agenda.length-1 )
+          str_dias += dias.find(x => x.id === element).name.substring(0,3)+'/';
+        else
+           str_dias += dias.find(x => x.id === element).name.substring(0,3)
+      });
+      $("#data_master").css("font-size","3.1em");
+      $("#data_master").html("<span>"+str_dias+"</span>");
+      $("#data_slave1").html("<span>Das 14:00</span>");
+      $("#data_slave2").html("<span>às 15:00</span>");
+    }
+     
+
+
+      
+       
+     
+    }else{
+      
    
       if(option == "D"){
         $("#data_master").css("font-size","6.5em");
@@ -174,6 +208,9 @@ evento_agenda();
         $("#data_slave2").html("<span> às "+ H +"</span>");
         
       }
+    }
+
+      
     }
 
   function set_style(strStyle, divElement){
@@ -385,4 +422,22 @@ async function print() {
         console.error(error);
     }
     upload_layout();
+}
+
+function array_sequencial(){
+  var retorno =1;
+  var pos1= parseInt(dias_agenda[0]);
+  console.log(pos1);
+  dias_agenda.forEach(function(element, index) {
+    console.log(pos1);
+    if(dias_agenda.includes(pos1)){
+      pos1 ++;
+    }else{
+      retorno = 0
+      return false;
+      
+    }
+    
+  });
+  return retorno;
 }
