@@ -36,11 +36,12 @@ const months = [
 $(document).ready(function() {
   agenda_id = window.sessionStorage.getItem('agenda_id');
   button_edit_hide();
-  carregarDatas();
+  
+  busca_agenda(agenda_id);
 });
 
-function carregarDatas(){
-  var data =  window.sessionStorage.getItem('data_referencia');
+function carregarDatas(data){
+  //var data =  window.sessionStorage.getItem('data_referencia');
   var hashdata = data.split("-");
   ano = hashdata[0];
   mes = hashdata[1];
@@ -85,9 +86,28 @@ function getImgSize(imgSrc) {
 
 
 
+function busca_agenda(agenda_id ){
+  $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_by_id",
+    data: {agenda_id: agenda_id}
+  })
+  .done(function(ret) {
+    
+    var obj = jQuery.parseJSON(ret);
+    console.log(obj);
+    if(obj.agenda.agenda_lote > 0){
+      origem_lote = true;
+    }else{
+      origem_lote = false;
+    }
+
+    carregarDatas(obj.agenda.data_referencia);
+    evento_agenda()
+  });
+}
 
 
-evento_agenda();
 
 
 
