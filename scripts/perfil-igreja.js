@@ -1,5 +1,6 @@
 carregar_feed();
 evento_agenda();
+carregar_perfil();
 function carregar_feed(){
     $.ajax({
       method: "POST",
@@ -54,6 +55,53 @@ function carregar_feed(){
      
   });
 }
+
+function carregar_perfil(){
+    var html = '';
+  
+      html += '<div id="imagem_igreja" class="div_img_igreja">';
+      html += '<img class="img_igreja1" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">';
+      html += '</div>';
+      html += '<div class="div_publicacao">';
+      html += '<div class="feed_principal">';
+      html += '<div class="div_feed_secundario">';
+      html += '<div>';
+      html += '<div>';
+      html += '<a class="a_div_perfil">';
+      html += '<h1 id="nome_da_igreja" class="nome_da_igreja">';
+      html += 'Santa Rita de Cassia';
+      html += '</h1>';
+      html += '<span class="abrir_map">';
+      html += '<span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432" >';
+      html += 'Ver no mapa';
+      html += '</span>';
+      html += '<span class="material-symbols-outlined icone_editar ion_map">';
+      html += 'location_on';
+      html += '</span>';
+      html += '</span>';
+      html += '<span id="endereco_da_igreja" class="endereco_igreja">';
+      html += 'Rua da igreja, 78, Vila Santana, Sorocaba';
+      html += '</span>';
+      html += '<span id="contato_da_igreja" class="endereco_igreja">';
+      html += '(15)99836-7365';
+      html += '</span>';
+      html += '<span id="comunidade" class="endereco_igreja">';
+      html += 'Comunidade';
+      html += '</span>';
+      html += '</a>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
+      html += '</div>';
+      $("#divPerfil").html(html);
+}
+   
+
+
+
+
+
 
 function evento_agenda() {
   $.ajax({
