@@ -1,0 +1,339 @@
+body{
+    background-color: lightgray;
+    height: 100%;
+    width: 100%;
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+.feed_main{
+    background:lightgray;;
+    font-size: 1.6rem;
+    font-family: sans-serif;
+    margin-top: 5rem;
+}
+
+.feed_main_top{
+    font-size: 1.6rem;
+    margin-top: 5.5rem;
+    text-align: center;
+}
+
+.div_publicacao{
+    background-color: lightgray;
+}
+
+.feed_principal{
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 2px;
+    padding-left: 2px;
+    padding-right: 6px;
+}
+
+.div_feed_secundario{
+    border-radius: 10px;
+  border: 1px solid white;
+  margin-left: 0.2rem;
+  margin-bottom: 0.1rem;
+  margin-right: 0.2rem;
+  background-color: white;
+  width: 100%; 
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+}
+
+.div_perfil{
+    display: flex;
+    text-decoration: none;
+}
+
+.img_igreja{
+    max-height: 3.5rem;
+}
+
+.nome_igreja{
+    align-self: center;
+    color: #363636;
+    margin-left: 0.6rem;
+    font-size: 1.3rem; 
+    font-family: exo;
+}
+
+.div_layout_feed{
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.a_img_layout{
+    color: #363636;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.img_layout_feed{
+    align-self: center;
+    max-height: 200px;
+    max-width: 100%;
+    width: 100%;
+}
+
+.div_descricao{
+    margin-top: 15px;
+}
+
+.span_descricao{
+    height: 2.5rem;
+    margin-top: 1.5rem;
+    color: rgb(98, 97, 97); 
+    font-family: exo; 
+    font-size: 1.5rem;
+}
+
+.div_rodape_feed{
+    margin-top: 1.1rem;
+}
+
+.rodape_feed_botao{
+    text-align: right; 
+    display: block;
+}
+
+.span_rodape_botao{
+    background-color: white; 
+    color: lightslategray;
+}
+
+.slick-prev {
+    left: 0px;
+}
+
+.slick-next {
+    right: 0px;
+}
+
+.slick-prev:before {
+    content: "<";
+    color: black;
+    font-size: 30px;
+}
+
+.slick-next:before {
+    content: ">";
+    color: black;
+    font-size: 30px;
+}
+
+.perfil_ec_selected {
+    opacity: 1 !important;
+}
+
+.modal1 {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #363636;
+    display: none;
+    font-family: sans-serif;
+    height: 100%;
+    left: 0;
+    overflow: auto;
+    padding-top: 45px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.modal_content{
+    -webkit-animation-duration: 0.4s;
+    -webkit-animation-name: animatetop;
+    animation-duration: 0.4s;
+    animation-name: animatetop;
+    background-color: white;
+    font-size: 2rem;
+    border-radius: 5px;
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin: auto;
+    padding: 0;
+    position: fixed;
+    width: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal_header{
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.modal_close{
+    font-size: 2.3rem;
+    font-weight: bold;
+    position: absolute;
+    right: 7px;
+    top: 0px;
+}
+
+.h3_modal{
+    justify-content: center; 
+    display: flex;
+    font-family: exo;
+}
+
+.modal_body{
+    padding: 0.2rem 1.6rem;
+}
+
+.modal_footer{
+    align-items: center;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    height: 5.5rem;
+    justify-content: space-around;
+    padding: 0.2rem 1.6rem;
+}
+
+.div_imgFundo_perfil{
+    position: relative; 
+    margin-right: auto; 
+    margin-left: auto; 
+    margin-top: 4rem;
+}
+
+.imgFundo_perfil{
+    min-height: 10rem; 
+    border-bottom: 1px solid darkred; 
+    background-color: black; 
+    width: 100%;
+}
+
+.div_img_igreja{
+    position: absolute; 
+    z-index: 3; 
+    top: 8rem; 
+    left: 4rem;
+}
+
+.img_igreja1{
+    max-height: 10rem; 
+    position: relative;
+}
+
+.a_div_perfil{
+    display: grid;
+    text-decoration: none;
+}
+
+.nome_da_igreja{
+    margin-top: 50px; 
+    margin-bottom: 20px; 
+    align-self: center; 
+    color: #363636; 
+    margin-left: 1.6rem; 
+    font-size: 1.7rem; 
+    font-family: exo;
+}
+
+.abrir_map{
+    bottom: 13px;
+    position: relative;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.ion_map{
+    color: darkred; 
+    font-size: 2rem !important; 
+}
+
+.endereco_igreja{
+    align-self: center;
+    color: #363636;
+    margin-left: 0.6rem;
+    font-size: 1.4rem; 
+    font-family: exo;
+    margin-bottom: 15px; 
+}
+
+.div_comunidade{
+    height: 90px; 
+    position: relative; 
+    top: 0.2rem; 
+    width: 98.5%; 
+    left:3px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7); 
+    background-color: white;
+}
+
+.div_feed{
+    font-size: 1.6rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.modal-content {
+    background-color: white;
+    margin: auto;
+    padding: 100px;
+    border: 1px solid #888;
+    border-radius: 30px;
+    width: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    max-width: 400px;
+}
+
+.modal-content2 {
+    background-color: white;
+    margin: auto;
+    padding: 100px;
+    border: 1px solid #888;
+    border-radius: 30px;
+    width: 80%;
+    top: 63%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    max-width: 400px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-footer button {
+    margin: 0 10px;
+    padding: 8px 10px;
+    font-size: 1rem;
+    background-color: white;
+    color: darkred;
+    border: 1px solid darkred;
+    border-radius: 30px;
+    width: 40%;
+    position: absolute;
+    bottom: 6px;
+}
+.modal1 {
+    background-color: black;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #363636;
+    display: none;
+    font-family: sans-serif;
+    height: 100%;
+    left: 0;
+    overflow: auto;
+    padding-top: 45px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
