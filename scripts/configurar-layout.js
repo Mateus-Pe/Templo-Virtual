@@ -1,5 +1,6 @@
 var dias_agenda = [];
 var atual_evento_cod = 0;
+img_src = "";
 var D = '0';// $('#data_master').children().html().trim();
 var mes = '0';//$('#data_slave1').children().html().trim();
 var H = '0';//$('#data_slave2').children().html().trim();
@@ -73,13 +74,15 @@ function getImgSize(imgSrc) {
   newImg.src = imgSrc;
   var height = newImg.height;
   var width = newImg.width;
+  console.log('heithg: '+newImg.src);
   p = $(newImg).ready(function() {
       return {width: newImg.width, height: newImg.height};
   });
 
   newHeight = Math.round((($( document ).width() * height) / width)+1);
-
+  
   $("#divImg").css("height", newHeight+"px");
+  console.log('new heithg: '+newHeight);
 }
 
 
@@ -92,24 +95,26 @@ function busca_agenda(agenda_id ){
     data: {agenda_id: agenda_id}
   })
   .done(function(ret) {
-    
+    str_dias_escolhidos = '';
     var obj = jQuery.parseJSON(ret);
     console.log(obj);
     if(obj.agenda.agenda_lote > 0){
       origem_lote = true;
+      str_dias_escolhidos = obj.agenda.agenda_dias_escolhidos.split(",");
+   
+      str_dias_escolhidos.forEach(function(element, index) {
+        
+        dias_agenda.push(parseInt(element));
+      });
     }else{
       origem_lote = false;
     }
 
     carregarDatas(obj.agenda.data_referencia);
-    str_dias_escolhidos = obj.agenda.agenda_dias_escolhidos.split(",");
    
-    str_dias_escolhidos.forEach(function(element, index) {
-      
-      dias_agenda.push(parseInt(element));
-    });
     console.log(origem_lote);
     console.log(dias_agenda);
+    $(document.body).show();
     evento_agenda(origem_lote);
   });
 }
@@ -153,20 +158,30 @@ function busca_agenda(agenda_id ){
       
 
       $('.layout_css').click(function(e){
-        layout_id = $(this).data('layout_id');
-         $("#divImg").css("background-image", "url("+$(this).data('img_background')+")");
-         $("#txt_evento").html($(this).data('evento_nome'));
-         $("#descricao").val($(this).data('evento_nome'));
-         set_style($(this).data('evento_css'), 'evento');
-         set_style($(this).data('data_css'), 'data');
-         set_style($(this).data('master_css'), 'data_master');
-         set_style($(this).data('slave1_css'), 'data_slave1');
-         set_style($(this).data('slave2_css'), 'data_slave2');
-         set_style($(this).data('rodape_css'), 'rodape');
+        atualiza_layout($(this), origem_lote);
       });
-      $('#0').click();
+      
       troca_layout('S', origem_lote);
+      $('#0').click();
+      
     });
+  }
+
+  function atualiza_layout(e, origem_lote){
+    layout_id = $(e).data('layout_id');
+    img_src = "imgs/imgs-igreja/"+$(e).data('img_background');
+    $("#divImg").css("background-image", "url("+img_src+")");
+    $("#txt_evento").html($(e).data('evento_nome'));
+    $("#descricao").val($(e).data('evento_nome'));
+    set_style($(e).data('evento_css'), 'evento');
+    set_style($(e).data('data_css'), 'data');
+    set_style($(e).data('master_css'), 'data_master');
+    set_style($(e).data('slave1_css'), 'data_slave1');
+    set_style($(e).data('slave2_css'), 'data_slave2');
+    set_style($(e).data('rodape_css'), 'rodape');
+    if(origem_lote){
+      $('#data').css('pointer-events', 'none');   
+    }
   }
 
 
@@ -174,13 +189,12 @@ function busca_agenda(agenda_id ){
   $('#layout').change(function() {
     var option = $('#layout').find(":selected").val();
     troca_layout(option, false);
-    });
+  });
 
-    function troca_layout(option, origem_lote){
+  function troca_layout(option, origem_lote){
       
     if(origem_lote){
-      $('#layout').hide();
-      $('#data').css('pointer-events', 'none');     
+      $('#layout').hide();        
    
       if(array_sequencial()){
         dia_inicio = dias.find(x => x.id == dias_agenda[0]).name;
@@ -230,7 +244,7 @@ function busca_agenda(agenda_id ){
     }
 
       
-    }
+  }
 
   function set_style(strStyle, divElement){
       arrStyle = strStyle.split(";");
@@ -307,7 +321,7 @@ function busca_agenda(agenda_id ){
   
 
         if(obj.status == '1'){
-          alert("atualizouuuuu");
+          window.location='calendario.html';
         }
        
   
@@ -417,7 +431,7 @@ function busca_agenda(agenda_id ){
         img.onerror = function() {
             reject("Erro ao carregar a imagem");
         };
-        img.src = "imgs/imgs-igreja/missa1.jpg";  // Substitua pelo caminho real da sua imagem no servidor local
+        img.src = img_src; // Substitua pelo caminho real da sua imagem no servidor local
     });
 }
 
@@ -431,12 +445,8 @@ async function print() {
           letterRendering: 1,
           allowTaint: true
       }).then(canvas => {
-          var anchorTag = document.createElement("a");
-          document.body.appendChild(anchorTag);
-          document.body.appendChild(canvas);
-          //anchorTag.download = "filename.png";
+         
           imageFile = canvas.toDataURL("image/jpeg");
-          //anchorTag.click();
           salvar(imageFile);
       });
   } catch (error) {
