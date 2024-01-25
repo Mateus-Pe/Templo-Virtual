@@ -81,44 +81,45 @@
 
     <div id="modal_contato" class="modal1">
         <div class="modal-content cadastro">
-            
+
             <div style="position: absolute; top: 6%; left: 16%;">
 
                 <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
 
-                <input class="cadastro__input" id="whatsapp" name="whatsapp" placeholder="Whatsapp"
+                <input class="cadastro__input" id="whatsapp_txt" name="whatsapp_txt" type="number"
+                    placeholder="Whatsapp"
                     style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
                     required>
             </div>
 
-            <div style="position: absolute; top: 22%; left: 16%; width: 225px;">
+            <div style="position: absolute; top: 24%; left: 16%; width: 225px;">
 
                 <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
 
-                <input class="cadastro__input" id="facebook" name="facebook" placeholder="Facebook"
+                <input class="cadastro__input" id="facebook_txt" name="facebook_txt" placeholder="Facebook"
                     style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
                     required>
-        
+
             </div>
 
-            <div style="position: absolute; top: 38%; left: 16%; width: 225px;">
+            <div style="position: absolute; top: 42%; left: 16%; width: 225px;">
 
                 <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
 
-                <input class="cadastro__input" id="instagram" name="instagram" placeholder="Instagram"
+                <input class="cadastro__input" id="instagram_txt" name="instagram_txt" placeholder="Instagram"
                     style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
                     required>
-        
+
             </div>
 
-            <div style="position: absolute; top: 52%; left: 16%; width: 225px;">
+            <div style="position: absolute; top: 60%; left: 16%; width: 225px;">
 
                 <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
 
-                <input class="cadastro__input" id="gmail" name="gmail" placeholder="Gmail"
+                <input class="cadastro__input" id="gmail_txt" name="gmail_txt" placeholder="Gmail"
                     style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
                     required>
-        
+
             </div>
             <div class="modal-footer">
                 <button href="#!" id="confirmar">OK</button>
@@ -126,14 +127,14 @@
         </div>
     </div>
 
-    
+
 
     <div id="imagem_igreja" class="div_img_igreja">
 
-        <img class="img_igreja1"
-        src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">
+        <img class="img_igreja1" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">
 
-        <span class="material-symbols-outlined" style="position: relative; font-size: 20px; color: darkred;">
+        <span class="material-symbols-outlined"
+            style="position: relative; font-size: 20px; color: darkred; right: 16px;">
             photo_camera
         </span>
     </div>
@@ -146,39 +147,38 @@
                     <div>
                         <a class="a_div_perfil">
 
-                        <h1 id="nome_da_igreja" class="nome_da_igreja">
-                            Santa Rita de Cassia
-                        </h1>
+                            <h1 id="nome_da_igreja" class="nome_da_igreja">
+                                Santa Rita de Cassia
+                            </h1>
 
-                        <span class="abrir_map">
+                            <span class="abrir_map">
 
-                            <span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432" >
-                                Ver no mapa
+                                <span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432">
+                                    Ver no mapa
+                                </span>
+
+                                <span class="material-symbols-outlined icone_editar ion_map">
+                                    location_on
+                                </span>
+
                             </span>
 
-                            <span class="material-symbols-outlined icone_editar ion_map">
-                                location_on
+                            <span id="endereco_da_igreja" class="endereco_igreja">
+                                Rua da igreja, 78, Vila Santana, Sorocaba
                             </span>
 
-                        </span>
-
-                        <span id="endereco_da_igreja" class="endereco_igreja">
-                            Rua da igreja, 78, Vila Santana, Sorocaba
-                        </span>
-
-                        <span id="contato_da_igreja" class="endereco_igreja" style="display: flex; align-items: center;">
-                            Contatos
-                            <span class="material-symbols-outlined" style="position: relative; left: 1rem; font-size: 20px; color: darkred;">
-                                edit
+                            <span id="contato_da_igreja" class="contato_igreja"
+                                style="display: flex; align-items: center;">
+                                Contatos
+                                <span class="material-symbols-outlined"
+                                    style="position: relative; left: 1rem; font-size: 20px; color: darkred;">
+                                    edit
+                                </span>
                             </span>
-                        </span>
 
 
-                        <span id="comunidade" class="endereco_igreja" style="display: flex; align-items: center;">
-                            Comunidade
-                        </span>
 
-
+                            <div class="contatos"></div>
                         </a>
                     </div>
                 </div>
@@ -189,15 +189,16 @@
 
     <div class="div_comunidade">
 
-        
-            <div style="display: inline-grid;">
-                <div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">
-                    <img src="https://www.pedeoferta.com.br/mercado/img/igreja/confissao.png" style="height:50px">
-                </div>
-                <span style="font-size: 1.3rem;text-align:center;text-decoration:none;width: 71px;">
-                    Santo Antonio
-                </span>
+
+        <div style="display: inline-grid;">
+            <div
+                style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">
+                <img src="https://www.pedeoferta.com.br/mercado/img/igreja/confissao.png" style="height:50px">
             </div>
+            <span style="font-size: 1.3rem;text-align:center;text-decoration:none;width: 71px;">
+                Santo Antonio
+            </span>
+        </div>
 
     </div>
 
@@ -220,10 +221,9 @@
         <script src="./scripts/configurar-perfil-igreja.js"></script>
         <script src="./scripts/geolocation.js"></script>
         <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjVDWPYDC5zoxBw0zW4bdnnaelnyCWdkw&callback=initMap">
 
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjVDWPYDC5zoxBw0zW4bdnnaelnyCWdkw&callback=initMap">
-        
-       </script>
+            </script>
 
 
 

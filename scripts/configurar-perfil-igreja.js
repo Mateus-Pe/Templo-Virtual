@@ -216,4 +216,121 @@ $(".modal_close").click(function(e) {
 
 $("#contato_da_igreja").click(function(e){
     $("#modal_contato").show();
+    
+  });
+  $("#confirmar").click(function(e){
+    $("#modal_contato").hide();
+  });
+
+$(function (){
+  var $exibirTexto = $("#whatsapp");
+    $("#whatsapp_txt").on("keyup", function () {
+      var texto = $(this).val();
+      $exibirTexto.text(texto);
+    });
+});
+
+$(function (){
+  var $exibirTexto = $("#facebook");
+    $("#facebook_txt").on("keyup", function () {
+      var texto = $(this).val();
+      $exibirTexto.text(texto);
+    });
+});
+
+$(function (){
+  var $exibirTexto = $("#instagram");
+    $("#instagram_txt").on("keyup", function () {
+      var texto = $(this).val();
+      $exibirTexto.text(texto);
+    });
+});
+
+$(function (){
+  var $exibirTexto = $("#gmail");
+    $("#gmail_txt").on("keyup", function () {
+      var texto = $(this).val();
+      $exibirTexto.text(texto);
+    });
+});
+
+
+$("#whatsapp_txt").on("input", function () {
+  toggleDivVisibility($(this).val(), $(".div_whats"));
+});
+
+$("#facebook_txt").on("input", function () {
+  toggleDivVisibility($(this).val(), $(".div_face"));
+});
+
+$("#instagram_txt").on("input", function () {
+  toggleDivVisibility($(this).val(), $(".div_insta"));
+});
+
+$("#gmail_txt").on("input", function () {
+  toggleDivVisibility($(this).val(), $(".div_gmail"));
+});
+
+// Função para mostrar ou ocultar a div com base no valor do campo de texto
+function toggleDivVisibility(value, targetDiv) {
+  if (value.trim() !== "") {
+      targetDiv.show();
+      targetDiv.css("display", "flex");
+
+  } else {
+      targetDiv.hide();
+      targetDiv.css("display", "none");
+  }
+}
+
+
+const imagens = {
+  whatsapp: './imgs/whatsapp.png',
+  facebook: './imgs/facebook.png',
+  //instagram: 'URL_DA_IMAGEM_INSTAGRAM',
+  //gmail: 'URL_DA_IMAGEM_GMAIL'
+};
+
+function atualizarContatos() {
+  const campos = ['whatsapp_txt', 'facebook_txt', 'instagram_txt', 'gmail_txt'];
+  const divs = ['.div_whats', '.div_face', '.div_insta', '.div_gmail'];
+
+  $('.contatos').empty();
+
+  campos.forEach((campo, index) => {
+    const valor = $('#' + campo).val().trim();
+    if (valor !== '') {
+      const divContato = $('<div class="contato"></div>');
+      const imgContato = $('<img src="' + imagens[campo.split('_')[0]] + '">');
+      divContato.append(imgContato);
+      const spanContato = $('<span></span>');
+      spanContato.text(valor);
+      divContato.append(spanContato);
+
+      const linhaAtual = $('<div class="linha"></div>');
+      linhaAtual.append(divContato);
+
+      $('.contatos').append(linhaAtual);
+    }
+  });
+}
+
+$('#whatsapp_txt').on('input', function() {
+  toggleDivVisibility($(this).val(), $('.div_whats'));
+  atualizarContatos();
+});
+
+$('#facebook_txt').on('input', function() {
+  toggleDivVisibility($(this).val(), $('.div_face'));
+  atualizarContatos();
+});
+
+$('#instagram_txt').on('input', function() {
+  toggleDivVisibility($(this).val(), $('.div_insta'));
+  atualizarContatos();
+});
+
+$('#gmail_txt').on('input', function() {
+  toggleDivVisibility($(this).val(), $('.div_gmail'));
+  atualizarContatos();
 });
