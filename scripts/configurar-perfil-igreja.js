@@ -1,5 +1,5 @@
 carregar_feed();
-evento_agenda();
+//evento_agenda();
 carregar_perfil();
 function carregar_feed(){
     $.ajax({
@@ -211,4 +211,9 @@ $("#localizacao").click(function(e) {
 });
 $(".modal_close").click(function(e) {
  $('#modal_addproduto').hide(); 
+});
+
+
+$("#contato_da_igreja").click(function(e){
+    $("#modal_contato").show();
 });
