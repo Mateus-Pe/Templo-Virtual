@@ -364,3 +364,20 @@ body{
     position: relative;
     right: 5px;
   }
+
+  .div_btn-salvar {
+    bottom: 30px;
+    display: block;
+    background-color: lightgray;
+}
+
+.div_botao-salvar {
+    font-family: Exo;
+    border: 1px solid darkred !important;
+    background-color: white;
+    color: darkred;
+    width: 70%;
+    border-radius: 10px;
+    height: 4.5rem;
+    font-size: 2rem;
+}
