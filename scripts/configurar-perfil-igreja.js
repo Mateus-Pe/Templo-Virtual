@@ -1,6 +1,19 @@
-carregar_feed();
+igrejaId = "" ;
 //evento_agenda();
-carregar_perfil();
+
+
+$(document).ready(function() {
+
+  carregar_perfil();
+  carregar_feed();
+  igrejaId = window.sessionStorage.getItem('igreja_id');
+  if(igrejaId != null && igrejaId != ''){
+    carregarIgreja();
+  }
+  
+});
+
+
 function carregar_feed(){
     $.ajax({
       method: "POST",
@@ -82,12 +95,14 @@ function carregar_perfil(){
       html += '<span id="endereco_da_igreja" class="endereco_igreja">';
       html += 'Rua da igreja, 78, Vila Santana, Sorocaba';
       html += '</span>';
-      html += '<span id="contato_da_igreja" class="endereco_igreja">';
-      html += '(15)99836-7365';
+      html += '<span id="contato_da_igreja" class="endereco_igreja" style="display: flex; align-items: center;">';
+      html += 'Contatos';
+      html += '<span class="material-symbols-outlined" style="position: relative; left: 1rem; font-size: 20px; color: darkred;">';
+      html += 'edit';
       html += '</span>';
-      html += '<span id="comunidade" class="endereco_igreja">';
-      html += 'Comunidade';
       html += '</span>';
+      html += '<div class="contatos">';
+      html += '</div>';
       html += '</a>';
       html += '</div>';
       html += '</div>';
@@ -102,50 +117,6 @@ function carregar_perfil(){
 
 
 
-
-function evento_agenda() {
-  $.ajax({
-      method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_lista_igreja_by_id",
-  })
-  .done(function(ret) {
-      var obj = jQuery.parseJSON(ret);
-      console.log(obj);
-
-      var html = '';
-      html += '<section class="regular slider">';
-
-      $.each(obj.lista_igreja, function (k, lpp) {
-          html += '<a data-igreja-id="'+lpp.igreja_id+'" class="produtos_perfil"><div class="divPerfilEC" style="opacity: 0.5;height: 90px; display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
-          html += '<div style="display: grid;">';
-          html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.igreja_logo+'" style="height:50px"/></div>';
-          html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;">'+abreviarNomeIgreja(lpp.igreja_nome)+'</span></div>';
-          html += '</div></a>';
-      });
-      html += '</section>';
-
-      $("#divHistoria").html(html);
-
-      slick();
-      $('#carregando').hide();
-
-      $('.produtos_perfil').click(function(e) {
-          $('.divPerfilEC').removeClass('perfil_ec_selected');
-          $(this).children().addClass('perfil_ec_selected');
-
-          var igrejaId = $(this).data('igreja-id');
-
-          var igrejaSelecionada = obj.lista_igreja.find(function(igreja) {
-              return igreja.igreja_id == igrejaId;
-          });
-
-          $("#nome_da_igreja").text(igrejaSelecionada.igreja_nome);
-          $("#endereco_da_igreja").text(igrejaSelecionada.igreja_endereco_logradouro + ", " + igrejaSelecionada.igreja_endereco_numero + ", " + igrejaSelecionada.igreja_endereco_bairro + ", " + igrejaSelecionada.igreja_endereco_cidade);
-          $("#imagem_igreja img").attr("src", igrejaSelecionada.igreja_logo);
-
-      });
-  });
-}
 
   function slick(){
     $(".regular").slick({
@@ -222,54 +193,7 @@ $("#contato_da_igreja").click(function(e){
     $("#modal_contato").hide();
   });
 
-$(function (){
-  var $exibirTexto = $("#whatsapp");
-    $("#whatsapp_txt").on("keyup", function () {
-      var texto = $(this).val();
-      $exibirTexto.text(texto);
-    });
-});
 
-$(function (){
-  var $exibirTexto = $("#facebook");
-    $("#facebook_txt").on("keyup", function () {
-      var texto = $(this).val();
-      $exibirTexto.text(texto);
-    });
-});
-
-$(function (){
-  var $exibirTexto = $("#instagram");
-    $("#instagram_txt").on("keyup", function () {
-      var texto = $(this).val();
-      $exibirTexto.text(texto);
-    });
-});
-
-$(function (){
-  var $exibirTexto = $("#gmail");
-    $("#gmail_txt").on("keyup", function () {
-      var texto = $(this).val();
-      $exibirTexto.text(texto);
-    });
-});
-
-
-$("#whatsapp_txt").on("input", function () {
-  toggleDivVisibility($(this).val(), $(".div_whats"));
-});
-
-$("#facebook_txt").on("input", function () {
-  toggleDivVisibility($(this).val(), $(".div_face"));
-});
-
-$("#instagram_txt").on("input", function () {
-  toggleDivVisibility($(this).val(), $(".div_insta"));
-});
-
-$("#gmail_txt").on("input", function () {
-  toggleDivVisibility($(this).val(), $(".div_gmail"));
-});
 
 // Função para mostrar ou ocultar a div com base no valor do campo de texto
 function toggleDivVisibility(value, targetDiv) {
@@ -288,12 +212,12 @@ const imagens = {
   whatsapp: './imgs/whatsapp.png',
   facebook: './imgs/facebook.png',
   //instagram: 'URL_DA_IMAGEM_INSTAGRAM',
-  //gmail: 'URL_DA_IMAGEM_GMAIL'
+  //email: 'URL_DA_IMAGEM_GMAIL'
 };
 
 function atualizarContatos() {
-  const campos = ['whatsapp_txt', 'facebook_txt', 'instagram_txt', 'gmail_txt'];
-  const divs = ['.div_whats', '.div_face', '.div_insta', '.div_gmail'];
+  const campos = ['whatsapp_txt', 'facebook_txt', 'instagram_txt', 'email_txt'];
+  const divs = ['.div_whats', '.div_face', '.div_insta', '.div_email'];
 
   $('.contatos').empty();
 
@@ -315,10 +239,15 @@ function atualizarContatos() {
   });
 }
 
-$('#whatsapp_txt').on('input', function() {
+/*$('#whatsapp_txt').on('input', function() {
   toggleDivVisibility($(this).val(), $('.div_whats'));
   atualizarContatos();
 });
+
+$('#whatsapp_txt').on('keyup', function(event) {
+  mascaraTelefone(event);
+
+});*/
 
 $('#facebook_txt').on('input', function() {
   toggleDivVisibility($(this).val(), $('.div_face'));
@@ -330,7 +259,108 @@ $('#instagram_txt').on('input', function() {
   atualizarContatos();
 });
 
-$('#gmail_txt').on('input', function() {
-  toggleDivVisibility($(this).val(), $('.div_gmail'));
+$('#email_txt').on('input', function() {
+  toggleDivVisibility($(this).val(), $('.div_email'));
   atualizarContatos();
 });
+
+$('#btn_salvar').on('click', function() {
+  salvar();
+});
+
+function salvar(){
+  $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_perfil_igreja",
+    data: {
+      igreja_id : igrejaId,
+      igreja_desc_resumida: $('#txt_desc_resumida').val(),
+      igreja_whats: $('#whatsapp_txt').val(),
+      igreja_face: $('#facebook_txt').val(),
+      igreja_instagram: $('#instagram_txt').val(),
+      igreja_email: $('#email_txt').val()
+      
+    }
+  })
+    .done(function (ret) {
+      var obj = jQuery.parseJSON(ret);
+      if(obj.status == '1'){
+        
+       // window.location = "lista-igreja.html";
+       console.log(obj);
+      }
+    });
+}
+
+
+function carregarIgreja(){
+  $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_igreja_by_id",
+    data: {
+      igreja_id : igrejaId
+     
+    }
+  })
+    .done(function (ret) {
+      var obj = jQuery.parseJSON(ret);
+      
+      if(obj.status == '1'){
+        $('#whatsapp_txt').val(obj.igreja.igreja_whats);
+        $('#facebook_txt').val(obj.igreja.igreja_face);
+        $('#instagram_txt').val(obj.igreja.igreja_instagram);
+        $('#email_txt').val(obj.igreja.igreja_email);
+        $('#txt_desc_resumida').val(obj.igreja.igreja_desc_resumida);
+        $("#nome_da_igreja").text(obj.igreja.igreja_nome);
+        $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
+        atualizarContatos();
+        alterar_desc_resumida();
+      }
+
+    });
+}
+
+
+$("#editar").click(function(e){
+  $("#modal_editar").show();
+  
+});
+$("#confirmar1").click(function(e){
+  alterar_desc_resumida();
+  $("#modal_editar").hide();
+});
+
+function alterar_desc_resumida(){
+  $("#desc_resumida").html($("#txt_desc_resumida").val());
+}
+
+
+function mascaraTelefone(event) {
+  let tecla = event.key;
+  let telefone = event.target.value.replace(/\D+/g, "");
+
+  if (/^[0-9]$/i.test(tecla)) {
+      telefone = telefone + tecla;
+      let tamanho = telefone.length;
+
+      if (tamanho >= 12) {
+          return false;
+      }
+      console.log('chamou');
+      if (tamanho > 10) {
+          telefone = telefone.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+      } else if (tamanho > 5) {
+          telefone = telefone.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+      } else if (tamanho > 2) {
+          telefone = telefone.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
+      } else {
+          telefone = telefone.replace(/^(\d*)/, "($1");
+      }
+console.log(telefone);
+      event.target.value = telefone;
+  }
+
+  if (!["Backspace", "Delete"].includes(tecla)) {
+      return false;
+  }
+}

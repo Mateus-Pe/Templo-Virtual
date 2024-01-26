@@ -368,7 +368,7 @@ body{
   .div_btn-salvar {
     bottom: 30px;
     display: block;
-    background-color: lightgray;
+    background-color: transparent;
 }
 
 .div_botao-salvar {
