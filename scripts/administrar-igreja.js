@@ -45,8 +45,9 @@ function listaEscolhida(data) {
 
         
         
-        html += '<div class="div-igreja">' +
+        html += '<div class="div-igreja" style="display:flex; align-items:center">' +
                     '<span class="span-igreja">' + data[i].tipo + '</span>' +
+                    '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined editar-paroquia" style="color:white; position:absolute; right:1%; font-size:2rem"> edit </span>'+
                     '</div>';
 
         html += '<div class="accordion" style="font-family: Exo;">';
@@ -96,6 +97,11 @@ function listaEscolhida(data) {
 };
 
 function configurarEventos(){
+
+    $('.editar-paroquia').click(function () {
+        window.sessionStorage.setItem('paroquia_id', $(this).data('paroquia_id'));
+        window.location = 'lista-igreja.html';
+    });
 
     $('.editar-igreja').click(function () {
         window.sessionStorage.setItem('igreja_id', $(this).data('id'));
