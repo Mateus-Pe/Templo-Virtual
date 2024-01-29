@@ -1,3 +1,4 @@
+var paroquia_id = '';
 var myJson; 
 
 var myJsonPesq; 
@@ -13,7 +14,8 @@ alteracao_matriz = false;
 
 $(document).ready(function() {
 
-
+  paroquia_id = window.sessionStorage.getItem('paroquia_id');  
+  alert(paroquia_id);
   existeMatriz();
   getCidades();
   igrejaId = window.sessionStorage.getItem('igreja_id');
@@ -328,6 +330,7 @@ function salvar(){
       igreja_nome : $('#nome_instituicao').val(),
       igreja_logo_url : "/img/SPA.jpg",
       igreja_matriz : "0",
+      paroquia_id : paroquia_id
      
     }
   })
