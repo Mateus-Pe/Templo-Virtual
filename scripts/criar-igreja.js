@@ -15,7 +15,7 @@ alteracao_matriz = false;
 $(document).ready(function() {
 
   paroquia_id = window.sessionStorage.getItem('paroquia_id');  
-  alert(paroquia_id);
+
   existeMatriz();
   getCidades();
   igrejaId = window.sessionStorage.getItem('igreja_id');

@@ -229,8 +229,7 @@ $('#add').click(function () {
         if(obj.status == '1'){
             
             window.sessionStorage.setItem('paroquia_id', obj.paroquia_id);
-            console.log(obj.paroquia_id);
-            //window.location = "criar-igreja.html";
+            window.location = "criar-igreja.html";
         }
         
     });

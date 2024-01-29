@@ -1,6 +1,13 @@
-get_listaitem();
+var paroquia_id = null;
+$(document).ready(function() {
+    paroquia_id = window.sessionStorage.getItem('paroquia_id'); 
+    if(paroquia_id != null && paroquia_id != ''){
+        get_listaitem(paroquia_id);
+    }    
+    
+}); 
 
-function get_listaitem() {
+function get_listaitem(paroquiaId) {
 
     $.ajax({
 
@@ -12,7 +19,7 @@ function get_listaitem() {
 
         dataType: 'json',
 
-        data: { 'lista_cod': 1291 },
+        data: { 'lista_cod': 1291, paroquia_id: paroquiaId },
 
         success: function (data) {
 
