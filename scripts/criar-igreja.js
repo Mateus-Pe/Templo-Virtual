@@ -426,8 +426,9 @@ function atualizar(){
 
 function existeMatriz(){
   $.ajax({
-    method: "GET",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/existe_matriz"
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/existe_matriz",
+    data: { paroquia_id: paroquia_id },
     
   })
     .done(function (ret) {
