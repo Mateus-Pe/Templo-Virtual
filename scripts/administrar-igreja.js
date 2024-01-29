@@ -1,19 +1,19 @@
 var cidade_id = '';
-get_listaitem();
 
-function get_listaitem() {
+
+function get_paroquias(cidadeId) {
 
     $.ajax({
 
         type: "POST",
 
-        url: "https://pedeoferta.com.br/templo/index.php/welcome/get_lista_igreja",
+        url: "https://pedeoferta.com.br/templo/index.php/welcome/get_lista_paroquia",
 
         cache: false,
 
         dataType: 'json',
 
-        data: { 'lista_cod': 1291 },
+        data: { 'cidade_id': cidadeId },
 
         success: function (data) {
 
@@ -201,6 +201,10 @@ function remover(id){
 $(document).ready(function () {
     $('#cidade_nome').html(' ' + window.sessionStorage.getItem("cidade_nome"));
     cidade_id = window.sessionStorage.getItem("cidade_id");
+
+    if(cidade_id != null && cidade_id != ''){
+        get_paroquias(cidade_id);
+    }
 });    
 
 $('#cidade_nome').click(function () {

@@ -513,7 +513,8 @@ function atualizar_matriz(){
       method: "POST",
       url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_matriz",
       data: {
-        igreja_id : igrejaId
+        igreja_id : igrejaId,
+        paroquia_id: paroquia_id
        
       }
     })
