@@ -47,6 +47,7 @@ function listaEscolhida(data) {
         
         html += '<div class="div-igreja" style="display:flex; align-items:center">' +
                     '<span class="span-igreja">' + data[i].tipo + '</span>' +
+                    '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined botao_adicionar" style="color:white; position:absolute; right:10%; font-size:2rem"> person_add </span>'+
                     '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined editar-paroquia" style="color:white; position:absolute; right:1%; font-size:2rem"> edit </span>'+
                     '</div>';
 
@@ -97,6 +98,14 @@ function listaEscolhida(data) {
 };
 
 function configurarEventos(){
+
+    $('.botao_adicionar').click(function () {
+        $('#id_paroquia').val($(this).data('paroquia_id'));
+       
+        $('#modalAdicionar').show();
+          
+    });
+
 
     $('.editar-paroquia').click(function () {
         window.sessionStorage.setItem('paroquia_id', $(this).data('paroquia_id'));
@@ -163,6 +172,36 @@ function configurarEventos(){
     });
 }
 
+$('#confirmarAdicao').click(function () {
+   
+    $.ajax({
+        method: "POST",
+        url: "https://pedeoferta.com.br/templo/index.php/welcome/novo_usuario",
+        data: {
+            usuario_paroquia_id :  $('#id_paroquia').val(),
+            usuario_nome : $('#usuario_nome').val(),
+            usuario_celular : $('#usuario_celular').val(),
+            usuario_tipo : $('#usuario_tipo').val()
+            
+        }
+    })
+
+    .done(function (ret) {
+        var obj = jQuery.parseJSON(ret);
+        
+        if(obj.status == '1'){
+
+            console.log(obj.login_url)
+        
+        }
+        
+    }); 
+});
+
+$('#cancelarAdicao').click(function () {
+    $('#modalAdicionar').hide();
+ 
+});
 
 
 

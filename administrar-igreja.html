@@ -30,9 +30,109 @@
     <script src="https://apis.google.com/js/api:client.js"></script>
    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
+    <style>
+
+.modal-content {
+    background-color: white;
+    margin: auto;
+    padding: 100px;
+    border: 1px solid #888;
+    border-radius: 30px;
+    width: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    max-width: 400px;
+}
+
+.modal-content2 {
+    background-color: white;
+    margin: auto;
+    padding: 100px;
+    border: 1px solid #888;
+    border-radius: 30px;
+    width: 80%;
+    top: 63%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    max-width: 400px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-footer button {
+    margin: 0 10px;
+    padding: 8px 10px;
+    font-size: 1rem;
+    background-color: white;
+    color: darkred;
+    border: 1px solid darkred;
+    border-radius: 30px;
+    width: 65%;
+    position: relative;
+    top: 9rem;
+}
+
+    </style>
 </head>
 
 <body id="idbody">
+
+    <div id="modalAdicionar" class="modal">
+        <div class="modal-content cadastro">
+            
+        <div style="position: absolute; top: 6%; left: 16%;">
+
+            <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
+
+            <input class="cadastro__input" id="uauario_nome" name="usuario_nome" placeholder="Nome"
+                style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                required>
+        </div>
+
+        <div style="position: absolute; top: 25%; left: 16%; width: 225px;">
+
+            <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
+
+            <select class="cadastro__input" id="usuario_tipo" name="usuario_tipo" placeholder="Função"
+                style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                required>
+                <option value="tipo" selected>Função</option>
+                <option value="P">Pároco</option>
+                <option value="S">Secretário</option>
+                <option value="O">Outro</option>
+            
+            </select>
+        </div>
+
+        <div style="position: absolute; top: 45%; left: 16%;">
+
+            <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
+
+            <input class="cadastro__input" id="usuario_celular" name="usuario_celular" placeholder="Celular"
+                style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                required>
+        </div>
+
+        <div style="position: absolute; top: 63%; left: 16%;">
+
+            <input class="cadastro__input" id="id_paroquia" name="id_paroquia" type="hidden"
+                style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                required>
+        </div>
+
+            <div class="modal-footer">
+                <button href="#!" id="cancelarAdicao" class="modal-close">Cancelar</button>
+                <button href="#!" id="confirmarAdicao">Confirmar</button>
+            </div>
+        </div>
+    </div>
 
     <div style="background-color: #f6f2fb;width: 100%;height: 20px;border-bottom: 1px solid lightgray; text-align: center;">
         <span class="ion-ios-location" id="cidade_nome" style="font-size: 1.6rem; text-transform: none; color: #5b318a"> Sorocaba - SP</span>
