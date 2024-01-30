@@ -47,20 +47,6 @@
     max-width: 400px;
 }
 
-.modal-content2 {
-    background-color: white;
-    margin: auto;
-    padding: 100px;
-    border: 1px solid #888;
-    border-radius: 30px;
-    width: 80%;
-    top: 63%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    max-width: 400px;
-}
-
 .modal-footer {
     display: flex;
     justify-content: center;
@@ -96,7 +82,16 @@
                 required>
         </div>
 
-        <div style="position: absolute; top: 25%; left: 16%; width: 225px;">
+        <div style="position: absolute; top: 25%; left: 16%;">
+
+            <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
+
+            <input class="cadastro__input" id="usuario_celular" name="usuario_celular" placeholder="Celular"
+                style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                required>
+        </div>
+
+        <div style="position: absolute; top: 45%; left: 16%; width: 225px;">
 
             <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
 
@@ -111,14 +106,16 @@
             </select>
         </div>
 
-        <div style="position: absolute; top: 45%; left: 16%;">
+        <div style="position: absolute; top: 63%; left: 16%;">
 
-            <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
+            <span class="material-symbols-outlined" id="copy_link" style="color: lightgray; margin-top: 0.5rem; position: absolute; left: 1rem;" >content_copy</span>
 
-            <input class="cadastro__input" id="usuario_celular" name="usuario_celular" placeholder="Celular"
+            
+            <input class="cadastro__input" id="link_usuario" name="link_usuario" placeholder="Link"
                 style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
-                required>
+                required readonly>
         </div>
+        
 
         <div style="position: absolute; top: 63%; left: 16%;">
 

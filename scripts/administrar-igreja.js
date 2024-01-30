@@ -192,6 +192,7 @@ $('#confirmarAdicao').click(function () {
         if(obj.status == '1'){
 
             console.log(obj.login_url)
+            $('#link_usuario').val(obj.login_url);
         
         }
         
@@ -250,7 +251,16 @@ $(document).ready(function () {
     if(cidade_id != null && cidade_id != ''){
         get_paroquias(cidade_id);
     }
-});    
+
+
+    $('#copy_link').click(function () {
+  
+        $('#link_usuario').select();
+        document.execCommand("copy");
+        $('#link_usuario').blur();
+    });
+
+}); 
 
 $('#cidade_nome').click(function () {
     window.location = 'estado.html';
