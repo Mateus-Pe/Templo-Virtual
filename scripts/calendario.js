@@ -241,3 +241,7 @@ function mock_agenda(){
 	   });
 }
 
+
+$('#add').click(function () {
+    window.location = "criar-agenda.html";
+});

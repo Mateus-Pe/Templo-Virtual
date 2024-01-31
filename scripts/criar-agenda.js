@@ -3,6 +3,19 @@ var ids_remove = [];
 var atual_evento_cod = 0;
 dias_checked = [];
 
+var igrejaId = null;
+
+$(document).ready(function() {
+
+  igrejaId = window.sessionStorage.getItem('igreja_id');
+
+ alert(igrejaId)
+  
+    
+  
+
+});
+
 var searchParams = new URLSearchParams(window.location.search);
 
 evento_agenda();
@@ -120,7 +133,7 @@ evento_agenda();
       url: "https://pedeoferta.com.br/templo/index.php/welcome/gerar_agenda",
       data: { 
           'dias': dias_checked.join(),
-          'agenda_igreja_id': 42,
+          'agenda_igreja_id': igrejaId,
           'agenda_evento_id': atual_evento_cod,
           'agenda_dias': $('#agenda_dias').val(),
           'tempo_duracao': $('#tempo_duracao').val(),
