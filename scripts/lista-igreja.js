@@ -81,6 +81,7 @@ function listaEscolhida(data) {
                     '</div>' +
                     '<div class="list-line">'+
                     '<div class="columns">' +
+                    '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle calendario">calendar_month</span>' +
                     '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle configurar-igreja">manufacturing</span>' +
                     '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle editar-igreja">edit</span>' +
                     span_remove +
@@ -103,6 +104,11 @@ function listaEscolhida(data) {
 
 function configurarEventos(){
 
+    $('.calendario').click(function () {
+        window.sessionStorage.setItem('igreja_id', $(this).data('id'));
+        window.location = 'calendario.html';
+    });
+    
     $('.editar-igreja').click(function () {
         window.sessionStorage.setItem('igreja_id', $(this).data('id'));
         window.location = 'criar-igreja.html';

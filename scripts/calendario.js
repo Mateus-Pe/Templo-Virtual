@@ -1,3 +1,18 @@
+
+
+var igrejaId = null;
+
+$(document).ready(function() {
+
+  igrejaId = window.sessionStorage.getItem('igreja_id');
+
+  makeCalendar(currentYear, currentMonth);
+  
+    
+  
+
+});
+
 const months = [
     { 'id': 1, 'name': 'Jan' },
     { 'id': 2, 'name': 'Fev' },
@@ -46,10 +61,16 @@ function makeCalendar(year, month) {
     monthName = months.find(x => x.id === month).name;
     $('#yearMonth').text(year + ' ' + monthName);
     configuraEventos();
-    carregarCalendario();
+
+
+    if(igrejaId != null && igrejaId != ''){
+        carregarCalendario();
+    }
+   
+   
 }
 
-makeCalendar(currentYear, currentMonth);
+
 
 
 function nextMonth() {
@@ -93,7 +114,7 @@ function carregarCalendario(){
     $.ajax({
         method: "POST",
         url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_calendario",
-        data : {igreja_id: '42'}
+        data : {igreja_id: igrejaId}
       })
       .done(function(ret) {
   
