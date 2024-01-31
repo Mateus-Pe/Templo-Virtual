@@ -45,13 +45,14 @@ function listaEscolhida(data) {
 
         
         
-        html += '<div class="div-igreja" style="display:flex; align-items:center">' +
+        html += '<div class="div-igreja" style="display:flex; align-items:center; border-color: white">' +
                     '<span class="span-igreja">' + data[i].tipo + '</span>' +
                     '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined botao_adicionar" style="color:white; position:absolute; right:10%; font-size:2rem"> person_add </span>'+
-                    '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined editar-paroquia" style="color:white; position:absolute; right:1%; font-size:2rem"> edit </span>'+
-                    '</div>';
+                    '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined editar-paroquia" style="color:white; position:absolute; right:20%; font-size:2rem"> edit </span>'+
+                    '<span class="ion-android-arrow-dropleft-circle acToggle" style="position:absolute; right: 2%; color: white; font-size: 1.3rem"></span>' +
+                '</div>';
 
-        html += '<div class="accordion" style="font-family: Exo;">';
+        html += '<div class="accordion div-igreja-detalhes" style="font-family: Exo; display: none">';
 
         $.each(data[i].listabycat, function (k, l) {
             var span_remove = '';
@@ -64,6 +65,7 @@ function listaEscolhida(data) {
                  '<div class="list-line">'+
                  '<label for="itens-check" class="label-lista">' +
                  '<p style="display:inline; padding:10px;">'+l.igreja_nome+'</p>' +
+                 
                  
                  '</label>' +
                  '<span class="ion-android-arrow-dropleft-circle acToggle"></span>' +
@@ -94,7 +96,13 @@ function listaEscolhida(data) {
     
     $('#divListaPrincipal').html(html);
 
-   
+    $('.div-igreja').click(function () {
+        $(this).next('.div-igreja-detalhes').slideToggle("slow");
+    });
+
+    configurarEventos();
+    $('#divHeader').show();
+
 };
 
 function configurarEventos(){
