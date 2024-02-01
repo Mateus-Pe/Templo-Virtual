@@ -5,7 +5,20 @@ dias_checked = [];
 
 var searchParams = new URLSearchParams(window.location.search);
 
-evento_agenda();
+
+
+var igrejaId = null;
+
+$(document).ready(function() {
+
+  igrejaId = window.sessionStorage.getItem('igreja_id');
+
+  evento_agenda();
+  
+    
+  
+
+});
 
 
 const months = [
@@ -181,7 +194,7 @@ function formata_data(day){
       method: "POST",
       url: "https://pedeoferta.com.br/templo/index.php/welcome/gerar_agenda_especifica",
       data: { 
-          'agenda_igreja_id': 42,
+          'agenda_igreja_id': igrejaId,
           'agenda_evento_id': atual_evento_cod,    
           'agenda_data': $('#data_evento').val(),     
           'agenda_de': $('#agenda_de').val(),
