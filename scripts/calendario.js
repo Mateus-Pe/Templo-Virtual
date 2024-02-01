@@ -214,10 +214,10 @@ function mock_agenda(){
 
 				html +=     '<div class="add" style="display: flex;" data-agenda_id="'+ ch.agenda_id +'">' +
 								'<div style="width: 40%; text-align: left;">'+
-									'<span style="font-size:1.0rem; color: black; margin-left: 15px;">'+ ch.agenda_hora +'</span>'+
+									'<span style="font-size:1.5rem; color: black; margin-left: 15px;">'+ ch.agenda_hora +'</span>'+
 								'</div>'+
                                 '<div style="width: 40%; text-align: left;">'+
-									'<span style="font-size:1.0rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
+									'<span style="font-size:1.5rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
 								'</div>'+
                                 '<div class="columns">' +
                                 '<span data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'"  class="material-symbols-outlined acToggle configurar_layout">edit</span>'+
