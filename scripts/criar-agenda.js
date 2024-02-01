@@ -150,7 +150,7 @@ evento_agenda();
         if(obj.status ==1){
             alert(obj.agenda_id);
             window.sessionStorage.setItem('agenda_id', obj.agenda_id);
-            window.location = "configurar-layout.html";
+            //window.location = "configurar-layout.html";
         }
 
 

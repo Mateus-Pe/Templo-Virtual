@@ -255,6 +255,7 @@ function remover(id){
 $(document).ready(function () {
     $('#cidade_nome').html(' ' + window.sessionStorage.getItem("cidade_nome"));
     cidade_id = window.sessionStorage.getItem("cidade_id");
+    window.sessionStorage.setItem('igreja_id','');
 
     if(cidade_id != null && cidade_id != ''){
         get_paroquias(cidade_id);

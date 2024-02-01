@@ -192,7 +192,7 @@ function mock_agenda(){
 	$.ajax({
 	   method: "POST",
 	   url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_calendario_hora",
-	   data: {  'igreja_id': 42, 
+	   data: {  'igreja_id': igrejaId, 
                 data_referencia: dtReferencia
 			 }
 	 })
