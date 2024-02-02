@@ -114,7 +114,7 @@ function montaProdutos(data) {
             color = "#643296";
         }
 
-        html = '<div class="pesq" style="background-color: ' + color + ';height:50px;line-height:50px; padding-bottom: 10px; border-bottom: 1px solid white">';
+        html = '<div class="pesq" style="background-color: darkred ;height:50px;line-height:50px; padding-bottom: 10px; border-bottom: 1px solid white">';
 
 
 
@@ -192,4 +192,9 @@ function pesq() {
 $('#span_criar-igreja').click(function () {
     
     $('#divProdutos').show();
+});
+
+$('#close').click(function () {
+    
+    $('#divProdutos').hide();
 });
