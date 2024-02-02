@@ -19,7 +19,7 @@ function get_listaitem(paroquiaId) {
 
         dataType: 'json',
 
-        data: { 'lista_cod': 1291, paroquia_id: paroquiaId },
+        data: {paroquia_id: paroquiaId },
 
         success: function (data) {
 
@@ -59,7 +59,7 @@ function listaEscolhida(data) {
 
         $.each(data[i].listabycat, function (k, l) {
             var span_remove = '';
-            if(data[i].tipo != 'MATRIZ'){
+            if(data[i].permite_excluir == 'S'){
             
                 span_remove = '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle remove-igreja">delete</span>' ;              
             }

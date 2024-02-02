@@ -333,5 +333,13 @@ $('.page-menu--toggle').click(function(e){
     sessionStorage.setItem("item_menu", item_menu);
   
   }
+
+  document.getElementById('span_criar-igreja').addEventListener('click', function() {
+    // Obtém o elemento select
+    var selectCalendario = document.getElementById('selectCalendario');
+
+    // Altera o estilo do select para torná-lo visível
+    selectCalendario.style.display = 'block';
+});
   
   
