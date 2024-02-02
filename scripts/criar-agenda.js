@@ -9,7 +9,7 @@ $(document).ready(function() {
 
   igrejaId = window.sessionStorage.getItem('igreja_id');
 
- alert(igrejaId)
+
   
     
   
@@ -150,7 +150,7 @@ evento_agenda();
         if(obj.status ==1){
             alert(obj.agenda_id);
             window.sessionStorage.setItem('agenda_id', obj.agenda_id);
-            //window.location = "configurar-layout.html";
+            window.location = "configurar-layout.html";
         }
 
 
