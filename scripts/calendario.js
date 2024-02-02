@@ -201,7 +201,7 @@ function mock_agenda(){
 
 			var obj = jQuery.parseJSON(ret);
 
-			$('#divLista').html('');
+			$('#divListaAgenda').html('');
 
             
 
@@ -226,7 +226,7 @@ function mock_agenda(){
 
 					   '</div>';
 
-				$('#divLista').append(html);
+				$('#divListaAgenda').append(html);
 			});
 
 			
@@ -334,12 +334,6 @@ $('.page-menu--toggle').click(function(e){
   
   }
 
-  document.getElementById('span_criar-igreja').addEventListener('click', function() {
-    // Obtém o elemento select
-    var selectCalendario = document.getElementById('selectCalendario');
-
-    // Altera o estilo do select para torná-lo visível
-    selectCalendario.style.display = 'block';
-});
+  
   
   

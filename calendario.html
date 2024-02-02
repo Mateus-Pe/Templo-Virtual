@@ -13,6 +13,8 @@
 
     <link type="text/css" rel="stylesheet" href="styles/calendario.css">
 
+    <link type="text/css" rel="stylesheet" href="styles/modal-igrejas.css">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 
     <link rel="stylesheet"
@@ -58,12 +60,7 @@
 
             <span class="span_criar-igreja" id="span_criar-igreja">CALENDÁRIO</span><br>
 
-            <select id="selectCalendario" style="display: none;">
-                <!-- Opções do select -->
-                <option value="opcao1">Opção 1</option>
-                <option value="opcao2">Opção 2</option>
-                <!-- Adicione mais opções conforme necessário -->
-            </select>
+         
 
             <span class="page-menu__cart ion-android-arrow-back" style="    margin-left: 1rem; display: none"
                 id="btnVoltar"></span>
@@ -100,7 +97,7 @@
 
             </div>
 
-            <div id="divLista" style="padding-bottom:150px;height: 300px;overflow-y: auto;"></div>
+            <div id="divListaAgenda" style="padding-bottom:150px;height: 300px;overflow-y: auto;"></div>
 
         </div>
 
@@ -117,9 +114,32 @@
         </div>
     </div>
 
+    <div id="divProdutos">
+        <div id="lista-produtos">
+            <div id="divPesquisa">
+                <span class="ion-ios-search-strong search__icon"></span>
+                <div class="search-market__container">
+                    <!--<div class="app" style="position: fixed;">
+                    <p>
+                        <button onclick="app.vai();">vai</button>
+                        <button onclick="app.stop();">Para</button>
+                    </p>
+                </div>-->
+                    <input class="search-market__input" type="text" id="search-market" placeholder="Pesquisar produtos">
+                </div>
+                <!--<span class="ion-ios-search-strong search-market__icon"></span>-->
+            </div>
+            <div id="divLista" style="height: 80%; overflow-y: auto;"></div>
+        </div>
+        <div id="confirmaLista">
+            <span id="close">X</span>
+            <span id="confirm">&#10004;</span>
+        </div>
+    </div>
 
     <script src="./scripts/jquery/jquery-3.2.1.min.js"></script>
     <script src="scripts/calendario.js"></script>
+    <script src="scripts/modal-igrejas.js"></script>
 
 
 

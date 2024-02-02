@@ -1,0 +1,507 @@
+*:focus {
+    outline:none !important;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-user-modify: read-write-plaintext-only;
+}
+
+.caixaAlerta {
+    width: 350px;
+    height: 120px;
+    background-color: #643296;
+    box-shadow: 3px 3px 3px grey;
+    border-radius: 10px;
+    border: 1px solid white;
+    margin: auto;
+    margin-top: 15%;
+    font-family: 'Exo';
+}
+
+.caixaAlerta p {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    padding: 3px;
+}
+
+.caixaAlerta input[type="submit"] {
+    width: 30%;
+    height: 25%;
+    background-color: #643296;
+    outline: none;
+    border: 1px solid white;
+    color: white;
+    float: right;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-family: 'Exo';
+    font-size: 1.4rem;
+    box-shadow: 2px 2px;
+}
+
+.caixaAlerta input[type="submit"]:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px;
+}
+
+.usarLista {
+    width: 220px;
+    height: 50px;
+    display: flex;
+    border-radius: 25px;
+    justify-content: space-between;
+    box-shadow: 2px 1px 3px #202020;
+    position: fixed;
+    bottom: 25px;
+    right: 21%;
+    text-align: center;
+    margin: 0;
+    z-index: 2;
+    background-color: #FFF;
+}
+
+.usarLista:hover {
+    border: 1px solid #a3a3a3;
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px;
+}
+
+.usarLista button {
+    width: 19%;
+    height: 80%;
+    border: 1px solid rgb(0, 170, 235);
+    border-radius: 100%;
+    margin: auto;
+    background-color: rgb(0, 170, 235);
+    color: white;
+    font-size: 3.5rem;
+    padding: 0px;
+    box-shadow: 0px 0px 3px black;
+}
+
+.usarLista p {
+    width: 70%;
+    height: 35%;
+    margin: auto;
+    margin-top: 15px;
+    font-family: 'Exo', sans-serif;
+    font-style: italic;
+    font-size: 1.7rem;
+    color: grey;
+}
+
+
+
+.container {
+    display: block;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+
+.checkmark {
+    position: absolute;
+    top: 7px;
+    left: 15px;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+
+.container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+
+.container input:checked~.checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+
+.container input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.search__icon {
+    position: absolute;
+    font-size: 2.5rem;
+    right: 0;
+    margin-right: 60px;
+    color: #643296;
+    margin-top: 8px;
+    z-index: 2;
+}
+
+.plus {
+    line-height: 55px;
+    margin: auto;
+}
+
+.img-share {
+    width: 30px;
+    height: 30px;
+    color: white;
+    position: absolute;
+    top: 13px;
+    display: block;
+    bottom: 0;
+    left: 11px;
+    right: 0;
+}
+
+.modal {
+    padding-top: 150px;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 3;
+}
+
+.boxRenomear {
+    -webkit-animation-duration: 0.4s;
+    -webkit-animation-name: animatetop;
+    animation-duration: 0.4s;
+    animation-name: animatetop;
+    background-color: #FFF;
+    border-radius: 15px;
+    border-top: 1px solid rgba(0, 0, 0, 0.16);
+    box-shadow: 5px 2px 7px #666;
+    margin: auto;
+    padding: 0;
+    position: relative;
+    width: 80%;
+    height: 65%;
+    min-height: 295px;
+}
+
+.boxRenomear input[type="text"] {
+    font: 15px/24px "Exo", Arial, sans-serif;
+    color: #333;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    font-style: italic;
+}
+
+.boxText {
+    border: 0;
+    border-bottom: 1px solid #b5aeae;
+}
+
+:focus {
+    outline: none;
+}
+
+.col-3 {
+    width: 90%;
+    margin: 10px 5%;
+    position: relative;
+}
+
+.boxText~.focus-border {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #786af7;
+    transition: 0.4s;
+}
+
+.boxText:focus~.focus-border {
+    width: 100%;
+    transition: 0.4s;
+    left: 0;
+}
+
+.ulSugestoes {
+    list-style: none;
+    width: 90%;
+    align-content: center;
+    text-align: center;
+    margin-top: -5px;
+}
+
+.ulSugestoes p {
+    font-family: 'Exo';
+    color: white;
+    font-size: 1.5rem;
+    border: 1px solid;
+    padding: 8px;
+    border-radius: 25px;
+    margin: 6px auto;
+}
+
+.legenda {
+    font-size: 1.3rem;
+    color: #643296;
+    font-style: italic;
+}
+
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    z-index: 5;
+}
+
+::-webkit-input-placeholder {
+    font-family: 'Exo';
+    color: #643296;
+}
+
+#title-list {
+    font-family: 'Exo';
+    font-style: italic;
+    color: black;
+    font-size: 1.5rem;
+    padding: 6px;
+    margin: 6px auto;
+}
+
+#search-market {
+    background-color: white;
+    font-family: Exo;
+    font-style: italic;
+    padding: 5px;
+    border-radius: 25px;
+    color: #643296;
+    width: 95%;
+    margin: 7px;
+    height: 28px;
+}
+
+#lista-produtos {
+    background-color: #643296;
+    height: 350px;
+    width: 100%;
+    border-radius: 5%;
+    border: 1px solid white;
+    box-shadow: 5px 2px 7px #666;
+}
+
+#confirmaLista {
+    width: 100%;
+    height: 40px;
+    margin-top: 7px;
+    line-height: 30px;
+    text-align: center;
+}
+
+#confirmaLista span {
+    font-family: 'Exo';
+    font-weight: bolder;
+    border: 1px solid;
+    border-radius: 25px;
+    padding: 3px 30px;
+    color: white;
+    font-size: 2.7rem;
+}
+
+#confirmaRenomear {
+    width: 100%;
+    height: 40px;
+    margin-top: 7px;
+    line-height: 30px;
+    text-align: center;
+    padding: 25px 45px;
+}
+
+#confirmaRenomear span {
+    font-family: 'Exo';
+    font-weight: bolder;
+    border: 1px solid;
+    border-radius: 25px;
+    padding: 3px 30px;
+    color: white;
+    font-size: 2.7rem;
+    box-shadow: 5px 2px 7px #666;
+    background-color: #e00a0a;
+    border-color: #e00a0a;
+}
+
+#confirmaRenomear button {
+    font-family: 'Exo';
+    font-weight: bolder;
+    border: 1px solid;
+    border-radius: 25px;
+    padding: 3px 30px;
+    color: white;
+    font-size: 2.7rem;
+    box-shadow: 5px 2px 7px #666;
+    background-color: #0b8851;
+    border-color: #0b8851;
+}
+
+#close {
+    box-shadow: 5px 2px 7px #666;
+    background-color: red;
+}
+
+#confirm {
+    box-shadow: 5px 2px 7px #666;
+    background-color: green;
+}
+
+#divListaPrincipal {
+    margin-top: 35px;
+    margin-bottom: 90px;
+}
+
+#editaNome {
+    background-color: white;
+    position: fixed;
+    font-family: 'Exo';
+    height: 35px;
+    line-height: 40px;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    display: inline-flex;
+}
+
+#editaNome span {
+    font-style: italic;
+    margin-left: 4px;
+    color: #b1b1b1;
+    font-size: 1.5rem;
+}
+
+#add {
+    font-size: 60px;
+    font-weight: 400;
+    width: 55px;
+    border-radius: 50%;
+    color: white;
+    height: 55px;
+    box-shadow: 3px 1px 5px #5b318a;
+    cursor: pointer;
+    background: rgb(0, 170, 235);
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    z-index: 3;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#divHeader {
+    background-color: white;
+    top: 0px;
+    width: 100%;
+    height: 70px;
+    z-index: 2;
+    position: fixed;
+    border-bottom: 1px solid #643296;
+    display: none;
+}
+
+#divProdutos {
+    color: #363636;
+    font-family: Exo;
+    overflow: auto;
+    padding-top: 95px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    min-height: 415px;
+    height: 100%;
+    z-index: 3;
+    padding-left: 45px;
+    padding-right: 45px;
+    display: none;
+}
+
+#calcular {
+    width: 50%;
+    float: left;
+    text-align: center;
+    display: grid;
+}
+
+#calcular span {
+    padding-left: 80px;
+}
+
+#checagem {
+    width: 50%;
+    float: right;
+    text-align: center;
+    display: grid;
+}
+
+#checagem span {
+    padding-right: 80px;
+}
+
+#compartilhar {
+    width: 55px;
+    height: 55px;
+    background-color: #fbb700;
+    border-radius: 100%;
+    position: fixed;
+    bottom: 30px;
+    right: 90px;
+    cursor: pointer;
+    box-shadow: 3px 1px 5px #666;
+    z-index: 3;
+}
+
+#divVoltar {
+    position: fixed;
+    z-index: 10;
+    top: 0px;
+    left: 0px;
+}
+
+#btnVoltar-listas {
+    color: #643296;
+    font-size: 3rem;
+    margin-left: 1rem;
+}
+
+
