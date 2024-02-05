@@ -29,6 +29,10 @@ var statusTalk = 'P'; /* P: PRODUTO
                       Q: QUANTIDADE*/
 
 getIgrejas();
+igrejaDesc();
+function igrejaDesc(){
+    $('#span_criar-igreja').html(window.sessionStorage.getItem("igreja_desc"));
+}
 
 
 
@@ -54,7 +58,7 @@ function getIgrejas() {
             myJsonPesq = data;
 
             montaProdutos(data);
-            //configurarEventos();
+            configurarEventos();
 
 
 
@@ -94,7 +98,7 @@ function montaProdutos(data) {
 
 
 
-        html += '<div class="add" style="text-align: center;" data-label="' + data[i].label + '">' +
+        html += '<div class="add" style="text-align: center;" data-id="' + data[i].igreja_id + '" data-igreja_desc="' + data[i].igreja_desc + '">' +
             '<span style="font-size:1.2rem; color:white;">' + data[i].label + '</span>' +
             '</div>' +
 
@@ -156,9 +160,23 @@ function pesq() {
 
     montaProdutos(myJson);// this.value);
 
-    //configurarEventos();
+    configurarEventos();
 
     return ret;
+}
+
+function configurarEventos() {
+
+
+
+    $('.add').click(function () {
+        window.sessionStorage.setItem('igreja_desc', $(this).data('igreja_desc'));
+        window.sessionStorage.setItem('igreja_id', $(this).data('id'));
+        location. reload(); 
+        
+    });
+
+
 }
 
 
@@ -167,6 +185,7 @@ function pesq() {
 $('#span_criar-igreja').click(function () {
     
     $('#divProdutos').show();
+
 });
 
 $('#close').click(function () {
