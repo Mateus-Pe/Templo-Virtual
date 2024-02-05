@@ -28,27 +28,24 @@ var statusTalk = 'P'; /* P: PRODUTO
                       C: COR
                       Q: QUANTIDADE*/
 
-getProdutos();
-//get_listaitem();
-
-
-console.log(window.sessionStorage.getItem("lista_cod"));
+getIgrejas();
 
 
 
-function getProdutos() {
+
+function getIgrejas() {
 
     $.ajax({
 
         type: "POST",
 
-        url: "https://www.pedeoferta.com.br/oferta/index.php/welcome/get_lista_produtos",
+        url: "https://pedeoferta.com.br/templo/index.php/welcome/get_lista_igreja_by_id",
 
         cache: false,
 
         dataType: 'json',
 
-        data: { 'lista_cod': 1 },
+        data: { 'igreja_id': window.sessionStorage.getItem("igreja_id")},
 
         success: function (data) {
 
@@ -90,36 +87,14 @@ function montaProdutos(data) {
         ate = maxRegs;
 
     for (var i = 0; i < rows; i++) {
-        if (buscaRapida == 1 && $('#search-market').val().length >= 1) {
-            switch (i) {
-                case 0:
-                    color = "green";
-                    break;
-                case 1:
-                    color = "blue";
-                    break;
-                case 2:
-                    color = "orange";
-                    break;
-                case 3:
-                    color = "red";
-                    break;
-                case 4:
-                    color = "gray";
-                    break;
-                default:
-                    color = "#643296";
-            }
-        } else {
-            color = "#643296";
-        }
+        
 
         html = '<div class="pesq" style="background-color: darkred ;height:50px;line-height:50px; padding-bottom: 10px; border-bottom: 1px solid white">';
 
 
 
 
-        html += '<div class="add" style="text-align: center;" data-label="' + data[i].label + '" data-imagem_url="' + data[i].imagem_url + '" data-oferta_cod="' + data[i].oferta_cod + '">' +
+        html += '<div class="add" style="text-align: center;" data-label="' + data[i].label + '">' +
             '<span style="font-size:1.2rem; color:white;">' + data[i].label + '</span>' +
             '</div>' +
 
