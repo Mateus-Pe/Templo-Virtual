@@ -53,3 +53,67 @@ function evento_agenda(){
      
   });
 }
+
+$('#cidade_nome').click(function () {
+  sessionStorage.setItem('origem', 'feed');
+  window.location = 'estado.html';
+});
+
+
+$(document).ready(function () {
+  $('#cidade_nome').html(' ' + window.sessionStorage.getItem("cidade_nome"));
+  cidade_id = window.sessionStorage.getItem("cidade_id");
+  window.sessionStorage.setItem('igreja_id','');
+
+  if(cidade_id != null && cidade_id != ''){
+      get_paroquias(cidade_id);
+  }
+});
+
+
+$('.page-menu--toggle').click(function(e){
+
+  e.preventDefault();
+
+  if($(this).hasClass('page-menu__hamburger--open')){
+
+      
+      $('.mobile-nav').css('display', 'none');
+      $('#add').css('bottom', '10px');
+      
+  }
+  else{
+
+    $('.mobile-nav').css('display', 'block');
+    $('#add').css('bottom', 'calc(10px + var(--nav-height))');
+
+  }
+
+  $(this).toggleClass('page-menu__hamburger--open');
+
+  $('.page-menu').toggleClass('disabled');
+
+  $('body').toggleClass('disabled');
+
+  $('body').toggleClass('no-scroll');
+
+
+  efeitoBlur()
+
+});
+
+function efeitoBlur(){
+  
+  $('main').toggleClass('is-blur');
+
+  $('.show-search').toggleClass('is-blur');
+
+  $('.categories').toggleClass('is-blur');
+
+  $('.options').toggleClass('is-blur');
+
+  $('.search-market').toggleClass('is-blur');
+
+
+
+}

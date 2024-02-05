@@ -1,14 +1,20 @@
+var origem = "";
+
+
 $(document).ready(function() {
   acesso_page();
 
-
+  origem = sessionStorage.getItem('origem') || "";
+  console.log("Origem: " + origem);
 });
 
 
 
 $('.UF').click(function(e){
   window.sessionStorage.setItem("uf", this.id);
-  window.location = "cidade.html"
+  if (origem === "feed" || origem === "administrar-igreja") {
+    window.location = "cidade.html";
+  }
 
 
 });
@@ -189,17 +195,3 @@ $.ajax({
   });
 
 }
-
-
-
-
-
-
-
-
-    
-
-
-
-
-

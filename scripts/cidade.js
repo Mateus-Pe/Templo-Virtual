@@ -16,7 +16,8 @@ $(document).ready(function() {
 
   getCidades(); 
 
-  
+  origem = sessionStorage.getItem('origem') || "";
+  console.log("Origem: " + origem);
 
 });
 
@@ -83,7 +84,7 @@ function montaCidades(data){
 
     for (var i = 0; i < rows; i++) {
 
-      html =      '<div class="pesq" data-id="'+data[i].id+'" data-name="'+data[i].nickname+'"  style="max-height:40px;margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid rgb(100,50,150);">';
+      html =      '<div class="pesq" data-id="'+data[i].id+'" data-name="'+data[i].nickname+'"  style="max-height:40px;margin-top: 10px; padding-bottom: 10px; border-bottom: 1px solid darkred;">';
 
            
 
@@ -123,9 +124,13 @@ function configurarEventos(){
     console.log($(this).data('id'));
     window.sessionStorage.setItem('cidade_id', $(this).data('id'));
     window.sessionStorage.setItem("cidade_nome", $(this).data('name'));
-    window.location = "administrar-igreja.html";
     
-
+    sessionStorage.setItem("origem", origem); 
+    if (origem === "feed" || origem === "administrar-igreja") {
+      window.location = origem + ".html";
+    } else {
+      window.location = "estado.html";
+    }
 
   });
 
@@ -181,19 +186,3 @@ $('#search-market').keyup(function (e) {
   
 
 });
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
