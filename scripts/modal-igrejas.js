@@ -113,7 +113,7 @@ function montaProdutos(data) {
 
 };
 
-$('#search-market').keyup(function (e) {
+$('#search-igreja').keyup(function (e) {
 
 
     pesq();
@@ -125,11 +125,11 @@ $('#search-market').keyup(function (e) {
 
 function pesq() {
     var ret = false;
-    if ($('#search-market').val().length >= 1) {
+    if ($('#search-igreja').val().length >= 1) {
 
         myJson = myJsonPesq.filter(function (a, b) {
 
-            return a['label'].toLowerCase().indexOf($('#search-market').val().toLowerCase()) >= 0;
+            return a['label'].toLowerCase().indexOf($('#search-igreja').val().toLowerCase()) >= 0;
 
         });
         if (myJson.length > 0) {
@@ -173,6 +173,7 @@ function configurarEventos() {
         window.sessionStorage.setItem('igreja_desc', $(this).data('igreja_desc'));
         window.sessionStorage.setItem('igreja_id', $(this).data('id'));
         location. reload(); 
+        fecharModal();
         
     });
 
@@ -184,11 +185,21 @@ function configurarEventos() {
 
 $('#span_criar-igreja').click(function () {
     
-    $('#divProdutos').show();
+    $('#divModal').show();
 
 });
 
-$('#close').click(function () {
-    
-    $('#divProdutos').hide();
+function fecharModal() {
+    $('#divModal').hide();
+}
+
+$(document).on('mouseup', function (e) {
+    var divLista = $('#divLista');
+    var divModal = $('#divModal');
+
+    // Verifica se o clique ocorreu fora da divLista e do divModal
+    if (!divLista.is(e.target) && divLista.has(e.target).length === 0 &&
+        !divModal.is(e.target) && divModal.has(e.target).length === 0) {
+        fecharModal();
+    }
 });
