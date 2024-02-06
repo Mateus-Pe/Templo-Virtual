@@ -220,6 +220,7 @@ function mock_agenda(){
 									'<span style="font-size:1.5rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
 								'</div>'+
                                 '<div class="columns">' +
+                                '<span data-agenda_img="'+ ch.agenda_img +'" class="material-symbols-outlined acToggle ver_layout">visibility</span>'+
                                 '<span data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'"  class="material-symbols-outlined acToggle configurar_layout">edit</span>'+
                                 '</div>'+
                             '</div>' +
@@ -235,6 +236,10 @@ function mock_agenda(){
                 window.sessionStorage.setItem('agenda_id', $(this).data('agenda_id'));
                 window.sessionStorage.setItem('data_referencia', str_data_referencia);
                 window.location = 'configurar-layout.html';
+            });
+
+            $('.ver_layout').click(function () {
+                alert($(this).data('agenda_img'));
             });
 
 
