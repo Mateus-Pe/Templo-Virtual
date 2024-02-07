@@ -1,15 +1,52 @@
 
 
 var igrejaId = null;
+var dtReferencia;
 
 $(document).ready(function() {
 
   igrejaId = window.sessionStorage.getItem('igreja_id');
 
   makeCalendar(currentYear, currentMonth);
-  
+
+
+  $('#visualizar_layout').click(function(){
+    var agenda_img = $(this).find('[data-agenda_img]').data('agenda_img');
+
+    $('#imagem_agenda').attr('src', agenda_img);
+
+    $('#modal_config').hide();
+    $('#modal_visualizar_layout').show();
+   
+    alert($(this).find('[data-agenda_img]').data('agenda_img'));
+    console.log('visualizou o layout');
     
-  
+  });
+
+  $('#editar_layout').click(function(){
+          var agenda_id = $(this).find('[data-agenda_id]').data('agenda_id');
+          var agenda_hora = $(this).find('[data-agenda_hora]').data('agenda_hora');
+          var str_data_referencia =  dtReferencia + '-' +  agenda_hora;
+          window.sessionStorage.setItem('agenda_id', agenda_id);
+          window.sessionStorage.setItem('data_referencia', str_data_referencia);
+          window.location = 'configurar-layout.html';
+        
+          $('#modal_config').hide();
+         console.log(agenda_id);
+        console.log('configurou o layout');
+  })
+
+  $('#cancelar').click(function(){
+    $('#modal_config').hide();
+  })
+
+
+  $(document).on('click', function(event) {
+    if ($(event.target).closest('.modal-content1').length === 0) {
+        $('#modal_visualizar_layout').hide();
+    }
+    
+  });
 
 });
 
@@ -220,8 +257,9 @@ function mock_agenda(){
 									'<span style="font-size:1.5rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
 								'</div>'+
                                 '<div class="columns">' +
-                                '<span data-agenda_img="'+ ch.agenda_img +'" class="material-symbols-outlined acToggle ver_layout">visibility</span>'+
-                                '<span data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'"  class="material-symbols-outlined acToggle configurar_layout">edit</span>'+
+                                '<span data-agenda_img="'+ ch.agenda_img +'"data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'" class="material-symbols-outlined acToggle config">more_horiz</span>'+
+                                //'<span data-agenda_img="'+ ch.agenda_img +'" class="material-symbols-outlined acToggle ver_layout">visibility</span>'+
+                                //'<span data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'"  class="material-symbols-outlined acToggle configurar_layout">edit</span>'+
                                 '</div>'+
                             '</div>' +
 
@@ -230,18 +268,19 @@ function mock_agenda(){
 				$('#divListaAgenda').append(html);
 			});
 
-			
-            $('.configurar_layout').click(function () {
-                var str_data_referencia =  dtReferencia + '-' + $(this).data('agenda_hora');
-                window.sessionStorage.setItem('agenda_id', $(this).data('agenda_id'));
-                window.sessionStorage.setItem('data_referencia', str_data_referencia);
-                window.location = 'configurar-layout.html';
+            $('.config').click(function () {
+                var agenda_img = $(this).data('agenda_img');
+                var agenda_id = $(this).data('agenda_id');
+                var agenda_hora = $(this).data('agenda_hora');
+            
+                // Definir os dados nos elementos do modal
+                $('#modal_config').find('[data-agenda_img]').data('agenda_img', agenda_img);
+                $('#modal_config').find('[data-agenda_id]').data('agenda_id', agenda_id);
+                $('#modal_config').find('[data-agenda_hora]').data('agenda_hora', agenda_hora);
+            
+                
+                $('#modal_config').show();
             });
-
-            $('.ver_layout').click(function () {
-                alert($(this).data('agenda_img'));
-            });
-
 
 	   });
 }
@@ -338,7 +377,3 @@ $('.page-menu--toggle').click(function(e){
     sessionStorage.setItem("item_menu", item_menu);
   
   }
-
-  
-  
-  
