@@ -126,7 +126,7 @@
     width: 100%;
     min-height: 415px;
     height: 100%;
-    z-index: 2;
+    z-index: 5;
     padding-left: 45px;
     padding-right: 45px;
     display: none;
