@@ -364,3 +364,93 @@ console.log(telefone);
       return false;
   }
 }
+
+//menu
+
+$('.page-menu--toggle').click(function(e){
+
+  e.preventDefault();
+
+  if($(this).hasClass('page-menu__hamburger--open')){
+
+      
+      $('.mobile-nav').css('display', 'none');
+      $('#imagem_igreja').css('top', '8rem');
+      $('.div_btn-salvar').css('bottom', '30px');
+      
+  }
+  else{
+
+    $('.mobile-nav').css('display', 'block');
+    $('#imagem_igreja').css('top', '2.49rem');
+    $('.div_btn-salvar').css('bottom', '0px');
+
+  }
+
+  $(this).toggleClass('page-menu__hamburger--open');
+
+  $('.page-menu').toggleClass('disabled');
+
+  $('body').toggleClass('disabled');
+
+  $('body').toggleClass('no-scroll');
+
+
+  efeitoBlur()
+
+});
+
+
+
+
+
+
+
+function efeitoBlur(){
+
+  $('main').toggleClass('is-blur');
+
+  $('.show-search').toggleClass('is-blur');
+
+  $('.categories').toggleClass('is-blur');
+
+  $('.options').toggleClass('is-blur');
+
+  $('.search-market').toggleClass('is-blur');
+
+  $('.perfil').toggleClass('is-blur');
+
+
+}
+
+
+
+//Verifica o item clicado no sidemenu
+
+$('.mobile-nav__items li a').click(function(){
+
+  var classeItemMenu = $(this).attr('class');
+
+
+
+  if(classeItemMenu == 'mobile-nav__link-produtos'   ||
+
+     classeItemMenu == 'mobile-nav__link-categorias' ||
+
+     classeItemMenu == 'mobile-nav__link-mercados'){
+
+      setStorageMenu(classeItemMenu);
+
+      window.location = 'vitrine-geral.html';
+
+  }
+
+});
+
+
+
+function setStorageMenu(item_menu) {
+
+  sessionStorage.setItem("item_menu", item_menu);
+
+}
