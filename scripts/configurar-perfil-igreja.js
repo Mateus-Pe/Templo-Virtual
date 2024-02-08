@@ -227,13 +227,12 @@ function toggleDivVisibility(value, targetDiv) {
 const imagens = {
   whatsapp: './imgs/whatsapp.png',
   facebook: './imgs/facebook.png',
-  //instagram: 'URL_DA_IMAGEM_INSTAGRAM',
-  //email: 'URL_DA_IMAGEM_GMAIL'
+  instagram: './imgs/instagram.png',
+  email: './imgs/email.png',
 };
 
 function atualizarContatos() {
   const campos = ['whatsapp_txt', 'facebook_txt', 'instagram_txt', 'email_txt'];
-  const divs = ['.div_whats', '.div_face', '.div_insta', '.div_email'];
 
   $('.contatos').empty();
 
@@ -247,10 +246,7 @@ function atualizarContatos() {
       spanContato.text(valor);
       divContato.append(spanContato);
 
-      const linhaAtual = $('<div class="linha"></div>');
-      linhaAtual.append(divContato);
-
-      $('.contatos').append(linhaAtual);
+      $('.contatos').append(divContato);
     }
   });
 }
@@ -259,11 +255,11 @@ function atualizarContatos() {
   toggleDivVisibility($(this).val(), $('.div_whats'));
   atualizarContatos();
 });
-
+*/
 $('#whatsapp_txt').on('keyup', function(event) {
   mascaraTelefone(event);
-
-});*/
+  
+});
 
 $('#facebook_txt').on('input', function() {
   toggleDivVisibility($(this).val(), $('.div_face'));
@@ -338,6 +334,11 @@ function carregarIgreja(){
 }
 
 
+$("#perfil_desc_resumida").click(function(e){
+  $("#modal_editar").show();
+  
+});
+
 $("#editar").click(function(e){
   $("#modal_editar").show();
   
@@ -353,33 +354,34 @@ function alterar_desc_resumida(){
 
 
 function mascaraTelefone(event) {
-  let tecla = event.key;
-  let telefone = event.target.value.replace(/\D+/g, "");
+  let telefone = event.target.value.replace(/\D+/g, ""); // Remove caracteres não numéricos
 
-  if (/^[0-9]$/i.test(tecla)) {
-      telefone = telefone + tecla;
-      let tamanho = telefone.length;
-
-      if (tamanho >= 12) {
-          return false;
+  // Verifica se a tecla pressionada é uma tecla de backspace ou delete
+  if (["Backspace", "Delete"].includes(event.key)) {
+      event.preventDefault(); // Impede o comportamento padrão do backspace ou delete
+      if (telefone.length > 0) {
+          telefone = telefone.slice(0, -1); // Remove o último caractere do número
       }
-      console.log('chamou');
-      if (tamanho > 10) {
-          telefone = telefone.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
-      } else if (tamanho > 5) {
-          telefone = telefone.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
-      } else if (tamanho > 2) {
-          telefone = telefone.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
-      } else {
-          telefone = telefone.replace(/^(\d*)/, "($1");
-      }
-console.log(telefone);
-      event.target.value = telefone;
-  }
-
-  if (!["Backspace", "Delete"].includes(tecla)) {
+  } else if (telefone.length >= 12) {
+      event.preventDefault(); // Impede a entrada de mais caracteres
       return false;
   }
+
+  let telefoneFormatado = '';
+
+  // Aplica a máscara de telefone
+  if (telefone.length > 2) {
+      telefoneFormatado = '(' + telefone.substring(0, 2) + ') ';
+      if (telefone.length > 7) {
+          telefoneFormatado += telefone.substring(2, 7) + '-' + telefone.substring(7, 11);
+      } else {
+          telefoneFormatado += telefone.substring(2, telefone.length);
+      }
+  } else {
+      telefoneFormatado = telefone;
+  }
+
+  event.target.value = telefoneFormatado; // Atualiza o valor do campo de texto
 }
 
 //menu
