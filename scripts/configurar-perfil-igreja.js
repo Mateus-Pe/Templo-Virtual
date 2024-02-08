@@ -82,7 +82,10 @@ function carregar_perfil(){
       html += '<div>';
       html += '<a class="a_div_perfil">';
       html += '<h1 id="nome_da_igreja" class="nome_da_igreja">';
-      html += 'Santa Rita de Cassia';
+     // html += '';
+      html += '<span id="descricao_igreja" class="material-symbols-outlined" style="position: relative; left: 1rem; font-size: 20px; color: darkred;">';
+      html += 'edit';
+      html += '</span>';
       html += '</h1>';
       html += '<span class="abrir_map">';
       html += '<span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432" >';
@@ -192,6 +195,19 @@ $("#contato_da_igreja").click(function(e){
   $("#confirmar").click(function(e){
     $("#modal_contato").hide();
   });
+
+  $("#nome_da_igreja").click(function(e){
+    $("#modal_descricao").show();
+  });
+
+  $("#ok").click(function(e){
+    $("#modal_descricao").hide();
+  });
+
+  $("#nome_igreja").on("input", function() {
+    var novoNome = $(this).val();
+    $("#nome_da_igreja").text(novoNome);
+});
 
 
 
@@ -312,6 +328,7 @@ function carregarIgreja(){
         $('#email_txt').val(obj.igreja.igreja_email);
         $('#txt_desc_resumida').val(obj.igreja.igreja_desc_resumida);
         $("#nome_da_igreja").text(obj.igreja.igreja_nome);
+        $("#nome_da_igreja").append('<span id="descricao_igreja" class="material-symbols-outlined" style="font-size: 20px; color: darkred; position: relative; left: 10px;">edit</span>');
         $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
         atualizarContatos();
         alterar_desc_resumida();
