@@ -18,7 +18,7 @@ $(document).ready(function() {
     $('#modal_config').hide();
     $('#modal_visualizar_layout').show();
    
-    alert($(this).find('[data-agenda_img]').data('agenda_img'));
+    
     console.log('visualizou o layout');
     
   });
@@ -46,6 +46,21 @@ $(document).ready(function() {
         $('#modal_visualizar_layout').hide();
     }
     
+  });
+
+  $('#excluir').click(function(){
+    $('#modal_config').hide();
+    $('#modalConfirmacao').show();
+  });
+
+  $('#cancelarRemocao').click(function(){
+    $('#modalConfirmacao').hide();
+    $('#modal_config').show();
+  });
+
+  $('#confirmarRemocao').click(function(){
+    $('#modalConfirmacao').hide();
+    $('#modal_config').hide();
   });
 
 });

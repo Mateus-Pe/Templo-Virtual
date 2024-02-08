@@ -168,7 +168,7 @@
 
                 <div id="cancelar">
         
-                    <div style="gap: 0.5rem; align-items: center; display: flex; justify-content: center; background-color: indianred; border: 1px solid; color: white; border-radius: 30px;">
+                    <div style="gap: 0.5rem; align-items: center; display: flex; justify-content: center; background-color: white; border: 1px solid darkred; color: darkred; border-radius: 30px;">
                      
                         <span>Cancelar</span>
                     </div>
@@ -177,9 +177,19 @@
         </div>
     </div>
 
-    <div id="modal_visualizar_layout" class="modal">
+    <div id="modal_visualizar_layout" class="modal" style="background-color: black;">
         <div class="modal-content">
             <img id="imagem_agenda" src="" alt="Imagem da Agenda">
+        </div>
+    </div>
+
+    <div id="modalConfirmacao" class="modal">
+        <div class="modal-content1" style="display: grid; justify-content: center;">
+            <h1>Deseja excluir este agendamento?</h1>
+            <div class="modal-footer">
+                <button href="#!" id="cancelarRemocao" class="modal-close">Cancelar</button>
+                <button href="#!" id="confirmarRemocao">Confirmar</button>
+            </div>
         </div>
     </div>
 
