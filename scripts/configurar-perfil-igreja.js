@@ -1,4 +1,5 @@
 igrejaId = "" ;
+nomeIgrejaVerificado = "";
 //evento_agenda();
 
 
@@ -11,6 +12,9 @@ $(document).ready(function() {
     carregarIgreja();
   }
   
+  carregarIgreja();
+
+  $('#nome_igreja').on('input', verificarNomeIgreja);
 });
 
 
@@ -81,12 +85,11 @@ function carregar_perfil(){
       html += '<div>';
       html += '<div>';
       html += '<a class="a_div_perfil">';
+      html += '<div>';
       html += '<h1 id="nome_da_igreja" class="nome_da_igreja">';
-     // html += '';
-      html += '<span id="descricao_igreja" class="material-symbols-outlined" style="position: relative; left: 1rem; font-size: 20px; color: darkred;">';
-      html += 'edit';
-      html += '</span>';
       html += '</h1>';
+      html += '<span id="descricao_igreja" class="material-symbols-outlined" style="font-size: 20px; color: darkred; position: relative; left: 1rem; top: 1rem;">edit</span>'
+      html += '</div>';
       html += '<span class="abrir_map">';
       html += '<span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432" >';
       html += 'Ver no mapa';
@@ -277,7 +280,18 @@ $('#email_txt').on('input', function() {
 });
 
 $('#btn_salvar').on('click', function() {
-  salvar();
+  var descResumida = $('#txt_desc_resumida').val().trim();
+
+  if (descResumida === ''){
+    $('#modal_validacao').show();
+  } else{
+    
+    salvar();
+  }
+});
+
+$('#btnFecharModal').on('click', function(){
+  $('#modal_validacao').hide();
 });
 
 function salvar(){
@@ -324,13 +338,25 @@ function carregarIgreja(){
         $('#email_txt').val(obj.igreja.igreja_email);
         $('#txt_desc_resumida').val(obj.igreja.igreja_desc_resumida);
         $("#nome_da_igreja").text(obj.igreja.igreja_nome);
-        $("#nome_da_igreja").append('<span id="descricao_igreja" class="material-symbols-outlined" style="font-size: 20px; color: darkred; position: relative; left: 10px;">edit</span>');
         $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
         atualizarContatos();
         alterar_desc_resumida();
+
+        nomeIgrejaVerificado = obj.igreja.igreja_nome;
+
+        var nomeIgreja = obj.igreja.igreja_nome;
+        $('#nome_igreja').val(nomeIgreja);
       }
 
     });
+}
+
+function verificarNomeIgreja() {
+  var novoNome = $('#nome_igreja').val().trim();
+  
+  if (novoNome === "") {
+    $("#nome_da_igreja").text(nomeIgrejaVerificado);
+  }
 }
 
 
@@ -383,6 +409,15 @@ function mascaraTelefone(event) {
 
   event.target.value = telefoneFormatado; // Atualiza o valor do campo de texto
 }
+
+$('#txt_desc_resumida').on('input', function() {
+  var maxLength = 20; 
+  var text = $(this).val();
+  
+  if (text.length > maxLength) {
+      $(this).val(text.substring(0, maxLength));
+  }
+});
 
 //menu
 
@@ -473,3 +508,33 @@ function setStorageMenu(item_menu) {
   sessionStorage.setItem("item_menu", item_menu);
 
 }
+
+
+function marker(lat, lng, img) {
+  var myLatLng = { lat: parseFloat(lat), lng: parseFloat(lng) };
+  var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 14,
+      center: myLatLng
+  });
+  var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: ''
+  });
+
+  // Ajuste o modal para exibir com base na posição clicada
+  var modal = document.querySelector('#modal_addproduto');
+  $(modal).css('display', 'block');
+}
+
+
+
+$("#localizacao").click(function(e) {
+  var lat = $(this).data('lat');
+  var lng = $(this).data('long');
+  marker(lat, lng, '');
+ $('#modal_addproduto').show(); 
+});
+$(".modal_close").click(function(e) {
+ $('#modal_addproduto').hide(); 
+});

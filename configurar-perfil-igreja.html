@@ -185,10 +185,10 @@
 
                     <div>
 
-                        <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; position: absolute; left: 4.8rem;">church</span>
+                        <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; position: absolute;">church</span>
 
                         <input class="cadastro__input" id="nome_igreja" name="nome_igreja" type="text"
-                            onkeydown="mascaraTelefone(event)" placeholder="Alterar nome da igreja"
+                            placeholder=""
                             style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
                             required>
                     </div>
@@ -200,14 +200,35 @@
             </div>
 
 
+            <div style="display: flex; width: 47%; text-align: center; justify-content: center;">
+                <div id="imagem_igreja" class="div_img_igreja">
 
-            <div id="imagem_igreja" class="div_img_igreja">
+                    <img class="img_igreja1" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">
 
-                <img class="img_igreja1" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">
+                    <span class="material-symbols-outlined"
+                        style="position: relative; font-size: 20px; color: darkred; right: 16px;">
+                        photo_camera
+                    </span>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <h1 id="nome_da_igreja" class="nome_da_igreja">
+                
+                    </h1>
+                    <span id="descricao_igreja" class="material-symbols-outlined" style="font-size: 20px; color: darkred; position: relative; left: 1rem; top: 1rem;">edit</span>
+                </div>
+            </div>
 
-                <span class="material-symbols-outlined"
-                    style="position: relative; font-size: 20px; color: darkred; right: 16px;">
-                    photo_camera
+            <div>
+                <span class="abrir_map">
+
+                    <span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432">
+                        Ver no mapa
+                    </span>
+
+                    <span class="material-symbols-outlined icone_editar ion_map">
+                        location_on
+                    </span>
+
                 </span>
             </div>
 
@@ -218,22 +239,6 @@
                         <div>
                             <div>
                                 <a class="a_div_perfil">
-
-                                    <h1 id="nome_da_igreja" class="nome_da_igreja">
-                                       
-                                    </h1>
-
-                                    <span class="abrir_map">
-
-                                        <span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432">
-                                            Ver no mapa
-                                        </span>
-
-                                        <span class="material-symbols-outlined icone_editar ion_map">
-                                            location_on
-                                        </span>
-
-                                    </span>
 
                                     <span id="endereco_da_igreja" class="endereco_igreja">
                                         Rua da igreja, 78, Vila Santana, Sorocaba
@@ -261,22 +266,23 @@
 
             <div class="div_comunidade">
 
-
-                <div id="perfil_desc_resumida" style="display: inline-grid;">
-                    <div
-                        style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">
-                        <img src="https://www.pedeoferta.com.br/mercado/img/igreja/confissao.png" style="height:50px">
+                <div id="perfil_desc_resumida" style="width: 30%;">
+                    <div  style="display: inline-grid;">
+                        <div
+                            style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">
+                            <img src="https://www.pedeoferta.com.br/mercado/img/igreja/confissao.png" style="height:50px">
+                        </div>
+                        <span id="desc_resumida"
+                            style="font-size: 1.3rem;text-align:center;text-decoration:none;width: 71px;">
+                            Santo Antonio
+                        </span>
                     </div>
-                    <span id="desc_resumida"
-                        style="font-size: 1.3rem;text-align:center;text-decoration:none;width: 71px;">
-                        Santo Antonio
+
+                    <span class="material-symbols-outlined" id="editar"
+                        style="position: relative; left: 1rem; font-size: 20px; color: darkred;">
+                        edit
                     </span>
                 </div>
-
-                <span class="material-symbols-outlined" id="editar"
-                    style="position: relative; left: 1rem; font-size: 20px; color: darkred;">
-                    edit
-                </span>
             </div>
 
 
@@ -321,6 +327,53 @@
         
             </div>
         </div>
+
+
+        <!-- Modal -->
+
+      <div class="modal1" id="modal_addproduto">
+
+        <!-- Conteudo do modal -->
+
+        <div class="modal_content">
+
+          <div class="modal_header">
+
+            <span class="modal_close ion-android-close"></span>
+
+            <h3 class="h3_modal">Mapa</h3>
+
+          </div>
+
+          <div class="modal_body">
+
+            <div id="divFiliais"></div>
+
+            <div id="divEndObs"></div>
+
+            <div id="map" style="height: 250px"></div>
+
+          </div>
+
+          <div class="modal_footer">
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div id="modal_validacao" class="modal_validacao">
+        <div class="modal-content_validacao">
+          <h2 class="modal-header">Aviso</h2>
+          <p class="modal-message">Preencha o campo de descrição resumida para prosseguir.</p>
+          <div class="modal-footer">
+            <button id="btnFecharModal" class="modal-close">Fechar</button>
+          </div>
+        </div>
+      </div>
 
 
         <footer>
