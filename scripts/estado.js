@@ -4,7 +4,9 @@ var origem = "";
 $(document).ready(function() {
   acesso_page();
 
-  origem = sessionStorage.getItem('origem') || "";
+  //origem = sessionStorage.getItem('origem') || "";
+  var searchParams = new URLSearchParams(window.location.search);
+  origem = searchParams.get("req");
   console.log("Origem: " + origem);
 });
 
@@ -13,7 +15,7 @@ $(document).ready(function() {
 $('.UF').click(function(e){
   window.sessionStorage.setItem("uf", this.id);
   if (origem === "feed" || origem === "administrar-igreja") {
-    window.location = "cidade.html";
+    window.location = "cidade.html?req="+origem;
   }
 
 

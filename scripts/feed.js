@@ -55,8 +55,8 @@ function evento_agenda(){
 }
 
 $('#cidade_nome').click(function () {
-  sessionStorage.setItem('origem', 'feed');
-  window.location = 'estado.html';
+  //sessionStorage.setItem('origem', 'feed');
+  window.location = 'estado.html?req=feed';
 });
 
 

@@ -272,8 +272,8 @@ $(document).ready(function () {
 }); 
 
 $('#cidade_nome').click(function () {
-    sessionStorage.setItem('origem', 'administrar-igreja');
-    window.location = 'estado.html';
+    //sessionStorage.setItem('origem', 'administrar-igreja');
+    window.location = 'estado.html?req=administrar-igreja';
 });
 
 

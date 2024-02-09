@@ -16,7 +16,8 @@ $(document).ready(function() {
 
   getCidades(); 
 
-  origem = sessionStorage.getItem('origem') || "";
+  var searchParams = new URLSearchParams(window.location.search);
+  origem = searchParams.get("req");
   console.log("Origem: " + origem);
 
 });
@@ -125,7 +126,7 @@ function configurarEventos(){
     window.sessionStorage.setItem('cidade_id', $(this).data('id'));
     window.sessionStorage.setItem("cidade_nome", $(this).data('name'));
     
-    sessionStorage.setItem("origem", origem); 
+    
     if (origem === "feed" || origem === "administrar-igreja") {
       window.location = origem + ".html";
     } else {
