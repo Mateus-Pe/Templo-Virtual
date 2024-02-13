@@ -33,36 +33,42 @@ $(document).ready(function() {
 
 
 $('#btn_salvar').click(function(e){
+  var nomeAbreviado = abreviarNomeInstituicao($('#nome_instituicao').val());
+ 
     
     if($('#nome_instituicao').val() == ''){
       $('.cadastro__alert').text('Para prosseguir coloque uma instituição');
     }
-    else if($('#cep_instituicao').val() == ''){
-        $('.cadastro__alert').text('Para prosseguir coloque o CEP');
-    }
-    else if($('#cidade_instituicao').val() == ''){
-      $('.cadastro__alert').text('Para prosseguir coloque a cidade');
-    }
-    else if($('#bairro_instituicao').val() == ''){
-      $('.cadastro__alert').text('Para prosseguir coloque o bairro');
-    }
-    else if($('#logradouro_instituicao').val() == ''){
-        $('.cadastro__alert').text('Para prosseguir coloque um logradouro');
-    }
-    else if($('#numero_instituicao').val() == ''){
-         $('.cadastro__alert').text('Para prosseguir coloque o número');
-    }
-       
-    else{
-      if(igrejaId != null && igrejaId != ''){
-        atualizar();
-      }
-      else{
-        salvar();
-      }
+    else if($(nomeAbreviado).val() != ''){
+     alert(abreviarNomeInstituicao(nomeAbreviado));
       
-     // window.location = 'lista-igreja.html';
-    }       
+      if($('#cep_instituicao').val() == ''){
+        $('.cadastro__alert').text('Para prosseguir coloque o CEP');
+      }
+      else if($('#cidade_instituicao').val() == ''){
+        $('.cadastro__alert').text('Para prosseguir coloque a cidade');
+      }
+      else if($('#bairro_instituicao').val() == ''){
+        $('.cadastro__alert').text('Para prosseguir coloque o bairro');
+      }
+      else if($('#logradouro_instituicao').val() == ''){
+          $('.cadastro__alert').text('Para prosseguir coloque um logradouro');
+      }
+      else if($('#numero_instituicao').val() == ''){
+          $('.cadastro__alert').text('Para prosseguir coloque o número');
+      }
+        
+      else{
+        if(igrejaId != null && igrejaId != ''){
+          atualizar();
+        }
+        else{
+          salvar();
+        }
+        
+      // window.location = 'lista-igreja.html';
+      } 
+    }      
 }); 
 
 
@@ -527,3 +533,92 @@ function atualizar_matriz(){
       });
   }
 }
+
+function abreviarNomeInstituicao(nome) {
+  if (nome.length > 20) {
+      var partesNome = nome.split(" ");
+      var nomeAbreviado = "";
+      var caracteresAbreviados = 0;
+      var tamanhoMaximo = 20;
+
+      // Encontra a maior palavra do nome e seu tamanho
+      var maiorPalavra = "";
+      var tamanhoMaiorPalavra = 0;
+      for (var i = 0; i < partesNome.length; i++) {
+          if (partesNome[i].length > tamanhoMaiorPalavra) {
+              maiorPalavra = partesNome[i];
+              tamanhoMaiorPalavra = partesNome[i].length;
+          }
+      }
+      console.log("Tamanho da maior palavra:", tamanhoMaiorPalavra);
+
+      for (var i = 0; i < partesNome.length - 1; i++) {
+          var palavra = partesNome[i];
+          var tamanhoPalavra = palavra.length;
+
+          if (i === partesNome.length - 1) { // Penúltima palavra não será abreviada
+              nomeAbreviado += palavra + " ";
+              continue;
+          }
+
+          if (palavra !== maiorPalavra) { // Abrevia todas as palavras menos a maior
+              nomeAbreviado += palavra.charAt(0).toUpperCase() + ".";
+              caracteresAbreviados += 2; // Conta a abreviação e o ponto
+          } else { // Abrevia a maior palavra limitando seu tamanho
+            var diferencaTamanho = tamanhoMaximo - caracteresAbreviados - 1; // Calcula a diferença de tamanho
+            var letrasRemovidas = tamanhoMaiorPalavra - diferencaTamanho; // Calcula a quantidade de letras a serem removidas da maior palavra
+            
+            // Verifica se há letras para serem removidas
+            if (letrasRemovidas > 0) {
+                var abreviacao = Math.max(tamanhoMaiorPalavra - letrasRemovidas - 1, 1); // Limita a abreviação ao tamanho máximo permitido para a maior palavra
+                var palavraAbreviada = palavra.substring(0, abreviacao) + ".";
+                nomeAbreviado += palavraAbreviada;
+                caracteresAbreviados += abreviacao + 1; // Atualiza a contagem de caracteres abreviados, incluindo o ponto
+                console.log("Tamanho da maior palavra após a abreviação:", tamanhoMaiorPalavra - letrasRemovidas);
+                console.log("Quantidade de letras removidas da maior palavra:", letrasRemovidas);
+            }
+            else {
+                nomeAbreviado += palavra + " "; // Não é necessário abreviar a maior palavra
+                console.log("Nenhuma letra precisa ser removida da maior palavra.");
+            }
+          }
+
+          if (caracteresAbreviados >= tamanhoMaximo) {
+              break; // Interrompe o loop se exceder o limite de caracteres
+          }
+      }
+
+      // Adiciona a última palavra sem abreviação
+      nomeAbreviado += partesNome[partesNome.length - 1];
+
+if (nomeAbreviado.length > tamanhoMaximo) {
+    // Trunca o nome abreviado para o limite máximo de caracteres
+    nomeAbreviado = nomeAbreviado.substring(0, tamanhoMaximo);
+
+    // Verifica se a maior palavra precisa ser abreviada para ajustar ao limite de caracteres
+    if (maiorPalavra.length > 20) {
+        var abreviacaoMaiorPalavra = Math.max(maiorPalavra.length - (tamanhoMaximo - 4), 1); // Limita a abreviação da maior palavra ao tamanho máximo permitido
+        var indexMaiorPalavra = nomeAbreviado.lastIndexOf(maiorPalavra); // Encontra o índice da última ocorrência da maior palavra no nome abreviado
+        nomeAbreviado = nomeAbreviado.substring(0, indexMaiorPalavra + abreviacaoMaiorPalavra) + "..."; // Abrevia a maior palavra
+    }
+}
+
+return nomeAbreviado.trim();
+  } else {
+      return nome;
+  }
+}
+
+// Exemplo de uso
+var nomeInstituicao = "Santuário Nacional de Nossa Senhora Aparecida";
+var nomeAbreviado = abreviarNomeInstituicao(nomeInstituicao);
+console.log("Nome abreviado:", nomeAbreviado);
+console.log("Número de caracteres no nome abreviado:", nomeAbreviado.length);
+
+
+
+$('#nome_instituicao').keyup(function() {
+  var nomeInstituicao = $(this).val();
+  var nomeAbreviado = abreviarNomeInstituicao(nomeInstituicao);
+  console.log(nomeAbreviado);
+});
