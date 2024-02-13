@@ -9,6 +9,8 @@ var matriz = null;
 
 var status_matriz_inicial = 0;
 
+var descricaoResumida = '';
+
 alteracao_matriz = false;
 
 
@@ -33,14 +35,14 @@ $(document).ready(function() {
 
 
 $('#btn_salvar').click(function(e){
-  var nomeAbreviado = abreviarNomeInstituicao($('#nome_instituicao').val());
+  nomeAbreviado = igreja_desc_resumida($('#nome_instituicao').val());
  
     
     if($('#nome_instituicao').val() == ''){
       $('.cadastro__alert').text('Para prosseguir coloque uma instituição');
     }
     else if($(nomeAbreviado).val() != ''){
-     alert(abreviarNomeInstituicao(nomeAbreviado));
+     alert(igreja_desc_resumida(nomeAbreviado));
       
       if($('#cep_instituicao').val() == ''){
         $('.cadastro__alert').text('Para prosseguir coloque o CEP');
@@ -323,6 +325,8 @@ function mock_cep(cep){
 }
 
 function salvar(){
+  descricaoResumida = igreja_desc_resumida($('#nome_instituicao').val());
+
   $.ajax({
     method: "POST",
     url: "https://pedeoferta.com.br/templo/index.php/welcome/incluir_igreja",
@@ -336,7 +340,8 @@ function salvar(){
       igreja_nome : $('#nome_instituicao').val(),
       igreja_logo_url : "/img/SPA.jpg",
       igreja_matriz : "0",
-      paroquia_id : paroquia_id
+      paroquia_id : paroquia_id,
+      igreja_desc_resumida: descricaoResumida
      
     }
   })
@@ -354,6 +359,7 @@ function salvar(){
       }
       
     });
+    console.log(descricaoResumida);
 }
 
 function configurarEventos(){
@@ -534,91 +540,64 @@ function atualizar_matriz(){
   }
 }
 
-function abreviarNomeInstituicao(nome) {
-  if (nome.length > 20) {
-      var partesNome = nome.split(" ");
-      var nomeAbreviado = "";
-      var caracteresAbreviados = 0;
-      var tamanhoMaximo = 20;
+function igreja_desc_resumida(nome) {
+  var palavrasARemover = [
+    "santuário", "paróquia", "catedral", "comunidade",
+    "basílica", "capela", "igreja", "templo",
+    "oratório", "mosteiro", "matriz"
+  ];
 
-      // Encontra a maior palavra do nome e seu tamanho
-      var maiorPalavra = "";
-      var tamanhoMaiorPalavra = 0;
-      for (var i = 0; i < partesNome.length; i++) {
-          if (partesNome[i].length > tamanhoMaiorPalavra) {
-              maiorPalavra = partesNome[i];
-              tamanhoMaiorPalavra = partesNome[i].length;
-          }
-      }
-      console.log("Tamanho da maior palavra:", tamanhoMaiorPalavra);
+  var preposicoes = ["de", "da", "das", "do", "dos"];
 
-      for (var i = 0; i < partesNome.length - 1; i++) {
-          var palavra = partesNome[i];
-          var tamanhoPalavra = palavra.length;
+  var partesNome = nome.split(" ");
 
-          if (i === partesNome.length - 1) { // Penúltima palavra não será abreviada
-              nomeAbreviado += palavra + " ";
-              continue;
-          }
+  var palavrasParaMaior = partesNome.filter(function(palavra) {
+    return palavra.toLowerCase() !== "nossa" && palavra.toLowerCase() !== "senhora";
+  });
 
-          if (palavra !== maiorPalavra) { // Abrevia todas as palavras menos a maior
-              nomeAbreviado += palavra.charAt(0).toUpperCase() + ".";
-              caracteresAbreviados += 2; // Conta a abreviação e o ponto
-          } else { // Abrevia a maior palavra limitando seu tamanho
-            var diferencaTamanho = tamanhoMaximo - caracteresAbreviados - 1; // Calcula a diferença de tamanho
-            var letrasRemovidas = tamanhoMaiorPalavra - diferencaTamanho; // Calcula a quantidade de letras a serem removidas da maior palavra
-            
-            // Verifica se há letras para serem removidas
-            if (letrasRemovidas > 0) {
-                var abreviacao = Math.max(tamanhoMaiorPalavra - letrasRemovidas - 1, 1); // Limita a abreviação ao tamanho máximo permitido para a maior palavra
-                var palavraAbreviada = palavra.substring(0, abreviacao) + ".";
-                nomeAbreviado += palavraAbreviada;
-                caracteresAbreviados += abreviacao + 1; // Atualiza a contagem de caracteres abreviados, incluindo o ponto
-                console.log("Tamanho da maior palavra após a abreviação:", tamanhoMaiorPalavra - letrasRemovidas);
-                console.log("Quantidade de letras removidas da maior palavra:", letrasRemovidas);
-            }
-            else {
-                nomeAbreviado += palavra + " "; // Não é necessário abreviar a maior palavra
-                console.log("Nenhuma letra precisa ser removida da maior palavra.");
-            }
-          }
+  palavrasParaMaior = palavrasParaMaior.filter(function(palavra) {
+    return palavra.toLowerCase() !== "são";
+  });
 
-          if (caracteresAbreviados >= tamanhoMaximo) {
-              break; // Interrompe o loop se exceder o limite de caracteres
-          }
-      }
-
-      // Adiciona a última palavra sem abreviação
-      nomeAbreviado += partesNome[partesNome.length - 1];
-
-if (nomeAbreviado.length > tamanhoMaximo) {
-    // Trunca o nome abreviado para o limite máximo de caracteres
-    nomeAbreviado = nomeAbreviado.substring(0, tamanhoMaximo);
-
-    // Verifica se a maior palavra precisa ser abreviada para ajustar ao limite de caracteres
-    if (maiorPalavra.length > 20) {
-        var abreviacaoMaiorPalavra = Math.max(maiorPalavra.length - (tamanhoMaximo - 4), 1); // Limita a abreviação da maior palavra ao tamanho máximo permitido
-        var indexMaiorPalavra = nomeAbreviado.lastIndexOf(maiorPalavra); // Encontra o índice da última ocorrência da maior palavra no nome abreviado
-        nomeAbreviado = nomeAbreviado.substring(0, indexMaiorPalavra + abreviacaoMaiorPalavra) + "..."; // Abrevia a maior palavra
-    }
-}
-
-return nomeAbreviado.trim();
-  } else {
-      return nome;
+  if (palavrasParaMaior.length > 0) {
+    palavrasParaMaior.pop();
   }
+
+  var palavrasNaoConsideradas = palavrasARemover.concat(preposicoes);
+
+  var maiorPalavra = "";
+  for (var i = 0; i < palavrasParaMaior.length; i++) {
+    var palavra = palavrasParaMaior[i];
+    if (!palavrasNaoConsideradas.includes(palavra.toLowerCase()) && palavra.length > maiorPalavra.length) {
+      maiorPalavra = palavra;
+    }
+  }
+
+  var nomeAbreviado = "";
+
+  for (var i = 0; i < partesNome.length; i++) {
+    var palavra = partesNome[i];
+
+    if (!palavrasARemover.includes(palavra.toLowerCase()) && !preposicoes.includes(palavra.toLowerCase())) {
+
+      if (i < partesNome.length - 1 && palavra.toLowerCase() === "nossa" && partesNome[i + 1].toLowerCase() === "senhora") {
+        nomeAbreviado += "N.S.";
+        i++; 
+      } else if (palavra.toLowerCase() === "são") {
+        nomeAbreviado += "S.";
+      } else if (i === partesNome.length - 1 || palavra === maiorPalavra) {
+        nomeAbreviado += palavra;
+      } else {
+        nomeAbreviado += palavra.charAt(0).toUpperCase() + ".";
+      }
+
+      if (i < partesNome.length - 1) {
+        nomeAbreviado += " ";
+      }
+    }
+  }
+
+  nomeAbreviado = nomeAbreviado.replace(/\.\s+/g, ".");
+
+  return  nomeAbreviado;
 }
-
-// Exemplo de uso
-var nomeInstituicao = "Santuário Nacional de Nossa Senhora Aparecida";
-var nomeAbreviado = abreviarNomeInstituicao(nomeInstituicao);
-console.log("Nome abreviado:", nomeAbreviado);
-console.log("Número de caracteres no nome abreviado:", nomeAbreviado.length);
-
-
-
-$('#nome_instituicao').keyup(function() {
-  var nomeInstituicao = $(this).val();
-  var nomeAbreviado = abreviarNomeInstituicao(nomeInstituicao);
-  console.log(nomeAbreviado);
-});
