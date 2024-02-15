@@ -9,8 +9,6 @@ var matriz = null;
 
 var status_matriz_inicial = 0;
 
-var descricaoResumida = '';
-
 alteracao_matriz = false;
 
 
@@ -35,42 +33,40 @@ $(document).ready(function() {
 
 
 $('#btn_salvar').click(function(e){
-  nomeAbreviado = igreja_desc_resumida($('#nome_instituicao').val());
+
+  
+  nomeAbreviado = igreja_desc_resumida_new($('#nome_instituicao').val());
  
     
     if($('#nome_instituicao').val() == ''){
       $('.cadastro__alert').text('Para prosseguir coloque uma instituição');
     }
-    else if($(nomeAbreviado).val() != ''){
-     alert(igreja_desc_resumida(nomeAbreviado));
-      
-      if($('#cep_instituicao').val() == ''){
+    else if($('#cep_instituicao').val() == ''){
         $('.cadastro__alert').text('Para prosseguir coloque o CEP');
       }
-      else if($('#cidade_instituicao').val() == ''){
-        $('.cadastro__alert').text('Para prosseguir coloque a cidade');
+    else if($('#cidade_instituicao').val() == ''){
+      $('.cadastro__alert').text('Para prosseguir coloque a cidade');
+    }
+    else if($('#bairro_instituicao').val() == ''){
+      $('.cadastro__alert').text('Para prosseguir coloque o bairro');
+    }
+    else if($('#logradouro_instituicao').val() == ''){
+        $('.cadastro__alert').text('Para prosseguir coloque um logradouro');
+    }
+    else if($('#numero_instituicao').val() == ''){
+        $('.cadastro__alert').text('Para prosseguir coloque o número');
+    }
+      
+    else{
+      if(igrejaId != null && igrejaId != ''){
+        atualizar();
       }
-      else if($('#bairro_instituicao').val() == ''){
-        $('.cadastro__alert').text('Para prosseguir coloque o bairro');
-      }
-      else if($('#logradouro_instituicao').val() == ''){
-          $('.cadastro__alert').text('Para prosseguir coloque um logradouro');
-      }
-      else if($('#numero_instituicao').val() == ''){
-          $('.cadastro__alert').text('Para prosseguir coloque o número');
-      }
-        
       else{
-        if(igrejaId != null && igrejaId != ''){
-          atualizar();
-        }
-        else{
-          salvar();
-        }
-        
-      // window.location = 'lista-igreja.html';
-      } 
-    }      
+        salvar();
+      }
+      
+    // window.location = 'lista-igreja.html';
+    }     
 }); 
 
 
@@ -325,7 +321,7 @@ function mock_cep(cep){
 }
 
 function salvar(){
-  descricaoResumida = igreja_desc_resumida($('#nome_instituicao').val());
+  descricaoResumida = igreja_desc_resumida_new($('#nome_instituicao').val());
 
   $.ajax({
     method: "POST",
@@ -540,17 +536,18 @@ function atualizar_matriz(){
   }
 }
 
-function igreja_desc_resumida(nome) {
+function igreja_desc_resumida_old(nome) {
   var palavrasARemover = [
-    "santuário", "paróquia", "catedral", "comunidade",
-    "basílica", "capela", "igreja", "templo",
-    "oratório", "mosteiro", "matriz"
+    "santuário", "santuario","paróquia",  "paroquia", "catedral", "comunidade",
+    "basílica", "basilica","capéla","capela", "igreja", "templo",
+    "oratório","oratorio",  "mosteiro", "matriz"
   ];
 
   var preposicoes = ["de", "da", "das", "do", "dos"];
-
+//NOSSA SENHORA DO PERPETUO SOCORRO
   var partesNome = nome.split(" ");
 
+  console.log(partesNome);
   var palavrasParaMaior = partesNome.filter(function(palavra) {
     return palavra.toLowerCase() !== "nossa" && palavra.toLowerCase() !== "senhora";
   });
@@ -559,11 +556,20 @@ function igreja_desc_resumida(nome) {
     return palavra.toLowerCase() !== "são";
   });
 
+  console.log('<br>');
+  console.log(palavrasParaMaior);
+
   if (palavrasParaMaior.length > 0) {
     palavrasParaMaior.pop();
   }
 
+  console.log('<br>');
+  console.log(palavrasParaMaior);
+
   var palavrasNaoConsideradas = palavrasARemover.concat(preposicoes);
+
+  console.log('<br>');
+  console.log(palavrasNaoConsideradas);
 
   var maiorPalavra = "";
   for (var i = 0; i < palavrasParaMaior.length; i++) {
@@ -598,6 +604,64 @@ function igreja_desc_resumida(nome) {
   }
 
   nomeAbreviado = nomeAbreviado.replace(/\.\s+/g, ".");
+
+  console.log('<br>');
+  console.log(nomeAbreviado);
+
+  return  nomeAbreviado;
+}
+
+
+function igreja_desc_resumida_new(nome) {
+  var palavrasARemover = [
+    "santuário", "santuario","paróquia",  "paroquia", "catedral", "comunidade",
+    "basílica", "basilica","capéla","capela", "igreja", "templo",
+    "oratório","oratorio",  "mosteiro", "matriz","de", "da", "das", "do", "dos"
+  ];
+
+ 
+  var partesNome = nome.split(" ");
+
+  var palavrasNecessarias = partesNome.filter(function(palavra) {
+    return !palavrasARemover.includes(palavra.toLowerCase());
+  }); 
+
+  console.log('<br>');
+  console.log(palavrasNecessarias);
+
+  var nomeAbreviado = "";
+  var strPalNec = palavrasNecessarias.join(" ");
+
+  if(strPalNec.length < 20){
+    nomeAbreviado = strPalNec;
+  }
+  else{
+    for (var i = 0; i < partesNome.length; i++) {
+      var palavra = partesNome[i];
+  
+      if (!palavrasARemover.includes(palavra.toLowerCase())) {
+  
+        if (palavra.toLowerCase() === "nossa") {
+          nomeAbreviado += "N.";
+        }  
+        else if (palavra.toLowerCase() === "senhora" || palavra.toLowerCase() === "santo" || palavra.toLowerCase() === "são" )  {
+            nomeAbreviado += "S.";  
+        }else{
+          nomeAbreviado += " ";
+          nomeAbreviado += palavra;
+        }  
+        
+          
+        
+      }
+    }
+  }
+  
+
+  nomeAbreviado = nomeAbreviado.replace(/\.\s+/g, ".");
+
+  console.log('<br>');
+  console.log(nomeAbreviado);
 
   return  nomeAbreviado;
 }

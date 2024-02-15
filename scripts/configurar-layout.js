@@ -34,6 +34,11 @@ const months = [
 
 
 $(document).ready(function() {
+  getImgSize("./imgs/imgs-igreja/missa1.jpg");
+  /*setTimeout(function() { 
+    getImgSize("./imgs/imgs-igreja/missa1.jpg");
+}, 5000);*/
+  
   agenda_id = window.sessionStorage.getItem('agenda_id');
   button_edit_hide();
   
@@ -72,9 +77,10 @@ function carregarDatas(data){
 function getImgSize(imgSrc) {
   var newImg = new Image();
   newImg.src = imgSrc;
-  var height = newImg.height;
-  var width = newImg.width;
-  console.log('heithg: '+newImg.src);
+  var height = 183;//newImg.height;
+  var width = 275;//newImg.width;
+  console.log('heithg: '+height);
+  console.log('wid: '+width);
   p = $(newImg).ready(function() {
       return {width: newImg.width, height: newImg.height};
   });
@@ -130,7 +136,7 @@ function busca_agenda(agenda_id ){
       data: {evento_id: "1"}
     })
     .done(function(ret) {
-      getImgSize("./imgs/imgs-igreja/missa1.jpg");
+      //getImgSize("./imgs/imgs-igreja/missa1.jpg");
       var obj = jQuery.parseJSON(ret);
 
       var html = '';
