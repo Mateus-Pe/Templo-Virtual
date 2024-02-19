@@ -61,12 +61,13 @@ $('#cidade_nome').click(function () {
 
 
 $(document).ready(function () {
+  //navigator.geolocation.getCurrentPosition(function(data){console.log(data)})
   $('#cidade_nome').html(' ' + window.sessionStorage.getItem("cidade_nome"));
   cidade_id = window.sessionStorage.getItem("cidade_id");
   window.sessionStorage.setItem('igreja_id','');
 
   if(cidade_id != null && cidade_id != ''){
-      get_paroquias(cidade_id);
+      //get_paroquias(cidade_id);
   }
 });
 
@@ -117,3 +118,6 @@ function efeitoBlur(){
 
 
 }
+
+
+

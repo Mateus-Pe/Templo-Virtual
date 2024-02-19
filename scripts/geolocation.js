@@ -1,179 +1,72 @@
-//SETA A LOCALIZACAO
 var geocoder;
 
-var infowindow;
+initialize(); 
 
-/*if(window.sessionStorage.getItem("Latitude") == null || window.sessionStorage.getItem("Latitude") == '')
-
-	navigator.geolocation.getCurrentPosition(onSuccess, onError);
-
-
-
-function onSuccess(position) {
-
-  window.sessionStorage.setItem("Latitude", position.coords.latitude);
-
-  window.sessionStorage.setItem("Longitude", position.coords.longitude); 
-
-
-  console.log(position.coords.latitude);
-  
-  location.reload(); 
-
-};
-
-
-
-
-
-
-
-function onError(error) {
-
-    console.log('codigo: ' + error.code + '\n' +
-
-        'messagem: ' + error.message + '\n');
-
-}*/
-
-
-
-function initMap() {
-
-        directionsDisplay = new google.maps.DirectionsRenderer();
-
-        geocoder = new google.maps.Geocoder;
-
-        infowindow = new google.maps.InfoWindow;
-
-
-
-      
-        if(window.sessionStorage.getItem("Latitude") != null){
-          coordenadas = ''+window.sessionStorage.getItem("Latitude")+','+window.sessionStorage.getItem("Longitude");
-          //coordenadas = '-23.6029417,-48.0633432';
-          geocodeLatLng(geocoder, infowindow, coordenadas);
-        }
-
-        
-
-
-
-        
-
-      }
-
-
-
-  function geocodeLatLng(geocoder, infowindow, coordenadas) {
-    if(window.sessionStorage.getItem("cidade_id") == null || window.sessionStorage.getItem("cidade_id") == ''){
-        $.ajax({
-            type: "GET",
-            url: "https://pedeoferta.com.br/oferta/welcome/get_cities_pdo",
-            cache: false,
-            dataType: 'json',
-
-            success: function (data) {
-                console.log(data);
-                var input = coordenadas;
-
-                var latlngStr = input.split(',', 2);
-
-                var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
-
-                geocoder.geocode({'location': latlng}, function(results, status) {
-
-                  if (status === 'OK') {
-
-                    if (results[1]) {
-
-                      console.log(results[1].formatted_address.toLowerCase());
-                      var rows = JSON.parse(data.length);
-
-                      for (var i = 0; i < rows; i++) {
-                        if(results[1].formatted_address.toLowerCase().indexOf(data[i].name) > 0){
-                          window.sessionStorage.setItem("cidade_id", data[i].id);
-                          window.sessionStorage.setItem("cidade_nome", data[i].nickname);
-                          console.log(data[i].id);
-                          break;
-                        }
-                      }
-                      
-                      //window.sessionStorage.setItem("endereco_info", results[1].formatted_address); 
-                                  
-
-                    } else {
-
-                      console.log('No results found');
-
-                    }
-
-                  } else {
-
-                   console.log('Geocoder failed due to: ' + status);
-
-                  }
-
-                });
-                },
-
-             
-
-            error: function (xhr, ajaxOptions, thrownError) {
-                console.log('Erro ao buscar as categorias');
-            }
-
-          });
-       
-
-       }
-
-      }
-
-
-
-function marker(lat, lng, img){
-
-     var myLatLng = {lat: lat, lng: lng};
-
-     /*var icon = {
-
-      url: img, // url
-
-      scaledSize: new google.maps.Size(60, 60), // scaled size
-
-      origin: new google.maps.Point(0,0), // origin
-
-      anchor: new google.maps.Point(0, 0) // anchor
-
-    };*/
-
-
-
-        var map = new google.maps.Map(document.getElementById('map'), {
-
-          zoom: 14,
-
-          center: myLatLng
-
-        });
-
-
-
-        var marker = new google.maps.Marker({
-
-          position: myLatLng,
-
-          //icon: icon,
-
-          map: map,
-
-          title: ''
-
-        });
-
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
 } 
+//Get the latitude and the longitude;
+function successFunction(position) {
+  var lat = position.coords.latitude;
+  var lng = position.coords.longitude;
+  codeLatLng(lat, lng)
+}
+
+function errorFunction(){
+  alert("Geocoder failed");
+}
+
+function initialize() {
+  geocoder = new google.maps.Geocoder();
 
 
 
- 
+}
+
+function codeLatLng(lat, lng) {
+
+  var latlng = new google.maps.LatLng(lat, lng);
+  geocoder.geocode({'latLng': latlng}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+    //console.log(results);
+      if (results[1]) {
+      var indice=0;
+      for (var j=0; j<results.length; j++)
+      {
+          if (results[j].types[0]=='locality')
+          {
+              indice=j;
+              break;
+          }
+      }
+      alert('The good number is: '+j);
+      console.log(results[j].formatted_address);
+      for (var i=0; i<results[j].address_components.length; i++)
+          {
+              if (results[j].address_components[i].types[0] == "locality") {
+                      //this is the object you are looking for City
+                      city = results[j].address_components[i];
+                  }
+              if (results[j].address_components[i].types[0] == "administrative_area_level_1") {
+                      //this is the object you are looking for State
+                      region = results[j].address_components[i];
+                  }
+              if (results[j].address_components[i].types[0] == "country") {
+                      //this is the object you are looking for
+                      country = results[j].address_components[i];
+                  }
+          }
+
+          //city data
+          alert(city.long_name + " || " + region.long_name + " || " + country.short_name)
+
+
+          } else {
+            alert("No results found");
+          }
+      //}
+    } else {
+      alert("Geocoder failed due to: " + status);
+    }
+  });
+}
