@@ -15,7 +15,7 @@ body{
 
 .feed_main_top{
     font-size: 1.6rem;
-    margin-top: 5.5rem;
+    margin-top: 4.5rem;
     text-align: center;
 }
 
@@ -184,6 +184,7 @@ body{
 
 .div_imgFundo_perfil{
     position: relative; 
+    margin-top: 5.5rem;
     margin-right: auto; 
     margin-left: auto;
 }
@@ -198,7 +199,7 @@ body{
 .div_img_igreja{
     position: absolute; 
     z-index: 3; 
-    top: 8rem; 
+    top: 2.6rem; 
     left: 4rem;
 }
 
@@ -262,7 +263,7 @@ body{
 .div_comunidade{
     height: 90px; 
     position: relative; 
-    top: 5.2rem; 
+    top: 2.2rem; 
     width: 98.5%; 
     left:3px; 
     border-radius: 10px; 
@@ -404,13 +405,13 @@ body{
 .header1{
     background-color: darkred;
     height: 55px;
-    position: relative;
+    position: fixed;
     display: flex;
     justify-content: center;
     gap: 14.7rem;
     top: 0;
     width: 100%;
-    z-index: 3;
+    z-index: 4;
 }
 
 .mobile_nav{
@@ -478,3 +479,21 @@ body{
     border-radius: 5px;
     cursor: pointer;
   }
+
+.header-up {
+    top: -100px; 
+    transition: top 0.3s ease-in-out;
+}
+
+.header-down {
+    top: 0;
+    transition: top 0.3s ease-in-out;
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; 
+}

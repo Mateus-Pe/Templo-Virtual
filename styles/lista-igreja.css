@@ -32,8 +32,9 @@
 }
 
 #divListaPrincipal {
-    margin-top: 35px;
+    margin-top: 56px;
     margin-bottom: 90px;
+    transition: transform 0.4s ease;
 }
 
 #divCorpo{
@@ -144,3 +145,50 @@
     justify-content: space-between; 
     align-items: flex-start;
 }
+
+.header1{
+    background-color: darkred;
+    height: 55px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+.span_criar-igreja{
+    font-size: 2rem; 
+    color: #fff; 
+    position: relative; 
+    right: 2.0rem; 
+    padding: 1.5rem;
+    font-family: Exo;
+}
+
+.container {
+    display: block;
+    position: relative;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.mobile_nav{
+    background-color: darkred !important;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.move-right {
+    transform: translateX(305px); /* ajuste esse valor conforme necessário */
+    transition: transform 0.5s ease; /* adicione uma transição suave para a animação */
+}
+

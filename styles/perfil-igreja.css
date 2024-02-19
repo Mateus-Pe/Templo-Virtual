@@ -198,6 +198,7 @@ body{
 
 .div_imgFundo_perfil{
     position: relative; 
+    margin-top: 5.5rem;
     margin-right: auto; 
     margin-left: auto;
 }
@@ -274,4 +275,52 @@ body{
     font-size: 1.6rem;
     margin-top: 0.5rem;
     text-align: center;
+}
+
+.header1{
+    background-color: darkred;
+    height: 55px;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    gap: 32.7rem;
+    top: 0;
+    width: 100%;
+    z-index: 4;
+}
+
+.span_criar-igreja{
+    font-size: 2rem; 
+    color: #fff; 
+    position: absolute; 
+    padding: 1.5rem;
+    font-family: Exo;
+}
+
+.header-up {
+    top: -100px; 
+    transition: top 0.3s ease-in-out;
+}
+
+.header-down {
+    top: 0;
+    transition: top 0.3s ease-in-out;
+}
+
+.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; 
+}
+
+.mobile_nav {
+    background-color: darkred !important;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
 }

@@ -1,108 +1,121 @@
+igrejaId = "" ;
+nomeIgrejaVerificado = "";
+
+
 carregar_feed();
 evento_agenda();
 carregar_perfil();
-function carregar_feed(){
-    $.ajax({
-      method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_feed",
-     
-    })
-    .done(function(ret) {
-     
-      var obj = jQuery.parseJSON(ret);
-      var html = '';
-     
-      console.log(obj);
-      $.each(obj.lista_feed, function (k, lpp) {
-        html += '<div class="div_publicacao">';
-        html += '<div class="feed_principal">';
-        html += '<div class="div_feed_secundario">';
-        html += '<div>';
-        html += '<div>';
-        html += '<a class="div_perfil">';
-        html += '<img class="img_igreja" src="'+lpp.igreja_logo+'">';
-        html += '<span class="nome_igreja">';
-        html += lpp.igreja_nome;
-        html += '</span>';
-        html += '</a>';
-        html += '</div>';
-        html += '<div class="div_layout_feed">';
-        html += '<a class="a_img_layout">';
-        html += '<img class="img_layout_feed" src="'+lpp.agenda_img+'">';
-        html += '</a>';
-        html += '<div class="div_descricao">';
-        html += '<span class="span_descricao">';
-        html += lpp.descricao_evento;
-        html += '</span>';
-        html += '</div>';
-        html += '</div>';
-        html += '<div class="div_rodape_feed">';
-        html += '<div class="rodape_feed_botao">';
-        html += '<span class="material-symbols-outlined span_rodape_botao">';
-        html += 'share';
-        html += '</span>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-      });
-     
 
-      $("#divFeed").html(html);
 
-     
-  });
-}
+$(document).ready(function() {
 
-function carregar_perfil(){
-    var html = '';
+  carregar_perfil();
+  carregar_feed();
+  igrejaId = window.sessionStorage.getItem('igreja_id');
+  if(igrejaId != null && igrejaId != ''){
+    carregarIgreja();
+  }
   
-      html += '<div id="imagem_igreja" class="div_img_igreja">';
-      html += '<img class="img_igreja1" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">';
-      html += '</div>';
+  carregarIgreja();
+
+  $('#nome_igreja').on('input', verificarNomeIgreja);
+});
+
+
+function carregar_feed(){
+  $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_feed",
+   
+  })
+  .done(function(ret) {
+   
+    var obj = jQuery.parseJSON(ret);
+    var html = '';
+   
+    console.log(obj);
+    $.each(obj.lista_feed, function (k, lpp) {
       html += '<div class="div_publicacao">';
       html += '<div class="feed_principal">';
       html += '<div class="div_feed_secundario">';
       html += '<div>';
       html += '<div>';
-      html += '<a class="a_div_perfil">';
-      html += '<h1 id="nome_da_igreja" class="nome_da_igreja">';
-      html += 'Santa Rita de Cassia';
-      html += '</h1>';
-      html += '<span class="abrir_map">';
-      html += '<span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432" >';
-      html += 'Ver no mapa';
-      html += '</span>';
-      html += '<span class="material-symbols-outlined icone_editar ion_map">';
-      html += 'location_on';
-      html += '</span>';
-      html += '</span>';
-      html += '<span id="endereco_da_igreja" class="endereco_igreja">';
-      html += 'Rua da igreja, 78, Vila Santana, Sorocaba';
-      html += '</span>';
-      html += '<span id="contato_da_igreja" class="endereco_igreja">';
-      html += '(15)99836-7365';
-      html += '</span>';
-      html += '<span id="comunidade" class="endereco_igreja">';
-      html += 'Comunidade';
+      html += '<a class="div_perfil">';
+      html += '<img class="img_igreja" src="'+lpp.igreja_logo+'">';
+      html += '<span class="nome_igreja">';
+      html += lpp.igreja_nome;
       html += '</span>';
       html += '</a>';
       html += '</div>';
+      html += '<div class="div_layout_feed">';
+      html += '<a class="a_img_layout">';
+      html += '<img class="img_layout_feed" src="'+lpp.agenda_img+'">';
+      html += '</a>';
+      html += '<div class="div_descricao">';
+      html += '<span class="span_descricao">';
+      html += lpp.descricao_evento;
+      html += '</span>';
+      html += '</div>';
+      html += '</div>';
+      html += '<div class="div_rodape_feed">';
+      html += '<div class="rodape_feed_botao">';
+      html += '<span class="material-symbols-outlined span_rodape_botao">';
+      html += 'share';
+      html += '</span>';
       html += '</div>';
       html += '</div>';
       html += '</div>';
       html += '</div>';
-      $("#divPerfil").html(html);
-}
+      html += '</div>';
+      html += '</div>';
+    });
    
 
+    $("#divFeed").html(html);
 
+   
+});
+}
 
+// Função para carregar o perfil
+function carregar_perfil(){
+  var html = '';
 
-
-
+    html += '<div id="imagem_igreja" class="div_img_igreja">';
+    html += '<img class="img_igreja1" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">';
+    html += '</div>';
+    html += '<div class="div_publicacao">';
+    html += '<div class="feed_principal">';
+    html += '<div class="div_feed_secundario">';
+    html += '<div>';
+    html += '<div>';
+    html += '<a class="a_div_perfil">';
+    html += '<div>';
+    html += '<h1 id="nome_da_igreja" class="nome_da_igreja">';
+    html += '</h1>';
+    html += '</div>';
+    html += '<span class="abrir_map">';
+    html += '<span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432" >';
+    html += 'Ver no mapa';
+    html += '</span>';
+    html += '<span class="material-symbols-outlined icone_editar ion_map">';
+    html += 'location_on';
+    html += '</span>';
+    html += '</span>';
+    html += '<span id="endereco_da_igreja" class="endereco_igreja">';
+    html += 'Rua da igreja, 78, Vila Santana, Sorocaba';
+    html += '</span>';
+    html += '<div class="contatos">';
+    html += '</div>';
+    html += '</a>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '</div>';
+    $("#divPerfil").html(html);
+}
+// Função para carregar o evento de agenda
 function evento_agenda() {
   $.ajax({
       method: "POST",
@@ -110,9 +123,8 @@ function evento_agenda() {
   })
   .done(function(ret) {
       var obj = jQuery.parseJSON(ret);
-      console.log(obj);
-
       var html = '';
+
       html += '<section class="regular slider">';
 
       $.each(obj.lista_igreja, function (k, lpp) {
@@ -147,15 +159,48 @@ function evento_agenda() {
   });
 }
 
-  function slick(){
-    $(".regular").slick({
+// Função para inicializar o slider
+function slick() {
+  $(".regular").slick({
       dots: false,
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 2
-    });
+  });
+}
 
-  }
+
+function carregarIgreja(){
+  $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_igreja_by_id",
+    data: {
+      igreja_id : igrejaId
+     
+    }
+  })
+    .done(function (ret) {
+      var obj = jQuery.parseJSON(ret);
+      
+      if(obj.status == '1'){
+        $('#whatsapp_txt').val(obj.igreja.igreja_whats);
+        $('#facebook_txt').val(obj.igreja.igreja_face);
+        $('#instagram_txt').val(obj.igreja.igreja_instagram);
+        $('#email_txt').val(obj.igreja.igreja_email);
+        $('#txt_desc_resumida').val(obj.igreja.igreja_desc_resumida);
+        $("#nome_da_igreja").text(obj.igreja.igreja_nome);
+        $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
+        atualizarContatos();
+        alterar_desc_resumida();
+
+        nomeIgrejaVerificado = obj.igreja.igreja_nome;
+
+        var nomeIgreja = obj.igreja.igreja_nome;
+        $('#nome_igreja').val(nomeIgreja);
+      }
+
+    });
+}
 
 
   
@@ -212,3 +257,175 @@ $("#localizacao").click(function(e) {
 $(".modal_close").click(function(e) {
  $('#modal_addproduto').hide(); 
 });
+
+
+//menu
+
+$('.page-menu--toggle').click(function(e){
+
+  e.preventDefault();
+
+  if($(this).hasClass('page-menu__hamburger--open')){
+
+      
+      $('.mobile-nav').css('display', 'none');
+      $('#imagem_igreja').css('top', '2.6rem');
+      $('.div_btn-salvar').css('bottom', '30px');
+      
+  }
+  else{
+
+    $('.mobile-nav').css('display', 'block');
+    $('#imagem_igreja').css('top', '2.49rem');
+    $('.div_btn-salvar').css('bottom', '0px');
+
+  }
+
+  $(this).toggleClass('page-menu__hamburger--open');
+
+  $('.page-menu').toggleClass('disabled');
+
+  $('body').toggleClass('disabled');
+
+  $('body').toggleClass('no-scroll');
+
+
+  efeitoBlur()
+
+});
+
+
+
+
+
+
+
+function efeitoBlur(){
+
+  $('main').toggleClass('is-blur');
+
+  $('.show-search').toggleClass('is-blur');
+
+  $('.categories').toggleClass('is-blur');
+
+  $('.options').toggleClass('is-blur');
+
+  $('.search-market').toggleClass('is-blur');
+
+  $('.menu_ligado').toggleClass('is-blur');
+
+
+}
+
+
+
+//Verifica o item clicado no sidemenu
+
+$('.mobile-nav__items li a').click(function(){
+
+  var classeItemMenu = $(this).attr('class');
+
+
+
+  if(classeItemMenu == 'mobile-nav__link-produtos'   ||
+
+     classeItemMenu == 'mobile-nav__link-categorias' ||
+
+     classeItemMenu == 'mobile-nav__link-mercados'){
+
+      setStorageMenu(classeItemMenu);
+
+      window.location = 'vitrine-geral.html';
+
+  }
+
+});
+
+
+
+function setStorageMenu(item_menu) {
+
+  sessionStorage.setItem("item_menu", item_menu);
+
+}
+
+
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var headerHeight = $('header').outerHeight();
+var isVisible = true;
+
+$(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = $(this).scrollTop();
+
+    if (Math.abs(lastScrollTop - st) <= delta)
+        return;
+
+    if (st > lastScrollTop && st > headerHeight) {
+        // Rolagem para baixo
+        if (isVisible) {
+            $('header').removeClass('header-down').addClass('header-up');
+            isVisible = false;
+        }
+    } else {
+        // Rolagem para cima
+        if (st < lastScrollTop) {
+            $('header').removeClass('header-up').addClass('header-down');
+            isVisible = true;
+        }
+    }
+
+    lastScrollTop = st;
+}
+
+
+function toggleDivVisibility(value, targetDiv) {
+  if (value.trim() !== "") {
+      targetDiv.show();
+      targetDiv.css("display", "flex");
+
+  } else {
+      targetDiv.hide();
+      targetDiv.css("display", "none");
+  }
+}
+
+
+const imagens = {
+  whatsapp: './imgs/whatsapp.png',
+  facebook: './imgs/facebook.png',
+  instagram: './imgs/instagram.png',
+  email: './imgs/email.png',
+};
+
+function atualizarContatos() {
+  const campos = ['whatsapp_txt', 'facebook_txt', 'instagram_txt', 'email_txt'];
+
+  $('.contatos').empty();
+
+  campos.forEach((campo, index) => {
+    const valor = $('#' + campo).val().trim();
+    if (valor !== '') {
+      const divContato = $('<div class="contato"></div>');
+      const imgContato = $('<img src="' + imagens[campo.split('_')[0]] + '">');
+      divContato.append(imgContato);
+      const spanContato = $('<span></span>');
+      spanContato.text(valor);
+      divContato.append(spanContato);
+
+      $('.contatos').append(divContato);
+    }
+  });
+}

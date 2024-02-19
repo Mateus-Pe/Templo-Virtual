@@ -69,6 +69,46 @@
 
 <body>
 
+  <nav class="mobile-nav mobile_nav" role="navigation" style="display: none;">
+
+    <ul class="mobile-nav__items">
+
+        <li><a class="mobile-nav__link-produtos3" href="lista-igreja.html"><span
+                    class="material-symbols-outlined">lists</span>Igrejas</a></li>
+
+        <li><a class="mobile-nav__link-categorias2" href="configurar-perfil-igreja.html"><span
+                    class="ion-grid"></span>Perfil</a></li>
+
+    </ul>
+
+</nav>
+
+<div class="page-menu">
+
+    <header class="header1">
+
+        <a class="page-menu--toggle page-menu__hamburger" href="#" id="btnMenu">
+
+            <span class="page-menu__item"></span>
+
+            <span class="page-menu__item"></span>
+
+            <span class="page-menu__item"></span>
+
+        </a>
+
+        <span class="span_criar-igreja" id="span_criar-igreja">IGREJA</span><br>
+
+
+
+        <span class="page-menu__cart ion-android-arrow-back" style="    margin-left: 1rem; display: none"
+            id="btnVoltar"></span>
+
+        <span class="page-menu__qtd-itens"></span>
+    </header>
+
+
+    <div class="menu_ligado">
 
       <div class="div_imgFundo_perfil">
 
@@ -131,10 +171,15 @@
 
       </div>
 
+
+      <div id="divFeed">
+
+      </div>
+
       
 
 
-
+    </div>
 
 
 
@@ -148,6 +193,8 @@
 
       <script src="./scripts/slick/slick.min.js"></script>
       <script src="./scripts/slick/slick.js"></script>
+      
+      <script src="scripts/modal-igrejas.js"></script>
 
       <script src="./scripts/perfil-igreja.js"></script>
       <script src="./scripts/geolocation.js"></script>

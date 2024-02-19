@@ -440,22 +440,20 @@ function alterar_desc_resumida(){
 
 
 function mascaraTelefone(event) {
-  let telefone = event.target.value.replace(/\D+/g, ""); // Remove caracteres não numéricos
+  let telefone = event.target.value.replace(/\D+/g, ""); 
 
-  // Verifica se a tecla pressionada é uma tecla de backspace ou delete
   if (["Backspace", "Delete"].includes(event.key)) {
-      event.preventDefault(); // Impede o comportamento padrão do backspace ou delete
+      event.preventDefault(); 
       if (telefone.length > 0) {
-          telefone = telefone.slice(0, -1); // Remove o último caractere do número
+          telefone = telefone.slice(0, -1); 
       }
   } else if (telefone.length >= 12) {
-      event.preventDefault(); // Impede a entrada de mais caracteres
+      event.preventDefault(); 
       return false;
   }
 
   let telefoneFormatado = '';
 
-  // Aplica a máscara de telefone
   if (telefone.length > 2) {
       telefoneFormatado = '(' + telefone.substring(0, 2) + ') ';
       if (telefone.length > 7) {
@@ -467,7 +465,7 @@ function mascaraTelefone(event) {
       telefoneFormatado = telefone;
   }
 
-  event.target.value = telefoneFormatado; // Atualiza o valor do campo de texto
+  event.target.value = telefoneFormatado; 
 }
 
 $('#txt_desc_resumida').on('input', function() {
@@ -489,7 +487,7 @@ $('.page-menu--toggle').click(function(e){
 
       
       $('.mobile-nav').css('display', 'none');
-      $('#imagem_igreja').css('top', '8rem');
+      $('#imagem_igreja').css('top', '2.6rem');
       $('.div_btn-salvar').css('bottom', '30px');
       
   }
@@ -598,3 +596,44 @@ $("#localizacao").click(function(e) {
 $(".modal_close").click(function(e) {
  $('#modal_addproduto').hide(); 
 });
+
+
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var headerHeight = $('header').outerHeight();
+var isVisible = true;
+
+$(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = $(this).scrollTop();
+
+    if (Math.abs(lastScrollTop - st) <= delta)
+        return;
+
+    if (st > lastScrollTop && st > headerHeight) {
+        // Rolagem para baixo
+        if (isVisible) {
+            $('header').removeClass('header-down').addClass('header-up');
+            isVisible = false;
+        }
+    } else {
+        // Rolagem para cima
+        if (st < lastScrollTop) {
+            $('header').removeClass('header-up').addClass('header-down');
+            isVisible = true;
+        }
+    }
+
+    lastScrollTop = st;
+}

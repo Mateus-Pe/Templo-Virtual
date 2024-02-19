@@ -213,3 +213,94 @@ function remover(id){
 
    
 }
+
+// menu
+
+$('.page-menu--toggle').click(function(e){
+
+    e.preventDefault();
+  
+    if($(this).hasClass('page-menu__hamburger--open')){
+
+        
+        $('.mobile-nav').css('display', 'none');
+        $('#add').css('bottom', '10px');
+        $('#divListaPrincipal').removeClass('move-right');
+        
+        
+    }
+    else{
+  
+      $('.mobile-nav').css('display', 'block');
+      $('#add').css('bottom', 'calc(10px + var(--nav-height))');
+      $('#divListaPrincipal').addClass('move-right');
+  
+    }
+  
+    $(this).toggleClass('page-menu__hamburger--open');
+  
+    $('.page-menu').toggleClass('disabled');
+  
+    $('body').toggleClass('disabled');
+
+    $('body').toggleClass('no-scroll');
+
+  
+    efeitoBlur()
+  
+  });
+  
+  
+  
+  
+  
+  
+  
+  function efeitoBlur(){
+  
+    $('main').toggleClass('is-blur');
+  
+    $('.show-search').toggleClass('is-blur');
+  
+    $('.categories').toggleClass('is-blur');
+  
+    $('.options').toggleClass('is-blur');
+  
+    $('.search-market').toggleClass('is-blur');
+
+    $('#divListaPrincipal').toggleClass('is-blur');
+
+    $('.container').toggleClass('is-blur');
+
+  
+  }
+  
+  
+  
+  //Verifica o item clicado no sidemenu
+  
+  $('.mobile-nav__items li a').click(function(){
+  
+    var classeItemMenu = $(this).attr('class');
+  
+  
+  
+    if(classeItemMenu == 'mobile-nav__link-produtos'   ||
+  
+       classeItemMenu == 'mobile-nav__link-categorias' ||
+  
+       classeItemMenu == 'mobile-nav__link-mercados'){
+  
+        setStorageMenu(classeItemMenu);
+  
+        window.location = 'vitrine-geral.html';
+  
+    }
+  
+  });
+
+  function setStorageMenu(item_menu) {
+  
+    sessionStorage.setItem("item_menu", item_menu);
+  
+  }
