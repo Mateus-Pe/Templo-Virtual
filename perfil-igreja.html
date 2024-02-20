@@ -50,6 +50,7 @@
 
   <link rel="stylesheet" href="./styles/perfil-igreja.css">
 
+  <link type="text/css" rel="stylesheet" href="styles/modal-igrejas.css">
 
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -64,7 +65,6 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&display=swap" rel="stylesheet">
 
-
 </head>
 
 <body>
@@ -73,42 +73,41 @@
 
     <ul class="mobile-nav__items">
 
-        <li><a class="mobile-nav__link-produtos3" href="lista-igreja.html"><span
-                    class="material-symbols-outlined">lists</span>Igrejas</a></li>
+      <li><a class="mobile-nav__link-produtos3" href="lista-igreja.html"><span
+            class="material-symbols-outlined">lists</span>Igrejas</a></li>
 
-        <li><a class="mobile-nav__link-categorias2" href="configurar-perfil-igreja.html"><span
-                    class="ion-grid"></span>Perfil</a></li>
+      <li><a class="mobile-nav__link-categorias2" href="configurar-perfil-igreja.html"><span
+            class="ion-grid"></span>Perfil</a></li>
 
     </ul>
 
-</nav>
+  </nav>
 
-<div class="page-menu">
+  <div class="page-menu">
 
     <header class="header1">
 
-        <a class="page-menu--toggle page-menu__hamburger" href="#" id="btnMenu">
+      <a class="page-menu--toggle page-menu__hamburger" href="#" id="btnMenu">
 
-            <span class="page-menu__item"></span>
+        <span class="page-menu__item"></span>
 
-            <span class="page-menu__item"></span>
+        <span class="page-menu__item"></span>
 
-            <span class="page-menu__item"></span>
+        <span class="page-menu__item"></span>
 
-        </a>
+      </a>
 
-        <span class="span_criar-igreja" id="span_criar-igreja">IGREJA</span><br>
+      <span class="span_criar-igreja" id="span_criar-igreja">IGREJA</span><br>
 
 
 
-        <span class="page-menu__cart ion-android-arrow-back" style="    margin-left: 1rem; display: none"
-            id="btnVoltar"></span>
+      <span class="page-menu__cart ion-android-arrow-back" style="    margin-left: 1rem; display: none"
+        id="btnVoltar"></span>
 
-        <span class="page-menu__qtd-itens"></span>
+      <span class="page-menu__qtd-itens"></span>
     </header>
 
-
-    <div class="menu_ligado">
+    <div class="perfil" style="width: 100%; height: 100%;">
 
       <div class="div_imgFundo_perfil">
 
@@ -121,67 +120,76 @@
       </div>
 
 
-      <!-- Modal -->
-
-      <div class="modal1" id="modal_addproduto">
-
-        <!-- Conteudo do modal -->
-
-        <div class="modal_content">
-
-          <div class="modal_header">
-
-            <span class="modal_close ion-android-close"></span>
-
-            <h3 class="h3_modal">Mapa</h3>
-
-          </div>
-
-          <div class="modal_body">
-
-            <div id="divFiliais"></div>
-
-            <div id="divEndObs"></div>
-
-            <div id="map" style="height: 250px"></div>
-
-          </div>
-
-          <div class="modal_footer">
-
-
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div id="divPerfil">
-
-      </div>
+      <div id="divPerfil"></div>
 
 
       <div class="div_comunidade">
 
-        <div id="divHistoria">
+        <div id="perfil_desc_resumida" style="width: 30%;">
+          <div style="display: inline-grid;">
+            <div
+              style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">
+              <img src="https://www.pedeoferta.com.br/mercado/img/igreja/confissao.png" style="height:50px">
+            </div>
+            <span id="desc_resumida" style="font-size: 1.3rem;text-align:center;text-decoration:none;width: 71px;">
+              Santo Antonio
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+      <main class="feed_main feed_main_top">
+
+
+
+
+        <div id="divHistoria" style="top: 0.2rem; position: relative;">
+
+        </div>
+
+
+      </main>
+    </div>
+
+
+    <!-- Modal -->
+
+    <div class="modal1" id="modal_addproduto">
+
+      <!-- Conteudo do modal -->
+
+      <div class="modal_content">
+
+        <div class="modal_header">
+
+          <span class="modal_close ion-android-close"></span>
+
+          <h3 class="h3_modal">Mapa</h3>
+
+        </div>
+
+        <div class="modal_body">
+
+          <div id="divFiliais"></div>
+
+          <div id="divEndObs"></div>
+
+          <div id="map" style="height: 250px"></div>
+
+        </div>
+
+        <div class="modal_footer">
+
+
 
         </div>
 
       </div>
 
-
-      <div id="divFeed">
-
-      </div>
-
-      
-
-
     </div>
 
-
+   
 
 
     <footer>
@@ -193,17 +201,14 @@
 
       <script src="./scripts/slick/slick.min.js"></script>
       <script src="./scripts/slick/slick.js"></script>
-      
-      <script src="scripts/modal-igrejas.js"></script>
 
       <script src="./scripts/perfil-igreja.js"></script>
+      <script src="scripts/modal-igrejas.js"></script>
       <script src="./scripts/geolocation.js"></script>
       <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjVDWPYDC5zoxBw0zW4bdnnaelnyCWdkw&callback=initMap">
 
         </script>
-
-
 
 
 

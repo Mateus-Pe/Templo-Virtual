@@ -372,7 +372,7 @@ function salvar(){
       var obj = jQuery.parseJSON(ret);
       if(obj.status == '1'){
         
-       window.location = "lista-igreja.html";
+       window.location = "perfil-igreja.html";
        console.log(obj);
       }
     });
