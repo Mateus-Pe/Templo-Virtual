@@ -39,12 +39,15 @@ body{
   margin-right: 0.2rem;
   background-color: white;
   width: 100%; 
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
 .div_perfil{
     display: flex;
     text-decoration: none;
+}
+.perfil_div{
+    display: flex;
+    align-items: center;
 }
 
 .img_igreja{

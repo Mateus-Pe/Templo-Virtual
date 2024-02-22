@@ -17,11 +17,13 @@ function evento_agenda(){
         html += '<div class="div_feed_secundario">';
         html += '<div>';
         html += '<div>';
-        html += '<a class="div_perfil">';
+        html += '<a class="div_perfil" >';
+        html += '<div class="perfil_div" data-igreja_id = "'+lpp.igreja_id+'">';
         html += '<img class="img_igreja" src="'+lpp.igreja_logo+'">';
         html += '<span class="nome_igreja">';
         html += lpp.igreja_nome;
         html += '</span>';
+        html += '</div>';
         html += '</a>';
         html += '</div>';
         html += '<div class="div_layout_feed">';
@@ -50,9 +52,17 @@ function evento_agenda(){
 
       $("#divHistoria").html(html);
 
-     
+      configurarEventos();
   });
 }
+
+function configurarEventos(){
+  $(".perfil_div").click(function(){
+    window.sessionStorage.setItem('igreja_id',$(this).data("igreja_id"));
+    location.href = "perfil-igreja.html";
+  });
+}
+
 
 $('#cidade_nome').click(function () {
   //sessionStorage.setItem('origem', 'feed');
@@ -118,6 +128,8 @@ function efeitoBlur(){
 
 
 }
+
+
 
 
 

@@ -2,18 +2,13 @@ igrejaId = "" ;
 nomeIgrejaVerificado = "";
 
 
-carregar_feed();
-evento_agenda();
-carregar_perfil();
-
-
 $(document).ready(function() {
-
+  getFeed();
   carregar_perfil();
-  carregar_feed();
   igrejaId = window.sessionStorage.getItem('igreja_id');
   if(igrejaId != null && igrejaId != ''){
     carregarIgreja();
+    getComunidade();
   }
   
 
@@ -21,65 +16,17 @@ $(document).ready(function() {
 });
 
 
-function carregar_feed(){
-  $.ajax({
-    method: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_feed",
-   
-  })
-  .done(function(ret) {
-   
-    var obj = jQuery.parseJSON(ret);
-    var html = '';
-   
-    console.log(obj);
-    $.each(obj.lista_feed, function (k, lpp) {
-      html += '<div class="div_publicacao">';
-      html += '<div class="feed_principal">';
-      html += '<div class="div_feed_secundario">';
-      html += '<div>';
-      html += '<div>';
-      html += '<a class="div_perfil">';
-      html += '<img class="img_igreja" src="'+lpp.igreja_logo+'">';
-      html += '<span class="nome_igreja">';
-      html += lpp.igreja_nome;
-      html += '</span>';
-      html += '</a>';
-      html += '</div>';
-      html += '<div class="div_layout_feed">';
-      html += '<a class="a_img_layout">';
-      html += '<img class="img_layout_feed" src="'+lpp.agenda_img+'">';
-      html += '</a>';
-      html += '<div class="div_descricao">';
-      html += '<span class="span_descricao">';
-      html += lpp.descricao_evento;
-      html += '</span>';
-      html += '</div>';
-      html += '</div>';
-      html += '<div class="div_rodape_feed">';
-      html += '<div class="rodape_feed_botao">';
-      html += '<span class="material-symbols-outlined span_rodape_botao">';
-      html += 'share';
-      html += '</span>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-    });
-   
 
-    $("#divFeed").html(html);
-
-   
-});
-}
 
 // Função para carregar o perfil
 function carregar_perfil(){
   var html = '';
 
+    html += '<div class="perfil" style="width: 100%; height: 70%;">';
+    html += '<div class="div_imgFundo_perfil">';
+    html += '<div class="imgFundo_perfil">';
+    html += '</div>';
+    html += '</div>';
     html += '<div id="imagem_igreja" class="div_img_igreja">';
     html += '<img class="img_igreja1" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">';
     html += '</div>';
@@ -117,9 +64,14 @@ function carregar_perfil(){
     html += '</div>';
     html += '</div>';
     $("#divPerfil").html(html);
+
+    eventoPerfil();
+    modalVisualizarPerfil();
+    modalVisualizarImgFundo();
 }
-// Função para carregar o evento de agenda
-function evento_agenda(){
+
+
+function getFeed(){
   $.ajax({
     method: "POST",
     url: "https://pedeoferta.com.br/templo/index.php/welcome/get_feed",
@@ -137,11 +89,13 @@ function evento_agenda(){
       html += '<div class="div_feed_secundario">';
       html += '<div>';
       html += '<div>';
-      html += '<a class="div_perfil">';
+      html += '<a class="div_perfil" >';
+      html += '<div class="perfil_div" data-igreja_id = "'+lpp.igreja_id+'">';
       html += '<img class="img_igreja" src="'+lpp.igreja_logo+'">';
       html += '<span class="nome_igreja">';
       html += lpp.igreja_nome;
       html += '</span>';
+      html += '</div>';
       html += '</a>';
       html += '</div>';
       html += '<div class="div_layout_feed">';
@@ -168,13 +122,55 @@ function evento_agenda(){
     });
    
 
-    $("#divHistoria").html(html);
+    $("#divFeed").html(html);
 
-   
+    configurarEventos();
 });
 }
 
-// Função para inicializar o slider
+
+function getComunidade(){
+  $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_lista_igreja_by_id_completo",
+    data: {igreja_id: igrejaId}
+  })
+  .done(function(ret) {
+
+    var obj = jQuery.parseJSON(ret);
+
+    var html = '';
+    html += '<section class="regular slider">';
+
+    $.each(obj.lista_igreja, function (k, lpp) {
+
+        html += '<a data-evento_cod="'+lpp.igreja_id+'" class="produtos_perfil"><div class="divPerfilEC" style="opacity: 0.5;height: 90px; display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center; gap:"18px";">';
+            html += '<div style="display: grid;">';
+        html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.igreja_logo+'" style="height:50px"/></div>';
+              html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;">'+lpp.igreja_desc+'</span></div>';
+            html += '</div></a>';
+    });
+    html += '</section>';
+
+    $("#divHistoria").html(html);
+
+    slick();
+    $('#carregando').hide();
+    $('.produtos_perfil').click(function(e){
+
+      var perfilId = $(this).data('evento_cod');
+      window.sessionStorage.setItem('igreja_id', perfilId); 
+      location.reload();
+      
+      $('.divPerfilEC').removeClass('perfil_ec_selected');
+      $(this).children().addClass('perfil_ec_selected');
+                  
+      atual_evento_cod = $(this).data('evento_cod');
+      console.log(atual_evento_cod);
+    });
+  });
+}
+
 function slick() {
   $(".regular").slick({
       dots: false,
@@ -214,6 +210,7 @@ function carregarIgreja(){
 
         var nomeIgreja = obj.igreja.igreja_nome;
         $('#nome_igreja').val(nomeIgreja);
+        
       }
 
     });
@@ -264,16 +261,18 @@ function marker(lat, lng, img) {
 }
 
 
+function eventoPerfil(){
+  $("#localizacao").click(function(e) {
+    var lat = $(this).data('lat');
+    var lng = $(this).data('long');
+    marker(lat, lng, '');
+   $('#modal_addproduto').show(); 
+  });
+  $(".modal_close").click(function(e) {
+   $('#modal_addproduto').hide(); 
+  });
+}
 
-$("#localizacao").click(function(e) {
-  var lat = $(this).data('lat');
-  var lng = $(this).data('long');
-  marker(lat, lng, '');
- $('#modal_addproduto').show(); 
-});
-$(".modal_close").click(function(e) {
- $('#modal_addproduto').hide(); 
-});
 
 
 //menu
@@ -366,7 +365,7 @@ function setStorageMenu(item_menu) {
 
 }
 
-
+/*
 var didScroll;
 var lastScrollTop = 0;
 var delta = 5;
@@ -406,7 +405,7 @@ function hasScrolled() {
 
     lastScrollTop = st;
 }
-
+*/
 
 function toggleDivVisibility(value, targetDiv) {
   if (value.trim() !== "") {
@@ -449,4 +448,40 @@ function atualizarContatos() {
       $('.contatos').append(divContato);
     }
   });
+}
+
+function modalVisualizarPerfil(){
+  $('.img_igreja1').click(function(){
+    var imgSrc = $(this).attr('src');
+  
+    $('#imagem').attr('src', imgSrc);
+  
+    $('#modal_visualizar_img').show();
+   
+
+    
+  });
+  
+  $('.modal_close').click(function() {
+    $('#modal_visualizar_img').hide();
+    $('#imagem').attr('src', '');
+  });
+  
+}
+
+function modalVisualizarImgFundo(){
+  $('.imgFundo_perfil').click(function(){
+    var imgSrc = $(this).attr('src');
+  
+    $('#imagem').attr('src', imgSrc);
+  
+    $('#modal_visualizar_img').show();
+    
+  });
+  
+  $('.modal_close').click(function() {
+    $('#modal_visualizar_img').hide();
+    $('#imagem').attr('src', '');
+  });
+  
 }
