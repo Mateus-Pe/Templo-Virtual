@@ -131,5 +131,30 @@ function efeitoBlur(){
 
 
 
+var player;
 
+        // Função para inicializar o player quando a API estiver pronta
+        function onYouTubeIframeAPIReady() {
+            // Crie um novo player
+            player = new YT.Player('player', {
+                height: '360',
+                width: '640',
+                videoId: 'ABzDOSQkhTM', // ID do vídeo do YouTube que deseja incorporar
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // Função chamada quando o player estiver pronto
+        function onPlayerReady(event) {
+            // Reproduza o vídeo quando estiver pronto
+            event.target.playVideo();
+        }
+
+        // Função chamada quando o estado do player mudar
+        function onPlayerStateChange(event) {
+            // Você pode adicionar lógica aqui para lidar com diferentes estados do player, como pausar o vídeo, etc.
+        }
 

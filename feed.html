@@ -36,6 +36,8 @@
 
     <meta name="twitter:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="styles/main.css">
 
     <link rel="stylesheet" href="styles/feed.css">
@@ -114,8 +116,52 @@
 
     <main class="feed_main feed_main_top">
 
+        <div class="div_publicacao">
+            <div class="feed_principal">
+                <div class="div_feed_secundario">
+                    <div>
+                        <div>
+                            <a class="div_perfil" >
+                                <div class="perfil_div" data-igreja_id = "'+lpp.igreja_id+'">
+                                    <img class="img_igreja" src="/imgs/imgs-igreja/igreja.png">
+                                    <span class="nome_igreja">
+                                    Nossa Senhora de Fátima Socorro
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                            <div class="div_layout_feed">
+                                <a class="a_img_layout">
+                                    <div id="player" style="width: 390px; height: 315px;"></div>
+                                </a>
+                                <div class="div_descricao">
+                                <span class="span_descricao">
+                                    Fique a seguir com o video
+                                </span>
+                                </div>
+                            </div>
+                            <div class="div_rodape_feed">
+                                <div class="rodape_feed_botao">
+                                    <span class="material-symbols-outlined span_rodape_botao">
+                                        share
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!--<div style="background-color: white; width: 400px; height: 377px;">
+
+            <div id="player" style="width: 390px; height: 315px;"></div>
+        </div> -->
 
 
+        <video width="390" height="315" controls>
+            <source src="/imgs/imgs-igreja/Imagens Incríveis da Natureza (4k).AVI " type="video/mp4">
+            Seu navegador não suporta o elemento de vídeo.
+        </video>
 
         <div id="divHistoria">
 
@@ -139,6 +185,8 @@
         <script src="scripts/jquery/jquery.maskedinput.min.js"></script>
 
         <script src="scripts/feed.js"></script>
+
+        <script src="https://www.youtube.com/iframe_api"></script>
 
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBjVDWPYDC5zoxBw0zW4bdnnaelnyCWdkw&sensor=false"></script>
 
