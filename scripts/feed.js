@@ -193,30 +193,52 @@ function efeitoBlur(){
 
 var player;
 
-        // Função para inicializar o player quando a API estiver pronta
-        //function onYouTubeIframeAPIReady() {
-          function readyVideo(classVideo){
-
-            // Crie um novo player
-            player = new YT.Player('video_'+ classVideo +'', {
-                height: '315',
-                width: '390',
-                videoId: 'ABzDOSQkhTM', // ID do vídeo do YouTube que deseja incorporar
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
+function readyVideo(classVideo) {
+    // Crie um novo player
+    player = new YT.Player('video_' + classVideo + '', {
+        height: '315',
+        width: '390',
+        videoId: 'ABzDOSQkhTM', // ID do vídeo do YouTube que deseja incorporar
+        playerVars: {
+            'autoplay': 0, // Configuração para não reproduzir automaticamente
+            'controls': 1 // Mostrar controles de vídeo
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
         }
+    });
+}
 
-        // Função chamada quando o player estiver pronto
-        function onPlayerReady(event) {
-            // Reproduza o vídeo quando estiver pronto
-            event.target.playVideo();
-        }
+// Função chamada quando o player estiver pronto
+function onPlayerReady(event) {
+    // Não reproduz o vídeo automaticamente
+    // Adiciona um evento de passar o mouse para iniciar a reprodução do vídeo
+    var videoElement = document.getElementById('video_1');
+    videoElement.addEventListener('mouseenter', function() {
+        player.playVideo();
+    });
+}
 
-        // Função chamada quando o estado do player mudar
-        function onPlayerStateChange(event) {
-            // Você pode adicionar lógica aqui para lidar com diferentes estados do player, como pausar o vídeo, etc.
-        }
+// Função chamada quando o estado do player mudar
+function onPlayerStateChange(event) {
+    // Verifica se o vídeo está pronto para ser reproduzido
+    if (event.data == YT.PlayerState.PLAYING) {
+        // Vídeo está sendo reproduzido
+        console.log('Vídeo iniciado!');
+    }
+    // Adicione mais lógica aqui conforme necessário
+}
 
+document.addEventListener('DOMContentLoaded', function() {
+  var meuVideo = document.getElementById('meuVideo');
+
+  // Adiciona um ouvinte de evento para o mouse entrar no vídeo
+  meuVideo.addEventListener('mouseenter', function() {
+      // Verifica se o vídeo já está pausado para evitar reiniciar se já estiver em andamento
+      if (meuVideo.paused) {
+          // Inicia a reprodução do vídeo
+          meuVideo.play();
+      }
+  });
+});
