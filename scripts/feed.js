@@ -6,33 +6,52 @@ function evento_agenda(){
      
     })
     .done(function(ret) {
-     
-      var obj = jQuery.parseJSON(ret);
       var html = '';
-     
-      console.log(obj);
+      var classVideo = 0;
+      var obj = jQuery.parseJSON(ret);
       $.each(obj.lista_feed, function (k, lpp) {
+        
+        classVideo ++;
+        html = montaHtmlVideo(classVideo);
+        if(classVideo < 7){
+          $("#divHistoria").append(html);
+          readyVideo(classVideo);
+        }
+        html = montaHtml(lpp);
+        $("#divHistoria").append(html);
+      });
+      
+
+      configurarEventos();
+      
+    });
+}
+
+function montaHtml(linha){
+  
+     var html = "";
+     
         html += '<div class="div_publicacao">';
         html += '<div class="feed_principal">';
         html += '<div class="div_feed_secundario">';
         html += '<div>';
         html += '<div>';
         html += '<a class="div_perfil" >';
-        html += '<div class="perfil_div" data-igreja_id = "'+lpp.igreja_id+'">';
-        html += '<img class="img_igreja" src="'+lpp.igreja_logo+'">';
+        html += '<div class="perfil_div" data-igreja_id = "'+linha.igreja_id+'">';
+        html += '<img class="img_igreja" src="'+linha.igreja_logo+'">';
         html += '<span class="nome_igreja">';
-        html += lpp.igreja_nome;
+        html += linha.igreja_nome;
         html += '</span>';
         html += '</div>';
         html += '</a>';
         html += '</div>';
         html += '<div class="div_layout_feed">';
         html += '<a class="a_img_layout">';
-        html += '<img class="img_layout_feed" src="'+lpp.agenda_img+'">';
+        html += '<img class="img_layout_feed" src="'+linha.agenda_img+'">';
         html += '</a>';
         html += '<div class="div_descricao">';
         html += '<span class="span_descricao">';
-        html += lpp.descricao_evento;
+        html += linha.descricao_evento;
         html += '</span>';
         html += '</div>';
         html += '</div>';
@@ -47,13 +66,54 @@ function evento_agenda(){
         html += '</div>';
         html += '</div>';
         html += '</div>';
-      });
+
+        
+      return html;
+}
+
+function montaHtmlVideo(classVideo){
+  var html = '';
      
+     
+        html += '<div class="div_publicacao">';
+        html += '<div class="feed_principal">';
+        html += '<div class="div_feed_secundario">';
+        html += '<div>';
+        html += '<div>';
+        html += '<a class="div_perfil" >';
+        html += '<div class="perfil_div" data-igreja_id = "1">';
+        html += '<img class="img_igreja" src="/imgs/imgs-igreja/igreja.png">';
+        html += '<span class="nome_igreja">';
+        html += 'Nossa Senhora de Fátima Socorro';
+        html += '</span>';
+        html += '</div>';
+        html += '</a>';
+        html += '</div>';
+        html += '<div class="div_layout_feed">';
+        html += '<a class="a_img_layout">';
+        html += '<div id="video_'+ classVideo +'"></div>';
+        html += '</a>';
+        html += '<div class="div_descricao">';
+        html += '<span class="span_descricao">';
+        html += 'Fique a seguir com o video';
+        html += '</span>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="div_rodape_feed">';
+        html += '<div class="rodape_feed_botao">';
+        html += '<span class="material-symbols-outlined span_rodape_botao">';
+        html += 'share';
+        html += '</span>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
 
-      $("#divHistoria").html(html);
-
-      configurarEventos();
-  });
+        
+      
+      return html;
 }
 
 function configurarEventos(){
@@ -134,11 +194,13 @@ function efeitoBlur(){
 var player;
 
         // Função para inicializar o player quando a API estiver pronta
-        function onYouTubeIframeAPIReady() {
+        //function onYouTubeIframeAPIReady() {
+          function readyVideo(classVideo){
+
             // Crie um novo player
-            player = new YT.Player('player', {
-                height: '360',
-                width: '640',
+            player = new YT.Player('video_'+ classVideo +'', {
+                height: '315',
+                width: '390',
                 videoId: 'ABzDOSQkhTM', // ID do vídeo do YouTube que deseja incorporar
                 events: {
                     'onReady': onPlayerReady,
