@@ -1,3 +1,5 @@
+var players = {};
+
 evento_agenda();
 function evento_agenda(){
     $.ajax({
@@ -13,7 +15,7 @@ function evento_agenda(){
         
         classVideo ++;
         html = montaHtmlVideo(classVideo);
-        if(classVideo < 7){
+        if(classVideo < 2){
           $("#divHistoria").append(html);
           readyVideo(classVideo);
         }
@@ -23,6 +25,7 @@ function evento_agenda(){
       
 
       configurarEventos();
+      iniciarIntersectionObserver();
       
     });
 }
@@ -91,7 +94,7 @@ function montaHtmlVideo(classVideo){
         html += '</div>';
         html += '<div class="div_layout_feed">';
         html += '<a class="a_img_layout">';
-        html += '<div id="video_'+ classVideo +'"></div>';
+        html += '<div id="video_'+ classVideo +'" class="video-hover-trigger"></div>';
         html += '</a>';
         html += '<div class="div_descricao">';
         html += '<span class="span_descricao">';
@@ -191,54 +194,93 @@ function efeitoBlur(){
 
 
 
-var player;
+
+function iniciarIntersectionObserver() {
+  const options = {
+    threshold: 0.5
+  };
+
+  const observer = new IntersectionObserver(handleIntersection, options);
+  const videos = document.querySelectorAll('.video-hover-trigger');
+
+  videos.forEach(video => {
+    observer.observe(video);
+  });
+}
+
+function handleIntersection(entries, observer) {
+  entries.forEach(entry => {
+    const videoId = entry.target.id;
+
+    if (entry.isIntersecting) {
+      if (videoId.startsWith('video_') && players[videoId]) {
+        // Se o elemento é um vídeo do YouTube e o player está definido
+        players[videoId].playVideo();
+      } else if (videoId === 'meuVideo') {
+        // Se o elemento é um vídeo local
+        const meuVideo = document.getElementById('meuVideo');
+        meuVideo.play();
+      }
+    } else {
+      if (videoId.startsWith('video_') && players[videoId]) {
+        // Se o elemento é um vídeo do YouTube e o player está definido
+        players[videoId].pauseVideo();
+      } else if (videoId === 'meuVideo') {
+        // Se o elemento é um vídeo local
+        const meuVideo = document.getElementById('meuVideo');
+        meuVideo.pause();
+      }
+    }
+  });
+}
 
 function readyVideo(classVideo) {
-    // Crie um novo player
-    player = new YT.Player('video_' + classVideo + '', {
-        height: '315',
-        width: '390',
-        videoId: 'ABzDOSQkhTM', // ID do vídeo do YouTube que deseja incorporar
-        playerVars: {
-            'autoplay': 0, // Configuração para não reproduzir automaticamente
-            'controls': 1 // Mostrar controles de vídeo
-        },
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-        }
-    });
-}
-
-// Função chamada quando o player estiver pronto
-function onPlayerReady(event) {
-    // Não reproduz o vídeo automaticamente
-    // Adiciona um evento de passar o mouse para iniciar a reprodução do vídeo
-    var videoElement = document.getElementById('video_1');
-    videoElement.addEventListener('mouseenter', function() {
-        player.playVideo();
-    });
-}
-
-// Função chamada quando o estado do player mudar
-function onPlayerStateChange(event) {
-    // Verifica se o vídeo está pronto para ser reproduzido
-    if (event.data == YT.PlayerState.PLAYING) {
-        // Vídeo está sendo reproduzido
-        console.log('Vídeo iniciado!');
-    }
-    // Adicione mais lógica aqui conforme necessário
+  // Crie um novo player
+  players['video_' + classVideo] = new YT.Player('video_' + classVideo, {
+      height: '315',
+      width: '390',
+      videoId: 'ABzDOSQkhTM', // ID do vídeo do YouTube que deseja incorporar
+      playerVars: {
+          'autoplay': 0, // Configuração para não reproduzir automaticamente
+          'controls': 1 // Mostrar controles de vídeo
+      },
+      events: {
+          'onReady': function(event) {
+              // O player está pronto, você pode fazer algo aqui se precisar
+          },
+          'onStateChange': function(event) {
+              // Verifica se o vídeo está pronto para ser reproduzido
+              if (event.data == YT.PlayerState.PLAYING) {
+                  // Vídeo está sendo reproduzido
+                  console.log('Vídeo iniciado!');
+              }
+          }
+      }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
   var meuVideo = document.getElementById('meuVideo');
 
-  // Adiciona um ouvinte de evento para o mouse entrar no vídeo
-  meuVideo.addEventListener('mouseenter', function() {
-      // Verifica se o vídeo já está pausado para evitar reiniciar se já estiver em andamento
-      if (meuVideo.paused) {
-          // Inicia a reprodução do vídeo
-          meuVideo.play();
-      }
+  // Função para iniciar a reprodução do vídeo local
+  function playLocalVideo() {
+    meuVideo.play().catch(function(error) {
+      // Tratar erro de reprodução
+      console.error('Erro ao reproduzir vídeo local:', error.message);
+    });
+  }
+
+  // Adicionar evento de clique para iniciar a reprodução do vídeo quando o usuário interagir com a página
+  document.addEventListener('click', function() {
+    playLocalVideo();
+  });
+
+  // Adicionar evento de clique no próprio vídeo para pausá-lo ou reproduzi-lo
+  meuVideo.addEventListener('click', function() {
+    if (meuVideo.paused) {
+      playLocalVideo();
+    } else {
+      meuVideo.pause();
+    }
   });
 });
