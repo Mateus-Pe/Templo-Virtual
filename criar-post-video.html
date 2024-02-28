@@ -1,0 +1,207 @@
+<html lang="pt-br">
+
+<head>
+
+    <!-- Chrome, Firefox OS and Opera -->
+
+    <meta name="theme-color" content="#5b318a">
+
+    <!-- Windows Phone -->
+
+    <meta name="msapplication-navbutton-color" content="#5b318a">
+
+    <!-- iOS Safari -->
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="#5b318a">
+
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+
+    <meta charset="utf-8">
+
+    <meta name="description" content="Vitrine de Ofertas">
+
+    <meta name="robots" content="index,follow">
+
+    <title>Pé de Oferta</title>
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:title" content="Pé de Oferta">
+
+    <meta property="og:description" content="Vitrine de Ofertas">
+
+    <meta property="og:url" content="http://pedeoferta.com.br/">
+
+    <meta property="og:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="Pé de Oferta">
+
+    <meta name="twitter:description" content="Vitrine de Ofertas">
+
+    <meta name="twitter:url" content="http://pedeoferta.com.br/">
+
+    <meta name="twitter:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
+
+    <link rel="stylesheet" href="./styles/ion.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="./styles/main.css">
+
+    <link rel="stylesheet" href="./styles/criar-post-video.css">
+
+    <link rel="stylesheet" href="./styles/jquery-ui.min.css">
+
+    <link href="./styles/slick.css" rel="stylesheet">
+
+    <link href="./styles/slick-theme.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+    
+
+<!--Header-->
+    <div id="divHeader" class="div_header">
+
+        <div id="texto" class="div_texto">
+            <div>
+                <span class="material-symbols-outlined span_texto">description</span>
+
+            </div>
+            <div>
+                <span class="span_text1">Texto</span>
+            </div>
+        </div>
+
+        <div id="imagem" class="div_imagem">
+
+            <span class="material-symbols-outlined span_imagem">image</span>
+
+            <span class="span_img1">Imagem</span>
+        </div>
+
+        <div id="video" class="div_video">
+            <span class="material-symbols-outlined span_video">play_circle</span>
+            <span class="span_vid1">Vídeo</span>
+        </div>
+    </div>
+
+
+<!--Conteúdo-->
+<main class="main">
+
+    <!--Selecionar como carregar o video-->
+    
+    <div class="select_video">
+
+        <div class="container_select">
+
+            <div id="youtube" class="video-icon">
+
+                <span class="material-symbols-outlined span_select">
+                    youtube_activity
+                </span>
+            </div>
+    
+            <div id="local" class="video-icon">
+                <span class="material-symbols-outlined span_select">
+                    video_library
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Conteúdo que deve aparecer de acordo com o item selecionado-->
+
+    <div id="select_youtube" class="select_youtube">
+
+        <div>
+            
+            <span class="material-symbols-outlined span_youtube">youtube_activity</span>
+            
+            <input class="cadastro__input input_youtube" id="link_youtube" name="link_youtube" placeholder="Adicione o link do YouTube" required>
+            
+        </div>
+
+
+        <div id="descricao_youtube">
+
+            <div>
+            
+                <span class="material-symbols-outlined span_coments">description</span>
+                
+                <textarea class="cadastro__input textarea_coments" id="descricao1" name="descricao1" placeholder="Descrição" required></textarea>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!--Selecionado video Local-->
+
+    
+    <div id="select_local" class="select_local">
+
+        <div class="div_botao">
+            
+            <button class="botao-video material-symbols-outlined">video_search</button>
+            
+        </div>
+
+
+        <div id="descricao_local">
+
+            <div>
+            
+                <span class="material-symbols-outlined span_coments">description</span>
+                
+                <textarea class="cadastro__input textarea_coments" id="descricao2" name="descricao2" placeholder="Descrição" required></textarea>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+
+    
+
+    <div class="checkout-entrega__buttons div_btn-salvar div_form cadastro" id="divBotoes">
+
+        <button class="div_botao-salvar" id="btn_salvar" tabindex="7">SALVAR</button>
+
+    </div>
+
+
+
+</main>
+
+
+
+    <footer>
+        <script src="./scripts/jquery/jquery-3.2.1.min.js"></script>
+
+        <script src="./scripts/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+
+        <script src="./scripts/criar-post-video.js"></script>
+
+        <script src="./scripts/slick/slick.min.js"></script>
+        <script src="./scripts/slick/slick.js"></script>
+
+        <!--  <script src="cordova.js"></script> -->
+
+    </footer>
+
+</body>
+
+</html>

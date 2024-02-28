@@ -1,0 +1,178 @@
+.video-icon {
+    width: 8rem;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    border: 1px solid darkred;
+    border-radius: 20px; 
+    padding: 10px;
+}
+
+.div_btn-salvar {
+    bottom: 30px;
+    display: block;
+}
+
+.div_botao-salvar {
+    font-family: Exo;
+    border: 1px solid darkred !important;
+    background-color: white;
+    color: darkred;
+    width: 70%;
+    border-radius: 10px;
+    height: 4.5rem;
+    font-size: 2rem;
+}
+
+#youtube {
+    color: darkred;
+}
+
+#local {
+    color: darkred;
+}
+
+#youtube.clicked,
+#local.clicked {
+    background-color: darkred;
+    color: white;
+}
+
+.botao-video {
+    background-color: white;
+    color: darkred;
+    border: 1px solid darkred;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.botao-video:hover {
+    background-color: #8B0000; 
+    color: white;
+}
+
+#select_youtube,
+#select_local,
+#divBotoes {
+    display: none;
+}
+
+.div_header{
+    background-color: white;
+    top: 0px;
+    width: 100%;
+    height: 70px; 
+    z-index: 2; 
+    position: fixed; 
+    border-bottom: 1px solid darkred;
+}
+
+.div_texto,
+.div_imagem{
+    width: 33.3%;
+    float:left; 
+    text-align: center;
+    display: grid; 
+    height:100%;
+}
+
+.span_texto,
+.span_imagem{
+    font-size: 5rem;
+    color: darkred;
+}
+
+.span_text1,
+.span_img1{
+    font-size: 1.2rem;
+    color: darkred;
+}
+
+
+.div_video{
+    width: 33.3%;
+    float:left; 
+    text-align: center;
+    display: grid; 
+    height:100%; 
+    background-color: darkred;
+}
+
+.span_video{
+    font-size: 5rem;
+    color: white
+}
+
+.span_vid1{
+    font-size: 1.2rem;
+    color: white
+}
+
+.main{
+    position: absolute; 
+    top: 20%;
+    width: 100%;
+}
+
+.select_video{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.container_select{
+    display: inline-flex; 
+    gap: 6rem;
+}
+
+.span_select{
+    font-size: 4rem;
+}
+
+.select_youtube,
+.select_local{
+    position: relative; 
+    justify-content: center; 
+    top: 4rem; 
+    gap: 2rem;
+}
+
+.span_youtube{
+    color: lightgray; 
+    top: 2.9rem; 
+    position: relative; 
+    left: 0.8rem;
+}
+
+.input_youtube{
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid darkred;
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.span_coments{
+    color: lightgray;
+    top: 2.5rem;
+    position: relative;
+    left: 0.8rem;
+}
+
+.textarea_coments{
+    background: transparent;
+    border: 1px solid darkred;
+    border-radius: 10px;
+    width: 100%;
+    height: 15rem;
+    font-size: 1.5rem;
+}
+
+.div_botao{
+    display: flex;
+    justify-content: center;
+}
