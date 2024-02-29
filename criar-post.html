@@ -50,6 +50,8 @@
 
     <link rel="stylesheet" href="./styles/main.css">
 
+    <link rel="stylesheet" href="./styles/criar-post.css">
+
     <link rel="stylesheet" href="./styles/jquery-ui.min.css">
 
     <link href="./styles/slick.css" rel="stylesheet">
@@ -90,6 +92,54 @@
             <span style="font-size: 1.2rem; color: darkred">Vídeo</span>
         </div>
     </div>
+
+
+    <!--Conteúdo-->
+<main class="main">
+
+
+    <!--Selecionado imagem Local-->
+
+    
+    <div id="imagem" class="select_local">
+
+        <div class="div_botao">
+            
+            <button id="add_imagem" class="botao-imagem material-symbols-outlined">image_search</button>
+            
+        </div>
+
+
+        <div id="descricao_local">
+
+            <div>
+            
+                <span class="material-symbols-outlined span_coments">description</span>
+                
+                <textarea class="cadastro__input textarea_coments" id="descricao2" name="descricao2" placeholder="Descrição" required></textarea>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
+
+
+    
+
+    <div class="checkout-entrega__buttons div_btn-salvar div_form cadastro" id="divBotoes">
+
+        <button class="div_botao-salvar" id="btn_salvar" tabindex="7">SALVAR</button>
+
+    </div>
+
+
+
+</main>
 
 
     <footer>

@@ -5,3 +5,8 @@ $('#texto').click(function(e){
   $('#video').click(function(e){
     window.location = "criar-post-video.html";
   });
+
+
+document.getElementById("add_imagem").addEventListener("click", function() {
+    document.getElementById("imageFileInput").click();
+});

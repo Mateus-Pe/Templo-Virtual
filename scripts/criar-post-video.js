@@ -35,3 +35,7 @@ document.getElementById("local").addEventListener("click", function() {
     this.classList.add("clicked");
     showHideElements("local");
 });
+
+document.getElementById("add_video_local").addEventListener("click", function() {
+    document.getElementById("videoFileInput").click();
+});

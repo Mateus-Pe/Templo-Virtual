@@ -50,6 +50,8 @@
 
     <link rel="stylesheet" href="./styles/main.css">
 
+    <link rel="stylesheet" href="./styles/criar-post-texto.css">
+
     <link rel="stylesheet" href="./styles/jquery-ui.min.css">
 
     <link href="./styles/slick.css" rel="stylesheet">
@@ -90,6 +92,101 @@
             <span style="font-size: 1.2rem; color: darkred">Vídeo</span>
         </div>
     </div>
+
+
+ <!--Conteúdo-->
+ <main class="main">
+
+    <div class="div_publicacao">
+        <div class="feed_principal">';
+            <div class="div_feed_secundario">
+                <div>
+                    <div>
+                        <a class="div_perfil" >
+                            <div class="perfil_div">
+                                <img class="img_igreja" src="imgs/imgs-igreja/igreja.png">
+                                <span class="nome_igreja">
+                                 Nossa Senhora de Fátima
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="div_layout_feed">
+                        <div id="feed_texto" class="feed_texto">
+                            <a  class="a_img_layout">
+                                <span >
+                                    Clique para editar o texto
+                                </span>
+                            </a>
+                        </div>
+                        <div id="descricao_texto" class="div_descricao feed_texto">
+                            <span class="span_descricao">
+                                Clique para adicionar uma descrição
+                            </span>
+                        </div>
+                    </div>
+                    <div class="div_rodape_feed">
+                        <div class="rodape_feed_botao">
+                           <span class="material-symbols-outlined span_rodape_botao">
+                                share
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modal_texto" class="modal">
+        <div class="modal-content cadastro">
+            
+            <div >
+
+                <span class="material-symbols-outlined" style="color: lightgray; margin-left: 1rem; display: flex; position: absolute;">assignment</span>
+
+                <textarea class="cadastro__input" id="texto_publi" name="texto_publi" placeholder="Digite o texto"
+                    style="border: 1px solid darkred;  outline: 0;  background: transparent; width: 100%; height: 10rem; border-radius: 10px;"
+                    required></textarea>
+            </div>
+            <div id="btn_ok" class="btn_ok">
+                <span style="font-size: 1.5rem;">
+                    OK
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal_descricao" class="modal">
+        <div class="modal-content cadastro">
+            
+            <div >
+
+                <span class="material-symbols-outlined" style="color: lightgray; margin-left: 1rem; display: flex; position: absolute;">description</span>
+
+                <textarea class="cadastro__input" id="descricao_publi" name="descricao_publi" placeholder="Descrição"
+                    style="border: 1px solid darkred;  outline: 0;  background: transparent; width: 100%; height: 10rem; border-radius: 10px;"
+                    required></textarea>
+            </div>
+            <div id="btn_ok1" class="btn_ok">
+                <span style="font-size: 1.5rem;">
+                    OK
+                </span>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="checkout-entrega__buttons div_btn-salvar div_form cadastro" id="divBotoes">
+
+        <button class="div_botao-salvar" id="btn_salvar" tabindex="7">SALVAR</button>
+
+    </div>
+
+
+
+</main>
+
 
 
     <footer>
