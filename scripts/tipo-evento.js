@@ -62,7 +62,7 @@
   
   $('#btnVoltar').click(function(e){
   
-    window.location="vitrine-geral.html";
+    window.location="pesquisa.html";
   
   });
   
