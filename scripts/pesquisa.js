@@ -10,6 +10,7 @@ var maxRegs = 5;
 
 var countRegs;
 
+var select = document.getElementById('eventos');
 
 
 $(document).ready(function() {
@@ -364,8 +365,65 @@ function appendMercados(data, de, ate){
 
 };
 
-$('#eventos').click(function(e){
+document.getElementById('filtro').addEventListener('click', function() {
+  document.querySelector('#input_pesq').style.display = 'none';
+  document.querySelector('#header').style.display = 'flex';
+  document.querySelector('#filtros_selects').style.display = 'grid';
+});
 
-    window.location.href = "tipo-evento.html";
-  
+document.getElementById('fecha_filtro').addEventListener('click', function(){
+  document.querySelector('#header').style.display = 'none';
+  document.querySelector('#filtros_selects').style.display = 'none';
+  document.querySelector('#input_pesq').style.display = 'flex';
+});
+
+
+select.addEventListener('click', function() {
+  window.location.href = 'tipo-evento.html';
+});
+
+
+const slider = document.getElementById('slider');
+const horarioInicio = document.getElementById('horarioInicio');
+const horarioFim = document.getElementById('horarioFim');
+
+noUiSlider.create(slider, {
+    start: [0, 24], // Valores iniciais dos pontos de início e fim
+    connect: true, // Conecta os pontos de início e fim com uma barra
+    range: {
+        'min': 0,
+        'max': 24
+    },
+    step: 1 // Passo de 1 hora
+});
+
+// Atualiza os valores dos horários conforme os pontos de início e fim são movidos
+slider.noUiSlider.on('update', function(values) {
+    horarioInicio.textContent = formatarHorario(values[0]);
+    horarioFim.textContent = formatarHorario(values[1]);
+});
+
+// Função para formatar o horário exibindo minutos com dois dígitos
+function formatarHorario(valor) {
+    const horas = Math.floor(valor);
+    const minutos = Math.round((valor % 1) * 60);
+    return pad(horas) + ':' + pad(minutos);
+}
+
+// Função auxiliar para adicionar um zero à esquerda, se necessário
+function pad(num) {
+    return (num < 10 ? '0' : '') + num;
+}
+
+
+document.querySelectorAll('.select_item').forEach(item => {
+  item.addEventListener('click', event => {
+      // Remove a classe 'selected' de todas as outras divs
+      document.querySelectorAll('.select_item').forEach(div => {
+          div.classList.remove('selected');
+      });
+
+      // Adiciona a classe 'selected' à div clicada
+      item.classList.add('selected');
   });
+});

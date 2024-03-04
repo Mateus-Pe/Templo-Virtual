@@ -48,9 +48,15 @@
 
     <link rel="stylesheet" href="./styles/main.css">
 
+    <link rel="stylesheet" href="./styles/pesquisa.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
     <link rel="stylesheet" href="./styles/jquery-ui.min.css">
 
     <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.css">
 
 
 
@@ -64,46 +70,166 @@
 
      
 
-      <div class="search-market" style="margin-top: -5px; background-color: white;">
+      <div id="input_pesq" class="search-market" style="margin-top: -5px; background-color: white; display: flex;">
 
         <div class="search-market__container">
-
+          
           <input class="search-market__input" type="text" id="search-market" placeholder="Pesquisar" style="height: 4.2rem;  box-shadow: 0 0.2rem 1rem rgba(90, 14, 14, 0.74);">
-
-
+          
 
         </div>
 
         <span class="ion-ios-search-strong search-market__icon"></span>
 
+        <span id="filtro" class="material-symbols-outlined" style="font-size: 2.3rem; position: absolute; right: 5px; margin-top: 1rem; color: #363636;">
+          tune
+          </span>
 
       </div>
 
-      <div style="position: relative; top: 3.8rem; width: 100%; height: 5rem ;border-top: 1px solid lightgrey; border-bottom: 1px solid lightgrey; align-items: center; justify-content: center ;display: flex;">
-        <div style="display: flex;  font-size: 1.4rem; color: grey;">
-            <div id="cidade" style="height: 4rem; display: flex; align-items: center; padding: 1.5rem; border-right: 1px solid lightgrey;">
-                <span>
-                    Cidade
+
+      <header id="header" class="header1">
+
+        <span id="salva_filtro" class="material-symbols-outlined" style="font-size: 3rem; position: absolute; left: 5px; margin-top: 1.3rem ;color: white;">
+          check
+        </span>
+
+        <span class="span_criar-igreja" id="span_criar-igreja">Filtrar busca</span><br>
+
+    
+        <span id="fecha_filtro" class="material-symbols-outlined" style="font-size: 3rem; position: absolute; right: 5px; margin-top: 1.3rem ;color: white;">
+          close
+        </span>
+  
+
+        <span class="page-menu__qtd-itens"></span>
+
+    </header>
+
+
+
+        
+
+
+      
+      <main class="vitrine-geral vitrine-mercado" style="margin-top: 0.5rem; font-family: Exo; height: 100%;">
+
+        <div id="filtros_selects" style="position: relative; top: 8rem; height: 100%; width: 100%; gap: 1rem ;display: none;">
+
+          <div style="width: 100%; position: relative; display: grid;">
+            <span>
+              Selecione o evento
+            </span>  
+
+            <select type="text" id="eventos" placeholder="Evento" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
+              <option style="display: none;" value="" disabled selected>Evento</option>
+            </select>
+          
+          </div>
+
+          <div style="width: 100%; position: relative; display: grid;">
+            <span>
+              Data / Hora
+            </span>  
+
+            <select type="text" id="eventos" placeholder="Evento" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
+              <option style="display: none;" value="" disabled selected>Dia</option>
+            </select>
+
+            <div style="padding-top: 1rem;">
+
+              <span>
+                Horário
+              </span>
+              
+              <div id="slider"></div>
+                <div id="rangeValues">
+                  <span id="horarioInicio">00:00</span> até <span id="horarioFim">24:00</span>
+                </div>
+              
+          </div>
+
+          <div style="width: 100%; position: relative; display: grid; padding-top: 3rem; gap: 1rem;">
+            <span>
+              Localização
+            </span>  
+
+            <select type="text" id="estado" placeholder="" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px; gap: 0.5rem;">
+              <option style="display: none;" value="" disabled selected>Estado</option>
+            </select>
+
+            <select type="text" id="regiao" placeholder="" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
+              <option style="display: none;" value="" disabled selected>Região</option>
+            </select>
+
+            <select type="text" id="cidade" placeholder="" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
+              <option style="display: none;" value="" disabled selected>Cidade</option>
+            </select>
+          
+          </div>
+
+
+          <div style="width: 100%; position: relative; display: grid; padding-top: 2rem; gap: 1rem;">
+            <span>
+              Instituição
+            </span>  
+
+            <select type="text" id="igreja" placeholder="Evento" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
+              <option style="display: none;" value="" disabled selected>Igrejas</option>
+            </select>
+
+            <select type="text" id="comunidade" placeholder="Evento" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
+              <option style="display: none;" value="" disabled selected>Comunidades</option>
+            </select>
+          
+          </div>
+
+
+          <div  style="width: 100%; position: relative; display: grid; padding-top: 2rem; gap: 1rem;">
+
+            <div>
+              <span>
+                Ordenar por:
+              </span>
+            </div>
+              
+              <div style="display: flex; gap: 1rem; justify-content: center;">
+                <div id="distancia_select"  class="select_item">
+                  <span style="padding: 1rem;">
+                    Distância
+                  </span>
+                </div>
+
+              <div id="data_select" class="select_item">
+                <span style="padding: 1rem;">
+                  Data
                 </span>
+              </div>
+
+              <div id="hora_select" class="select_item">
+                <span style="padding: 1rem;">
+                  Hora
+                </span>
+              </div>
+
+              <div id="evento_select" class="select_item">
+                <span style="padding: 1rem;">
+                  Evento
+                </span>
+              </div>
+
+
             </div>
 
-            <div id="categorias" style="height: 4rem; display: flex; align-items: center; padding: 1.5rem; border-right: 1px solid lightgrey;">
-                <span>
-                    Categorias
-                </span>
-            </div>
+          </div>
 
-            <div id="eventos" style="height: 4rem; display: flex; align-items: center; padding:1.5rem ;">
-                <span>
-                    Eventos
-                </span>
-            </div>
         </div>
-      </div>
 
 
 
-      <main class="vitrine-geral vitrine-mercado" style="margin-top: 0.5rem; font-family: Exo;">
+
+
+        
 
         <!--<div style="background-color: rgba(197, 191, 210, 0.81); color: #363636;    font-family: sans-serif; height: 100%; left: 0;    overflow: auto;padding-top: 100px; position: fixed;  top: 0;   width: 100%; z-index: 1;" id="waiting">
 
@@ -126,6 +252,8 @@
     </div>
 
     <footer>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.js"></script>
 
       <script src="./scripts/jquery/jquery-3.2.1.min.js"></script>
 

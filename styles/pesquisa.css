@@ -1,0 +1,51 @@
+.header1{
+    background-color: darkred;
+    height: 55px;
+    position: fixed;
+    display: none;
+    justify-content: space-between;
+    top: 0;
+    width: 100%;
+    
+}
+
+.span_criar-igreja{
+    font-size: 2rem; 
+    color: #fff; 
+    position: relative; 
+    left: 13rem; 
+    padding: 1.5rem;
+    font-family: Exo;
+}
+
+#slider {
+    width: 80%;
+    margin: 5px auto;
+}
+
+/* Estilos personalizados para a barra de intervalo */
+.noUi-connect {
+    background: darkred !important; /* Cor da barra de progresso */
+}
+
+/* Estilos personalizados para os pontos de controle */
+.noUi-handle {
+    background: white !important; /* Cor do ponto de controle */
+    border: 2px solid darkred !important; /* Cor da borda do ponto de controle */
+    width: 20px; /* Largura do ponto de controle */
+    height: 20px; /* Altura do ponto de controle */
+}
+
+.selected {
+    background-color: darkred;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Adiciona uma transição suave */
+}
+
+.select_item{
+    border: 1px solid darkred; 
+    border-radius: 20px; 
+    height: 4rem; 
+    align-items: center; 
+    display: flex;
+}
