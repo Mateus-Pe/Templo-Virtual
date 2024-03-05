@@ -124,6 +124,29 @@ function configurarEventos(){
     window.sessionStorage.setItem('igreja_id',$(this).data("igreja_id"));
     location.href = "perfil-igreja.html";
   });
+
+  $(window).scroll(function() {
+    //if(($(window).scrollTop() % 500)== 0){
+      /*if(sessionStorage.getItem('arrayOfertaAcesso') != null && sessionStorage.getItem('arrayOfertaAcesso') != ''){
+        arrayOfertaAcesso = JSON.parse(sessionStorage.getItem('arrayOfertaAcesso')); 
+      }else{
+        arrayOfertaAcesso = [];
+      }
+     console.log($(window).scrollTop());
+     console.log(JSON.parse(sessionStorage.getItem('arrayOfertaAcesso')));*/
+    
+      
+     $('.div_publicacao').each(function(){
+        if($(this).position().top < $(window).scrollTop() && jQuery.inArray($(this).data('oferta_cod'), arrayOfertaAcesso) == -1){
+          arrayOfertaAcesso.push($(this).data('oferta_cod'));
+          acesso_oferta();
+          //sessionStorage.setItem('arrayOfertaAcesso', JSON.stringify(arrayOfertaAcesso));
+          
+          //console.log($(this).data('oferta_cod'));
+        }
+     });
+    //}
+    });
 }
 
 
