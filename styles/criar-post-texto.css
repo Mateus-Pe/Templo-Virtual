@@ -203,7 +203,39 @@
     border: 1px solid darkred;
     padding: 5px;
     width: 60px;
-    left: 10.5rem;
+    left: 40%;
     position: relative;
     border-radius: 10px
+}
+
+.header1{
+    background-color: darkred;
+    height: 55px;
+    position: fixed;
+    display: none;
+    justify-content: space-between;
+    top: 0;
+    width: 100%;
+    display: none;
+    
+}
+
+@media screen and (max-width: 768px) {
+
+    /* Redefine o tamanho do texto_publi */
+    #texto_publi {
+        width: calc(100% - 20px); /* Calcula a largura da tela menos 20px para margens */
+        height: calc(100vh - 250px); /* Calcula a altura da tela menos 250px para outros elementos */
+        margin: 10px; /* Adiciona margens para um visual melhor */
+    }
+
+    /* Define o tamanho do texto dentro do editor para 1.4rem */
+    .ck-content {
+        font-size: 1.4rem;
+    }
+
+    /* Define a largura do editor CKEditor como 100% */
+    .ck.ck-editor {
+        width: 100% !important;
+    }
 }

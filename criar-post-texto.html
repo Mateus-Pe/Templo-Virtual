@@ -68,7 +68,7 @@
     
 
 
-    <div id="divHeader" style="background-color: darkred;top: 0px;width: 100%;height: 70px; z-index: 2; position: fixed; border-bottom: 1px solid darkred">
+    <div id="divHeader" style="background-color: darkred;top: 0px;width: 100%;height: 70px; z-index: 2; position: fixed; border-bottom: 1px solid darkred; display: flex;">
 
         <div id="texto" style="width: 33.3%;float:left; text-align: center;display: grid; height:100%">
             <div>
@@ -92,6 +92,15 @@
             <span style="font-size: 1.2rem; color: darkred">Vídeo</span>
         </div>
     </div>
+
+
+
+    <header id="header" class="header1">
+    
+        <span id="salva_publi" class="material-symbols-outlined" style="font-size: 3rem; position: absolute; right: 5px; margin-top: 1.3rem ;color: white;">
+          check
+        </span>
+    </header>
 
 
  <!--Conteúdo-->
@@ -119,8 +128,8 @@
                                 </span>
                             </a>
                         </div>
-                        <div id="descricao_texto" class="div_descricao feed_texto">
-                            <span class="span_descricao">
+                        <div  class="div_descricao feed_texto">
+                            <span id="descricao_texto" class="span_descricao">
                                 Clique para adicionar uma descrição
                             </span>
                         </div>
@@ -138,42 +147,18 @@
     </div>
 
 
-    <div id="modal_texto" class="modal">
-        <div class="modal-content cadastro">
-            
-            <div >
+    <div id="editor_texto" style="display: none;" >
 
-                <span class="material-symbols-outlined" style="color: lightgray; margin-left: 1rem; display: flex; position: absolute;">assignment</span>
-
-                <textarea class="cadastro__input" id="texto_publi" name="texto_publi" placeholder="Digite o texto"
-                    style="border: 1px solid darkred;  outline: 0;  background: transparent; width: 100%; height: 10rem; border-radius: 10px;"
-                    required></textarea>
-            </div>
-            <div id="btn_ok" class="btn_ok">
-                <span style="font-size: 1.5rem;">
-                    OK
-                </span>
-            </div>
-        </div>
+        <textarea class="cadastro__input" id="texto_publi" name="texto_publi" placeholder="Digite o texto"
+            style="border: 1px solid darkred;  outline: 0;  background: transparent; width: 100%;border-radius: 10px;"
+            required></textarea>
     </div>
 
-    <div id="modal_descricao" class="modal">
-        <div class="modal-content cadastro">
-            
-            <div >
+    <div id="editor_desc" style="display: none;">
 
-                <span class="material-symbols-outlined" style="color: lightgray; margin-left: 1rem; display: flex; position: absolute;">description</span>
-
-                <textarea class="cadastro__input" id="descricao_publi" name="descricao_publi" placeholder="Descrição"
+        <textarea class="cadastro__input" id="descricao_publi" name="descricao_publi" placeholder="Descrição"
                     style="border: 1px solid darkred;  outline: 0;  background: transparent; width: 100%; height: 10rem; border-radius: 10px;"
                     required></textarea>
-            </div>
-            <div id="btn_ok1" class="btn_ok">
-                <span style="font-size: 1.5rem;">
-                    OK
-                </span>
-            </div>
-        </div>
     </div>
     
 
@@ -193,6 +178,8 @@
         <script src="./scripts/jquery/jquery-3.2.1.min.js"></script>
 
         <script src="./scripts/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+
+        <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 
         <script src="./scripts/criar-post-texto.js"></script>
 
