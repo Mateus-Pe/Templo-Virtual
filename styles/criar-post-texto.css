@@ -220,22 +220,28 @@
     
 }
 
-@media screen and (max-width: 768px) {
-
-    /* Redefine o tamanho do texto_publi */
-    #texto_publi {
-        width: calc(100% - 20px); /* Calcula a largura da tela menos 20px para margens */
-        height: calc(100vh - 250px); /* Calcula a altura da tela menos 250px para outros elementos */
-        margin: 10px; /* Adiciona margens para um visual melhor */
-    }
-
-    /* Define o tamanho do texto dentro do editor para 1.4rem */
-    .ck-content {
-        font-size: 1.4rem;
-    }
-
-    /* Define a largura do editor CKEditor como 100% */
-    .ck.ck-editor {
-        width: 100% !important;
-    }
+.mce-container-body {
+    font-family: 'Exo', sans-serif !important;
+}
+.mce-toolbar-grp {
+    border: 1px solid darkred !important;
+    background-color: white !important;
+    color: darkred !important;
+    border-radius: 10px !important;
+    height: 4.5rem !important;
+    font-size: 2rem !important;
+}
+.mce-toolbar-grp .mce-btn {
+    background-color: white !important;
+    color: darkred !important;
+    border: 1px solid darkred !important;
+    border-radius: 20px !important;
+    padding: 10px 20px !important;
+    font-size: 3rem !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+}
+.mce-toolbar-grp .mce-btn:hover {
+    background-color: #8B0000 !important;
+    color: white !important;
 }

@@ -176,3 +176,29 @@
     display: flex;
     justify-content: center;
 }
+
+.mce-container-body {
+    font-family: 'Exo', sans-serif !important;
+}
+.mce-toolbar-grp {
+    border: 1px solid darkred !important;
+    background-color: white !important;
+    color: darkred !important;
+    border-radius: 10px !important;
+    height: 4.5rem !important;
+    font-size: 2rem !important;
+}
+.mce-toolbar-grp .mce-btn {
+    background-color: white !important;
+    color: darkred !important;
+    border: 1px solid darkred !important;
+    border-radius: 20px !important;
+    padding: 10px 20px !important;
+    font-size: 3rem !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+}
+.mce-toolbar-grp .mce-btn:hover {
+    background-color: #8B0000 !important;
+    color: white !important;
+}
