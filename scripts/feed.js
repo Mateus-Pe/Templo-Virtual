@@ -26,6 +26,7 @@ function evento_agenda(){
 
       configurarEventos();
       iniciarIntersectionObserver();
+      compartilha()
       
     });
 }
@@ -63,6 +64,17 @@ function montaHtml(linha){
         html += '<span class="material-symbols-outlined span_rodape_botao">';
         html += 'share';
         html += '</span>';
+        html += '</div>';
+        html += '<div class="compartilhamento">';
+        html += ' <a href="whatsapp://send?text=Sua mensagem aqui" class="btn-compartilhar btn-whatsapp" target="_blank">';
+        html += '<img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/whatsapp.svg" alt="Compartilhar via WhatsApp">';
+        html += '</a>';
+        html += ' <a href="https://www.facebook.com/sharer/sharer.php?u=Sua_URL_Aqui" class="btn-compartilhar btn-facebook" target="_blank">';
+        html += ' <img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/facebook.svg" alt="Compartilhar no Facebook">';
+        html += '</a>';
+        html += ' <a href="https://twitter.com/intent/tweet?url=Sua_URL_Aqui&text=Sua_mensagem_aqui" class="btn-compartilhar btn-twitter" target="_blank">';
+        html += '<img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/twitter.svg" alt="Compartilhar no Twitter">';
+        html += '</a>';
         html += '</div>';
         html += '</div>';
         html += '</div>';
@@ -307,3 +319,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+
+function compartilha() {
+  // Obtenha todos os elementos com a classe "span_rodape_botao" e adicione um ouvinte de evento de clique a cada um
+  var buttons = document.querySelectorAll('.span_rodape_botao');
+  buttons.forEach(function(button) {
+      button.addEventListener('click', function() {
+          // Encontre o elemento de compartilhamento associado a este botão
+          var compartilhamento = this.closest('.div_rodape_feed').querySelector('.compartilhamento');
+          // Verifique se o elemento de compartilhamento está visível
+          if (compartilhamento.style.display === 'flex') {
+              // Se estiver visível, oculte-o
+              compartilhamento.style.display = 'none';
+          } else {
+              // Se estiver oculto, exiba-o
+              compartilhamento.style.display = 'flex';
+          }
+      });
+  });
+}
