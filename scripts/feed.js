@@ -31,59 +31,57 @@ function evento_agenda(){
     });
 }
 
-function montaHtml(linha){
-  
-     var html = "";
-     
-        html += '<div class="div_publicacao">';
-        html += '<div class="feed_principal">';
-        html += '<div class="div_feed_secundario">';
-        html += '<div>';
-        html += '<div>';
-        html += '<a class="div_perfil" >';
-        html += '<div class="perfil_div" data-igreja_id = "'+linha.igreja_id+'">';
-        html += '<img class="img_igreja" src="'+linha.igreja_logo+'">';
-        html += '<span class="nome_igreja">';
-        html += linha.igreja_nome;
-        html += '</span>';
-        html += '</div>';
-        html += '</a>';
-        html += '</div>';
-        html += '<div class="div_layout_feed">';
-        html += '<a class="a_img_layout">';
-        html += '<img class="img_layout_feed" src="'+linha.agenda_img+'">';
-        html += '</a>';
-        html += '<div class="div_descricao">';
-        html += '<span class="span_descricao">';
-        html += linha.descricao_evento;
-        html += '</span>';
-        html += '</div>';
-        html += '</div>';
-        html += '<div class="div_rodape_feed">';
-        html += '<div class="rodape_feed_botao">';
-        html += '<span class="material-symbols-outlined span_rodape_botao">';
-        html += 'share';
-        html += '</span>';
-        html += '</div>';
-        html += '<div class="compartilhamento">';
-        html += ' <a href="whatsapp://send?text=Sua mensagem aqui" class="btn-compartilhar btn-whatsapp" target="_blank">';
-        html += '<img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/whatsapp.svg" alt="Compartilhar via WhatsApp">';
-        html += '</a>';
-        html += ' <a href="https://www.facebook.com/sharer/sharer.php?u=Sua_URL_Aqui" class="btn-compartilhar btn-facebook" target="_blank">';
-        html += ' <img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/facebook.svg" alt="Compartilhar no Facebook">';
-        html += '</a>';
-        html += ' <a href="https://twitter.com/intent/tweet?url=Sua_URL_Aqui&text=Sua_mensagem_aqui" class="btn-compartilhar btn-twitter" target="_blank">';
-        html += '<img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/twitter.svg" alt="Compartilhar no Twitter">';
-        html += '</a>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
+function montaHtml(linha) {
+  var html = "";
 
-        
-      return html;
+  html += '<div class="div_publicacao">';
+  html += '<div class="feed_principal">';
+  html += '<div class="div_feed_secundario">';
+  html += '<div>';
+  html += '<div>';
+  html += '<a class="div_perfil" >';
+  html += '<div class="perfil_div" data-igreja_id = "' + linha.igreja_id + '">';
+  html += '<img class="img_igreja" src="' + linha.igreja_logo + '">';
+  html += '<span class="nome_igreja">';
+  html += linha.igreja_nome;
+  html += '</span>';
+  html += '</div>';
+  html += '</a>';
+  html += '</div>';
+  html += '<div class="div_layout_feed">';
+  html += '<a class="a_img_layout">';
+  html += '<img class="img_layout_feed" src="' + linha.agenda_img + '">';
+  html += '</a>';
+  html += '<div class="div_descricao">';
+  html += '<span class="span_descricao">';
+  html += linha.descricao_evento;
+  html += '</span>';
+  html += '</div>';
+  html += '</div>';
+  html += '<div class="div_rodape_feed">';
+  html += '<div class="rodape_feed_botao">';
+  html += '<span class="material-symbols-outlined span_rodape_botao">';
+  html += 'share';
+  html += '</span>';
+  html += '</div>';
+  html += '<div class="compartilhamento">';
+  html += ' <a href="whatsapp://send?text=' + encodeURIComponent('' + linha.agenda_img) + '" class="btn-compartilhar btn-whatsapp" target="_blank" data-share="' + encodeURIComponent(linha.agenda_img) + '">';
+  html += '<img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/whatsapp.svg" alt="Compartilhar via WhatsApp">';
+  html += '</a>';
+  html += ' <a href="https://www.facebook.com/sharer/sharer.php?u=' + linha.agenda_img + '" class="btn-compartilhar btn-facebook" target="_blank" data-share="' + encodeURIComponent(linha.agenda_img) + '">';
+  html += ' <img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/facebook.svg" alt="Compartilhar no Facebook">';
+  html += '</a>';
+  html += ' <a href="https://twitter.com/intent/tweet?url=' + linha.agenda_img + '" class="btn-compartilhar btn-twitter" target="_blank" data-share="' + encodeURIComponent(linha.agenda_img) + '">';
+  html += '<img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/twitter.svg" alt="Compartilhar no Twitter">';
+  html += '</a>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
+
+  return html;
 }
 
 function montaHtmlVideo(classVideo){
@@ -322,20 +320,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function compartilha() {
-  // Obtenha todos os elementos com a classe "span_rodape_botao" e adicione um ouvinte de evento de clique a cada um
   var buttons = document.querySelectorAll('.span_rodape_botao');
   buttons.forEach(function(button) {
-      button.addEventListener('click', function() {
-          // Encontre o elemento de compartilhamento associado a este botão
-          var compartilhamento = this.closest('.div_rodape_feed').querySelector('.compartilhamento');
-          // Verifique se o elemento de compartilhamento está visível
-          if (compartilhamento.style.display === 'flex') {
-              // Se estiver visível, oculte-o
-              compartilhamento.style.display = 'none';
-          } else {
-              // Se estiver oculto, exiba-o
-              compartilhamento.style.display = 'flex';
-          }
-      });
+    button.addEventListener('click', function() {
+      var postagem = this.closest('.div_publicacao');
+      var imagem = postagem.querySelector('.img_layout_feed');
+
+      if (postagem && imagem) {
+        var compartilhamento = this.closest('.div_rodape_feed').querySelector('.compartilhamento');
+        var imagemCompartilhamento = compartilhamento.getAttribute('data-share');
+
+        if (compartilhamento.style.display === 'flex') {
+          compartilhamento.style.display = 'none';
+        } else {
+          compartilhamento.style.display = 'flex';
+        }
+
+        var whatsappAPI = 'https://wa.me/?text=' + encodeURIComponent(whatsappMessage);
+        var facebookURL = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(imagemCompartilhamento);
+        var twitterURL = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(imagemCompartilhamento);
+
+        document.getElementById('btn-compartilhar-whatsapp').setAttribute('href', whatsappAPI);
+        document.getElementById('btn-compartilhar-facebook').setAttribute('href', facebookURL);
+        document.getElementById('btn-compartilhar-twitter').setAttribute('href', twitterURL);
+
+        if (this.classList.contains('btn-whatsapp')) {
+          window.open(whatsappAPI, '_blank'); // Abre o WhatsApp com a mensagem especificada
+        } else if (this.classList.contains('btn-facebook')) {
+          window.open(facebookURL, '_blank');
+        } else if (this.classList.contains('btn-twitter')) {
+          window.open(twitterURL, '_blank');
+        }
+      } else {
+        console.error('Erro ao encontrar a postagem ou a imagem associada.');
+      }
+    });
   });
 }
