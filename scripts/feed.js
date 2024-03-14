@@ -65,14 +65,14 @@ function montaHtml(linha) {
   html += '</span>';
   html += '</div>';
   html += '<div class="compartilhamento">';
-  html += ' <a href="whatsapp://send?text=' + encodeURIComponent('' + linha.agenda_img) + '" class="btn-compartilhar btn-whatsapp" target="_blank" data-share="' + encodeURIComponent(linha.agenda_img) + '">';
+  html += ' <a href="#" class="btn-compartilhar btn-whatsapp">';
   html += '<img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/whatsapp.svg" alt="Compartilhar via WhatsApp">';
   html += '</a>';
-  html += ' <a href="https://www.facebook.com/sharer/sharer.php?u=' + linha.agenda_img + '" class="btn-compartilhar btn-facebook" target="_blank" data-share="' + encodeURIComponent(linha.agenda_img) + '">';
+  html += ' <a href="#" class="btn-compartilhar btn-facebook">';
   html += ' <img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/facebook.svg" alt="Compartilhar no Facebook">';
   html += '</a>';
-  html += ' <a href="https://twitter.com/intent/tweet?url=' + linha.agenda_img + '" class="btn-compartilhar btn-twitter" target="_blank" data-share="' + encodeURIComponent(linha.agenda_img) + '">';
-  html += '<img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/twitter.svg" alt="Compartilhar no Twitter">';
+  html += ' <a href="#" class="btn-compartilhar btn-instagram">';
+  html += '<img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/instagram.svg" alt="Compartilhar no Instagram">';
   html += '</a>';
   html += '</div>';
   html += '</div>';
@@ -324,36 +324,80 @@ function compartilha() {
   buttons.forEach(function(button) {
     button.addEventListener('click', function() {
       var postagem = this.closest('.div_publicacao');
-      var imagem = postagem.querySelector('.img_layout_feed');
+      var imagemUrl = postagem.querySelector('.img_layout_feed').getAttribute('src');
+      var postId = extrairIdDaImagem(imagemUrl);
 
-      if (postagem && imagem) {
-        var compartilhamento = this.closest('.div_rodape_feed').querySelector('.compartilhamento');
-        var imagemCompartilhamento = compartilhamento.getAttribute('data-share');
+      if (postId) {
+        var postUrl = 'http://localhost:3001/feed.html?id=' + postId;
+        
+        // Abre um menu de compartilhamento com opções para WhatsApp, Facebook e Instagram
+        var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
+        compartilhamentoMenu.style.display = 'flex';
 
-        if (compartilhamento.style.display === 'flex') {
-          compartilhamento.style.display = 'none';
-        } else {
-          compartilhamento.style.display = 'flex';
-        }
+        var whatsappButton = compartilhamentoMenu.querySelector('.btn-whatsapp');
+        var facebookButton = compartilhamentoMenu.querySelector('.btn-facebook');
+        var instagramButton = compartilhamentoMenu.querySelector('.btn-instagram');
 
-        var whatsappAPI = 'https://wa.me/?text=' + encodeURIComponent(whatsappMessage);
-        var facebookURL = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(imagemCompartilhamento);
-        var twitterURL = 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(imagemCompartilhamento);
+        whatsappButton.addEventListener('click', function() {
+          abrirLink('whatsapp://send?text=' + encodeURIComponent(postUrl));
+        });
 
-        document.getElementById('btn-compartilhar-whatsapp').setAttribute('href', whatsappAPI);
-        document.getElementById('btn-compartilhar-facebook').setAttribute('href', facebookURL);
-        document.getElementById('btn-compartilhar-twitter').setAttribute('href', twitterURL);
+        facebookButton.addEventListener('click', function() {
+          abrirLink('fb://share?url=' + encodeURIComponent(postUrl));
+        });
 
-        if (this.classList.contains('btn-whatsapp')) {
-          window.open(whatsappAPI, '_blank'); // Abre o WhatsApp com a mensagem especificada
-        } else if (this.classList.contains('btn-facebook')) {
-          window.open(facebookURL, '_blank');
-        } else if (this.classList.contains('btn-twitter')) {
-          window.open(twitterURL, '_blank');
-        }
+        instagramButton.addEventListener('click', function() {
+          abrirLink('instagram://app');
+        });
       } else {
-        console.error('Erro ao encontrar a postagem ou a imagem associada.');
+        console.error('Erro ao obter o ID da publicação.');
       }
     });
   });
+}
+
+function abrirLink(url) {
+  var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  var android = /Android/.test(navigator.userAgent);
+
+  if (iOS) {
+    window.location.href = url; // Abre o link se for iOS
+  } else if (android) {
+    var timeout;
+    var timeoutDuration = 1000; // Define um tempo limite para abrir o aplicativo
+
+    var iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = url;
+    document.body.appendChild(iframe);
+
+    timeout = setTimeout(function() {
+      window.location.href = 'https://play.google.com/store/apps/details?id=com.instagram.android'; // Abre a loja do aplicativo se o tempo limite for atingido
+    }, timeoutDuration);
+  } else {
+    window.open(url, '_blank'); // Abre o link em uma nova aba do navegador para outros dispositivos
+  }
+}
+
+function compartilharNoWhatsApp(postUrl) {
+  window.open('whatsapp://send?text=' + encodeURIComponent(postUrl), '_blank').focus();
+}
+
+function compartilharNoFacebook(postUrl) {
+  window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(postUrl), '_blank').focus();
+}
+
+function compartilharNoInstagram(postUrl) {
+  window.open('https://www.instagram.com/' + encodeURIComponent(postUrl), '_blank').focus();
+}
+
+
+function extrairIdDaImagem(imagemUrl) {
+  // Extrai o ID da imagem do URL
+  var idMatch = imagemUrl.match(/\/(\d+)\.jpg$/);
+  if (idMatch) {
+    return idMatch[1];
+  } else {
+    return null;
+  }
 }

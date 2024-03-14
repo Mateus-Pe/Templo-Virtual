@@ -1,28 +1,28 @@
-body{
+body {
     background-color: lightgray;
     height: 100%;
     width: 100%;
     font-size: 62.5%;
 }
 
-.feed_main{
-    background:lightgray;;
+.feed_main {
+    background: lightgray;
     font-size: 1.6rem;
     font-family: sans-serif;
     margin-top: 5rem;
 }
 
-.feed_main_top{
+.feed_main_top {
     font-size: 1.6rem;
     margin-top: 5.5rem;
     text-align: center;
 }
 
-.div_publicacao{
+.div_publicacao {
     background-color: lightgray;
 }
 
-.feed_principal{
+.feed_principal {
     position: relative;
     margin-right: auto;
     margin-left: auto;
@@ -31,43 +31,44 @@ body{
     padding-right: 6px;
 }
 
-.div_feed_secundario{
+.div_feed_secundario {
     border-radius: 10px;
-  border: 1px solid white;
-  margin-left: 0.2rem;
-  margin-bottom: 0.1rem;
-  margin-right: 0.2rem;
-  background-color: white;
-  width: 100%; 
+    border: 1px solid white;
+    margin-left: 0.2rem;
+    margin-bottom: 0.1rem;
+    margin-right: 0.2rem;
+    background-color: white;
+    width: 100%;
 }
 
-.div_perfil{
+.div_perfil {
     display: flex;
     text-decoration: none;
 }
-.perfil_div{
+
+.perfil_div {
     display: flex;
     align-items: center;
 }
 
-.img_igreja{
+.img_igreja {
     max-height: 3.5rem;
 }
 
-.nome_igreja{
+.nome_igreja {
     align-self: center;
     color: #363636;
     margin-left: 0.6rem;
-    font-size: 1.3rem; 
+    font-size: 1.3rem;
     font-family: exo;
 }
 
-.div_layout_feed{
+.div_layout_feed {
     margin-top: 1.5rem;
     text-align: center;
 }
 
-.a_img_layout{
+.a_img_layout {
     color: #363636;
     display: flex;
     flex-flow: column;
@@ -76,40 +77,40 @@ body{
     text-decoration: none;
 }
 
-.img_layout_feed{
+.img_layout_feed {
     align-self: center;
     max-height: 200px;
     max-width: 100%;
     width: 100%;
 }
 
-.div_descricao{
+.div_descricao {
     margin-top: 15px;
 }
 
-.span_descricao{
+.span_descricao {
     height: 2.5rem;
     margin-top: 1.5rem;
-    color: rgb(98, 97, 97); 
-    font-family: exo; 
+    color: rgb(98, 97, 97);
+    font-family: exo;
     font-size: 1.5rem;
 }
 
-.div_rodape_feed{
+.div_rodape_feed {
     margin-top: 1.1rem;
 }
 
-.rodape_feed_botao{
-    text-align: right; 
+.rodape_feed_botao {
+    text-align: right;
     display: block;
 }
 
-.span_rodape_botao{
-    background-color: white; 
+.span_rodape_botao {
+    background-color: white;
     color: lightslategray;
 }
 
-.header1{
+.header1 {
     background-color: darkred;
     height: 55px;
     position: absolute;
@@ -120,7 +121,7 @@ body{
     z-index: 3;
 }
 
-.mobile_nav{
+.mobile_nav {
     background-color: darkred !important;
     height: 100%;
     left: 0;
@@ -130,11 +131,11 @@ body{
     z-index: 1;
 }
 
-.span_criar-igreja{
-    font-size: 2rem; 
-    color: #fff; 
-    position: relative; 
-    right: 2.0rem; 
+.span_criar-igreja {
+    font-size: 2rem;
+    color: #fff;
+    position: relative;
+    right: 2.0rem;
     padding: 1.5rem;
     font-family: Exo;
 }
@@ -164,26 +165,38 @@ body{
     justify-content: center;
     align-items: center;
     transition: background-color 0.3s ease;
+    /* Adicionando margem para separar os botões */
+    margin: 0 5px;
 }
 
 .btn-whatsapp {
-    background-color: #25D366; /* Verde do WhatsApp */
+    background-color: #25D366;
+    /* Verde do WhatsApp */
 }
 
 .btn-facebook {
-    background-color: #1877F2; /* Azul do Facebook */
+    background-color: #1877F2;
+    /* Azul do Facebook */
 }
 
-.btn-twitter {
-    background-color: #1DA1F2; /* Azul do Twitter */
+.btn-instagram {
+    background-color: #E4405F;
+    /* Cor característica do Instagram */
+}
+
+.btn-instagram:hover {
+    background-color: #CA3754;
+    /* Cor de destaque ao passar o mouse */
 }
 
 .btn-compartilhar img {
-    width: 24px; /* Tamanho dos ícones */
+    width: 24px;
+    /* Tamanho dos ícones */
     height: 24px;
     filter: invert(1);
 }
 
 .btn-compartilhar:hover {
-    opacity: 0.8; /* Opacidade reduzida ao passar o mouse */
+    opacity: 0.8;
+    /* Opacidade reduzida ao passar o mouse */
 }
