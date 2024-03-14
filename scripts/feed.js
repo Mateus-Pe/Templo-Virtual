@@ -329,7 +329,7 @@ function compartilha() {
 
       if (postId) {
         var postUrl = 'http://localhost:3001/feed.html?id=' + postId;
-        
+
         // Abre um menu de compartilhamento com opções para WhatsApp, Facebook e Instagram
         var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
         compartilhamentoMenu.style.display = 'flex';
@@ -343,11 +343,11 @@ function compartilha() {
         });
 
         facebookButton.addEventListener('click', function() {
-          abrirLink('fb://share?url=' + encodeURIComponent(postUrl));
+          abrirLink('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(postUrl));
         });
 
         instagramButton.addEventListener('click', function() {
-          abrirLink('instagram://app');
+          abrirLink('https://www.instagram.com/' + encodeURIComponent(postUrl));
         });
       } else {
         console.error('Erro ao obter o ID da publicação.');
@@ -356,28 +356,19 @@ function compartilha() {
   });
 }
 
+
 function abrirLink(url) {
-  var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  var android = /Android/.test(navigator.userAgent);
+  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-  if (iOS) {
-    window.location.href = url; // Abre o link se for iOS
-  } else if (android) {
-    var timeout;
-    var timeoutDuration = 1000; // Define um tempo limite para abrir o aplicativo
-
-    var iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = url;
-    document.body.appendChild(iframe);
-
-    timeout = setTimeout(function() {
-      window.location.href = 'https://play.google.com/store/apps/details?id=com.instagram.android'; // Abre a loja do aplicativo se o tempo limite for atingido
-    }, timeoutDuration);
+  if (isMobile) {
+    // Se estiver em um dispositivo móvel, tentamos abrir o link diretamente
+    window.location.href = url;
   } else {
-    window.open(url, '_blank'); // Abre o link em uma nova aba do navegador para outros dispositivos
+    // Se estiver em um computador, abrimos o link em uma nova aba do navegador
+    window.open(url, '_blank');
   }
 }
+
 
 function compartilharNoWhatsApp(postUrl) {
   window.open('whatsapp://send?text=' + encodeURIComponent(postUrl), '_blank').focus();
