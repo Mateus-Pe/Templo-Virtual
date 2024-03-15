@@ -87,6 +87,8 @@
 
       </div>
 
+      <div id="barra-caminhos"></div>
+
 
       <header id="header" class="header1">
 
@@ -123,20 +125,27 @@
 
             <select type="text" id="eventos" placeholder="Evento" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
               <option style="display: none;" value="" disabled selected>Evento</option>
+              <option value="1">Missa</option>
+              <option value="2">Culto</option>
+              <option value="3">Grupo de Oração</option>
+              <option value="4">Estudo Bíblico</option>
+              <option value="5">Confissão</option>
+              <option value="6">Batismo</option>
             </select>
           
           </div>
 
           <div style="width: 100%; position: relative; display: grid;">
             <span>
-              Data / Hora
+              Dias
             </span>  
 
-            <select type="text" id="eventos" placeholder="Evento" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
-              <option style="display: none;" value="" disabled selected>Dia</option>
-            </select>
+            <div id="dias-slider"></div>
+              <div id="rangeValuesDias">
+                  <span id="diaInicio">1</span> até <span id="diaFim">30</span>
+              </div>
 
-            <div style="padding-top: 1rem;">
+            <div style="padding-top: 2rem;">
 
               <span>
                 Horário
@@ -156,14 +165,34 @@
 
             <select type="text" id="estado" placeholder="" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px; gap: 0.5rem;">
               <option style="display: none;" value="" disabled selected>Estado</option>
+              <option value="SP">São Paulo</option>
+              <option value="RJ">Rio de Janeiro</option>
+              <option value="MG">Minas Gerais</option>
+              <option value="BA">Bahia</option>
+              <option value="PR">Paraná</option>
             </select>
 
             <select type="text" id="regiao" placeholder="" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
               <option style="display: none;" value="" disabled selected>Região</option>
+              <option value="" disabled selected>Região</option>
+              <option value="Sorocaba e Região">Sorocaba e Região</option>
+              <option value="Campinas e Região">Campinas e Região</option>
+              <option value="Grande São Paulo">Grande São Paulo</option>
             </select>
 
             <select type="text" id="cidade" placeholder="" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
               <option style="display: none;" value="" disabled selected>Cidade</option>
+              <option value="Itapetininga">Itapetininga</option>
+              <option value="Sorocaba">Sorocaba</option>
+              <option value="Votorantim">Votorantim</option>
+              <option value="Itu">Itu</option>
+              <option value="Salto">Salto</option>
+              <option value="Piedade">Piedade</option>
+              <option value="Rio de Janeiro">Rio de Janeiro</option>
+              <option value="Belo Horizonte">Belo Horizonte</option>
+              <option value="Brasília">Brasília</option>
+              <option value="Salvador">Salvador</option>
+              <option value="Recife">Recife</option>
             </select>
           
           </div>
@@ -176,10 +205,20 @@
 
             <select type="text" id="igreja" placeholder="Evento" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
               <option style="display: none;" value="" disabled selected>Igrejas</option>
+              <option value="1">Igreja Universal do Reino de Deus</option>
+              <option value="2">Assembleia de Deus</option>
+              <option value="3">Igreja Batista</option>
+              <option value="4">Igreja Adventista do Sétimo Dia</option>
+              <option value="5">Igreja Presbiteriana</option>
+              <option value="6">Igreja Mundial do Poder de Deus</option>
             </select>
 
             <select type="text" id="comunidade" placeholder="Evento" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
               <option style="display: none;" value="" disabled selected>Comunidades</option>
+              <option value="1">Diocese de Sorocaba</option>
+              <option value="2">Conferência Batista do Brasil</option>
+              <option value="3">Arquidiocese de São Paulo</option>
+              <option value="4">Associação das Igrejas Evangélicas</option>
             </select>
           
           </div>

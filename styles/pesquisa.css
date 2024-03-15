@@ -6,6 +6,7 @@
     justify-content: space-between;
     top: 0;
     width: 100%;
+    z-index: 5;
     
 }
 
@@ -18,28 +19,15 @@
     font-family: Exo;
 }
 
-#slider {
+#slider, #dias-slider {
     width: 80%;
     margin: 5px auto;
-}
-
-/* Estilos personalizados para a barra de intervalo */
-.noUi-connect {
-    background: darkred !important; /* Cor da barra de progresso */
-}
-
-/* Estilos personalizados para os pontos de controle */
-.noUi-handle {
-    background: white !important; /* Cor do ponto de controle */
-    border: 2px solid darkred !important; /* Cor da borda do ponto de controle */
-    width: 20px; /* Largura do ponto de controle */
-    height: 20px; /* Altura do ponto de controle */
 }
 
 .selected {
     background-color: darkred;
     color: white;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Adiciona uma transição suave */
+    transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 .select_item{
@@ -49,3 +37,37 @@
     align-items: center; 
     display: flex;
 }
+
+#barra-caminhos {
+    display: none; /* Inicialmente oculta */
+    position: fixed;
+    top: 60px; /* Altura da barra de cabeçalho */
+    left: 0;
+    width: 100%;
+    background-color: #f0f0f0; /* Cor de fundo */
+    padding: 10px;
+    font-size: 1rem;
+    z-index: 1000; /* Certifique-se de que a barra de caminhos esteja acima de outros elementos */
+}
+
+#barra-caminhos span {
+    margin-right: 5px; /* Espaçamento entre os itens */
+    cursor: pointer; /* Cursor do mouse muda para indicar que os itens são clicáveis */
+}
+
+#barra-caminhos span:hover {
+    text-decoration: underline; /* Sublinhado quando o mouse passa sobre os itens */
+}
+
+/* Estilos personalizados para a barra de intervalo */
+.noUi-connect {
+    background: darkred !important; 
+}
+
+.noUi-handle {
+    background: white !important; 
+    border: 2px solid darkred !important; 
+    width: 20px;
+    height: 20px; 
+}
+

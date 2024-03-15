@@ -365,6 +365,13 @@ function appendMercados(data, de, ate){
 
 };
 
+
+
+
+
+
+
+
 document.getElementById('filtro').addEventListener('click', function() {
   document.querySelector('#input_pesq').style.display = 'none';
   document.querySelector('#header').style.display = 'flex';
@@ -378,9 +385,6 @@ document.getElementById('fecha_filtro').addEventListener('click', function(){
 });
 
 
-select.addEventListener('click', function() {
-  window.location.href = 'tipo-evento.html';
-});
 
 
 const slider = document.getElementById('slider');
@@ -388,29 +392,26 @@ const horarioInicio = document.getElementById('horarioInicio');
 const horarioFim = document.getElementById('horarioFim');
 
 noUiSlider.create(slider, {
-    start: [0, 24], // Valores iniciais dos pontos de início e fim
-    connect: true, // Conecta os pontos de início e fim com uma barra
+    start: [1, 24], 
+    connect: true, 
     range: {
-        'min': 0,
+        'min': 1,
         'max': 24
     },
-    step: 1 // Passo de 1 hora
+    step: 1 
 });
 
-// Atualiza os valores dos horários conforme os pontos de início e fim são movidos
 slider.noUiSlider.on('update', function(values) {
     horarioInicio.textContent = formatarHorario(values[0]);
     horarioFim.textContent = formatarHorario(values[1]);
 });
 
-// Função para formatar o horário exibindo minutos com dois dígitos
 function formatarHorario(valor) {
     const horas = Math.floor(valor);
     const minutos = Math.round((valor % 1) * 60);
     return pad(horas) + ':' + pad(minutos);
 }
 
-// Função auxiliar para adicionar um zero à esquerda, se necessário
 function pad(num) {
     return (num < 10 ? '0' : '') + num;
 }
@@ -418,12 +419,103 @@ function pad(num) {
 
 document.querySelectorAll('.select_item').forEach(item => {
   item.addEventListener('click', event => {
-      // Remove a classe 'selected' de todas as outras divs
       document.querySelectorAll('.select_item').forEach(div => {
           div.classList.remove('selected');
       });
 
-      // Adiciona a classe 'selected' à div clicada
       item.classList.add('selected');
   });
+});
+
+
+const diasSlider = document.getElementById('dias-slider');
+const diaInicio = document.getElementById('diaInicio');
+const diaFim = document.getElementById('diaFim');
+
+noUiSlider.create(diasSlider, {
+    start: [1, 31], 
+    connect: true, 
+    range: {
+        'min': 1,
+        'max': 31 
+    },
+    step: 1 
+});
+
+diasSlider.noUiSlider.on('update', function(values) {
+    diaInicio.textContent = Math.round(values[0]); 
+    diaFim.textContent = Math.round(values[1]); 
+});
+
+
+
+var filtrosSelecionados = []; // Array para armazenar os filtros selecionados
+
+// Função para atualizar a visibilidade da barra de caminhos com base nos filtros selecionados
+function atualizarVisibilidadeBarraCaminhos() {
+  const barraCaminhos = document.getElementById('barra-caminhos');
+  if (filtrosSelecionados.length > 0) {
+    barraCaminhos.style.display = 'flex';
+  } else {
+    barraCaminhos.style.display = 'none';
+  }
+}
+
+// Função para adicionar um filtro à barra de caminhos
+function adicionarFiltro(valor) {
+  filtrosSelecionados.push(valor);
+  atualizarBarraCaminhos();
+  atualizarVisibilidadeBarraCaminhos(); // Atualiza a visibilidade após adicionar filtro
+}
+
+// Função para remover um filtro da barra de caminhos
+function removerFiltro(valor) {
+  filtrosSelecionados = filtrosSelecionados.filter(filtro => filtro !== valor);
+  atualizarBarraCaminhos();
+  atualizarVisibilidadeBarraCaminhos(); // Atualiza a visibilidade após remover filtro
+}
+
+// Função para atualizar a barra de caminhos com os filtros selecionados
+function atualizarBarraCaminhos() {
+  const barraCaminhos = document.getElementById('barra-caminhos');
+  barraCaminhos.innerHTML = filtrosSelecionados.map(valor => `<span onclick="removerFiltro('${valor}')">${valor}</span>`).join(' > ');
+}
+
+// Função para limpar todos os filtros e esvaziar a barra de caminhos
+function limparFiltros() {
+  filtrosSelecionados = []; // Limpa os filtros selecionados
+  atualizarBarraCaminhos(); // Atualiza a barra de caminhos para exibir filtros vazios
+  atualizarVisibilidadeBarraCaminhos(); // Atualiza a visibilidade da barra de caminhos
+
+    document.getElementById('eventos').selectedIndex = 0;
+    document.getElementById('estado').selectedIndex = 0;
+    document.getElementById('regiao').selectedIndex = 0;
+    document.getElementById('cidade').selectedIndex = 0;
+    document.getElementById('igreja').selectedIndex = 0;
+    document.getElementById('comunidade').selectedIndex = 0;
+}
+
+// Evento de clique no botão "Fechar" para limpar filtros
+document.getElementById('fecha_filtro').addEventListener('click', function() {
+  limparFiltros();
+});
+
+// Função para salvar os filtros selecionados e exibir a barra de caminhos
+function salvarFiltros() {
+  document.querySelector('#barra-caminhos').style.display = 'flex';
+  document.querySelector('#header').style.display = 'none';
+  document.querySelector('#filtros_selects').style.display = 'none';
+  document.querySelector('#input_pesq').style.display = 'flex';
+  
+  atualizarBarraCaminhos();
+  atualizarVisibilidadeBarraCaminhos(); // Garanta que a barra de caminhos seja exibida após salvar os filtros
+  
+  console.log(filtrosSelecionados); // Adicione esta linha para verificar os filtros selecionados
+  
+  // Aqui você pode adicionar qualquer outra lógica necessária para manipular os filtros salvos, como enviar para o servidor, etc.
+}
+
+
+document.getElementById('salva_filtro').addEventListener('click', function() {
+  salvarFiltros();
 });
