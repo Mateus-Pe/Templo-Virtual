@@ -1,0 +1,27 @@
+#barra-caminhos {
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: space-around;
+    top: 4.5rem;
+    left: 0;
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: 10px;
+    font-size: 1.2rem;
+    font-family: exo;
+    z-index: 4;
+}
+  
+  #barra-caminhos span {
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  #barra-caminhos span:first-child {
+    margin-right: auto;
+  }
+  
+  #barra-caminhos span:last-child {
+    margin-left: auto;
+  }

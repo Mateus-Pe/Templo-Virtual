@@ -15,7 +15,7 @@ var select = document.getElementById('eventos');
 
 $(document).ready(function() {
 
-  getMercados();  
+  getMercados();
 
 });
 
@@ -374,6 +374,7 @@ function appendMercados(data, de, ate){
 
 document.getElementById('filtro').addEventListener('click', function() {
   document.querySelector('#input_pesq').style.display = 'none';
+  document.getElementById('barra-caminhos').style.display = 'none'; 
   document.querySelector('#header').style.display = 'flex';
   document.querySelector('#filtros_selects').style.display = 'grid';
 });
@@ -381,7 +382,29 @@ document.getElementById('filtro').addEventListener('click', function() {
 document.getElementById('fecha_filtro').addEventListener('click', function(){
   document.querySelector('#header').style.display = 'none';
   document.querySelector('#filtros_selects').style.display = 'none';
+  document.getElementById('barra-caminhos').style.display = 'none';
   document.querySelector('#input_pesq').style.display = 'flex';
+  
+  document.querySelectorAll('select').forEach(select => {
+  select.value = '';
+  });
+});
+
+document.getElementById('salva_filtro').addEventListener('click', function() {
+  salvarFiltros();
+
+  document.getElementById('barra-caminhos').style.display = 'flex';
+  document.querySelector('#input_pesq').style.display = 'flex';
+  document.querySelector('#header').style.display = 'none';
+  document.querySelector('#filtros_selects').style.display = 'none';
+
+  const valoresSelecionados = obterValoresSelecionados();
+  const barraCaminhos = document.getElementById('barra-caminhos');
+  if (valoresSelecionados.length > 0) {
+    barraCaminhos.style.display = 'flex';
+  } else {
+    barraCaminhos.style.display = 'none';
+  }
 });
 
 
@@ -445,77 +468,4 @@ noUiSlider.create(diasSlider, {
 diasSlider.noUiSlider.on('update', function(values) {
     diaInicio.textContent = Math.round(values[0]); 
     diaFim.textContent = Math.round(values[1]); 
-});
-
-
-
-var filtrosSelecionados = []; // Array para armazenar os filtros selecionados
-
-// Função para atualizar a visibilidade da barra de caminhos com base nos filtros selecionados
-function atualizarVisibilidadeBarraCaminhos() {
-  const barraCaminhos = document.getElementById('barra-caminhos');
-  if (filtrosSelecionados.length > 0) {
-    barraCaminhos.style.display = 'flex';
-  } else {
-    barraCaminhos.style.display = 'none';
-  }
-}
-
-// Função para adicionar um filtro à barra de caminhos
-function adicionarFiltro(valor) {
-  filtrosSelecionados.push(valor);
-  atualizarBarraCaminhos();
-  atualizarVisibilidadeBarraCaminhos(); // Atualiza a visibilidade após adicionar filtro
-}
-
-// Função para remover um filtro da barra de caminhos
-function removerFiltro(valor) {
-  filtrosSelecionados = filtrosSelecionados.filter(filtro => filtro !== valor);
-  atualizarBarraCaminhos();
-  atualizarVisibilidadeBarraCaminhos(); // Atualiza a visibilidade após remover filtro
-}
-
-// Função para atualizar a barra de caminhos com os filtros selecionados
-function atualizarBarraCaminhos() {
-  const barraCaminhos = document.getElementById('barra-caminhos');
-  barraCaminhos.innerHTML = filtrosSelecionados.map(valor => `<span onclick="removerFiltro('${valor}')">${valor}</span>`).join(' > ');
-}
-
-// Função para limpar todos os filtros e esvaziar a barra de caminhos
-function limparFiltros() {
-  filtrosSelecionados = []; // Limpa os filtros selecionados
-  atualizarBarraCaminhos(); // Atualiza a barra de caminhos para exibir filtros vazios
-  atualizarVisibilidadeBarraCaminhos(); // Atualiza a visibilidade da barra de caminhos
-
-    document.getElementById('eventos').selectedIndex = 0;
-    document.getElementById('estado').selectedIndex = 0;
-    document.getElementById('regiao').selectedIndex = 0;
-    document.getElementById('cidade').selectedIndex = 0;
-    document.getElementById('igreja').selectedIndex = 0;
-    document.getElementById('comunidade').selectedIndex = 0;
-}
-
-// Evento de clique no botão "Fechar" para limpar filtros
-document.getElementById('fecha_filtro').addEventListener('click', function() {
-  limparFiltros();
-});
-
-// Função para salvar os filtros selecionados e exibir a barra de caminhos
-function salvarFiltros() {
-  document.querySelector('#barra-caminhos').style.display = 'flex';
-  document.querySelector('#header').style.display = 'none';
-  document.querySelector('#filtros_selects').style.display = 'none';
-  document.querySelector('#input_pesq').style.display = 'flex';
-  
-  atualizarBarraCaminhos();
-  atualizarVisibilidadeBarraCaminhos(); // Garanta que a barra de caminhos seja exibida após salvar os filtros
-  
-  console.log(filtrosSelecionados); // Adicione esta linha para verificar os filtros selecionados
-  
-  // Aqui você pode adicionar qualquer outra lógica necessária para manipular os filtros salvos, como enviar para o servidor, etc.
-}
-
-
-document.getElementById('salva_filtro').addEventListener('click', function() {
-  salvarFiltros();
 });

@@ -50,6 +50,8 @@
 
     <link rel="stylesheet" href="./styles/pesquisa.css">
 
+    <link rel="stylesheet" href="./styles/barra-caminhos.css">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <link rel="stylesheet" href="./styles/jquery-ui.min.css">
@@ -125,12 +127,12 @@
 
             <select type="text" id="eventos" placeholder="Evento" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
               <option style="display: none;" value="" disabled selected>Evento</option>
-              <option value="1">Missa</option>
-              <option value="2">Culto</option>
-              <option value="3">Grupo de Oração</option>
-              <option value="4">Estudo Bíblico</option>
-              <option value="5">Confissão</option>
-              <option value="6">Batismo</option>
+              <option value="Missa">Missa</option>
+              <option value="Culto">Culto</option>
+              <option value="G.Oração">Grupo de Oração</option>
+              <option value="E.Bíblico">Estudo Bíblico</option>
+              <option value="Confissão">Confissão</option>
+              <option value="Batismo">Batismo</option>
             </select>
           
           </div>
@@ -175,8 +177,8 @@
             <select type="text" id="regiao" placeholder="" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
               <option style="display: none;" value="" disabled selected>Região</option>
               <option value="" disabled selected>Região</option>
-              <option value="Sorocaba e Região">Sorocaba e Região</option>
-              <option value="Campinas e Região">Campinas e Região</option>
+              <option value="R.Sorocaba">Sorocaba e Região</option>
+              <option value="R.Campinas">Campinas e Região</option>
               <option value="Grande São Paulo">Grande São Paulo</option>
             </select>
 
@@ -205,20 +207,20 @@
 
             <select type="text" id="igreja" placeholder="Evento" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
               <option style="display: none;" value="" disabled selected>Igrejas</option>
-              <option value="1">Igreja Universal do Reino de Deus</option>
-              <option value="2">Assembleia de Deus</option>
-              <option value="3">Igreja Batista</option>
-              <option value="4">Igreja Adventista do Sétimo Dia</option>
-              <option value="5">Igreja Presbiteriana</option>
-              <option value="6">Igreja Mundial do Poder de Deus</option>
+              <option value="U.Reino de Deus">Igreja Universal do Reino de Deus</option>
+              <option value="A.de Deus">Assembleia de Deus</option>
+              <option value="Batista">Igreja Batista</option>
+              <option value="A.Sétimo Dia">Igreja Adventista do Sétimo Dia</option>
+              <option value="Presbiteriana">Igreja Presbiteriana</option>
+              <option value="M.Poder de Deus">Igreja Mundial do Poder de Deus</option>
             </select>
 
             <select type="text" id="comunidade" placeholder="Evento" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
               <option style="display: none;" value="" disabled selected>Comunidades</option>
-              <option value="1">Diocese de Sorocaba</option>
-              <option value="2">Conferência Batista do Brasil</option>
-              <option value="3">Arquidiocese de São Paulo</option>
-              <option value="4">Associação das Igrejas Evangélicas</option>
+              <option value="D.Sorocaba">Diocese de Sorocaba</option>
+              <option value="C.B.Brasil">Conferência Batista do Brasil</option>
+              <option value="A.São Paulo">Arquidiocese de São Paulo</option>
+              <option value="A.I.Evangélicas">Associação das Igrejas Evangélicas</option>
             </select>
           
           </div>
@@ -298,7 +300,9 @@
 
       <script src="./scripts/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 
-      <script src="./scripts/pesquisa.js"></script>      
+      <script src="./scripts/pesquisa.js"></script>   
+      
+      <script src="./scripts/barra-caminhos.js"></script>
 
     </footer>
 
