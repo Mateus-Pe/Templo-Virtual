@@ -21,9 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
       plugins: [],
       toolbar: 'undo redo | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | removeformat | code',
       fontsize_formats: '8px 10px 12px 14px 18px 24px 36px',
-      content_style: 'body { font-family: Arial, Helvetica, sans-serif; font-size: 14px; }'
+      content_style: 'body { font-family: Arial, Helvetica, sans-serif; font-size: 14px; }',
+      ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("txixhs2kyot0muep1k6v2mp5hd6wqk30jmbvp6hv8pk3g4b7")),
   });
 
+  
   // Aguarde 10 milissegundos e, em seguida, remova a barra de status do TinyMCE
   setTimeout(function() {
       // Encontra a div com a classe .tox-statusbar
@@ -37,5 +39,5 @@ document.addEventListener('DOMContentLoaded', function() {
           // Se a div não foi encontrada, exibe uma mensagem de erro no console
           console.error('A div com a classe .tox .tox-statusbar não foi encontrada.');
       }
-  }, 50);
+  }, 60);
 });

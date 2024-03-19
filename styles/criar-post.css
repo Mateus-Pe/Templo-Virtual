@@ -55,9 +55,8 @@
 .select_local{
     position: absolute; 
     display: grid;
-    justify-content: center; 
-    top: 4rem; 
-    gap: 2rem;
+    justify-content: center;
+    gap: 1rem;
     width: 100%;
 }
 
@@ -85,7 +84,7 @@
 }
 
 .div_botao{
-    display: flex;
+    display: grid;
     justify-content: center;
 }
 

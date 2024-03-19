@@ -6,6 +6,13 @@ $('#imagem').click(function(e){
     window.location = "criar-post.html";
 });
 
+
+
+window.addEventListener("load", function() {
+    verificarCampos(); // Chama a função para verificar os campos ao carregar a página
+});
+
+
 function showHideElements(selectedOption) {
     if (selectedOption === "youtube") {
         document.getElementById("select_youtube").style.display = "grid";
@@ -89,4 +96,32 @@ tinymce.init({
             }
         });
     }
+});
+
+document.getElementById("link_youtube").addEventListener("input", function() {
+    verificarCampos();
+});
+
+// Adiciona um evento de escuta para o campo de entrada de upload de imagem local
+document.getElementById("videoFileInput").addEventListener("change", function() {
+    verificarCampos();
+});
+
+
+
+function verificarCampos() {
+    var linkYouTube = document.getElementById("link_youtube").value;
+    var arquivoLocal = document.getElementById("videoFileInput").value;
+
+    var botaoCompartilhar = document.getElementById("btn_salvar");
+
+    if (linkYouTube || arquivoLocal) {
+        botaoCompartilhar.disabled = false; // Habilita o botão de compartilhamento
+    } else {
+        botaoCompartilhar.disabled = true; // Desabilita o botão de compartilhamento
+    }
+}
+
+document.getElementById("btn_salvar").addEventListener("click", function() {
+    alert("Botão de compartilhar clicado!");
 });

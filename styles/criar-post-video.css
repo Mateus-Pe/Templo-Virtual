@@ -11,11 +11,12 @@
 .div_btn-salvar {
     bottom: 30px;
     display: block;
+    background-color: transparent;
 }
 
 .div_botao-salvar {
     font-family: Exo;
-    border: 1px solid darkred !important;
+    border: 1px solid darkred ;
     background-color: white;
     color: darkred;
     width: 70%;
@@ -24,12 +25,29 @@
     font-size: 2rem;
 }
 
+.div_botao-salvar:disabled {
+    background-color: white; /* Cinza */
+    color: #888; /* Cor de texto mais clara */
+    border-color: #888;
+    cursor: not-allowed; /* Cursor de "não permitido" */
+}
+
+/* Estilos quando o botão está habilitado */
+.div_botao-salvar:enabled {
+    background-color: white;
+    color: darkred;
+}
+
 #youtube {
     color: darkred;
+    position: relative;
+    left: 4rem;
 }
 
 #local {
     color: darkred;
+    position: relative;
+    
 }
 
 #youtube.clicked,
@@ -55,8 +73,7 @@
 }
 
 #select_youtube,
-#select_local,
-#divBotoes {
+#select_local {
     display: none;
 }
 
@@ -118,14 +135,14 @@
 }
 
 .select_video{
-    display: flex; 
+    display: grid; 
     align-items: center; 
     justify-content: center;
 }
 
 .container_select{
-    display: inline-flex; 
-    gap: 6rem;
+    display: inline-flex;
+    gap: 16rem;
 }
 
 .span_select{
