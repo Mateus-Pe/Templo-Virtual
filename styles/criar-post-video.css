@@ -26,27 +26,24 @@
 }
 
 .div_botao-salvar:disabled {
-    background-color: white; /* Cinza */
-    color: #888; /* Cor de texto mais clara */
-    border-color: #888;
-    cursor: not-allowed; /* Cursor de "não permitido" */
+    background-color: white;
+    color: #888; 
+    border: 1px solid #888;
+    cursor: not-allowed; 
 }
 
-/* Estilos quando o botão está habilitado */
 .div_botao-salvar:enabled {
     background-color: white;
     color: darkred;
+    border: 1px solid darkred;
 }
 
 #youtube {
     color: darkred;
-    position: relative;
-    left: 4rem;
 }
 
 #local {
     color: darkred;
-    position: relative;
     
 }
 
@@ -142,7 +139,10 @@
 
 .container_select{
     display: inline-flex;
-    gap: 16rem;
+    gap: 12rem;
+    position: relative;
+    left: 4rem;
+    max-width: 80%;
 }
 
 .span_select{
@@ -154,7 +154,7 @@
     position: relative; 
     justify-content: center; 
     top: 4rem; 
-    gap: 2rem;
+    gap: 1.3rem;
 }
 
 .span_youtube{

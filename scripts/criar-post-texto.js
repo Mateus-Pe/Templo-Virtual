@@ -9,27 +9,13 @@ $('#video').click(function(e){
 });
 
 document.getElementById('feed_texto').addEventListener('click', function() {
-    document.querySelector('#btn_salvar').style.display = 'none';
-    document.querySelector('#divHeader').style.display = 'none';
     document.querySelector('#editor_desc').style.display = 'none';
     document.querySelector('#editor_texto').style.display = 'flex';
-    document.querySelector('#header').style.display = 'flex';
 });
 
 document.getElementById('descricao_texto').addEventListener('click', function() {
-    document.querySelector('#btn_salvar').style.display = 'none';
-    document.querySelector('#divHeader').style.display = 'none';
     document.querySelector('#editor_texto').style.display = 'none';
-    document.querySelector('#header').style.display = 'flex';
     document.querySelector('#editor_desc').style.display = 'flex';
-});
-
-document.getElementById('salva_publi').addEventListener('click', function() {
-    document.querySelector('#btn_salvar').style.display = 'inline';
-    document.querySelector('#divHeader').style.display = 'flex';
-    document.querySelector('#editor_texto').style.display = 'none';
-    document.querySelector('#editor_desc').style.display = 'none';
-    document.querySelector('#header').style.display = 'none';
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -54,6 +40,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (conteudoHtml.trim() === '') {
                     // Se estiver vazio, define o texto padrão na div feed_texto
                     document.getElementById('feed_texto').innerHTML = textoPadrao;
+                    desabilita_btn_salvar();
+                } else {
+                    habilita_btn_salvar()
                 }
             });
         },
@@ -100,4 +89,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+});
+
+function desabilita_btn_salvar(){
+    document.getElementById('btn_salvar').disabled = true;
+}
+
+function habilita_btn_salvar(){
+    document.getElementById('btn_salvar').disabled = false;
+}
+
+window.addEventListener("load", function() {
+    desabilita_btn_salvar();
 });

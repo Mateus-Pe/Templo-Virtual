@@ -7,11 +7,6 @@ $('#texto').click(function(e){
   });
 
 
-document.getElementById("add_imagem").addEventListener("click", function() {
-    document.getElementById("imageFileInput").click();
-});
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
   // Inicialize o TinyMCE
@@ -41,3 +36,32 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }, 60);
 });
+
+document.getElementById("add_imagem").addEventListener("click", function() {
+  document.getElementById("imageFileInput").click();
+});
+
+
+document.getElementById("imageFileInput").addEventListener("change", function() {
+  verificarCampos();
+});
+
+window.addEventListener("load", function() {
+  verificarCampos();
+});
+
+
+function verificarCampos() {
+  var arquivoInput = document.getElementById("imageFileInput");
+  var botaoCompartilhar = document.getElementById("btn_salvar");
+
+  if (arquivoInput.files && arquivoInput.files.length > 0) {
+      botaoCompartilhar.disabled = false;
+  } else {
+      botaoCompartilhar.disabled = true;
+  }
+}
+
+//document.getElementById("btn_salvar").addEventListener("click", function() {
+  //alert("Botão de compartilhar clicado!");
+//});
