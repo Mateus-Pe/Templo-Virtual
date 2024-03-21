@@ -165,7 +165,29 @@
             
         </div>
 
-        <span style="font-size: 1.3rem; font-family: exo; display: flex; justify-content: center;">Clique no botão para adicionar o vídeo</span>
+        <span id="txt_add_video" style="font-size: 1.3rem; font-family: exo; display: flex; justify-content: center;">Clique no botão para adicionar o vídeo</span>
+
+        <div id="visualizacao_video" style="display: none; justify-content: center; font-size: 1.3rem;">
+            <div id="video_preview" style="border: 1px solid darkred; border-radius: 10px; width: 97%; display: flex; flex-direction: column; align-items: center; box-shadow: 1px 1px 2px rgba(128, 0, 0, 0.8);">
+                <!-- Nome do Vídeo -->
+                <p id="video_name" style="position: relative; left: 2rem; width: 91%;">Nome do Vídeo</p>
+                
+                <!-- Barra de Progresso -->
+                <div id="progressContainer" class="" style="width: 85%;">
+                    <progress id="progressBar" value="0" max="100" style="width: 70%;"></progress>
+                </div>
+
+                <div id="vizualizar" style="display: none; margin-top: 5px;">
+                   <span>VISUALIZAR</span>
+                </div>
+                
+                <!-- Botão de Excluir Vídeo -->
+                <div style="display: flex; align-items: center; margin-top: 10px; position: absolute; right: 2rem;">
+                    <span id="delete_video" class="material-symbols-outlined" style="color: darkred;">delete</span>
+                </div>
+            </div>
+        </div>
+        
 
 
         <div id="descricao_local">
@@ -191,6 +213,48 @@
 
         <button class="div_botao-salvar" id="btn_salvar" tabindex="7">Compartilhar</button>
 
+    </div>
+
+
+    <div id="modal_visualizar_layout" class="modal" style="background-color: black;">
+        <span id="close" class="material-symbols-outlined" style="color: white;font-size: 3rem; position: absolute; right: 0.5rem; top: 0.5rem;">
+            close
+            </span>
+        <div class="modal-content">
+
+            <div>
+                <div class="feed_principal">
+                    <div class="div_feed_secundario">
+                        <div>
+                            <div>
+                                <a class="div_perfil">
+                                    <div class="perfil_div" data-igreja_id="1">
+                                        <img class="img_igreja" src="/imgs/imgs-igreja/igreja.png">
+                                        <span class="nome_igreja">Nossa Senhora de Fátima Socorro</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="div_layout_feed">
+                                <a class="a_img_layout">
+                                    <video id="meuVideo" class="video-hover-trigger" controls>
+                                        <source src="/imgs/imgs-igreja/Imagens Incríveis da Natureza (4k).AVI " type="video/mp4">
+                                        Seu navegador não suporta o elemento de vídeo.
+                                    </video>
+                                </a>
+                                <div class="div_descricao">
+                                    <span id="descricao_do_video" class="span_descricao">Adicione um comentário para visualiza-lo</span>
+                                </div>
+                            </div>
+                            <div class="div_rodape_feed">
+                                <div class="rodape_feed_botao">
+                                    <span class="material-symbols-outlined span_rodape_botao">share</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
