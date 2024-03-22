@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // Se a div não foi encontrada, exibe uma mensagem de erro no console
           console.error('A div com a classe .tox .tox-statusbar não foi encontrada.');
       }
-  }, 60);
+  }, 1000);
 });
 
 document.getElementById("add_imagem").addEventListener("click", function() {
