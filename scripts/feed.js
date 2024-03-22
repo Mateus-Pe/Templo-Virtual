@@ -328,7 +328,7 @@ function compartilha() {
       var postId = extrairIdDaImagem(imagemUrl);
 
       if (postId) {
-        var postUrl = 'http://localhost:3001/feed.html?id=' + postId;
+        var postUrl = 'http://pedeoferta.com.br/site/servitus/feed.html?id=' + postId;
 
         // Abre um menu de compartilhamento com opções para WhatsApp, Facebook e Instagram
         var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
