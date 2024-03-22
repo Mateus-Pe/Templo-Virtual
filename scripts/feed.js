@@ -392,3 +392,9 @@ function extrairIdDaImagem(imagemUrl) {
     return null;
   }
 }
+
+
+
+function alterarMetaTag(){
+  alert("teste");
+}
