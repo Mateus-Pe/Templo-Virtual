@@ -19,7 +19,7 @@ function evento_agenda(){
           $("#divHistoria").append(html);
           readyVideo(classVideo);
         }
-        html = montaHtml(lpp);
+        html = montaHtml(lpp, k);
         $("#divHistoria").append(html);
       });
       
@@ -31,10 +31,11 @@ function evento_agenda(){
     });
 }
 
-function montaHtml(linha) {
+function montaHtml(linha, i) {
   var html = "";
+  var postId = 'post_' + i;
 
-  html += '<div class="div_publicacao">';
+  html += '<div id="' + postId + '" class="div_publicacao">';
   html += '<div class="feed_principal">';
   html += '<div class="div_feed_secundario">';
   html += '<div>';
@@ -271,7 +272,7 @@ function readyVideo(classVideo) {
   // Crie um novo player
   players['video_' + classVideo] = new YT.Player('video_' + classVideo, {
       height: '315',
-      width: '390',
+      width: '100%',
       videoId: 'ABzDOSQkhTM', // ID do vídeo do YouTube que deseja incorporar
       playerVars: {
           'autoplay': 0, // Configuração para não reproduzir automaticamente
@@ -329,6 +330,7 @@ function compartilha() {
 
       if (postId) {
         var postUrl = 'http://pedeoferta.com.br/site/servitus/feed.html?id=' + postId;
+        var nomeInstituicao = postagem.querySelector('.nome_igreja').innerText;
 
         // Abre um menu de compartilhamento com opções para WhatsApp, Facebook e Instagram
         var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
@@ -340,14 +342,20 @@ function compartilha() {
 
         whatsappButton.addEventListener('click', function() {
           abrirLink('whatsapp://send?text=' + encodeURIComponent(postUrl));
+          // Atualizar meta tags ao compartilhar via WhatsApp
+          atualizarMetaTagsOG(nomeInstituicao, postUrl, imagemUrl);
         });
 
         facebookButton.addEventListener('click', function() {
           abrirLink('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(postUrl));
+          // Atualizar meta tags ao compartilhar no Facebook
+          atualizarMetaTagsOG(nomeInstituicao, postUrl, imagemUrl);
         });
 
         instagramButton.addEventListener('click', function() {
           abrirLink('https://www.instagram.com/' + encodeURIComponent(postUrl));
+          // Atualizar meta tags ao compartilhar no Instagram
+          atualizarMetaTagsOG(nomeInstituicao, postUrl, imagemUrl);
         });
       } else {
         console.error('Erro ao obter o ID da publicação.');
@@ -355,6 +363,8 @@ function compartilha() {
     });
   });
 }
+
+
 
 
 function abrirLink(url) {
@@ -397,4 +407,23 @@ function extrairIdDaImagem(imagemUrl) {
 
 function alterarMetaTag(){
   alert("teste");
+}
+
+
+function atualizarMetaTagsOG(description, url, imageUrl) {
+  // Seleciona os meta tags com propriedade "og:description", "og:url" e "og:image"
+  var ogDescriptionTag = document.querySelector('meta[property="og:description"]');
+  var ogUrlTag = document.querySelector('meta[property="og:url"]');
+  var ogImageTag = document.querySelector('meta[property="og:image"]');
+
+  // Atualiza o conteúdo dos meta tags
+  if (ogDescriptionTag) {
+      ogDescriptionTag.setAttribute('content', description);
+  }
+  if (ogUrlTag) {
+      ogUrlTag.setAttribute('content', url);
+  }
+  if (ogImageTag) {
+      ogImageTag.setAttribute('content', imageUrl);
+  }
 }
