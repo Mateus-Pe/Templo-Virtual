@@ -1,5 +1,9 @@
 var players = {};
 
+window.onload = function() {
+  atualizarMetaTagsOG(description, url, imageUrl);
+};
+
 evento_agenda();
 function evento_agenda(){
     $.ajax({
@@ -329,7 +333,8 @@ function compartilha() {
       var postId = extrairIdDaImagem(imagemUrl);
 
       if (postId) {
-        var postUrl = 'http://pedeoferta.com.br/site/servitus/feed.html';
+        var parametros = "?a="+postagem+"&b="+imagemUrl+"&c="+postId;
+        var postUrl = 'http://pedeoferta.com.br/site/servitus/compartilha.html'+parametros;
         var nomeInstituicao = postagem.querySelector('.nome_igreja').innerText;
 
         // Abre um menu de compartilhamento com opções para WhatsApp, Facebook e Instagram
@@ -342,20 +347,14 @@ function compartilha() {
 
         whatsappButton.addEventListener('click', function() {
           abrirLink('whatsapp://send?text=' + encodeURIComponent(postUrl));
-          // Atualizar meta tags ao compartilhar via WhatsApp
-          atualizarMetaTagsOG(nomeInstituicao, postUrl, imagemUrl);
         });
 
         facebookButton.addEventListener('click', function() {
           abrirLink('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(postUrl));
-          // Atualizar meta tags ao compartilhar no Facebook
-          atualizarMetaTagsOG(nomeInstituicao, postUrl, imagemUrl);
         });
 
         instagramButton.addEventListener('click', function() {
           abrirLink('https://www.instagram.com/' + encodeURIComponent(postUrl));
-          // Atualizar meta tags ao compartilhar no Instagram
-          atualizarMetaTagsOG(nomeInstituicao, postUrl, imagemUrl);
         });
       } else {
         console.error('Erro ao obter o ID da publicação.');
@@ -400,30 +399,5 @@ function extrairIdDaImagem(imagemUrl) {
     return idMatch[1];
   } else {
     return null;
-  }
-}
-
-
-
-function alterarMetaTag(){
-  alert("teste");
-}
-
-
-function atualizarMetaTagsOG(description, url, imageUrl) {
-  // Seleciona os meta tags com propriedade "og:description", "og:url" e "og:image"
-  var ogDescriptionTag = document.querySelector('meta[property="og:description"]');
-  var ogUrlTag = document.querySelector('meta[property="og:url"]');
-  var ogImageTag = document.querySelector('meta[property="og:image"]');
-
-  // Atualiza o conteúdo dos meta tags
-  if (ogDescriptionTag) {
-      ogDescriptionTag.setAttribute('content', description);
-  }
-  if (ogUrlTag) {
-      ogUrlTag.setAttribute('content', url);
-  }
-  if (ogImageTag) {
-      ogImageTag.setAttribute('content', imageUrl);
   }
 }
