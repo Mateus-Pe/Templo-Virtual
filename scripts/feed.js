@@ -334,9 +334,10 @@ function compartilha() {
 
       if (postId) {
         var nomeInstituicao = postagem.querySelector('.nome_igreja').innerText;
-        var parametros = "?a="+nomeInstituicao+"&b="+imagemUrl+"&c="+postId;
+        var timestamp = Date.now();
+        var parametros = "?a="+encodeURIComponent(nomeInstituicao)+"&c="+imagemUrl+"&timestamp="+timestamp;
         var postUrl = 'http://pedeoferta.com.br/site/servitus/compartilha.html'+parametros;
-
+        console.log('Link compartilhado:', postUrl);
         // Abre um menu de compartilhamento com opções para WhatsApp, Facebook e Instagram
         var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
         compartilhamentoMenu.style.display = 'flex';
