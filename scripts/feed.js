@@ -347,7 +347,7 @@ function compartilha() {
         var instagramButton = compartilhamentoMenu.querySelector('.btn-instagram');
 
         whatsappButton.addEventListener('click', function() {
-          abrirLink('whatsapp://send?text=' + encodeURIComponent(postUrl));
+          abrirLink('https://api.whatsapp.com/send?text=' + encodeURIComponent(postUrl));
         });
 
         facebookButton.addEventListener('click', function() {
@@ -381,7 +381,7 @@ function abrirLink(url) {
 
 
 function compartilharNoWhatsApp(postUrl) {
-  window.open('whatsapp://send?text=' + encodeURIComponent(postUrl), '_blank').focus();
+  window.open('https://web.whatsapp.com/send?text=' + encodeURIComponent(postUrl), '_blank').focus();
 }
 
 function compartilharNoFacebook(postUrl) {
