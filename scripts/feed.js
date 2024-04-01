@@ -1,6 +1,10 @@
 var players = {};
 
 window.onload = function() {
+  var descricao = "Descrição da publicação";
+  var url = window.location.href; 
+  var imageUrl = "URL_da_Imagem.jpg";
+
   atualizarMetaTagsOG(description, url, imageUrl);
 };
 
@@ -347,7 +351,7 @@ function compartilha() {
         var instagramButton = compartilhamentoMenu.querySelector('.btn-instagram');
 
         whatsappButton.addEventListener('click', function() {
-          abrirLink('https://api.whatsapp.com/send?text=' + encodeURIComponent(postUrl));
+          abrirLinkParaWhatsApp(postUrl);
         });
 
         facebookButton.addEventListener('click', function() {
@@ -379,17 +383,17 @@ function abrirLink(url) {
   }
 }
 
-
-function compartilharNoWhatsApp(postUrl) {
-  window.open('https://web.whatsapp.com/send?text=' + encodeURIComponent(postUrl), '_blank').focus();
-}
-
-function compartilharNoFacebook(postUrl) {
-  window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(postUrl), '_blank').focus();
-}
-
-function compartilharNoInstagram(postUrl) {
-  window.open('https://www.instagram.com/' + encodeURIComponent(postUrl), '_blank').focus();
+function abrirLinkParaWhatsApp(url) {
+  var whatsappLink = 'whatsapp://send?text=' + encodeURIComponent(url);
+  var whatsappWebLink = 'https://web.whatsapp.com/send?text=' + encodeURIComponent(url);
+  
+  // Verifica se o navegador suporta o protocolo whatsapp://
+  if (navigator.userAgent.match(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i)) {
+    window.open(whatsappLink, '_blank');
+  } else {
+    // Se não suportar, abre o link para o WhatsApp Web
+    window.open(whatsappWebLink, '_blank');
+  }
 }
 
 

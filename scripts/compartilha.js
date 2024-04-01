@@ -20,6 +20,3 @@ function atualizarMetaTagsOG(description, url, imageUrl) {
       ogImageTag.setAttribute('content', imageUrl);
   }
 }
-
-
-
