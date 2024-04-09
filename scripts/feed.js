@@ -34,7 +34,7 @@ function evento_agenda(){
 
       configurarEventos();
       iniciarIntersectionObserver();
-      compartilha()
+      compartilha();
       
     });
 }
@@ -333,6 +333,7 @@ function compartilha() {
   buttons.forEach(function(button) {
     button.addEventListener('click', function() {
       var postagem = this.closest('.div_publicacao');
+      var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
       var imagemUrl = postagem.querySelector('.img_layout_feed').getAttribute('src');
       var postId = extrairIdDaImagem(imagemUrl);
 
@@ -342,6 +343,7 @@ function compartilha() {
         var parametros = "?a="+encodeURIComponent(nomeInstituicao)+"&c="+imagemUrl+"&timestamp="+timestamp;
         var postUrl = 'http://pedeoferta.com.br/site/servitus/compartilha.html'+parametros;
         console.log('Link compartilhado:', postUrl);
+        
         // Abre um menu de compartilhamento com opções para WhatsApp, Facebook e Instagram
         var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
         compartilhamentoMenu.style.display = 'flex';
@@ -361,12 +363,38 @@ function compartilha() {
         instagramButton.addEventListener('click', function() {
           abrirLink('https://www.instagram.com/' + encodeURIComponent(postUrl));
         });
+
+        // Alternar a visibilidade dos botões de compartilhamento
+        toggleShareButtons(compartilhamentoMenu);
+        hideShareButtonsFromOtherPosts(compartilhamentoMenu);
       } else {
         console.error('Erro ao obter o ID da publicação.');
       }
     });
   });
 }
+
+function toggleShareButtons(compartilhamentoMenu) {
+  // Verifica se os botões estão visíveis
+  var shareButtons = compartilhamentoMenu.querySelectorAll('.btn-compartilhar');
+  shareButtons.forEach(function(button) {
+    var isVisible = button.style.display === 'flex';
+    button.style.display = isVisible ? 'none' : 'flex';
+  });
+}
+
+function hideShareButtonsFromOtherPosts(currentCompartilhamentoMenu) {
+  var allCompartilhamentoMenus = document.querySelectorAll('.compartilhamento');
+  allCompartilhamentoMenus.forEach(function(compartilhamentoMenu) {
+    if (compartilhamentoMenu !== currentCompartilhamentoMenu) {
+      var shareButtons = compartilhamentoMenu.querySelectorAll('.btn-compartilhar');
+      shareButtons.forEach(function(button) {
+        button.style.display = 'none';
+      });
+    }
+  });
+}
+
 
 
 
