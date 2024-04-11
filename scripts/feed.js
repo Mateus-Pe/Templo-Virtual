@@ -375,18 +375,26 @@ function compartilha() {
 }
 
 function toggleShareButtons(compartilhamentoMenu) {
-  // Verifica se os botões estão visíveis
+  compartilhamentoMenu.offsetHeight;
+  // Alterna a classe 'show' para controlar a exibição dos botões
+  compartilhamentoMenu.classList.toggle('show');
+  // Atualiza o estilo de exibição dos botões
   var shareButtons = compartilhamentoMenu.querySelectorAll('.btn-compartilhar');
   shareButtons.forEach(function(button) {
-    var isVisible = button.style.display === 'flex';
-    button.style.display = isVisible ? 'none' : 'flex';
+    if (compartilhamentoMenu.classList.contains('show')) {
+      button.style.display = 'flex'; // Exibe os botões
+    } else {
+      button.style.display = 'none'; // Oculta os botões
+    }
   });
 }
+
 
 function hideShareButtonsFromOtherPosts(currentCompartilhamentoMenu) {
   var allCompartilhamentoMenus = document.querySelectorAll('.compartilhamento');
   allCompartilhamentoMenus.forEach(function(compartilhamentoMenu) {
     if (compartilhamentoMenu !== currentCompartilhamentoMenu) {
+      compartilhamentoMenu.classList.remove('show');
       var shareButtons = compartilhamentoMenu.querySelectorAll('.btn-compartilhar');
       shareButtons.forEach(function(button) {
         button.style.display = 'none';
