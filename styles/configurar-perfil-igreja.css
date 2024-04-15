@@ -408,7 +408,7 @@ body{
     position: fixed;
     display: flex;
     justify-content: center;
-    gap: 14.7rem;
+    gap: 40%;
     top: 0;
     width: 100%;
     z-index: 4;
