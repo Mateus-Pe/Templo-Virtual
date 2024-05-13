@@ -116,6 +116,7 @@ $('#cidade_instituicao').focus(function(e) {
   $('.div_form').hide();
   $('#div_cidade_instituicao').show();  
   $('#divLista').show();
+  $('#div_checkbox').hide();
  
 
   
@@ -228,7 +229,7 @@ $('#cidade_instituicao').keyup(function (e) {
 
 
 
-  $('#divLista').hide();
+  //$('#divLista').hide();
 
   montaCidades(myJson);// this.value);
 
@@ -243,37 +244,49 @@ $('#cidade_instituicao').keyup(function (e) {
 
 $('#cep_instituicao').keyup(function (e) {
   if (e.which == 13){
-    //obj = mock_cep($('#cep_instituicao').val());
-    url = "http://viacep.com.br/ws/"+$('#cep_instituicao').val()+"/json/";
-   
-    $.ajax({
-      method: "GET",
-      url: url
-      
-    })
-    .done(function (ret) {
-        
-      if(ret != null){
 
-        if(ret.erro){
-          $('#cidade_instituicao').focus();
-        }
-        else{
-          monta_endereco_cep(ret);
-        }
-        
-  
-      }else{
-        $('#cidade_instituicao').focus();
-        
-      }    
-    });
-  
+  ajaxCep();
 
-    
   }  
 });
 
+$('#cep_instituicao').blur(function (e) {
+
+  ajaxCep();
+
+});
+
+function ajaxCep(){
+  //obj = mock_cep($('#cep_instituicao').val());
+  if ($('#cep_instituicao').val().length == 8){
+
+  
+  url = "http://viacep.com.br/ws/"+$('#cep_instituicao').val()+"/json/";
+   
+  $.ajax({
+    method: "GET",
+    url: url
+    
+  })
+  .done(function (ret) {
+      
+    if(ret != null){
+
+      if(ret.erro){
+        $('#cidade_instituicao').focus();
+      }
+      else{
+        monta_endereco_cep(ret);
+      }
+      
+
+    }else{
+      $('#cidade_instituicao').focus();
+      
+    }    
+  });
+}
+}
 
 function monta_endereco_cep(obj){
 
@@ -367,6 +380,7 @@ function configurarEventos(){
     $('#cidade_id_instituicao').val($(this).data('id'));
     habilita_campos()
     $('#bairro_instituicao').focus();
+    $('#div_checkbox').show();
 
   });
 }
