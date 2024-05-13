@@ -69,7 +69,7 @@ function carregarDatas(data){
     }
   
     if(parseInt(D) < 10){
-      D = '0'+ D;
+      D = '0'+ parseInt(D);
     }
 }
 

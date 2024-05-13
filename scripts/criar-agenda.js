@@ -71,10 +71,10 @@ evento_agenda();
       $('#modalConfirmacao').hide();
       
     });
-    
+  
     
     if(!erro) {
-      gerar_agenda();
+     gerar_agenda();
     }
   }
 
