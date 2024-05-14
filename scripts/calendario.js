@@ -1,5 +1,5 @@
 
-
+currentDay = 0;
 var igrejaId = null;
 var dtReferencia;
 
@@ -25,6 +25,7 @@ $(document).ready(function() {
 
   $('#editar_layout').click(function(){
           var agenda_id = $(this).find('[data-agenda_id]').data('agenda_id');
+          alert(agenda_id);
           var agenda_hora = $(this).find('[data-agenda_hora]').data('agenda_hora');
           var str_data_referencia =  dtReferencia + '-' +  agenda_hora;
           window.sessionStorage.setItem('agenda_id', agenda_id);
@@ -49,6 +50,7 @@ $(document).ready(function() {
   });
 
   $('#excluir').click(function(){
+    
     $('#modal_config').hide();
     $('#modalConfirmacao').show();
   });
@@ -59,6 +61,8 @@ $(document).ready(function() {
   });
 
   $('#confirmarRemocao').click(function(){
+    var agenda_id = $('#modal_config').find('[data-agenda_id]').data('agenda_id');
+    remover(agenda_id);
     $('#modalConfirmacao').hide();
     $('#modal_config').hide();
   });
@@ -156,6 +160,7 @@ function configuraEventos(){
     
         $('.calendarList2 li').click(function (e) {
             data =currentYear +'-'+currentMonth+"-"+$(this).attr('id') ;
+            currentDay = $(this).attr('id');
             get_calendario_hora(data);
           });    
 
@@ -297,6 +302,13 @@ function mock_agenda(){
                 $('#modal_config').show();
             });
 
+            $('.remove-igreja').click(function () {
+
+              var id = $(this).data('id');
+              remover(id);
+          });
+      
+
 	   });
 }
 
@@ -392,3 +404,36 @@ $('.page-menu--toggle').click(function(e){
     sessionStorage.setItem("item_menu", item_menu);
   
   }
+
+  function remover(id){
+    
+    
+
+        $.ajax({
+            method: "POST",
+            url: "https://pedeoferta.com.br/templo/index.php/welcome/remove_agenda",
+            data: {
+                agenda_id : id
+                
+            }
+        })
+
+        .done(function (ret) {
+            var obj = jQuery.parseJSON(ret);
+            
+            if(obj.status == '1'){
+                
+              if(currentDay > 0){
+                data =currentYear +'-'+currentMonth+"-"+currentDay;
+                get_calendario_hora(data);
+              
+              }
+              
+                
+            }
+            
+        });
+
+
+   
+}
