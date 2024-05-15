@@ -64,19 +64,18 @@ evento_agenda();
       $('#texto_confirmacao').html(texto_modal);
       erro = true;
     } 
-
-    $('#modalConfirmacao').show();
     
-    $('#confirmar').click(function (e) {
-      $('#modalConfirmacao').hide();
-      
-    });
-  
-    
-    if(!erro) {
-     gerar_agenda();
+    if(erro) {
+      $('#modalConfirmacao').show();
+    }else{  
+      gerar_agenda();
     }
   }
+
+  $('#confirmar').click(function (e) {
+    $('#modalConfirmacao').hide();
+    
+  });
 
   function evento_agenda(){
     $.ajax({
@@ -124,7 +123,7 @@ evento_agenda();
 
   }
 
-  function gerar_agenda(){
+function gerar_agenda(){
     
 
 
@@ -147,10 +146,13 @@ evento_agenda();
 
       var obj = jQuery.parseJSON(ret);
 
-        if(obj.status ==1){
-            alert(obj.agenda_id);
+        if(obj.status == 1){
             window.sessionStorage.setItem('agenda_id', obj.agenda_id);
             window.location = "configurar-layout.html";
+        }else{
+          texto_modal = "<p> Nenhum evento criado, os dias da semana não batem com os dias a serem gerados </p><br>";
+          $('#texto_confirmacao').html(texto_modal);
+          $('#modalConfirmacao').show();
         }
 
 

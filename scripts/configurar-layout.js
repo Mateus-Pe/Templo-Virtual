@@ -203,12 +203,21 @@ function busca_agenda(agenda_id ){
       $('#layout').hide();        
    
       if(array_sequencial()){
-        dia_inicio = dias.find(x => x.id == dias_agenda[0]).name;
-        dia_fim = dias.find(x => x.id == dias_agenda[dias_agenda.length-1]).name;
-        $("#data_master").css("font-size","4.8em");
-        $("#data_master").html("<span>"+dia_inicio+" à "+dia_fim+"</span>");
-        $("#data_slave1").html("<span>Das 14:00</span>");
-        $("#data_slave2").html("<span>às 15:00</span>");
+        if(dias_agenda.length == 1){
+          dia_inicio = dias.find(x => x.id == dias_agenda[0]).name;
+          $("#data_master").css("font-size","4.8em");
+          $("#data_master").html("<span>"+dia_inicio+"</span>");
+          $("#data_slave1").html("<span>Das 14:00</span>");
+          $("#data_slave2").html("<span>às 15:00</span>");
+        }
+        else{
+          dia_inicio = dias.find(x => x.id == dias_agenda[0]).name;
+          dia_fim = dias.find(x => x.id == dias_agenda[dias_agenda.length-1]).name;
+          $("#data_master").css("font-size","4.8em");
+          $("#data_master").html("<span>"+dia_inicio+" à "+dia_fim+"</span>");
+          $("#data_slave1").html("<span>Das 14:00</span>");
+          $("#data_slave2").html("<span>às 15:00</span>");
+        }  
       }else{
         str_dias = "";
         dias_agenda.forEach(function(element, index) {
