@@ -7,6 +7,8 @@ var H = '0';//$('#data_slave2').children().html().trim();
 var diaName = '';
 var layout_id = 0;
 var agenda_id = 0;
+hora_inicio_fixo = '0';
+hora_fim_fixo = '0';
 const dias = [
   { 'id': 1, 'name': 'Segunda' },
   { 'id': 2, 'name': 'Terça' },
@@ -115,7 +117,7 @@ function busca_agenda(agenda_id ){
     }else{
       origem_lote = false;
     }
-
+    carrega_horas_fixas(obj.agenda.data_inicio_fixo, obj.agenda.data_fim_fixo);
     carregarDatas(obj.agenda.data_referencia);
    
     console.log(origem_lote);
@@ -125,7 +127,14 @@ function busca_agenda(agenda_id ){
   });
 }
 
-
+  function carrega_horas_fixas(data_inicio, data_fim){
+    var hashdata = data_inicio.split("-");
+    hora_inicio_fixo = hashdata[3];
+    var hashdata = data_fim.split("-");
+    hora_fim_fixo = hashdata[3];
+    console.log(hora_inicio_fixo);
+    console.log(hora_fim_fixo);
+  }
 
 
 
@@ -248,16 +257,16 @@ function busca_agenda(agenda_id ){
           dia_inicio = dias.find(x => x.id == dias_agenda[0]).name;
           $("#data_master").css("font-size","4.8em");
           $("#data_master").html("<span>"+dia_inicio+"</span>");
-          $("#data_slave1").html("<span>Das 14:00</span>");
-          $("#data_slave2").html("<span>às 15:00</span>");
+          $("#data_slave1").html("<span>Das "+hora_inicio_fixo+"</span>");
+          $("#data_slave2").html("<span>às "+hora_fim_fixo+"</span>");
         }
         else{
           dia_inicio = dias.find(x => x.id == dias_agenda[0]).name;
           dia_fim = dias.find(x => x.id == dias_agenda[dias_agenda.length-1]).name;
           $("#data_master").css("font-size","4.8em");
           $("#data_master").html("<span>"+dia_inicio+" à "+dia_fim+"</span>");
-          $("#data_slave1").html("<span>Das 14:00</span>");
-          $("#data_slave2").html("<span>às 15:00</span>");
+          $("#data_slave1").html("<span>Das "+hora_inicio_fixo+"</span>");
+          $("#data_slave2").html("<span>às "+hora_fim_fixo+"</span>");
         }  
       }else{
         str_dias = "";
@@ -269,8 +278,8 @@ function busca_agenda(agenda_id ){
         });
         $("#data_master").css("font-size","3.1em");
         $("#data_master").html("<span>"+str_dias+"</span>");
-        $("#data_slave1").html("<span>Das 14:00</span>");
-        $("#data_slave2").html("<span>às 15:00</span>");
+        $("#data_slave1").html("<span>Das "+hora_inicio_fixo+"</span>");
+          $("#data_slave2").html("<span>às "+hora_fim_fixo+"</span>");
       }
     }else{
       
