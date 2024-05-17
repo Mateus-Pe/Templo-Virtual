@@ -121,7 +121,7 @@ function busca_agenda(agenda_id ){
     console.log(origem_lote);
     console.log(dias_agenda);
     $(document.body).show();
-    evento_agenda(origem_lote);
+    evento_agenda(origem_lote, obj.agenda.agenda_evento_id);
   });
 }
 
@@ -129,11 +129,11 @@ function busca_agenda(agenda_id ){
 
 
 
-  function evento_agenda(origem_lote){
+  function evento_agenda(origem_lote, evento_id){
     $.ajax({
       method: "POST",
       url: "https://pedeoferta.com.br/templo/index.php/welcome/get_layout_evento",
-      data: {evento_id: "1"}
+      data: {evento_id: evento_id}
     })
     .done(function(ret) {
       //getImgSize("./imgs/imgs-igreja/missa1.jpg");
@@ -143,7 +143,7 @@ function busca_agenda(agenda_id ){
       html += '<section class="regular slider">';
       console.log(obj);
       $.each(obj.lista_layout_evento, function (k, lpp) {
-          html += '<a id="'+k+'"  data-layout_id="'+lpp.layout_id+'"  data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-slave2_css="'+lpp.layout_data_slave2_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" class="layout_css produtos_perfil"><div  class="divPerfilEC" style="opacity: 0.5;height: 80px;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
+          html += '<a id="'+k+'"  data-layout_id="'+lpp.layout_id+'"  data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-slave2_css="'+lpp.layout_data_slave2_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" data-evento_sub_descricao="'+lpp.evento_sub_descricao+'" class="layout_css produtos_perfil"><div  class="divPerfilEC" style="opacity: 0.5;height: 80px;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
               html += '<div style="display: grid;">';
           html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.layout_background_icone+'" style="height:55px;width:60px;border-radius:50%;"/></div>';
                 html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;"></span></div>';
@@ -164,7 +164,9 @@ function busca_agenda(agenda_id ){
       
 
       $('.layout_css').click(function(e){
-        atualiza_layout($(this), origem_lote);
+        obj_layout = carrega_layout($(this));
+        console.log(obj_layout.descricao);
+        atualiza_layout(obj_layout, origem_lote);
       });
       
       troca_layout('S', origem_lote);
@@ -173,18 +175,57 @@ function busca_agenda(agenda_id ){
     });
   }
 
-  function atualiza_layout(e, origem_lote){
-    layout_id = $(e).data('layout_id');
-    img_src = "imgs/imgs-igreja/"+$(e).data('img_background');
+  function carrega_layout(e){
+    
+    const layout = {layout_id:$(e).data('layout_id'), 
+                img_src:$(e).data('img_background'), 
+                descricao: $(e).data('evento_nome'),
+                evento_css: $(e).data('evento_css'),
+                evento_sub_descricao: $(e).data('evento_sub_descricao'),
+                data_css: $(e).data('data_css'),
+                master_css: $(e).data('master_css'),
+                data_slave1: $(e).data('slave1_css'),
+                data_slave2: $(e).data('slave2_css'),
+                rodape: $(e).data('rodape_css')              
+              };
+
+              
+    return layout; 
+  }
+
+  function atualiza_layout(layout, origem_lote){
+    descricao = "";
+    sub_descricao = "";
+    layout_id = layout.layout_id;
+    img_src = "imgs/imgs-igreja/"+layout.img_src;
     $("#divImg").css("background-image", "url("+img_src+")");
-    $("#txt_evento").html($(e).data('evento_nome'));
-    $("#descricao").val($(e).data('evento_nome'));
-    set_style($(e).data('evento_css'), 'evento');
-    set_style($(e).data('data_css'), 'data');
-    set_style($(e).data('master_css'), 'data_master');
-    set_style($(e).data('slave1_css'), 'data_slave1');
-    set_style($(e).data('slave2_css'), 'data_slave2');
-    set_style($(e).data('rodape_css'), 'rodape');
+    if($("#descricao").val() != "" && $("#descricao").val() != layout.descricao){
+      descricao = $("#descricao").val(); 
+    }
+    else{
+      descricao = layout.descricao;
+    }
+    
+    if($("#descricao_rodape").val() != "" && $("#descricao_rodape").val() != layout.descricao){
+      sub_descricao = $("#descricao_rodape").val(); 
+    }
+    else{
+      sub_descricao = layout.evento_sub_descricao;
+    }
+
+    
+
+    $("#txt_evento").html(descricao);
+    $("#descricao").val(descricao);
+    $("#txt_rodape").html(sub_descricao);
+    $("#descricao_rodape").val(sub_descricao);
+
+    set_style(layout.evento_css, 'evento');
+    set_style(layout.data_css, 'data');
+    set_style(layout.master_css, 'data_master');
+    set_style(layout.data_slave1, 'data_slave1');
+    set_style(layout.data_slave2, 'data_slave2');
+    set_style(layout.rodape, 'rodape');
     if(origem_lote){
       $('#data').css('pointer-events', 'none');   
     }
