@@ -9,6 +9,8 @@ var layout_id = 0;
 var agenda_id = 0;
 hora_inicio_fixo = '0';
 hora_fim_fixo = '0';
+opt = "cabecalho";
+
 const dias = [
   { 'id': 1, 'name': 'Segunda' },
   { 'id': 2, 'name': 'Terça' },
@@ -46,6 +48,139 @@ $(document).ready(function() {
   
   busca_agenda(agenda_id);
 });
+
+$('#cor').click(function(e){
+  $('#cores').show();
+});
+
+$('.color').click(function(e){
+  console.log($(this).css("background-color"));
+
+  if(opt == "cabecalho"){
+    
+    $("#evento").css("color", $(this).css("background-color"));
+  }
+  if(opt == "corpo"){
+    
+    $("#data").css("color", $(this).css("background-color"));
+  }
+  if(opt == "rodape"){
+   
+   $("#rodape").css("color", $(this).css("background-color"));
+  }
+  mudaElemento(opt);
+  $('#cores').hide();
+});
+
+$('#elemento').change(function() {
+  var option = $('#elemento').find(":selected").val();
+  mudaElemento(option);
+});
+
+function converteFontePonto(valorPX){
+  var valor = 0;
+  valor = valorPX.replace('px', '');
+  valor = 0.75 * valor;
+  return valor+''+'pt';
+}
+
+function textArea2html(texto){
+  return texto.replace(/\n/g, "<br />");
+}
+
+function html2TextArea(texto){
+  return texto.replace(/<br>/g,"\n");
+}
+
+function mudaElemento(option){
+  if(option == "cabecalho"){
+    $("#txt_descricao").val(html2TextArea($("#txt_evento").html()));
+    $("#fonte_master").val($("#evento").css("font-family"));
+    $("#tamanho_fonte").val(converteFontePonto($("#evento").css("font-size")));
+    $("#cor").css("background-color", $("#evento").css("color"));
+    $("#altura").val($("#evento").css("top").replace('px',''));
+    $("#div_display_txt").css("display","flex");
+    $("#data_destaque").css("display","none");
+    opt = 'cabecalho';
+  }
+  if(option == "corpo"){
+    $("#txt_descricao").val('teste');
+    $("#fonte_master").val($("#data").css("font-family"));
+    $("#tamanho_fonte").val(converteFontePonto($("#data").css("font-size")));
+    $("#cor").css("background-color", $("#data").css("color"));
+    $("#div_display_txt").css("display","none");
+    $("#data_destaque").css("display","flex");
+    opt = 'corpo';
+  }
+  if(option == "rodape"){
+    $("#txt_descricao").val($("#txt_rodape").html());
+    $("#fonte_master").val($("#rodape").css("font-family"));
+    $("#tamanho_fonte").val(converteFontePonto($("#rodape").css("font-size")));
+    $("#cor").css("background-color", $("#rodape").css("color"));
+    $("#div_display_txt").css("display","flex");
+    $("#data_destaque").css("display","none");
+    opt = 'rodape';
+  }
+}
+
+
+
+$("#txt_descricao").on("keyup", function () {
+
+  if(opt == "cabecalho"){
+    $('#txt_evento').html(textArea2html($(this).val()));
+    //$("#txt_evento").html($(this).val());
+    
+  }
+  if(opt == "corpo"){
+    
+    $("#data").css("font-family", fonte);
+  }
+  if(opt == "rodape"){
+   
+    $("#txt_rodape").text($(this).val());
+  }
+});
+
+$('#fonte_master').change(function() {
+  var fonte = $('#fonte_master').find(":selected").val();
+  console.log(fonte);
+  
+  if(opt == "cabecalho"){
+    
+    $("#evento").css("font-family", fonte);
+  }
+  if(opt == "corpo"){
+    
+    $("#data").css("font-family", fonte);
+  }
+  if(opt == "rodape"){
+   
+   $("#rodape").css("font-family", fonte);
+  }
+  mudaElemento(opt);
+  });
+
+
+  $('#tamanho_fonte').change(function() {
+    var tamanhoFonte = $('#tamanho_fonte').find(":selected").val();
+    console.log(tamanhoFonte);
+    
+    if(opt == "cabecalho"){
+      
+      $("#evento").css("font-size", tamanhoFonte);
+    }
+    if(opt == "corpo"){
+      
+      $("#data").css("font-size", tamanhoFonte);
+    }
+    if(opt == "rodape"){
+     
+     $("#rodape").css("font-size", tamanhoFonte);
+    }
+    mudaElemento(opt);
+    });
+  
 
 function carregarDatas(data){
   //var data =  window.sessionStorage.getItem('data_referencia');
@@ -90,7 +225,31 @@ function getImgSize(imgSrc) {
   newHeight = Math.round((($( document ).width() * height) / width)+1);
   
   $("#divImg").css("height", newHeight+"px");
+  alingOtherElements(newHeight);
   console.log('new heithg: '+newHeight);
+}
+
+function alingOtherElements(height){
+  //alturas fixas
+  var alturaMenu = $(".header1").css("height").replace('px', '');// 55;
+  var alturaLayoutImg = $("#layoutImg").css("height").replace('px', ''); //80;
+  var alturaPreVisualizar = $("#pre_visualizar").css("height").replace('px', '');
+  //alinhamento pre visualizar
+  $("#pre_visualizar").css("bottom", height+"px");
+  //alinhamento do layout img
+  var posicaoLayoutImg = height+parseInt(alturaPreVisualizar);
+  $("#layoutImg").css("bottom", posicaoLayoutImg+"px");
+  //alinhamento dos campos
+  var alturaCampos = $(document).height() - (parseInt(alturaMenu) + parseInt(alturaLayoutImg) + parseInt(alturaPreVisualizar) + height);
+  console.log($(document).height());
+  console.log(parseInt(alturaMenu));
+  console.log(parseInt(alturaLayoutImg));
+  console.log(height);
+
+  $("#div_campos").css("top", alturaMenu+"px");
+  $("#div_campos").css("height", alturaCampos+"px");
+  console.log(alturaCampos);
+  
 }
 
 
@@ -228,15 +387,16 @@ function busca_agenda(agenda_id ){
     $("#descricao").val(descricao);
     $("#txt_rodape").html(sub_descricao);
     $("#descricao_rodape").val(sub_descricao);
-
+    
     set_style(layout.evento_css, 'evento');
     set_style(layout.data_css, 'data');
     set_style(layout.master_css, 'data_master');
     set_style(layout.data_slave1, 'data_slave1');
     set_style(layout.data_slave2, 'data_slave2');
     set_style(layout.rodape, 'rodape');
+    mudaElemento(opt);
     if(origem_lote){
-      $('#data').css('pointer-events', 'none');   
+      $('#data').css('pointer-events', 'none');
     }
   }
 
@@ -250,7 +410,7 @@ function busca_agenda(agenda_id ){
   function troca_layout(option, origem_lote){
       
     if(origem_lote){
-      $('#layout').hide();        
+      //$('#layout').hide();        
    
       if(array_sequencial()){
         if(dias_agenda.length == 1){
@@ -343,13 +503,7 @@ function busca_agenda(agenda_id ){
       $("#rodape").css("font-family", $(this).find('option:selected').val());
       });
   
-    $(function() {
-      var $exibirTexto = $("#txt_evento");
-      $("#descricao").on("keyup", function () {
-        var texto = $(this).val();
-        $exibirTexto.text(texto);
-      });
-    });
+    
 
     $(function() {
       var $exibirTexto = $("#txt_rodape");
@@ -537,3 +691,4 @@ function array_sequencial(){
   });
   return retorno;
 }
+

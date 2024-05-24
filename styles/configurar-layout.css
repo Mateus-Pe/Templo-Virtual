@@ -135,3 +135,35 @@ input[type="checkbox"]:checked::before {
 .rodape:active{
     background-color: transparent;
 }
+
+.color{
+    width: 20px;
+    height: 20px;
+    margin: 3px;
+    border: solid 1px;
+}
+
+.modal-colors {
+    background-color: white;
+    margin: auto;
+    padding: 70px;
+    border: 1px solid #888;
+    border-radius: 30px;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    max-width: 400px;
+}
+
+.header1{
+    background-color: darkred;
+    height: 55px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
