@@ -151,9 +151,9 @@
 
     <header class="header1">
 
-        <a class="page-menu--toggle page-menu__hamburger" href="#" id="btnMenu">
+        <a class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn_close">
 
-            <span class="material-symbols-outlined" style="color: white;">close</span>
+            <span class="material-symbols-outlined" id="btn_close" style="color: white;">close</span>
 
         </a>
         <div style="position: relative;">
@@ -165,7 +165,7 @@
             </select>
         </div>
             
-        <a class="page-menu--toggle page-menu__hamburger" href="#" id="btnMenu">
+        <a class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn-salvar">
 
         <span class="material-symbols-outlined" id="btn_salvar" style="color: white;">check</span>
         
@@ -178,19 +178,36 @@
 
     <div style="align-items: center; display: flex;">
 
-        <div id="data_destaque" style="width: 100%; display: none;">
+        <div id="data_destaque" style="width: 100%; gap: 4px; display: none;">
+            <div>
 
-            <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem;
-            position: absolute;">description</span>
-        
-                    <select class="login__input" id="layout" name="layout" style="border: 1px solid darkred;"
-                        required>
-                       
-                        <option value="D">Destaque dia</option>
-                        <option value="H">Destaque hora</option>
-                        <option value="S" selected>Destaque dia semana</option>
-        
-                    </select>
+                <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem; position: absolute;">description</span>
+
+
+                <input class="cadastro__input" id="txt_data_master" name="txt_data_master" placeholder="Descrição"
+                style="border: 1px solid darkred;"
+                required>
+            </div>
+            <div>
+                <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem; position: absolute;">description</span>
+
+
+                <input class="cadastro__input" id="txt_data_slave" name="txt_data_slave" placeholder="Descrição"
+                style="border: 1px solid darkred;"
+                required>
+            </div>
+
+        <!--
+
+            <select class="login__input" id="layout" name="layout" style="border: 1px solid darkred;"
+            required>
+            
+            <option value="D">Destaque dia</option>
+            <option value="H">Destaque hora</option>
+            <option value="S" selected>Destaque dia semana</option>
+            
+        </select>
+    -->
         </div>
 
         <div style="width: 100%;" id="div_display_txt">
@@ -244,9 +261,10 @@
 
 
         <div class="modal" id="cores">
+            
             <div class="modal-colors">
 
-                <div style="display:flex">
+                <div id="div_cores" style="display:flex">
                     <div>
                         <div class="color" style="background-color: blue;"></div>   
             

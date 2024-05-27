@@ -53,25 +53,6 @@ $('#cor').click(function(e){
   $('#cores').show();
 });
 
-$('.color').click(function(e){
-  console.log($(this).css("background-color"));
-
-  if(opt == "cabecalho"){
-    
-    $("#evento").css("color", $(this).css("background-color"));
-  }
-  if(opt == "corpo"){
-    
-    $("#data").css("color", $(this).css("background-color"));
-  }
-  if(opt == "rodape"){
-   
-   $("#rodape").css("color", $(this).css("background-color"));
-  }
-  mudaElemento(opt);
-  $('#cores').hide();
-});
-
 $('#elemento').change(function() {
   var option = $('#elemento').find(":selected").val();
   mudaElemento(option);
@@ -104,16 +85,20 @@ function mudaElemento(option){
     opt = 'cabecalho';
   }
   if(option == "corpo"){
-    $("#txt_descricao").val('teste');
+    $("#txt_data_master").val(getContent($('#data_master').html()));
+    var txtSlave = getContent($('#data_slave1').html());
+    txtSlave += ' '+getContent($('#data_slave2').html());
+    $("#txt_data_slave").val(txtSlave);
     $("#fonte_master").val($("#data").css("font-family"));
     $("#tamanho_fonte").val(converteFontePonto($("#data").css("font-size")));
     $("#cor").css("background-color", $("#data").css("color"));
     $("#div_display_txt").css("display","none");
-    $("#data_destaque").css("display","flex");
+    $("#data_destaque").css("display","grid");
     opt = 'corpo';
   }
   if(option == "rodape"){
-    $("#txt_descricao").val($("#txt_rodape").html());
+    
+    $("#txt_descricao").val(html2TextArea($("#txt_rodape").html()));
     $("#fonte_master").val($("#rodape").css("font-family"));
     $("#tamanho_fonte").val(converteFontePonto($("#rodape").css("font-size")));
     $("#cor").css("background-color", $("#rodape").css("color"));
@@ -121,6 +106,13 @@ function mudaElemento(option){
     $("#data_destaque").css("display","none");
     opt = 'rodape';
   }
+}
+
+function getContent(html){
+  const conteudoTexto = html.replace(/<[^>]*>/g, '');
+
+    // Retornar o conteúdo de texto limpo
+  return conteudoTexto;
 }
 
 
@@ -138,7 +130,7 @@ $("#txt_descricao").on("keyup", function () {
   }
   if(opt == "rodape"){
    
-    $("#txt_rodape").text($(this).val());
+    $("#txt_rodape").html(textArea2html($(this).val()));
   }
 });
 
@@ -180,6 +172,76 @@ $('#fonte_master').change(function() {
     }
     mudaElemento(opt);
     });
+
+    function geraCores(){
+      var html = "";
+      var numeroColunas = 10;
+    
+      // Definindo uma paleta de cores principais mais variada
+      var coresPrincipais = [
+        [255, 0, 0],    // Vermelho
+        [255, 165, 0],  // Laranja
+        [255, 255, 0],  // Amarelo
+        [0, 128, 0],    // Verde
+        [0, 255, 255],  // Ciano
+        [0, 0, 255],    // Azul
+        [75, 0, 130],   // Índigo
+        [238, 130, 238],// Violeta
+        [128, 128, 128],// Cinza
+        [255, 255, 255],// Branco
+        [0, 0, 0]       // Preto
+      ];
+    
+      // Função para interpolar entre duas cores
+      function interpolateColor(color1, color2, factor) {
+        if (arguments.length < 3) { 
+          factor = 0.5; 
+        }
+        var result = color1.slice();
+        for (var i = 0; i < 3; i++) {
+          result[i] = Math.round(result[i] + factor * (color2[i] - result[i]));
+        }
+        return result;
+      }
+    
+      for(var i = 0; i < numeroColunas; i++){
+        html += "<div>";
+    
+        for(var j = 0; j < numeroColunas; j++){
+          // Calcular a posição relativa na grade
+          var rowPosition = i / (numeroColunas - 1);
+          var colPosition = j / (numeroColunas - 1);
+    
+          // Selecionar cores para interpolar, espaçadas uniformemente
+          var colorIndex1 = Math.floor(rowPosition * (coresPrincipais.length - 1));
+          var colorIndex2 = (colorIndex1 + 1) % coresPrincipais.length;
+    
+          // Interpolar entre as duas cores baseado na posição
+          var interpolatedColor = interpolateColor(coresPrincipais[colorIndex1], coresPrincipais[colorIndex2], colPosition);
+          var cor = `rgb(${interpolatedColor[0]}, ${interpolatedColor[1]}, ${interpolatedColor[2]})`;
+    
+          html += '<div class="color" style="background-color: ' + cor + '; "></div>';
+        }
+        html += "</div>";
+      }
+      $('#div_cores').html(html);
+    
+      $('.color').click(function(e){
+        console.log($(this).css("background-color"));
+    
+        if(opt == "cabecalho"){
+          $("#evento").css("color", $(this).css("background-color"));
+        }
+        if(opt == "corpo"){
+          $("#data").css("color", $(this).css("background-color"));
+        }
+        if(opt == "rodape"){
+          $("#rodape").css("color", $(this).css("background-color"));
+        }
+        mudaElemento(opt);
+        $('#cores').hide();
+      });
+    }
   
 
 function carregarDatas(data){
@@ -238,7 +300,10 @@ function alingOtherElements(height){
   $("#pre_visualizar").css("bottom", height+"px");
   //alinhamento do layout img
   var posicaoLayoutImg = height+parseInt(alturaPreVisualizar);
+  var alturaCores = $(document).height() - posicaoLayoutImg;
   $("#layoutImg").css("bottom", posicaoLayoutImg+"px");
+  $("#cores").css("height", alturaCores+"px");
+  geraCores();
   //alinhamento dos campos
   var alturaCampos = $(document).height() - (parseInt(alturaMenu) + parseInt(alturaLayoutImg) + parseInt(alturaPreVisualizar) + height);
   console.log($(document).height());
@@ -409,7 +474,7 @@ function busca_agenda(agenda_id ){
 
   function troca_layout(option, origem_lote){
       
-    if(origem_lote){
+    //if(origem_lote){
       //$('#layout').hide();        
    
       if(array_sequencial()){
@@ -439,9 +504,9 @@ function busca_agenda(agenda_id ){
         $("#data_master").css("font-size","3.1em");
         $("#data_master").html("<span>"+str_dias+"</span>");
         $("#data_slave1").html("<span>Das "+hora_inicio_fixo+"</span>");
-          $("#data_slave2").html("<span>às "+hora_fim_fixo+"</span>");
+        $("#data_slave2").html("<span>às "+hora_fim_fixo+"</span>");
       }
-    }else{
+    /*}else{
       
    
       if(option == "D"){
@@ -466,7 +531,7 @@ function busca_agenda(agenda_id ){
         $("#data_slave2").html("<span> às "+ H +"</span>");
         
       }
-    }
+    }*/
 
       
   }
