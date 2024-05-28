@@ -361,7 +361,13 @@ function busca_agenda(agenda_id ){
     console.log(origem_lote);
     console.log(dias_agenda);
     $(document.body).show();
-    evento_agenda(origem_lote, obj.agenda.agenda_evento_id);
+    var isEdit = false;
+    if(obj.agenda.agenda_layout != null && obj.agenda.agenda_layout != ''){
+      isEdit = true;
+      $("#divImg").html(obj.agenda.agenda_layout);
+    }
+    evento_agenda(origem_lote, obj.agenda, isEdit);
+    
   });
 }
 
@@ -376,11 +382,11 @@ function busca_agenda(agenda_id ){
 
 
 
-  function evento_agenda(origem_lote, evento_id){
+  function evento_agenda(origem_lote, agenda, isEdit){
     $.ajax({
       method: "POST",
       url: "https://pedeoferta.com.br/templo/index.php/welcome/get_layout_evento",
-      data: {evento_id: evento_id}
+      data: {evento_id: agenda.agenda_evento_id}
     })
     .done(function(ret) {
       //getImgSize("./imgs/imgs-igreja/missa1.jpg");
@@ -388,13 +394,19 @@ function busca_agenda(agenda_id ){
 
       var html = '';
       html += '<section class="regular slider">';
-      console.log(obj);
+      
       $.each(obj.lista_layout_evento, function (k, lpp) {
-          html += '<a id="'+k+'"  data-layout_id="'+lpp.layout_id+'"  data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" data-evento_sub_descricao="'+lpp.evento_sub_descricao+'" class="layout_css produtos_perfil"><div  class="divPerfilEC" style="opacity: 0.5;height: 80px;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
+        var layoutEdit = '';
+        if(isEdit && lpp.layout_id == agenda.agenda_layout_id){
+          layoutEdit = 'layoutEdit';
+        }
+          html += '<a id="'+k+'"  data-layout_id="'+lpp.layout_id+'"  data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" data-evento_sub_descricao="'+lpp.evento_sub_descricao+'" class="layout_css produtos_perfil '+layoutEdit+'"><div  class="divPerfilEC" style="opacity: 0.5;height: 80px;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
               html += '<div style="display: grid;">';
           html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.layout_background_icone+'" style="height:55px;width:60px;border-radius:50%;"/></div>';
                 html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;"></span></div>';
               html += '</div></a>';
+
+
       });
       html += '</section>';
 
@@ -404,20 +416,24 @@ function busca_agenda(agenda_id ){
       $('#carregando').hide();
       $('.produtos_perfil').click(function(e){
         $('.divPerfilEC').removeClass('perfil_ec_selected');
-        $(this).children().addClass('perfil_ec_selected');                    
-       
+        $(this).children().addClass('perfil_ec_selected');
       });
 
       
-
+      
       $('.layout_css').click(function(e){
         obj_layout = carrega_layout($(this));
         console.log(obj_layout.descricao);
         atualiza_layout(obj_layout, origem_lote);
       });
       
-      troca_layout('S', origem_lote);
-      $('#0').click();
+      if(!isEdit){
+        troca_layout('S', origem_lote);
+        $('#0').click();
+      }
+      else{
+        carregaBackground(carrega_layout($(".layoutEdit")));
+      }
       
     });
   }
@@ -432,19 +448,23 @@ function busca_agenda(agenda_id ){
                 data_css: $(e).data('data_css'),
                 master_css: $(e).data('master_css'),
                 data_slave1: $(e).data('slave1_css'),
-                rodape: $(e).data('rodape_css')              
+                rodape: $(e).data('rodape_css')
               };
 
               
     return layout; 
   }
 
-  function atualiza_layout(layout, origem_lote){
-    descricao = "";
-    sub_descricao = "";
+  function carregaBackground(layout){
     layout_id = layout.layout_id;
     img_src = "imgs/imgs-igreja/"+layout.img_src;
     $("#divImg").css("background-image", "url("+img_src+")");
+  }
+
+  function atualiza_layout(layout, origem_lote){
+    descricao = "";
+    sub_descricao = "";
+    carregaBackground(layout);
     if($("#descricao").val() != "" && $("#descricao").val() != layout.descricao){
       descricao = $("#descricao").val(); 
     }
@@ -487,7 +507,7 @@ function busca_agenda(agenda_id ){
 
   function troca_layout(option, origem_lote){
       
-    //if(origem_lote){
+    if(origem_lote){
       //$('#layout').hide();        
    
       if(array_sequencial()){
@@ -516,32 +536,12 @@ function busca_agenda(agenda_id ){
         $("#data_master").html("<span>"+str_dias+"</span>");
         $("#data_slave1").html("<span>Das "+hora_inicio_fixo+" às "+hora_fim_fixo+"</span>");
       }
-    /*}else{
-      
-   
-      if(option == "D"){
-        $("#data_master").css("font-size","6.5em");
-        $("#data_master").html("<span>"+ D +"</span>");
-        $("#data_slave1").html("<span>"+ mes +"</span>");
-        $("#data_slave2").html("<span>"+ H +"</span>");
-      }
-  
-      if(option == "H"){
-        $("#data_master").css("font-size","5.5em");
-        $("#data_master").html("<span>"+ H +"</span>");
-        $("#data_slave1").html("<span> dia "+ D +"</span>");
-        $("#data_slave2").html("<span> de "+ mes +"</span>");
+    }else{
         
-      }
-  
-      if(option == "S"){
-        $("#data_master").css("font-size","4.8em");
         $("#data_master").html("<span>"+ diaName +"</span>");
-        $("#data_slave1").html("<span>dia "+ D +"</span>");
-        $("#data_slave2").html("<span> às "+ H +"</span>");
-        
-      }
-    }*/
+        $("#data_slave1").html("<span>dia "+ D +"  às "+ H +"</span>");
+   
+    }
 
       
   }
@@ -551,7 +551,7 @@ function busca_agenda(agenda_id ){
       $("#"+divElement).removeAttr("style")
       $.each(arrStyle, function(index, value) { 
         var hashmap = value.split(":");
-        $("#"+divElement).css(hashmap[0], hashmap[1]);        
+        $("#"+divElement).css(hashmap[0], hashmap[1]);
     });
 
 
@@ -578,7 +578,9 @@ function busca_agenda(agenda_id ){
       $("#rodape").css("font-family", $(this).find('option:selected').val());
       });
   
-    
+      $('#div_btn_close').click(function(e){
+        window.location='calendario.html';
+      });
 
     $(function() {
       var $exibirTexto = $("#txt_rodape");
@@ -590,7 +592,7 @@ function busca_agenda(agenda_id ){
 
     document.getElementById('btn_salvar').addEventListener('click',function(){
      print();
-     //salvar();
+     salvar();
      
     });
 
@@ -606,7 +608,8 @@ function busca_agenda(agenda_id ){
               agenda_layout_data : $('#layout').find(":selected").val(),
               agenda_desc_footer : $("#txt_rodape").html(),
               agenda_font_footer : "font-family:" + $('#fonte1').find(":selected").val(),
-              agenda_layout_id: layout_id
+              agenda_layout_id: layout_id,
+              agenda_layout: $("#divImg").html()
             }
       })
       .done(function(ret) {
@@ -621,6 +624,11 @@ function busca_agenda(agenda_id ){
   
         
       });
+    }
+
+    function getStyleElement(elemento){
+      var styles = $div.attr('style');
+      console.log(styles.replace(/\s+/g, ''));
     }
 
 
