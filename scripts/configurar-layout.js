@@ -9,6 +9,8 @@ var layout_id = 0;
 var agenda_id = 0;
 hora_inicio_fixo = '0';
 hora_fim_fixo = '0';
+descricao_cabecalho = '';
+descricao_rodape = '';
 opt = "cabecalho";
 
 const dias = [
@@ -36,18 +38,111 @@ const months = [
   { 'id': 12, 'name': 'Dez' },
 ];
 
-
 $(document).ready(function() {
   getImgSize("./imgs/imgs-igreja/missa1.jpg");
-  /*setTimeout(function() { 
-    getImgSize("./imgs/imgs-igreja/missa1.jpg");
-}, 5000);*/
   
   agenda_id = window.sessionStorage.getItem('agenda_id');
-  button_edit_hide();
-  
+
   busca_agenda(agenda_id);
 });
+
+function busca_agenda(agenda_id ){
+  $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_by_id",
+    data: {agenda_id: agenda_id}
+  })
+  .done(function(ret) {
+    str_dias_escolhidos = '';
+    var obj = jQuery.parseJSON(ret);
+    console.log(obj);
+    if(obj.agenda.agenda_lote > 0){
+     
+      str_dias_escolhidos = obj.agenda.agenda_dias_escolhidos.split(",");//FILIPE
+   
+      str_dias_escolhidos.forEach(function(element, index) {
+        
+        dias_agenda.push(parseInt(element));
+      });
+    }
+
+    carrega_horas_fixas(obj.agenda.data_inicio_fixo, obj.agenda.data_fim_fixo);
+    carregarDatas(obj.agenda.data_referencia);
+   
+
+    $(document.body).show();
+   
+    if(isEdit(obj.agenda)){
+      $("#divImg").html(obj.agenda.agenda_layout);
+    }
+    evento_agenda(obj.agenda);
+    
+  });
+}
+
+function evento_agenda(agenda){
+  $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_layout_evento",
+    data: {evento_id: agenda.agenda_evento_id}
+  })
+  .done(function(ret) {
+    //getImgSize("./imgs/imgs-igreja/missa1.jpg");
+    var obj = jQuery.parseJSON(ret);
+
+    var html = '';
+    html += '<section class="regular slider">';
+    
+    $.each(obj.lista_layout_evento, function (k, lpp) {
+      var layoutEdit = '';
+      if(isEdit(agenda) && lpp.layout_id == agenda.agenda_layout_id){
+        layoutEdit = 'layoutEdit';
+      }
+        html += '<a id="'+k+'"  data-layout_id="'+lpp.layout_id+'"  data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" data-evento_sub_descricao="'+lpp.evento_sub_descricao+'" class="layout_css produtos_perfil '+layoutEdit+'"><div  class="divPerfilEC" style="opacity: 0.5;height: 80px;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
+            html += '<div style="display: grid;">';
+        html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.layout_background_icone+'" style="height:55px;width:60px;border-radius:50%;"/></div>';
+              html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;"></span></div>';
+            html += '</div></a>';
+
+
+    });
+    html += '</section>';
+
+    $("#divLayoutSlick").html(html);
+
+    slick();
+     
+    $('.layout_css').click(function(e){
+      //inicio deixa layout slick selecionado
+      $('.divPerfilEC').removeClass('layout_slick_selected');
+      $(this).children().addClass('layout_slick_selected');
+      //fim deixa layout slick selecionado
+      obj_layout = data2objLayout($(this));
+      atualiza_layout(obj_layout, agenda);
+      
+    });
+    
+    if(!isEdit(agenda)){
+      
+      $('#0').click();
+    }
+    else{
+      carregaBackground(data2objLayout($(".layoutEdit")));
+    }
+
+    mudaElemento(opt);
+    
+  });
+}
+
+function carrega_horas_fixas(data_inicio, data_fim){
+  var hashdata = data_inicio.split("-");
+  hora_inicio_fixo = hashdata[3];
+  var hashdata = data_fim.split("-");
+  hora_fim_fixo = hashdata[3];
+  console.log(hora_inicio_fixo);
+  console.log(hora_fim_fixo);
+}
 
 $('#cor').click(function(e){
   $('#cores').show();
@@ -120,12 +215,13 @@ $("#txt_descricao").on("keyup", function () {
 
   if(opt == "cabecalho"){
     $('#txt_evento').html(textArea2html($(this).val()));
-    //$("#txt_evento").html($(this).val());
+    descricao_cabecalho = textArea2html($(this).val());
     
   }
   if(opt == "rodape"){
    
     $("#txt_rodape").html(textArea2html($(this).val()));
+    descricao_rodape = textArea2html($(this).val());
   }
 });
 
@@ -292,8 +388,6 @@ function getImgSize(imgSrc) {
   newImg.src = imgSrc;
   var height = 183;//newImg.height;
   var width = 275;//newImg.width;
-  console.log('heithg: '+height);
-  console.log('wid: '+width);
   p = $(newImg).ready(function() {
       return {width: newImg.width, height: newImg.height};
   });
@@ -302,7 +396,7 @@ function getImgSize(imgSrc) {
   
   $("#divImg").css("height", newHeight+"px");
   alingOtherElements(newHeight);
-  console.log('new heithg: '+newHeight);
+
 }
 
 function alingOtherElements(height){
@@ -334,111 +428,15 @@ function alingOtherElements(height){
 
 
 
-function busca_agenda(agenda_id ){
-  $.ajax({
-    method: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_by_id",
-    data: {agenda_id: agenda_id}
-  })
-  .done(function(ret) {
-    str_dias_escolhidos = '';
-    var obj = jQuery.parseJSON(ret);
-    console.log(obj);
-    if(obj.agenda.agenda_lote > 0){
-      origem_lote = true;
-      str_dias_escolhidos = obj.agenda.agenda_dias_escolhidos.split(",");
-   
-      str_dias_escolhidos.forEach(function(element, index) {
-        
-        dias_agenda.push(parseInt(element));
-      });
-    }else{
-      origem_lote = false;
-    }
-    carrega_horas_fixas(obj.agenda.data_inicio_fixo, obj.agenda.data_fim_fixo);
-    carregarDatas(obj.agenda.data_referencia);
-   
-    console.log(origem_lote);
-    console.log(dias_agenda);
-    $(document.body).show();
-    var isEdit = false;
-    if(obj.agenda.agenda_layout != null && obj.agenda.agenda_layout != ''){
-      isEdit = true;
-      $("#divImg").html(obj.agenda.agenda_layout);
-    }
-    evento_agenda(origem_lote, obj.agenda, isEdit);
-    
-  });
-}
 
-  function carrega_horas_fixas(data_inicio, data_fim){
-    var hashdata = data_inicio.split("-");
-    hora_inicio_fixo = hashdata[3];
-    var hashdata = data_fim.split("-");
-    hora_fim_fixo = hashdata[3];
-    console.log(hora_inicio_fixo);
-    console.log(hora_fim_fixo);
-  }
+
+  
 
 
 
-  function evento_agenda(origem_lote, agenda, isEdit){
-    $.ajax({
-      method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_layout_evento",
-      data: {evento_id: agenda.agenda_evento_id}
-    })
-    .done(function(ret) {
-      //getImgSize("./imgs/imgs-igreja/missa1.jpg");
-      var obj = jQuery.parseJSON(ret);
+  
 
-      var html = '';
-      html += '<section class="regular slider">';
-      
-      $.each(obj.lista_layout_evento, function (k, lpp) {
-        var layoutEdit = '';
-        if(isEdit && lpp.layout_id == agenda.agenda_layout_id){
-          layoutEdit = 'layoutEdit';
-        }
-          html += '<a id="'+k+'"  data-layout_id="'+lpp.layout_id+'"  data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" data-evento_sub_descricao="'+lpp.evento_sub_descricao+'" class="layout_css produtos_perfil '+layoutEdit+'"><div  class="divPerfilEC" style="opacity: 0.5;height: 80px;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
-              html += '<div style="display: grid;">';
-          html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.layout_background_icone+'" style="height:55px;width:60px;border-radius:50%;"/></div>';
-                html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;"></span></div>';
-              html += '</div></a>';
-
-
-      });
-      html += '</section>';
-
-      $("#divHistoria").html(html);
-
-      slick();
-      $('#carregando').hide();
-      $('.produtos_perfil').click(function(e){
-        $('.divPerfilEC').removeClass('perfil_ec_selected');
-        $(this).children().addClass('perfil_ec_selected');
-      });
-
-      
-      
-      $('.layout_css').click(function(e){
-        obj_layout = carrega_layout($(this));
-        console.log(obj_layout.descricao);
-        atualiza_layout(obj_layout, origem_lote);
-      });
-      
-      if(!isEdit){
-        troca_layout('S', origem_lote);
-        $('#0').click();
-      }
-      else{
-        carregaBackground(carrega_layout($(".layoutEdit")));
-      }
-      
-    });
-  }
-
-  function carrega_layout(e){
+  function data2objLayout(e){
     
     const layout = {layout_id:$(e).data('layout_id'), 
                 img_src:$(e).data('img_background'), 
@@ -461,51 +459,51 @@ function busca_agenda(agenda_id ){
     $("#divImg").css("background-image", "url("+img_src+")");
   }
 
-  function atualiza_layout(layout, origem_lote){
+  function atualiza_layout(layout, agenda){
     descricao = "";
     sub_descricao = "";
+    console.log(layout);
     carregaBackground(layout);
-    if($("#descricao").val() != "" && $("#descricao").val() != layout.descricao){
-      descricao = $("#descricao").val(); 
+    if(descricao_cabecalho != "" && descricao_cabecalho != layout.descricao){
+      descricao = descricao_cabecalho;  
     }
     else{
-      descricao = layout.descricao;
+      descricao = layout.descricao;//sugestao
     }
     
-    if($("#descricao_rodape").val() != "" && $("#descricao_rodape").val() != layout.descricao){
-      sub_descricao = $("#descricao_rodape").val(); 
+    if(descricao_rodape != "" && descricao_rodape != layout.descricao){
+      sub_descricao = descricao_rodape; 
     }
     else{
-      sub_descricao = layout.evento_sub_descricao;
+      sub_descricao = layout.evento_sub_descricao;//sugestao
     }
-
-    
 
     $("#txt_evento").html(descricao);
-    $("#descricao").val(descricao);
     $("#txt_rodape").html(sub_descricao);
-    $("#descricao_rodape").val(sub_descricao);
-    
+  
     set_style(layout.evento_css, 'evento');
     set_style(layout.data_css, 'data');
     set_style(layout.master_css, 'data_master');
     set_style(layout.data_slave1, 'data_slave1');
     set_style(layout.rodape, 'rodape');
-    mudaElemento(opt);
-    if(origem_lote){
-      $('#data').css('pointer-events', 'none');
-    }
+    
     tamanhoDataSlave();
+    sugestao_data(origemLote(agenda));
   }
 
-
-
-  $('#layout').change(function() {
-    var option = $('#layout').find(":selected").val();
-    troca_layout(option, false);
+  function set_style(strStyle, divElement){
+    arrStyle = strStyle.split(";");
+    $("#"+divElement).removeAttr("style")
+    $.each(arrStyle, function(index, value) { 
+      var hashmap = value.split(":");
+      $("#"+divElement).css(hashmap[0], hashmap[1]);
   });
 
-  function troca_layout(option, origem_lote){
+
+}
+
+
+  function sugestao_data(origem_lote){
       
     if(origem_lote){
       //$('#layout').hide();        
@@ -546,16 +544,7 @@ function busca_agenda(agenda_id ){
       
   }
 
-  function set_style(strStyle, divElement){
-      arrStyle = strStyle.split(";");
-      $("#"+divElement).removeAttr("style")
-      $.each(arrStyle, function(index, value) { 
-        var hashmap = value.split(":");
-        $("#"+divElement).css(hashmap[0], hashmap[1]);
-    });
-
-
-  }
+ 
 
 
   function slick(){
@@ -582,13 +571,7 @@ function busca_agenda(agenda_id ){
         window.location='calendario.html';
       });
 
-    $(function() {
-      var $exibirTexto = $("#txt_rodape");
-      $("#descricao_rodape").on("keyup", function () {
-        var texto = $(this).val();
-        $exibirTexto.text(texto);
-      });
-    });
+    
 
     document.getElementById('btn_salvar').addEventListener('click',function(){
      print();
@@ -686,18 +669,6 @@ function busca_agenda(agenda_id ){
     popup_edit++;
   }
 
-  function button_edit_show(){
-    $('#modalHeader').show();
-    $('#modalData').show();
-    $('#modalFooter').show();
-  }
-  function button_edit_hide(){
-    $('#modalHeader').hide();
-    $('#modalData').hide();
-    $('#modalFooter').hide();
-  }
-  //setInterval(button_edit,5000);
-
   function upload_layout(imageFile){
     
 
@@ -773,5 +744,23 @@ function array_sequencial(){
     
   });
   return retorno;
+}
+
+function origemLote(objAgenda){
+  if(objAgenda.agenda_lote > 0){
+    return true;    
+  }else{
+    return false;
+  }
+
+}
+
+function isEdit(objAgenda){
+  if(objAgenda.agenda_layout != null && objAgenda.agenda_layout != ''){
+    return true;
+  }  
+  else{
+    return false;
+  }
 }
 
