@@ -472,13 +472,13 @@ function alingOtherElements(height){
     console.log(layout);
     carregaBackground(layout);
     if(!isEdit(agenda)){
-      sugestao_layout(layout);
+      sugestao_layout(layout, agenda);
     }
 
     mudaElemento(opt);
   }
 
-  function sugestao_layout(layout){
+  function sugestao_layout(layout, agenda){
     if(descricao_cabecalho != "" && descricao_cabecalho != layout.descricao){
       descricao = descricao_cabecalho;  
     }
