@@ -94,11 +94,16 @@ function evento_agenda(agenda){
     html += '<section class="regular slider">';
     
     $.each(obj.lista_layout_evento, function (k, lpp) {
-      var layoutEdit = '';
-      if(isEdit(agenda) && lpp.layout_id == agenda.agenda_layout_id){
-        layoutEdit = 'layoutEdit';
+      var idK = k;
+      if(isEdit(agenda)){
+        if(lpp.layout_id != agenda.agenda_layout_id){
+          return true;
+        }else{
+          idK = 0;
+        }
+
       }
-        html += '<a id="'+k+'"  data-layout_id="'+lpp.layout_id+'"  data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" data-evento_sub_descricao="'+lpp.evento_sub_descricao+'" class="layout_css produtos_perfil '+layoutEdit+'"><div  class="divPerfilEC" style="opacity: 0.5;height: 80px;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
+        html += '<a id="'+idK+'"  data-layout_id="'+lpp.layout_id+'"  data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" data-evento_sub_descricao="'+lpp.evento_sub_descricao+'" class="layout_css produtos_perfil "><div  class="divPerfilEC" style="opacity: 0.5;height: 80px;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
             html += '<div style="display: grid;">';
         html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.layout_background_icone+'" style="height:55px;width:60px;border-radius:50%;"/></div>';
               html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;"></span></div>';
@@ -122,15 +127,17 @@ function evento_agenda(agenda){
       
     });
     
-    if(!isEdit(agenda)){
+    //FILIPE
+    //if(!isEdit(agenda)){
       
       $('#0').click();
-    }
-    else{
-      carregaBackground(data2objLayout($(".layoutEdit")));
-    }
+    //}
+    //else{
+      //carregaBackground(data2objLayout($(".layoutEdit")));
+      //$(".layoutEdit").click();
+    //}
 
-    mudaElemento(opt);
+    
     
   });
 }
@@ -464,6 +471,14 @@ function alingOtherElements(height){
     sub_descricao = "";
     console.log(layout);
     carregaBackground(layout);
+    if(!isEdit(agenda)){
+      sugestao_layout(layout);
+    }
+
+    mudaElemento(opt);
+  }
+
+  function sugestao_layout(layout){
     if(descricao_cabecalho != "" && descricao_cabecalho != layout.descricao){
       descricao = descricao_cabecalho;  
     }
@@ -511,14 +526,12 @@ function alingOtherElements(height){
       if(array_sequencial()){
         if(dias_agenda.length == 1){
           dia_inicio = dias.find(x => x.id == dias_agenda[0]).name;
-          $("#data_master").css("font-size","4.8em");
           $("#data_master").html("<span>"+dia_inicio+"</span>");
           $("#data_slave1").html("<span>Das "+hora_inicio_fixo+" às "+hora_fim_fixo+"</span>");
         }
         else{
           dia_inicio = dias.find(x => x.id == dias_agenda[0]).name;
           dia_fim = dias.find(x => x.id == dias_agenda[dias_agenda.length-1]).name;
-          $("#data_master").css("font-size","4.8em");
           $("#data_master").html("<span>"+dia_inicio+" à "+dia_fim+"</span>");
           $("#data_slave1").html("<span>Das "+hora_inicio_fixo+" às "+hora_fim_fixo+"</span>");
         }  
@@ -530,7 +543,6 @@ function alingOtherElements(height){
           else
             str_dias += dias.find(x => x.id == element).name.substring(0,3)
         });
-        $("#data_master").css("font-size","3.1em");
         $("#data_master").html("<span>"+str_dias+"</span>");
         $("#data_slave1").html("<span>Das "+hora_inicio_fixo+" às "+hora_fim_fixo+"</span>");
       }
