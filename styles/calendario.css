@@ -243,4 +243,17 @@ body {
     border-radius: 30px;
 }
 
+.modal-status {
+    background-color: white;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    border-radius: 30px;
+    width: 85%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    max-width: 400px;
+}
 

@@ -25,7 +25,6 @@ $(document).ready(function() {
 
   $('#editar_layout').click(function(){
           var agenda_id = $(this).find('[data-agenda_id]').data('agenda_id');
-          alert(agenda_id);
           var agenda_hora = $(this).find('[data-agenda_hora]').data('agenda_hora');
           var str_data_referencia =  dtReferencia + '-' +  agenda_hora;
           window.sessionStorage.setItem('agenda_id', agenda_id);
@@ -66,7 +65,6 @@ $(document).ready(function() {
     $('#modalConfirmacao').hide();
     $('#modal_config').hide();
   });
-
 });
 
 const months = [
@@ -239,22 +237,38 @@ function mock_agenda(){
         console.log(obj.agenda_data_inicio);
     });
   
-      
-  
-  
   }
 
+
+
+  function statusLayout(status, ch){
+    
+    cor = '';
+    if(status == 1){
+      cor = 'green';
+    }else{
+      cor = 'red';
+    }
+    return  '<div id="div_status" style="width: 10%; align-items: center; display: flex; justify-content: center;">'+
+            '<div data-agenda_id="'+ch.agenda_id+'" data-status="'+status+'" id="status_layout" style="border-radius: 50%; background-color: '+cor+'; width: 10px; height: 10px; border: 1px solid '+cor+';"></div>'+
+            '</div>';
+  }
+
+  $('#ok').click(function(){
+    $('#modalStatus').hide();
+  });
+  
   function get_calendario_hora(dtReferencia){
 
 	$.ajax({
 	   method: "POST",
 	   url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_calendario_hora",
 	   data: {  'igreja_id': igrejaId, 
-                data_referencia: dtReferencia
+                data_referencia: dtReferencia,
+                
 			 }
 	 })
 	   .done(function(ret) {
-
 
 			var obj = jQuery.parseJSON(ret);
 
@@ -265,17 +279,17 @@ function mock_agenda(){
             var total_checked = 0;
 			$.each(obj.calendario_hora, function (k, ch) {
 				checked = '';
-
 				
 				html =  '<div class="pesq" style="background-color: white;height:50px;line-height:50px; padding-bottom: 10px; border-bottom: 1px solid #5b318a36">';
 
 				html +=     '<div class="add" style="display: flex;" data-agenda_id="'+ ch.agenda_id +'">' +
-								'<div style="width: 40%; text-align: left;">'+
+								'<div style="width: 35%; text-align: left;">'+
 									'<span style="font-size:1.5rem; color: black; margin-left: 15px;">'+ ch.agenda_hora +'</span>'+
 								'</div>'+
-                                '<div style="width: 40%; text-align: left;">'+
+                                '<div style="width: 35%; text-align: left;">'+
 									'<span style="font-size:1.5rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
 								'</div>'+
+                statusLayout(ch.agenda_layout_configurado, ch)+
                                 '<div class="columns">' +
                                 '<span data-agenda_img="'+ ch.agenda_img +'"data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'" class="material-symbols-outlined acToggle config">more_horiz</span>'+
                                 //'<span data-agenda_img="'+ ch.agenda_img +'" class="material-symbols-outlined acToggle ver_layout">visibility</span>'+
@@ -302,14 +316,38 @@ function mock_agenda(){
                 $('#modal_config').show();
             });
 
+            $('#status_layout').click(function(){
+              var agenda_id = $(this).data('agenda_id');
+              var status = $(this).data('status');
+
+              $('#modalStatus').find('[data-agenda_id]').data('agenda_id', agenda_id);
+              $('#modalStatus').find('[data-status]').data('status', status);
+
+              $('#modalStatus').show();
+              if(status == 1){
+                 $('#mensagem_status').text('Este evento já está configurado para aparecer no feed');
+                 $('#configurar_layout').css('display', 'none');
+              }else{
+                 $('#mensagem_status').text('Este evento ainda não foi configurado, para configurar basta clicar em configurar layout');
+                 $('#configurar_layout').css('display', 'flex');
+              }
+            });
+
+            $('#configurar_layout').click(function(){
+              var agenda_id = $(this).data('agenda_id');
+              window.sessionStorage.setItem('agenda_id', agenda_id);
+              $('#modalStatus').hide();
+              window.location = 'configurar-layout.html';
+            });
+
             $('.remove-igreja').click(function () {
 
               var id = $(this).data('id');
               remover(id);
           });
-      
 
 	   });
+
 }
 
 
