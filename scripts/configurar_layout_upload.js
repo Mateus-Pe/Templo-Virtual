@@ -1,0 +1,97 @@
+$(document).ready(function() {
+  alingDivPreviw();
+});
+
+$('#texto').click(function(e){
+    window.location = "criar-post-texto.html";
+  });
+
+  $('#video').click(function(e){
+    window.location = "criar-post-video.html";
+  });
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Inicialize o TinyMCE
+  tinymce.init({
+      selector: '#descricao2',
+      height: '20rem',
+      plugins: [],
+      toolbar: 'undo redo | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | removeformat | code',
+      fontsize_formats: '8px 10px 12px 14px 18px 24px 36px',
+      content_style: 'body { font-family: Arial, Helvetica, sans-serif; font-size: 14px; }',
+      ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("txixhs2kyot0muep1k6v2mp5hd6wqk30jmbvp6hv8pk3g4b7")),
+  });
+
+  
+  // Aguarde 10 milissegundos e, em seguida, remova a barra de status do TinyMCE
+  setTimeout(function() {
+      // Encontra a div com a classe .tox-statusbar
+      var statusbarDiv = document.querySelector('.tox .tox-statusbar');
+
+      // Verifica se a div foi encontrada
+      if (statusbarDiv) {
+          // Remove a div
+          statusbarDiv.remove();
+      } else {
+          // Se a div não foi encontrada, exibe uma mensagem de erro no console
+          console.error('A div com a classe .tox .tox-statusbar não foi encontrada.');
+      }
+  }, 1000);
+});
+
+document.getElementById("add_imagem").addEventListener("click", function() {
+  document.getElementById("imageFileInput").click();
+});
+
+document.getElementById('imageFileInput').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          document.getElementById('previewImg').src = e.target.result;
+          //$("#imagem_selecionada").css("background-image", "url("+e.target.result+")");
+      };
+      reader.readAsDataURL(file);
+      console.log($("#previewImg").src);
+      
+  }
+});
+
+function alingDivPreviw(){
+  var alturaMenu = parseInt($(".header1").css("height").replace('px', ''));// 55;
+  var alturaImagemSelected = parseInt($("#imagem").css("height").replace('px', '')); //70;
+  var alturaPreVisualizar = parseInt($("#pre_visualizar").css("height").replace('px', ''));
+  var alturaDivs =  alturaMenu + alturaImagemSelected + alturaPreVisualizar;
+  console.log(alturaDivs);
+  var posicaoTextArea = parseInt($("#textArea").css("height").replace('px', ''));
+  console.log(posicaoTextArea);
+  var alturaPreviw = parseInt($(document).height() - posicaoTextArea - alturaDivs);
+  $("#imagem_selecionada").css("height", alturaPreviw+"px");
+  console.log(alturaPreviw);
+}
+
+document.getElementById("imageFileInput").addEventListener("change", function() {
+  verificarCampos();
+});
+
+window.addEventListener("load", function() {
+  verificarCampos();
+});
+
+
+function verificarCampos() {
+  var arquivoInput = document.getElementById("imageFileInput");
+  var botaoCompartilhar = document.getElementById("btn_salvar");
+
+  if (arquivoInput.files && arquivoInput.files.length > 0) {
+      botaoCompartilhar.disabled = false;
+  } else {
+      botaoCompartilhar.disabled = true;
+  }
+}
+
+//document.getElementById("btn_salvar").addEventListener("click", function() {
+  //alert("Botão de compartilhar clicado!");
+//});
