@@ -12,34 +12,75 @@ $('#texto').click(function(e){
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Inicialize o TinyMCE
-  tinymce.init({
-      selector: '#descricao2',
-      height: '20rem',
-      plugins: [],
-      toolbar: 'undo redo | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | removeformat | code',
-      fontsize_formats: '8px 10px 12px 14px 18px 24px 36px',
-      content_style: 'body { font-family: Arial, Helvetica, sans-serif; font-size: 14px; }',
-      ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("txixhs2kyot0muep1k6v2mp5hd6wqk30jmbvp6hv8pk3g4b7")),
-  });
-
+  document.addEventListener('DOMContentLoaded', function() {
+    var descricaoTexto = document.getElementById('descricao_layout_feed');
+    if (descricaoTexto) {
+      // Inicialize o TinyMCE
+      tinymce.init({
+        selector: '#descricao2',
+        height: '20rem',
+        plugins: [],
+        toolbar: 'undo redo | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | removeformat | code',
+        fontsize_formats: '8px 10px 12px 14px 18px 24px 36px',
+        content_style: 'body { font-family: Arial, Helvetica, sans-serif; font-size: 14px; }',
+        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("txixhs2kyot0muep1k6v2mp5hd6wqk30jmbvp6hv8pk3g4b7")),
+        setup: function(editor) {
+          editor.on('init', function() {
+            // Remove a barra de status ao inicializar o editor
+            var statusbarDiv = document.querySelector('.tox .tox-statusbar');
+            if (statusbarDiv) {
+              statusbarDiv.remove();
+            } else {
+              console.error('A div com a classe .tox .tox-statusbar não foi encontrada.');
+            }
   
-  // Aguarde 10 milissegundos e, em seguida, remova a barra de status do TinyMCE
-  setTimeout(function() {
-      // Encontra a div com a classe .tox-statusbar
-      var statusbarDiv = document.querySelector('.tox .tox-statusbar');
-
-      // Verifica se a div foi encontrada
-      if (statusbarDiv) {
-          // Remove a div
-          statusbarDiv.remove();
+            // Verifica e atualiza o conteúdo do editor ao inicializar
+            var conteudoHtml = editor.getContent();
+            if (!conteudoHtml.trim()) {
+              descricaoTexto.innerHTML = 'Adicione um comentário para visualiza-lo';
+            } else {
+              descricaoTexto.innerHTML = conteudoHtml;
+            }
+            descricaoTexto.style.display = 'inline'; // Exibe a div
+            descricaoTexto.style.opacity = 1;
+          });
+  
+          // Atualiza o conteúdo da div ao modificar o texto no editor
+          editor.on('keyup change', function() {
+            var conteudoHtml = editor.getContent();
+            if (!conteudoHtml.trim()) {
+              descricaoTexto.innerHTML = 'Adicione um comentário para visualiza-lo';
+            } else {
+              descricaoTexto.innerHTML = conteudoHtml;
+            }
+            descricaoTexto.style.display = 'inline'; // Exibe a div quando há conteúdo
+          });
+        }
+      });
+    }
+  
+    // Exibe o modal e a div com o conteúdo do editor
+    $('#visualizar').click(function(e) {
+      var conteudoHtml = tinymce.get('descricao2').getContent();
+      if (!conteudoHtml.trim()) {
+        descricaoTexto.innerHTML = 'Adicione um comentário para visualiza-lo';
       } else {
-          // Se a div não foi encontrada, exibe uma mensagem de erro no console
-          console.error('A div com a classe .tox .tox-statusbar não foi encontrada.');
+        descricaoTexto.innerHTML = conteudoHtml;
       }
-  }, 1000);
-});
+      descricaoTexto.style.display = 'inline'; // Exibe a div quando o modal é aberto
+      $('#modal_visualizar').show();
+    });
+  
+    // Fecha o modal e esconde a div
+    $('#close_view').click(function(e) {
+      $('#modal_visualizar').hide();
+      descricaoTexto.style.display = 'none'; // Esconde a div quando o modal é fechado
+    });
+  });
+  
+  
+  
+  
 
 document.getElementById("add_imagem").addEventListener("click", function() {
   document.getElementById("imageFileInput").click();
@@ -51,7 +92,11 @@ document.getElementById('imageFileInput').addEventListener('change', function(ev
       const reader = new FileReader();
       reader.onload = function(e) {
           document.getElementById('previewImg').src = e.target.result;
+          document.getElementById('visualiza_layout_feed').src = e.target.result;
           //$("#imagem_selecionada").css("background-image", "url("+e.target.result+")");
+          $("#visualizar").css("display","grid");
+          $("#previewImg").css("display","flex");
+          
       };
       reader.readAsDataURL(file);
       console.log($("#previewImg").src);
