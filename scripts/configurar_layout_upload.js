@@ -91,11 +91,24 @@ document.getElementById('imageFileInput').addEventListener('change', function(ev
   if (file) {
       const reader = new FileReader();
       reader.onload = function(e) {
-          document.getElementById('previewImg').src = e.target.result;
+        const img = new Image();
+        $("#visualizar").css("display","none");
+        $("#previewImg").css("display","none");
+            img.onload = function() {
+                const height = img.height;
+                const width = img.width;
+                if (validarImagem(height, width)){
+                  document.getElementById('previewImg').src = e.target.result;
+                  $("#visualizar").css("display","grid");
+                  $("#previewImg").css("display","flex");
+                }
+            }
+            img.src = e.target.result;
+
+          //document.getElementById('previewImg').src = e.target.result;
           document.getElementById('visualiza_layout_feed').src = e.target.result;
           //$("#imagem_selecionada").css("background-image", "url("+e.target.result+")");
-          $("#visualizar").css("display","grid");
-          $("#previewImg").css("display","flex");
+          
           
       };
       reader.readAsDataURL(file);
@@ -103,6 +116,34 @@ document.getElementById('imageFileInput').addEventListener('change', function(ev
       
   }
 });
+
+function validarImagem(height, width){
+  retorno = true;
+
+  if ((1.33 * width) > height && height > width) {
+    $("#modalConfirmacao").show();
+    texto_modal = "<p> Erro ao carregar a imagem, procure uma imagem com as dimensões de largura e altura próximas.</p><br>";
+      $('#mensagem_modal').html(texto_modal);
+      retorno = false;
+  }
+  if ((1.8 * height) > width && width > height) {
+    $("#modalConfirmacao").show();
+    texto_modal = "<p> Erro ao carregar a imagem, procure uma imagem com as dimensões de largura e altura próximas.</p><br>";
+      $('#mensagem_modal').html(texto_modal);
+      retorno = false;
+  }
+  if (height < 100 || width < 100){
+    $("#modalConfirmacao").show();
+    texto_modal = "<p> Erro ao carregar a imagem, procure uma imagem com mais de 100 pixels.</p><br>";
+      $('#mensagem_modal').html(texto_modal);
+      retorno = false;
+  }
+  console.log(`Altura: ${height}, Largura: ${width}`);
+  $('#confirmar').click(function(e){
+    $("#modalConfirmacao").hide();
+  });
+  return retorno;
+}
 
 function alingDivPreviw(){
   var alturaMenu = parseInt($(".header1").css("height").replace('px', ''));// 55;
