@@ -209,7 +209,7 @@ function formata_data(day){
         
         if(obj.status ==1){
             window.sessionStorage.setItem('agenda_id', obj.agenda_id);
-            window.location = "configurar-layout.html";
+            window.location = "escolha-layout.html";
         }
 
 

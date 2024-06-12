@@ -1,0 +1,32 @@
+.principal{
+    display: grid;
+    gap: 0.5rem;
+    position: relative;
+    top: 10%;
+}
+
+.div-container{
+    border-top: 1px solid rgba(0, 0, 0, 0.30);
+    border-radius: 10px;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.div-botao{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding-bottom: 10px;
+}
+
+.botao{
+    font-family: Exo;
+    border: 1px solid darkred;
+    background-color: white;
+    width: 70%;
+    border-radius: 10px;
+    height: 6.5rem;
+    font-size: 1.5rem;
+}

@@ -250,7 +250,7 @@ function mock_agenda(){
       cor = 'red';
     }
     return  '<div id="div_status" style="width: 10%; align-items: center; display: flex; justify-content: center;">'+
-            '<div data-agenda_id="'+ch.agenda_id+'" data-status="'+status+'" id="status_layout" style="border-radius: 50%; background-color: '+cor+'; width: 10px; height: 10px; border: 1px solid '+cor+';"></div>'+
+            '<div data-agenda_id="'+ch.agenda_id+'" data-status="'+status+'" class="status_layout" style="border-radius: 50%; background-color: '+cor+'; width: 10px; height: 10px; border: 1px solid '+cor+';"></div>'+
             '</div>';
   }
 
@@ -316,7 +316,7 @@ function mock_agenda(){
                 $('#modal_config').show();
             });
 
-            $('#status_layout').click(function(){
+            $('.status_layout').click(function(){
               var agenda_id = $(this).data('agenda_id');
               var status = $(this).data('status');
 
