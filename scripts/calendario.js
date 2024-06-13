@@ -244,7 +244,7 @@ function mock_agenda(){
   function statusLayout(status, ch){
     
     cor = '';
-    if(status == 1){
+    if(status > 0){
       cor = 'green';
     }else{
       cor = 'red';
@@ -289,7 +289,7 @@ function mock_agenda(){
                                 '<div style="width: 35%; text-align: left;">'+
 									'<span style="font-size:1.5rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
 								'</div>'+
-                statusLayout(ch.agenda_layout_configurado, ch)+
+                statusLayout(ch.agenda_layout_tipo, ch)+
                                 '<div class="columns">' +
                                 '<span data-agenda_img="'+ ch.agenda_img +'"data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'" class="material-symbols-outlined acToggle config">more_horiz</span>'+
                                 //'<span data-agenda_img="'+ ch.agenda_img +'" class="material-symbols-outlined acToggle ver_layout">visibility</span>'+

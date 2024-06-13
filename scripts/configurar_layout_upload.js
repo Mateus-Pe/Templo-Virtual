@@ -1,5 +1,10 @@
+var previewImg = false;
+var conteudoHtml = '';
+var agenda_id = 0;
+
 $(document).ready(function() {
   alingDivPreviw();
+  agenda_id = window.sessionStorage.getItem('agenda_id');
 });
 
 $('#texto').click(function(e){
@@ -35,7 +40,8 @@ $('#texto').click(function(e){
             }
   
             // Verifica e atualiza o conteúdo do editor ao inicializar
-            var conteudoHtml = editor.getContent();
+            conteudoHtml = editor.getContent();
+            console.log(conteudoHtml);
             if (!conteudoHtml.trim()) {
               descricaoTexto.innerHTML = 'Adicione um comentário para visualiza-lo';
             } else {
@@ -47,7 +53,7 @@ $('#texto').click(function(e){
   
           // Atualiza o conteúdo da div ao modificar o texto no editor
           editor.on('keyup change', function() {
-            var conteudoHtml = editor.getContent();
+            conteudoHtml = editor.getContent();
             if (!conteudoHtml.trim()) {
               descricaoTexto.innerHTML = 'Adicione um comentário para visualiza-lo';
             } else {
@@ -94,6 +100,7 @@ document.getElementById('imageFileInput').addEventListener('change', function(ev
         const img = new Image();
         $("#visualizar").css("display","none");
         $("#previewImg").css("display","none");
+        previewImg = false;
             img.onload = function() {
                 const height = img.height;
                 const width = img.width;
@@ -101,6 +108,7 @@ document.getElementById('imageFileInput').addEventListener('change', function(ev
                   document.getElementById('previewImg').src = e.target.result;
                   $("#visualizar").css("display","grid");
                   $("#previewImg").css("display","flex");
+                  previewImg = true;
                 }
             }
             img.src = e.target.result;
@@ -139,9 +147,6 @@ function validarImagem(height, width){
       retorno = false;
   }
   console.log(`Altura: ${height}, Largura: ${width}`);
-  $('#confirmar').click(function(e){
-    $("#modalConfirmacao").hide();
-  });
   return retorno;
 }
 
@@ -178,6 +183,38 @@ function verificarCampos() {
   }
 }
 
-//document.getElementById("btn_salvar").addEventListener("click", function() {
-  //alert("Botão de compartilhar clicado!");
-//});
+document.getElementById("btn_salvar").addEventListener("click", function() {
+
+  if(!previewImg){
+    $("#modalConfirmacao").show();
+    texto_modal = "<p> Erro ao compartilhar, selecione uma imagem.</p><br>";
+      $('#mensagem_modal').html(texto_modal);
+  }else{
+    salvar();
+  }
+});
+
+$('#confirmar').click(function(e){
+  $("#modalConfirmacao").hide();
+});
+
+function salvar(){
+  file = $("#imageFileInput");
+  $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_layout_agenda_upload",
+    data: {
+          agenda_id: agenda_id,
+          agenda_layout_upload_img : 'teste inicial',
+          agenda_layout_upload_desc : conteudoHtml
+        }
+  })
+  .done(function(ret) {
+
+    var obj = jQuery.parseJSON(ret);
+
+    if(obj.status == '1'){
+      window.location='calendario.html';
+    }
+  });
+}
