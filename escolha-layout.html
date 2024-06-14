@@ -65,26 +65,49 @@
 </head>
 
 <body style="background-color: white">
+
+
+    <header class="header1">
+        <div style="position: relative;">
+            <span style="color: white; font-size: 1.5rem; font-family: exo;">
+                CONFIGURAR LAYOUT PARA O FEED
+            </span>
+        </div>
+    </header>
+
+
     <div class="principal">
-        <div class="div-container">
-            <div class="div-botao">
-                <button id="imagem_existente" class="botao">
-                    Configurar layout para o feed com imagem já existente.
-                </button>
+        <div class="opcoes">
+            <div class="div-container" style=" box-shadow: 0 3px 6px rgba(0, 0, 255, 0.2), 0 3px 6px rgba(0, 0, 255, 0.2);">
+                <div style="justify-content: center; display: flex;">
+                    <span class="material-symbols-outlined" style="font-size: 6rem; color: lightblue;">
+                        image_search
+                    </span>
+                </div>
+                <div class="div-botao">
+                    <button id="imagem_existente" class="botao" style="border: 1px solid darkblue; background-color: lightcyan;">
+                        Com imagem já existente.
+                    </button>
+                </div>
+            </div>
+    
+            <div class="div-container" style=" box-shadow: 0 3px 6px rgba(0, 128, 0, 0.2), 0 3px 6px rgba(0, 128, 0, 0.2);">
+                <div style="justify-content: center; display: flex;">
+                    <span class="material-symbols-outlined" style="font-size: 6rem; color: lightgreen;">
+                        add_photo_alternate
+                    </span>
+                </div>
+                <div class="div-botao">
+                    <button id="criar_imagem" class="botao" style="border: 1px solid darkgreen; background-color: palegreen;">
+                        Criando uma nova imagem.
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div class="div-container">
+        <div style="justify-content: center; display: flex;">
             <div class="div-botao">
-                <button id="criar_imagem" class="botao">
-                    Configurar layout para o feed criando uma nova imagem.
-                </button>
-            </div>
-        </div>
-
-        <div class="div-container">
-            <div class="div-botao">
-                <button id="agora_nao" class="botao" style="width: 15rem;">
+                <button id="agora_nao" class="botao" style="width: 12rem; height: 4rem; background-color: papayawhip;">
                     Agora não.
                 </button>
             </div>

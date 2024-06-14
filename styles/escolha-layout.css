@@ -1,15 +1,16 @@
 .principal{
     display: grid;
-    gap: 0.5rem;
+    gap: 3rem;
     position: relative;
-    top: 10%;
+    top: 30%;
 }
 
 .div-container{
     border-top: 1px solid rgba(0, 0, 0, 0.30);
     border-radius: 10px;
-    height: 10rem;
-    display: flex;
+    height: 13rem;
+    width: 18rem;
+    display: grid;
     justify-content: center;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
@@ -25,8 +26,26 @@
     font-family: Exo;
     border: 1px solid darkred;
     background-color: white;
-    width: 70%;
+    width: 80%;
     border-radius: 10px;
-    height: 6.5rem;
-    font-size: 1.5rem;
+    height: 5rem;
+    font-size: 1.2rem;
+}
+
+.opcoes{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.header1{
+    background-color: darkred;
+    height: 55px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    width: 100%;
+    z-index: 3;
 }
