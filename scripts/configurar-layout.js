@@ -12,6 +12,7 @@ hora_fim_fixo = '0';
 descricao_cabecalho = '';
 descricao_rodape = '';
 opt = "cabecalho";
+estilos = {};
 
 const dias = [
   { 'id': 1, 'name': 'Segunda' },
@@ -55,7 +56,6 @@ function busca_agenda(agenda_id ){
   .done(function(ret) {
     str_dias_escolhidos = '';
     var obj = jQuery.parseJSON(ret);
-    console.log(obj);
     if(obj.agenda.agenda_lote > 0){
      
       str_dias_escolhidos = obj.agenda.agenda_dias_escolhidos.split(",");//FILIPE
@@ -147,12 +147,14 @@ function carrega_horas_fixas(data_inicio, data_fim){
   hora_inicio_fixo = hashdata[3];
   var hashdata = data_fim.split("-");
   hora_fim_fixo = hashdata[3];
-  console.log(hora_inicio_fixo);
-  console.log(hora_fim_fixo);
 }
 
 $('#cor').click(function(e){
   $('#cores').show();
+});
+
+$('#close_colors').click(function(e){
+  $('#cores').hide();
 });
 
 $('#elemento').change(function() {
@@ -246,7 +248,6 @@ $("#txt_data_slave").on("keyup", function () {
 
 $('#fonte_master').change(function() {
   var fonte = $('#fonte_master').find(":selected").val();
-  console.log(fonte);
   
   if(opt == "cabecalho"){
     
@@ -266,7 +267,6 @@ $('#fonte_master').change(function() {
 
   $('#tamanho_fonte').change(function() {
     var tamanhoFonte = $('#tamanho_fonte').find(":selected").val();
-    console.log(tamanhoFonte);
     
     if(opt == "cabecalho"){
       
@@ -293,6 +293,7 @@ $('#fonte_master').change(function() {
     function geraCores(){
       var html = "";
       var numeroColunas = 10;
+      var numeroLinhas = 9;
     
       // Definindo uma paleta de cores principais mais variada
       var coresPrincipais = [
@@ -324,10 +325,10 @@ $('#fonte_master').change(function() {
       for(var i = 0; i < numeroColunas; i++){
         html += "<div>";
     
-        for(var j = 0; j < numeroColunas; j++){
+        for(var j = 0; j < numeroLinhas; j++){
           // Calcular a posição relativa na grade
           var rowPosition = i / (numeroColunas - 1);
-          var colPosition = j / (numeroColunas - 1);
+          var colPosition = j / (numeroLinhas - 1);
     
           // Selecionar cores para interpolar, espaçadas uniformemente
           var colorIndex1 = Math.floor(rowPosition * (coresPrincipais.length - 1));
@@ -344,7 +345,6 @@ $('#fonte_master').change(function() {
       $('#div_cores').html(html);
     
       $('.color').click(function(e){
-        console.log($(this).css("background-color"));
     
         if(opt == "cabecalho"){
           $("#evento").css("color", $(this).css("background-color"));
@@ -421,27 +421,37 @@ function alingOtherElements(height){
   geraCores();
   //alinhamento dos campos
   var alturaCampos = $(document).height() - (parseInt(alturaMenu) + parseInt(alturaLayoutImg) + parseInt(alturaPreVisualizar) + height);
-  console.log($(document).height());
-  console.log(parseInt(alturaMenu));
-  console.log(parseInt(alturaLayoutImg));
-  console.log(height);
+  
 
   $("#div_campos").css("top", alturaMenu+"px");
   $("#div_campos").css("height", alturaCampos+"px");
-  console.log(alturaCampos);
   
 }
 
 
 
 
+function processStyleString(styleString) {
+  return styleString.split(';').reduce((acc, style) => {
+    if (style.trim()) {
+      let [key, value] = style.split(':').map(item => item.trim());
+      acc[key] = value;
+    }
+    return acc;
+  }, {});
+}
 
 
-  
+function stylesObjLayout(){
+  if($('#evento').attr('style') != undefined){ //Verificar se é a primeira vez que está chamando o evento click do atualiza layout
 
-
-
-  
+    estilos = {
+      cabecalho: $('#evento').attr('style').replace(/\s+/g, ''),
+      data: $('#data').attr('style').replace(/\s+/g, ''),
+      rodape: $('#rodape').attr('style').replace(/\s+/g, '')
+    }
+  }
+}
 
   function data2objLayout(e){
     
@@ -469,7 +479,6 @@ function alingOtherElements(height){
   function atualiza_layout(layout, agenda){
     descricao = "";
     sub_descricao = "";
-    console.log(layout);
     carregaBackground(layout);
     if(!isEdit(agenda)){
       sugestao_layout(layout, agenda);
@@ -495,26 +504,59 @@ function alingOtherElements(height){
 
     $("#txt_evento").html(descricao);
     $("#txt_rodape").html(sub_descricao);
-  
-    set_style(layout.evento_css, 'evento');
-    set_style(layout.data_css, 'data');
-    set_style(layout.master_css, 'data_master');
-    set_style(layout.data_slave1, 'data_slave1');
-    set_style(layout.rodape, 'rodape');
+    stylesObjLayout();
+    if(estilos.hasOwnProperty('cabecalho')){ // Verifica se é a primeira vez que está rodando
+      
+      set_style(mergeStyleLayout(layout.evento_css, estilos.cabecalho), 'evento');
+      set_style(mergeStyleLayout(layout.data_css, estilos.data),'data');
+      set_style(mergeStyleLayout(layout.rodape, estilos.rodape),'rodape');
+    }
+    else{
+      set_style(layout.evento_css, 'evento');
+      set_style(layout.data_css, 'data');
+      set_style(layout.rodape, 'rodape');
+    }
+    
     
     tamanhoDataSlave();
     sugestao_data(origemLote(agenda));
   }
 
-  function set_style(strStyle, divElement){
-    arrStyle = strStyle.split(";");
-    $("#"+divElement).removeAttr("style")
-    $.each(arrStyle, function(index, value) { 
-      var hashmap = value.split(":");
-      $("#"+divElement).css(hashmap[0], hashmap[1]);
+function mergeStyleLayout(styleIn, styleOut){
+
+  style = '';
+  arrStyleChange = ["font-family", "color", "font-size"]
+  arrStyle = styleIn.split(";");
+  console.log(styleIn);
+  $.each(arrStyle, function(index, value) {
+    var hashmap = value.split(":"); 
+    console.log(hashmap);
+    if(jQuery.inArray(hashmap[0], arrStyleChange) < 0 && value != ''){
+      style += hashmap[0]+':'+hashmap[1]+';';
+      console.log(style);
+    }
   });
 
+  arrStyle = styleOut.split(";");
+  console.log(styleOut);
+  $.each(arrStyle, function(index, value) {
+    var hashmap = value.split(":"); 
+    if(jQuery.inArray(hashmap[0], arrStyleChange) >= 0  && value != ''){
+      style += hashmap[0]+':'+hashmap[1]+';';
+      console.log(style);
+    }
+  });
+  console.log(style);
+  return style;
+} 
 
+function set_style(strStyle, divElement){
+  arrStyle = strStyle.split(";");
+  $("#"+divElement).removeAttr("style");
+  $.each(arrStyle, function(index, value) {
+    var hashmap = value.split(":");
+    $("#"+divElement).css(hashmap[0], hashmap[1]);  
+  });
 }
 
 
@@ -623,7 +665,6 @@ function alingOtherElements(height){
 
     function getStyleElement(elemento){
       var styles = $div.attr('style');
-      console.log(styles.replace(/\s+/g, ''));
     }
 
 
@@ -698,7 +739,6 @@ function alingOtherElements(height){
 
         success: function (data) {
 
-          console.log(data);
 
         }
 
@@ -735,7 +775,6 @@ async function print() {
           salvar(imageFile);
       });
   } catch (error) {
-      console.error(error);
   }
   
 }
@@ -743,9 +782,7 @@ async function print() {
 function array_sequencial(){
   var retorno =1;
   var pos1= parseInt(dias_agenda[0]);
-  console.log(dias_agenda);
   dias_agenda.forEach(function(element, index) {
-    console.log(pos1);
     if(dias_agenda.includes(pos1)){
       pos1 ++;
     }else{
