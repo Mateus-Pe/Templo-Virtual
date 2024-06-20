@@ -650,7 +650,7 @@ function set_style(strStyle, divElement){
   
 
         if(obj.status == '1'){
-          window.location='calendario.html';
+          window.location='configurar_layout_upload.html';
         }
        
   

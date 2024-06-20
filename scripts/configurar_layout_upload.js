@@ -5,16 +5,9 @@ var agenda_id = 0;
 $(document).ready(function() {
   alingDivPreviw();
   agenda_id = window.sessionStorage.getItem('agenda_id');
+  console.log(agenda_id);
+  get_agenda();
 });
-
-$('#texto').click(function(e){
-    window.location = "criar-post-texto.html";
-  });
-
-  $('#video').click(function(e){
-    window.location = "criar-post-video.html";
-  });
-
 
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -109,6 +102,7 @@ document.getElementById('imageFileInput').addEventListener('change', function(ev
                   $("#visualizar").css("display","grid");
                   $("#previewImg").css("display","flex");
                   previewImg = true;
+                  verificaBotaoImg();
                 }
             }
             img.src = e.target.result;
@@ -198,14 +192,45 @@ $('#confirmar').click(function(e){
   $("#modalConfirmacao").hide();
 });
 
+function verificaBotaoImg(){
+  if(previewImg){
+    $("#imagem").css("display", "none");
+    $("#editImg").css("display", "grid");
+  }
+}
+
+$("#add_new_img").click(function(e){
+  $("#imageFileInput").click();
+});
+
+$("#add_new_img").click(function(e){
+  $("#modal_trocarImg").hide();
+});
+
+$("#trocar_img").click(function(e){
+  window.location = "configurar-layout.html";
+});
+
+$("#trocar_img").click(function(e){
+  $("#modal_trocarImg").hide();
+});
+
+$("#editImg").click(function(e){
+  $("#modal_trocarImg").show();
+});
+$("#cancelar").click(function(e){
+  $("#modal_trocarImg").hide();
+});
+
 function salvar(){
+  console.log($('#previewImg').attr('src'));
   file = $("#imageFileInput");
   $.ajax({
     method: "POST",
     url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_layout_agenda_upload",
     data: {
           agenda_id: agenda_id,
-          agenda_layout_upload_img : 'teste inicial',
+          agenda_layout_upload_img : $('#previewImg').attr('src'),
           agenda_layout_upload_desc : conteudoHtml
         }
   })
@@ -218,3 +243,36 @@ function salvar(){
     }
   });
 }
+
+function get_agenda(){
+
+	$.ajax({
+	   method: "POST",
+	   url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_by_id",
+	   data: {  "agenda_id" : agenda_id
+
+			 }
+	 })
+   .done(function(ret) {
+
+    var obj = jQuery.parseJSON(ret);
+    console.log(obj);
+    $(".img_igreja").attr("src", obj.agenda.igreja_logo_url);
+    $(".nome_igreja").text(obj.agenda.igreja_nome);
+    if(obj.agenda.agenda_img != '' && obj.agenda.agenda_img != null){
+
+      document.getElementById('previewImg').src = obj.agenda.agenda_img;
+      $("#visualizar").css("display","grid");
+      $("#previewImg").css("display","flex");
+      previewImg = true;
+      document.getElementById('visualiza_layout_feed').src = obj.agenda.agenda_img;
+    }
+    else{
+      $("#visualizar").css("display","none");
+      $("#previewImg").css("display","none");
+      previewImg = false;
+    }
+
+    verificaBotaoImg();
+  });
+  }

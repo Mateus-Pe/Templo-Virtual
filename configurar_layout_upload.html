@@ -92,6 +92,16 @@
     <!--Selecionado imagem Local-->
 
     <div style="display: flex; width: 100%; position: absolute; top: 55px; height: 70px; ">
+
+        <div id="editImg" class="select_local" style="display: none;">
+
+            <div class="div_botao">
+                
+                <button id="btn_editar" class="botao-imagem material-symbols-outlined">settings</button>
+            </div>
+            <span id="addEdit" style="font-size: 1.5rem;">Trocar imagem</span>
+
+        </div>
     
         <div id="imagem" class="select_local">
 
@@ -99,19 +109,21 @@
                 
                 <button id="add_imagem" class="botao-imagem material-symbols-outlined">image_search</button>
             </div>
-            <span style="font-size: 1.5rem;">Adicionar imagem</span>
+            <span id="addEdit" style="font-size: 1.5rem;">Adicionar imagem</span>
 
         </div>
 
         <div id="visualizar" class="visualizar" style="display: none;">
-
+    
             <div class="div_botao">
                 
                 <button id="btn_visualizar" class="botao-imagem material-symbols-outlined">visibility</button>
             </div>
             <span style="font-size: 1.5rem;">Visualizar publicação</span>
-
+    
         </div>
+    </div>
+
     </div>
 
     <div id="pre_visualizar" style="height: 15px; position: absolute; width: 100%; text-align: center; top: 125px; font-size: 10px; background-color: darkred; color: white;">
@@ -170,6 +182,40 @@
             <div style="font-size: 1.2rem;" id="mensagem_modal"></div>
             <div class="modal-footer">
                 <button href="#!" id="confirmar">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal_trocarImg" class="modal">
+        <div class="modal-content1">
+            <div class="cadastro" style="justify-content: center; display: grid; gap: 1.5rem;">
+
+                <div id="trocar_img">
+
+                    <div style="gap: 0.5rem; align-items: center; display: flex;">
+                        
+                        <span class="material-symbols-outlined" style="color: lightgray;">edit</span>
+                        <span>Trocar layout criado</span>
+                    </div>
+                    
+                </div>
+
+                <div id="add_new_img">
+                    
+                    <div style="gap: 0.5rem; align-items: center; display: flex;">
+                     
+                        <span class="material-symbols-outlined" style="color: lightgray;">add_photo_alternate</span>
+                        <span>Trocar por uma nova imagem</span>
+                    </div>
+                </div>
+
+                <div id="cancelar">
+        
+                    <div style="gap: 0.5rem; align-items: center; display: flex; justify-content: center; background-color: white; border: 1px solid darkred; color: darkred; border-radius: 30px; padding: 5px;">
+                     
+                        <span>Cancelar</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
