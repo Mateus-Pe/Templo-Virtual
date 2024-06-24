@@ -11,8 +11,15 @@ $(document).ready(function() {
 
   $('#visualizar_layout').click(function(){
     var agenda_img = $(this).find('[data-agenda_img]').data('agenda_img');
+    var logo_url = $(this).find('[data-logo_url]').data('logo_url');
+    var igreja_nome = $(this).find('[data-igreja_nome]').data('igreja_nome');
+    var agenda_desc = $(this).find('[data-agenda_desc]').data('agenda_desc');
+    
 
-    $('#imagem_agenda').attr('src', agenda_img);
+    $('#visualiza_layout_feed').attr('src', agenda_img);
+    $('#imagem_igreja').attr('src', logo_url);
+    $(".nome_igreja").text(igreja_nome);
+    $("#descricao_layout_feed").html(agenda_desc);
 
     $('#modal_config').hide();
     $('#modal_visualizar_layout').show();
@@ -275,8 +282,7 @@ function mock_agenda(){
 			 }
 	 })
 	   .done(function(ret) {
-
-			var obj = jQuery.parseJSON(ret);
+      var obj = jQuery.parseJSON(ret);
 
 			$('#divListaAgenda').html('');
 
@@ -297,7 +303,7 @@ function mock_agenda(){
 								'</div>'+
                 statusLayout(ch.agenda_layout_tipo, ch)+
                                 '<div class="columns">' +
-                                '<span data-agenda_img="'+ ch.agenda_img +'"data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'" data-status="'+ch.agenda_layout_tipo+'" class="material-symbols-outlined acToggle config">more_horiz</span>'+
+                                '<span data-agenda_img="'+ ch.agenda_img +'"data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'" data-status="'+ch.agenda_layout_tipo+'" data-logo_url="'+ch.igreja_logo_url+'" data-igreja_nome="'+ch.igreja_nome+'" data-agenda_desc=\''+ch.agenda_layout_upload_desc+'\'  class="material-symbols-outlined acToggle config">more_horiz</span>'+
                                 //'<span data-agenda_img="'+ ch.agenda_img +'" class="material-symbols-outlined acToggle ver_layout">visibility</span>'+
                                 //'<span data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'"  class="material-symbols-outlined acToggle configurar_layout">edit</span>'+
                                 '</div>'+
@@ -306,6 +312,7 @@ function mock_agenda(){
 					   '</div>';
 
 				$('#divListaAgenda').append(html);
+        console.log(obj);
 			});
 
             $('.config').click(function () {
@@ -313,12 +320,21 @@ function mock_agenda(){
                 var status = $(this).data('status');
                 var agenda_id = $(this).data('agenda_id');
                 var agenda_hora = $(this).data('agenda_hora');
+                var igreja_logo_url = $(this).data('logo_url');
+                var igreja_nome = $(this).data('igreja_nome');
+                var agenda_desc = $(this).data('agenda_desc');
             
                 // Definir os dados nos elementos do modal
                 $('#modal_config').find('[data-agenda_img]').data('agenda_img', agenda_img);
                 $('#modal_config').find('[data-agenda_id]').data('agenda_id', agenda_id);
                 $('#modal_config').find('[data-agenda_hora]').data('agenda_hora', agenda_hora);
                 $('#modal_config').find('[data-status]').data('status', status);
+                $('#modal_config').find('[data-logo_url]').data('logo_url', igreja_logo_url);
+                $('#modal_config').find('[data-igreja_nome]').data('igreja_nome', igreja_nome);
+                $('#modal_config').find('[data-agenda_desc]').data('agenda_desc', agenda_desc);
+
+
+                
             
                 
                 $('#modal_config').show();

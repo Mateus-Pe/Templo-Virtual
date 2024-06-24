@@ -171,7 +171,7 @@ function salvar(){
     var obj = jQuery.parseJSON(ret);
 
     if(obj.status == '1'){
-      window.location='calendario.html';
+     window.location='calendario.html';
     }
   });
 }
@@ -246,7 +246,10 @@ function get_agenda(){
               }
               descricaoTexto.style.display = 'inline'; // Exibe a div
               descricaoTexto.style.opacity = 1;
-              editor.setContent(agenda.agenda_layout_upload_desc);
+              if(agenda.agenda_layout_upload_desc != null && agenda.agenda_layout_upload_desc != ''){
+                
+                editor.setContent(agenda.agenda_layout_upload_desc);
+              }
             
           });
   

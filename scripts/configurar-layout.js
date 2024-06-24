@@ -449,16 +449,32 @@ function processStyleString(styleString) {
 }
 
 
-function stylesObjLayout(){
-  if($('#evento').attr('style') != undefined){ //Verificar se é a primeira vez que está chamando o evento click do atualiza layout
+function stylesObjLayout() {
+  if ($('#evento').attr('style') != undefined) { // Verificar se é a primeira vez que está chamando o evento click do atualiza layout
 
-    estilos = {
-      cabecalho: $('#evento').attr('style').replace(/\s+/g, ''),
-      data: $('#data').attr('style').replace(/\s+/g, ''),
-      rodape: $('#rodape').attr('style').replace(/\s+/g, '')
+    function preserveFontFamilySpaces(style) {
+      // Preserva espaços dentro dos valores de font-family
+      return style.replace(/font-family:\s*([^;]+);/g, function(match, p1) {
+        return 'font-family:' + p1.replace(/\s*,\s*/g, ',').replace(/,/g, ', ') + ';';
+      });
     }
+
+    // Função para remover espaços desnecessários fora do `font-family`
+    function removeUnnecessarySpaces(style) {
+      return style.replace(/;\s*/g, ';').replace(/\s*:\s*/g, ':');
+    }
+
+    // Cria um objeto 'estilos' com os estilos dos elementos desejados, removendo espaços desnecessários fora do `font-family`
+    estilos = {
+      cabecalho: preserveFontFamilySpaces(removeUnnecessarySpaces($('#evento').attr('style'))),
+      data: preserveFontFamilySpaces(removeUnnecessarySpaces($('#data').attr('style'))),
+      rodape: preserveFontFamilySpaces(removeUnnecessarySpaces($('#rodape').attr('style')))
+    }
+
+    console.log(estilos);
   }
 }
+
 
   function data2objLayout(e){
     
