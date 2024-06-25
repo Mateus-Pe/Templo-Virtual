@@ -235,7 +235,10 @@ function get_agenda(){
             } else {
               console.error('A div com a classe .tox .tox-statusbar não foi encontrada.');
             }
-            
+            if(agenda.agenda_layout_upload_desc != null && agenda.agenda_layout_upload_desc != ''){
+                
+              editor.setContent(agenda.agenda_layout_upload_desc);
+            }
               // Verifica e atualiza o conteúdo do editor ao inicializar
               conteudoHtml = editor.getContent();
               console.log(conteudoHtml);
@@ -246,10 +249,7 @@ function get_agenda(){
               }
               descricaoTexto.style.display = 'inline'; // Exibe a div
               descricaoTexto.style.opacity = 1;
-              if(agenda.agenda_layout_upload_desc != null && agenda.agenda_layout_upload_desc != ''){
-                
-                editor.setContent(agenda.agenda_layout_upload_desc);
-              }
+              
             
           });
   
