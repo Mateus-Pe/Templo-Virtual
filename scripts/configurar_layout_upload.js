@@ -56,7 +56,7 @@ function validarImagem(height, width){
 
   if ((1.33 * width) > height && height > width) {
     $("#modalConfirmacao").show();
-    texto_modal = "<p> Erro ao carregar a imagem, procure uma imagem com as dimensões de largura e altura próximas.</p><br>";
+    texto_modal = "<p> Erro ao carregar a imagem, procure uma imagem com as dimensões de largura e altura </p><br>";
       $('#mensagem_modal').html(texto_modal);
       retorno = false;
   }
@@ -155,16 +155,33 @@ $("#cancelar").click(function(e){
 });
 
 function salvar(){
-  console.log($('#previewImg').attr('src'));
-  file = $("#imageFileInput");
+  //console.log($('#previewImg').attr('src'));
+  //file = $("#imageFileInput");
+  var formData = new FormData();
+  formData.append('file', $('#imageFileInput')[0].files[0]);
+  formData.append('agenda_id', agenda_id);
+  formData.append('agenda_layout_upload_desc', conteudoHtml);
+
+  /*$.ajax({
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_layout_agenda_upload",
+    type: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (response) {
+       console.log(response);
+    },
+    error: function () {
+      console.log("Ocorreu um erro ao fazer o upload.");
+    }
+});*/
+
   $.ajax({
     method: "POST",
     url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_layout_agenda_upload",
-    data: {
-          agenda_id: agenda_id,
-          agenda_layout_upload_img : $('#previewImg').attr('src'),
-          agenda_layout_upload_desc : conteudoHtml
-        }
+    data: formData,
+    processData: false,
+    contentType: false
   })
   .done(function(ret) {
 
