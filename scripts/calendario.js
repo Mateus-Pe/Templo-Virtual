@@ -257,11 +257,22 @@ function mock_agenda(){
   function statusLayout(status, ch){
     
     cor = '';
-    if(status == 2){
-      cor = 'green';
-    }else{
-      cor = 'red';
-    }
+
+    switch (status) {
+      case '0':
+          cor = 'red';
+          break;
+      case '1':
+          cor = 'red';
+          break;
+      case '2':
+          cor = 'green';
+          break;
+      case '3':
+          cor = 'orange';
+          break;
+  }
+  console.log(status);
     return  '<div id="div_status" style="width: 10%; align-items: center; display: flex; justify-content: center;">'+
             '<div data-agenda_id="'+ch.agenda_id+'" data-status="'+status+'" class="status_layout" style="border-radius: 50%; background-color: '+cor+'; width: 10px; height: 10px; border: 1px solid '+cor+';"></div>'+
             '</div>';

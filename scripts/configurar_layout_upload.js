@@ -1,6 +1,7 @@
 var previewImg = false;
 var conteudoHtml = '';
 var agenda_id = 0;
+var origem_imagem = ''; // U-upload; L-layout
 
 $(document).ready(function() {
   alingDivPreviw();
@@ -35,6 +36,7 @@ document.getElementById('imageFileInput').addEventListener('change', function(ev
                   $("#previewImg").css("display","flex");
                   previewImg = true;
                   verificaBotaoImg();
+                  origem_imagem = 'U';
                 }
             }
             img.src = e.target.result;
@@ -56,7 +58,7 @@ function validarImagem(height, width){
 
   if ((1.33 * width) > height && height > width) {
     $("#modalConfirmacao").show();
-    texto_modal = "<p> Erro ao carregar a imagem, procure uma imagem com as dimensões de largura e altura </p><br>";
+    texto_modal = "<p> Erro ao carregar a imagem, procure uma imagem com as dimensões de largura e altura próximas.</p><br>";
       $('#mensagem_modal').html(texto_modal);
       retorno = false;
   }
@@ -158,23 +160,15 @@ function salvar(){
   //console.log($('#previewImg').attr('src'));
   //file = $("#imageFileInput");
   var formData = new FormData();
-  formData.append('file', $('#imageFileInput')[0].files[0]);
   formData.append('agenda_id', agenda_id);
   formData.append('agenda_layout_upload_desc', conteudoHtml);
-
-  /*$.ajax({
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_layout_agenda_upload",
-    type: 'POST',
-    data: formData,
-    processData: false,
-    contentType: false,
-    success: function (response) {
-       console.log(response);
-    },
-    error: function () {
-      console.log("Ocorreu um erro ao fazer o upload.");
-    }
-});*/
+  if(origem_imagem == 'L'){
+    formData.append('imagem_src', $("#previewImg").attr("src"));
+  }
+  else{
+    formData.append('file', $('#imageFileInput')[0].files[0]);
+  }
+  formData.append('origem_imagem', origem_imagem);
 
   $.ajax({
     method: "POST",
@@ -207,9 +201,6 @@ function get_agenda(){
 
     var obj = jQuery.parseJSON(ret);
     console.log(obj);
-    if(obj.agenda.agenda_layout_tipo == 2){ //edição
-      
-    }
     $(".img_igreja").attr("src", obj.agenda.igreja_logo_url);
     $(".nome_igreja").text(obj.agenda.igreja_nome);
     if(obj.agenda.agenda_img != '' && obj.agenda.agenda_img != null){
@@ -218,6 +209,7 @@ function get_agenda(){
       $("#visualizar").css("display","grid");
       $("#previewImg").css("display","flex");
       previewImg = true;
+      origem_imagem = 'L';
       document.getElementById('visualiza_layout_feed').src = obj.agenda.agenda_img;
     }
     else{
