@@ -71,6 +71,7 @@ body {
 .calendarList2 li {
     text-align: center;
     align-items: center;
+    justify-content: center;
     display: flex;
     padding: 10px;
     width: 30px;
@@ -136,9 +137,10 @@ body {
 }
 
 .dia_selecionado{
-    background-color: #CCCCCC; 
-    color: white; 
+    background-color: #ffaaaa;
+    color: white;
     transition: background-color 0.5s ease;
+    border: 1px solid darkred;
 }
 
 #add {
@@ -212,7 +214,8 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
-    max-width: 400px;
+    max-height: 85%;
+    overflow-y: auto;
 }
 
 .modal-content1 {
@@ -344,3 +347,8 @@ body {
     background-color: white;
     color: lightslategray;
 }
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.2;
+  }

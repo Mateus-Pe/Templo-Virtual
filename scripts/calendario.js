@@ -75,8 +75,17 @@ $(document).ready(function() {
   $('#confirmarRemocao').click(function(){
     var agenda_id = $('#modal_config').find('[data-agenda_id]').data('agenda_id');
     remover(agenda_id);
-    $('#modalConfirmacao').hide();
-    $('#modal_config').hide();
+    setTimeout(function() {
+      // Verificar se ainda existem eventos na lista
+      if ($('#divListaAgenda').find('.pesq').length === 0) {
+          // Não há mais eventos, então atualize a tela
+          location.reload(); // Isso recarrega a página
+      } else {
+          // Ainda existem eventos na lista
+          $('#modalConfirmacao').hide();
+          $('#modal_config').hide();
+      }
+  }, 1000);
   });
 });
 
@@ -128,13 +137,33 @@ function makeCalendar(year, month) {
     monthName = months.find(x => x.id === month).name;
     $('#yearMonth').text(year + ' ' + monthName);
     configuraEventos();
-
-
+    
+    
     if(igrejaId != null && igrejaId != ''){
-        carregarCalendario();
+      carregarCalendario();
     }
-   
-   
+
+    var idDiaAnterior = ''; // Inicializa a variável idDiaAnterior
+
+$('#calendarList').on('click', 'li', function() {
+
+  if (idDiaAnterior !== '') {
+      
+    $('#' + idDiaAnterior).addClass('dia_eventos');
+  }
+    // Remove a classe dia_selecionado de todos os dias
+    $('#calendarList li').removeClass('dia_selecionado');
+    
+    // Adiciona a classe dia_selecionado ao dia clicado para destacá-lo
+    $(this).addClass('dia_selecionado');
+    
+    // Verifica se o dia clicado possui a classe dia_eventos
+    if ($(this).hasClass('dia_eventos')) {
+        // Remove a classe dia_eventos do dia clicado
+        $(this).removeClass('dia_eventos');
+        idDiaAnterior =  $(this).attr('id'); // Atualiza idDiaAnterior com o ID do dia clicado
+    }
+});
 }
 
 
@@ -278,6 +307,15 @@ function mock_agenda(){
             '</div>';
   }
 
+  function disableConfig() {
+    $('.config').each(function() {
+      var status = $(this).data('status');
+      if (status == 3) {
+        $(this).addClass('disabled');
+      }
+    });
+  }
+
   $('#ok').click(function(){
     $('#modalStatus').hide();
   });
@@ -325,7 +363,7 @@ function mock_agenda(){
 				$('#divListaAgenda').append(html);
         console.log(obj);
 			});
-
+            disableConfig();
             $('.config').click(function () {
                 var agenda_img = $(this).data('agenda_img');
                 var status = $(this).data('status');
@@ -362,9 +400,12 @@ function mock_agenda(){
               if(status == 2){
                  $('#mensagem_status').text('Este evento já está configurado para aparecer no feed');
                  $('#configurar_layout').css('display', 'none');
+              }else if(status == 3){
+                $('#mensagem_status').text('Este evento já foi realizado');
+                $('#configurar_layout').css('display', 'none');
               }else{
-                 $('#mensagem_status').text('Este evento ainda não foi configurado, para configurar basta clicar em configurar layout');
-                 $('#configurar_layout').css('display', 'flex');
+                $('#mensagem_status').text('Este evento ainda não foi configurado, para configurar basta clicar em configurar layout');
+                $('#configurar_layout').css('display', 'flex');
               }
             });
 
@@ -412,9 +453,8 @@ $('.page-menu--toggle').click(function(e){
   
     $(this).toggleClass('page-menu__hamburger--open');
   
-    $('.page-menu').toggleClass('disabled');
+    $('.page-menu').toggleClass();
   
-    $('body').toggleClass('disabled');
 
     $('body').toggleClass('no-scroll');
 
