@@ -114,11 +114,12 @@
 
         <div class="perfil" style="width: 100%; height: 100%;">
 
-            <div class="div_imgFundo_perfil">
+            <div id="img_fundo" class="div_imgFundo_perfil">
 
 
                 <div class="imgFundo_perfil">
 
+                    <img id="img_fundo_src" src="" style="width: 100%; height: 10rem;">
 
                 </div>
 
@@ -200,12 +201,12 @@
             </div>
 
 
-            <div style="display: flex; width: 47%; text-align: center; justify-content: center;">
+            <div  style="display: flex; width: 38%; text-align: center; justify-content: center;">
                 <div id="imagem_igreja" class="div_img_igreja">
 
-                    <img class="img_igreja1" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">
+                    <img id="img_igreja_selected" class="img_igreja1" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">
 
-                    <span class="material-symbols-outlined"
+                    <span id="select_img_igreja" class="material-symbols-outlined"
                         style="position: relative; font-size: 20px; color: darkred; right: 16px;">
                         photo_camera
                     </span>
@@ -270,11 +271,11 @@
                     <div  style="display: inline-grid;">
                         <div
                             style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">
-                            <img src="https://www.pedeoferta.com.br/mercado/img/igreja/confissao.png" style="height:50px">
+                            <img id="img_igreja_desc_resumida" src="https://www.pedeoferta.com.br/mercado/img/igreja/confissao.png" style="height:50px; width: 50px; border-radius: 50%;">
                         </div>
                         <span id="desc_resumida"
                             style="font-size: 1.3rem;text-align:center;text-decoration:none;width: 71px;">
-                            Santo Antonio
+                            
                         </span>
                     </div>
 
@@ -388,7 +389,8 @@
         </div>
       </div>
 
-
+      <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
+      <input type="file" id="imageFundoFileInput" accept="image/*" style="display: none;">
         <footer>
             <script src="./scripts/jquery/jquery-3.2.1.min.js"></script>
 

@@ -1,5 +1,6 @@
 igrejaId = "" ;
 nomeIgrejaVerificado = "";
+origem_imagem = "";
 //evento_agenda();
 
 
@@ -11,8 +12,6 @@ $(document).ready(function() {
   if(igrejaId != null && igrejaId != ''){
     carregarIgreja();
   }
-  
-  carregarIgreja();
 
   $('#nome_igreja').on('input', verificarNomeIgreja);
 });
@@ -62,68 +61,6 @@ function carregar_perfil(){
       html += '</div>';
       $("#divPerfil").html(html);
 }
-
-
-function evento_agenda(){
-  $.ajax({
-    method: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_feed",
-   
-  })
-  .done(function(ret) {
-   
-    var obj = jQuery.parseJSON(ret);
-    var html = '';
-   
-    console.log(obj);
-    $.each(obj.lista_feed, function (k, lpp) {
-      html += '<div class="div_publicacao">';
-      html += '<div class="feed_principal">';
-      html += '<div class="div_feed_secundario">';
-      html += '<div>';
-      html += '<div>';
-      html += '<a class="div_perfil">';
-      html += '<img class="img_igreja" src="'+lpp.igreja_logo+'">';
-      html += '<span class="nome_igreja">';
-      html += lpp.igreja_nome;
-      html += '</span>';
-      html += '</a>';
-      html += '</div>';
-      html += '<div class="div_layout_feed">';
-      html += '<a class="a_img_layout">';
-      html += '<img class="img_layout_feed" src="'+lpp.agenda_img+'">';
-      html += '</a>';
-      html += '<div class="div_descricao">';
-      html += '<span class="span_descricao">';
-      html += lpp.descricao_evento;
-      html += '</span>';
-      html += '</div>';
-      html += '</div>';
-      html += '<div class="div_rodape_feed">';
-      html += '<div class="rodape_feed_botao">';
-      html += '<span class="material-symbols-outlined span_rodape_botao">';
-      html += 'share';
-      html += '</span>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-    });
-   
-
-    $("#divHistoria").html(html);
-
-   
-});
-}
-   
-
-
-
-
-
 
   function slick(){
     $(".regular").slick({
@@ -300,18 +237,24 @@ $('#btnFecharModal').on('click', function(){
 });
 
 function salvar(){
+
+  var formData = new FormData();
+  formData.append('igreja_id', igrejaId);
+  formData.append('igreja_desc_resumida', $('#txt_desc_resumida').val());
+  formData.append('igreja_whats', $('#whatsapp_txt').val());
+  formData.append('igreja_face', $('#facebook_txt').val());
+  formData.append('igreja_instagram', $('#instagram_txt').val());
+  formData.append('igreja_email', $('#email_txt').val());
+  formData.append('file_background', $('#imageFundoFileInput')[0].files[0]);
+  formData.append('file', $('#imageFileInput')[0].files[0]);
+  
+
   $.ajax({
     method: "POST",
     url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_perfil_igreja",
-    data: {
-      igreja_id : igrejaId,
-      igreja_desc_resumida: $('#txt_desc_resumida').val(),
-      igreja_whats: $('#whatsapp_txt').val(),
-      igreja_face: $('#facebook_txt').val(),
-      igreja_instagram: $('#instagram_txt').val(),
-      igreja_email: $('#email_txt').val()
-      
-    }
+    data: formData, 
+    processData: false,
+    contentType: false
   })
     .done(function (ret) {
       var obj = jQuery.parseJSON(ret);
@@ -344,6 +287,9 @@ function carregarIgreja(){
         $('#txt_desc_resumida').val(obj.igreja.igreja_desc_resumida);
         $("#nome_da_igreja").text(obj.igreja.igreja_nome);
         $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
+        $("#img_igreja_selected").attr('src', obj.igreja.igreja_logo_url);
+        $("#img_igreja_desc_resumida").attr('src', obj.igreja.igreja_logo_url);
+        $("#img_fundo_src").attr('src', obj.igreja.igreja_fundo_url);
         atualizarContatos();
         alterar_desc_resumida();
 
@@ -582,3 +528,74 @@ function hasScrolled() {
 
     lastScrollTop = st;
 }
+
+document.getElementById("select_img_igreja").addEventListener("click", function() {
+  document.getElementById("imageFileInput").click();
+});
+
+document.getElementById("img_fundo").addEventListener("click", function() {
+  document.getElementById("imageFundoFileInput").click();
+});
+
+document.getElementById('imageFileInput').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        
+        previewImg = false;
+            img.onload = function() {
+                //const height = img.height;
+                //const width = img.width;
+                //if (validarImagem(height, width)){
+                  document.getElementById('img_igreja_selected').src = e.target.result;
+                  document.getElementById('img_igreja_desc_resumida').src = e.target.result;
+                  previewImg = true;
+                  origem_imagem = "U";
+                //}
+            }
+            img.src = e.target.result;
+
+          //document.getElementById('previewImg').src = e.target.result;
+          document.getElementById('img_igreja_selected').src = e.target.result;
+          //$("#imagem_selecionada").css("background-image", "url("+e.target.result+")");
+          
+          
+      };
+      reader.readAsDataURL(file);
+      console.log($("#img_igreja_selected").src);
+      
+  }
+});
+
+document.getElementById('imageFundoFileInput').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        
+        previewImg = false;
+            img.onload = function() {
+                //const height = img.height;
+                //const width = img.width;
+                //if (validarImagem(height, width)){
+                  document.getElementById('img_fundo_src').src = e.target.result;
+                  previewImg = true;
+                  origem_imagem = "U";
+                //}
+            }
+            img.src = e.target.result;
+
+          //document.getElementById('previewImg').src = e.target.result;
+          document.getElementById('img_fundo_src').src = e.target.result;
+          //$("#imagem_selecionada").css("background-image", "url("+e.target.result+")");
+          
+          
+      };
+      reader.readAsDataURL(file);
+      console.log($("#img_fundo_src").src);
+      
+  }
+});

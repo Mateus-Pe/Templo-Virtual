@@ -204,8 +204,10 @@ body{
 }
 
 .img_igreja1{
-    max-height: 10rem; 
+    height: 10rem; 
+    width: 10rem;
     position: relative;
+    border-radius: 50%;
 }
 
 .a_div_perfil{
