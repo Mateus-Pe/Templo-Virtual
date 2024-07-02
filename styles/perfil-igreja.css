@@ -10,17 +10,14 @@ body{
     background:lightgray;;
     font-size: 1.6rem;
     font-family: sans-serif;
-    margin-top: 5rem;
 }
 
 .feed_main_top{
     font-size: 1.6rem;
-    margin-top: 5.5rem;
-    text-align: center;
 }
 
 .div_publicacao{
-    background-color: white;
+    background-color: lightgray;
 }
 
 .feed_principal{
@@ -303,8 +300,7 @@ body{
 
 .div_comunidade{
     height: 90px; 
-    position: relative; 
-    top: 2.2rem; 
+    position: relative;
     width: 98.5%; 
     left:3px; 
     border-radius: 10px; 

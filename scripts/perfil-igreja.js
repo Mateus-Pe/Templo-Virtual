@@ -22,9 +22,10 @@ $(document).ready(function() {
 function carregar_perfil(){
   var html = '';
 
-    html += '<div class="perfil" style="width: 100%; ">';
+    html += '<div class="perfil" style="width: 100%; background-color: lightgrey">';
     html += '<div class="div_imgFundo_perfil">';
     html += '<div class="imgFundo_perfil">';
+    html += '<img class="img_fundo1" style="width: 100%; height: 250px;" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">';
     html += '</div>';
     html += '</div>';
     html += '<div id="imagem_igreja" class="div_img_igreja">';
@@ -140,6 +141,7 @@ function getComunidade(){
   .done(function(ret) {
 
     var obj = jQuery.parseJSON(ret);
+    console.log(obj);
 
     var html = '';
     html += '<section class="regular slider">';
@@ -148,7 +150,7 @@ function getComunidade(){
 
         html += '<a data-evento_cod="'+lpp.igreja_id+'" class="produtos_perfil"><div class="divPerfilEC" style="opacity: 0.5;height: 90px; display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center; gap:"18px";">';
             html += '<div style="display: grid;">';
-        html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.igreja_logo+'" style="height:50px"/></div>';
+        html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.igreja_logo+'" style="height:50px; border-radius: 50%; width: 50px"/></div>';
               html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;">'+lpp.igreja_desc+'</span></div>';
             html += '</div></a>';
     });
@@ -205,8 +207,9 @@ function carregarIgreja(){
         $('#txt_desc_resumida').val(obj.igreja.igreja_desc_resumida);
         $("#nome_da_igreja").text(obj.igreja.igreja_nome);
         $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
+        $(".img_igreja1").attr('src', obj.igreja.igreja_logo_url);
+        $(".img_fundo1").attr('src', obj.igreja.igreja_fundo_url);
         atualizarContatos();
-        alterar_desc_resumida();
 
         nomeIgrejaVerificado = obj.igreja.igreja_nome;
 
