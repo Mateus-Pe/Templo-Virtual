@@ -24,8 +24,8 @@ function evento_agenda(){
         classVideo ++;
         html = montaHtmlVideo(classVideo);
         if(classVideo < 2){
-          $("#divHistoria").append(html);
-          readyVideo(classVideo);
+          //$("#divHistoria").append(html);
+          //readyVideo(classVideo);
         }
         html = montaHtml(lpp, k);
         $("#divHistoria").append(html);
