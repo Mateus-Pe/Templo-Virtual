@@ -583,6 +583,7 @@ document.getElementById('imageFundoFileInput').addEventListener('change', functi
                 //if (validarImagem(height, width)){
                   document.getElementById('img_fundo_src').src = e.target.result;
                   previewImg = true;
+                  $("#img_fundo_src").css('display', 'flex');
                   origem_imagem = "U";
                 //}
             }
