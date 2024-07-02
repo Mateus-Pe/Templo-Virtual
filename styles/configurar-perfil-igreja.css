@@ -190,7 +190,7 @@ body{
 }
 
 .imgFundo_perfil{
-    min-height: 10rem; 
+    height: 250px; 
     border-bottom: 1px solid darkred; 
     background-color: black; 
     width: 100%;
@@ -199,7 +199,7 @@ body{
 .div_img_igreja{
     position: absolute; 
     z-index: 3; 
-    top: 2.6rem; 
+    top: 18.6rem; 
     left: 4rem;
 }
 
@@ -208,6 +208,7 @@ body{
     width: 10rem;
     position: relative;
     border-radius: 50%;
+    border: 3px solid white;
 }
 
 .a_div_perfil{
