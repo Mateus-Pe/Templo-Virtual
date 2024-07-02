@@ -297,6 +297,7 @@ function carregarIgreja(){
 
         var nomeIgreja = obj.igreja.igreja_nome;
         $('#nome_igreja').val(nomeIgreja);
+        $("#img_fundo_src").css('display', 'flex');
       }
 
     });

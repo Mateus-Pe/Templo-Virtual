@@ -22,7 +22,7 @@ $(document).ready(function() {
 function carregar_perfil(){
   var html = '';
 
-    html += '<div class="perfil" style="width: 100%; height: 70%;">';
+    html += '<div class="perfil" style="width: 100%; ">';
     html += '<div class="div_imgFundo_perfil">';
     html += '<div class="imgFundo_perfil">';
     html += '</div>';
@@ -63,11 +63,13 @@ function carregar_perfil(){
     html += '</div>';
     html += '</div>';
     html += '</div>';
+    html += '<div class="div_comunidade"> </div>';
     $("#divPerfil").html(html);
 
     eventoPerfil();
     modalVisualizarPerfil();
     modalVisualizarImgFundo();
+    
 }
 
 
@@ -152,7 +154,7 @@ function getComunidade(){
     });
     html += '</section>';
 
-    $("#divHistoria").html(html);
+    $(".div_comunidade").html(html);
 
     slick();
     $('#carregando').hide();
