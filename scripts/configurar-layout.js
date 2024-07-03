@@ -395,31 +395,11 @@ function getImgSize(imgSrc) {
   newHeight = Math.round((($( document ).width() * height) / width)+1);
   
   $("#divImg").css("height", newHeight+"px");
-  alingOtherElements(newHeight);
-
-}
-
-function alingOtherElements(height){
-  //alturas fixas
-  var alturaMenu = $(".header1").css("height").replace('px', '');// 55;
-  var alturaLayoutImg = $("#layoutImg").css("height").replace('px', ''); //80;
-  var alturaPreVisualizar = $("#pre_visualizar").css("height").replace('px', '');
-  //alinhamento pre visualizar
-  $("#pre_visualizar").css("bottom", height+"px");
-  //alinhamento do layout img
-  var posicaoLayoutImg = height+parseInt(alturaPreVisualizar);
-  var alturaCores = $(document).height() - posicaoLayoutImg;
-  $("#layoutImg").css("bottom", posicaoLayoutImg+"px");
-  $("#cores").css("height", alturaCores+"px");
+  //alingOtherElements(newHeight);
   geraCores();
-  //alinhamento dos campos
-  var alturaCampos = $(document).height() - (parseInt(alturaMenu) + parseInt(alturaLayoutImg) + parseInt(alturaPreVisualizar) + height);
-  
 
-  $("#div_campos").css("top", alturaMenu+"px");
-  $("#div_campos").css("height", alturaCampos+"px");
-  
 }
+
 
 function styleLayout(layout){
   console.log("style criou");

@@ -4,7 +4,7 @@ var agenda_id = 0;
 var origem_imagem = ''; // U-upload; L-layout
 
 $(document).ready(function() {
-  alingDivPreviw();
+  //alingDivPreviw();
   agenda_id = window.sessionStorage.getItem('agenda_id');
   console.log(agenda_id);
   get_agenda();
@@ -86,9 +86,9 @@ function alingDivPreviw(){
   console.log(alturaDivs);
   var posicaoTextArea = parseInt($("#textArea").css("height").replace('px', ''));
   console.log(posicaoTextArea);
-  var alturaPreviw = parseInt($(document).height() - posicaoTextArea - alturaDivs);
-  $("#imagem_selecionada").css("height", alturaPreviw+"px");
-  console.log(alturaPreviw);
+  //var alturaPreviw = parseInt($(document).height() - posicaoTextArea - alturaDivs);
+  //$("#imagem_selecionada").css("height", alturaPreviw+"px");
+
 }
 
 document.getElementById("imageFileInput").addEventListener("change", function() {
@@ -229,7 +229,7 @@ function get_agenda(){
       // Inicialize o TinyMCE
       tinymce.init({
         selector: '#descricao2',
-        height: '20rem',
+        height: '120px',
         plugins: [],
         toolbar: 'undo redo | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | removeformat | code',
         fontsize_formats: '8px 10px 12px 14px 18px 24px 36px',

@@ -132,7 +132,7 @@
 .header1{
     background-color: darkred;
     height: 55px;
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: space-between;
     top: 0;

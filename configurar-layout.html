@@ -94,131 +94,8 @@
 
     </header>
 
-<div id="div_campos" style="position: absolute; width: 100%; display: grid; justify-content: center; background-color: rgb(236, 236, 236);">
-
-
-    <div style="align-items: center; display: flex;">
-
-        <div id="data_destaque" style="width: 100%; gap: 4px; display: none;">
-            <div>
-
-                <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem; position: absolute;">description</span>
-
-
-                <input class="cadastro__input" id="txt_data_master" name="txt_data_master" placeholder="Descrição"
-                style="border: 1px solid darkred;"
-                required>
-            </div>
-            <div>
-                <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem; position: absolute;">description</span>
-
-
-                <input class="cadastro__input" id="txt_data_slave" name="txt_data_slave" placeholder="Descrição"
-                style="border: 1px solid darkred;"
-                required>
-            </div>
-
-        </div>
-
-        <div style="width: 100%;" id="div_display_txt">
-            <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem;
-            position: absolute;">description</span>
-
-            <textarea class="login__input" id="txt_descricao" type="text" name="txt_descricao" style="border: 1px solid darkred; height: 7rem;"></textarea>
-        </div>
-    </div>
-
-    <div style="display: flex; gap: 15px;">
-        <div>
-            
-            <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem;
-            position: absolute;">serif</span>
-
-            <select class="login__input" id="fonte_master" name="fonte_master"
-                style="border: 1px solid darkred;"
-                required>
-                <option value="exo">Exo</option>
-                <option value="arial">Arial</option>
-                <option value='"Dancing Script", cursive'>Cursiva</option>
-                <option value="sans-serif">Sans-serif</option>
-                <option value="fantasy">Fantasy</option>
-                <option value="serif">Serif</option>
-                <option value="math">Math</option>
-
-            </select>
-        </div>
-        
-        <div>
-
-            <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem;
-            position: absolute;">format_size</span>
-            
-            <select class="login__input" id="tamanho_fonte" name="tamanho_fonte"
-                style="border: 1px solid darkred;"
-                required>
-                <option value="12pt">12</option>
-                <option value="15pt">15</option>
-                <option value="18pt">18</option>
-                <option value="24pt">24</option>
-
-            </select>
-        </div>
-
-        <div style="height: 3.5rem; width: 3.5rem; background-color: white;" id="cor">
-            <span class="material-symbols-outlined" style="color: lightgray; padding: 6px;
-            position: absolute;">format_color_text</span>
-        </div>
-
-
-        <div class="modal" id="cores">
-
-            <div class="modal-colors">
-                <span class="material-symbols-outlined" id="close_colors" style="color: black; position: relative; left: 90%;">close</span>
-
-                <div id="div_cores" style="display:flex">
-                    <div>
-                        <div class="color" style="background-color: blue;"></div>   
-            
-                        <div class="color" style="background: red"></div>
-            
-                        <div class="color" style="background: green"></div>
-                    </div>	
-                    <div>
-                        <div class="color" style="background-color: yellow"></div>   
-            
-                        <div class="color" style="background: orange"></div>
-            
-                        <div class="color" style="background: gray"></div>
-                    </div>
-                    <div>
-                        <div class="color" style="background-color: black"></div>   
-            
-                        <div class="color" style="background: brown"></div>
-                        
-                        <div class="color" style="background: white"></div>
-                    </div>
-                
-                </div>	
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
-    <div id="layoutImg" style='bottom: 293px; height: 80px; position: absolute; width: 100%; border-bottom:1px solid lightgray; background-color: white;font-family: "exo"; border-top: 1px solid lightgray;'>
-
-            <div id="divLayoutSlick" style="height: 80px; width: 100%;">
-            </div>
-
-    </div>
-
-    <div id="pre_visualizar" style="height: 15px; position: absolute; width: 100%; text-align: center; font-size: 10px; background-color: darkred; color: white;">
-        <span style="position: relative; top: 20%;">PRÉ VISUALIZAÇÃO</span>
-    </div>
-    
     <div id="divImg"
-        style='bottom: 0px; background-size: contain;background-color: white; width: 100%; position: absolute; font-family: "arial";'>
+        style='background-size: contain;background-color: white; width: 100%; position: relative; font-family: "arial";'>
         <div id="evento" class="evento">
             <div id="txt_evento"></div>
         </div>
@@ -244,6 +121,128 @@
         </div>
 
         
+    </div>
+
+
+
+    <div id="layoutImg" style=' height: 80px; position: relative; width: 100%; border-bottom:1px solid lightgray; background-color: white;font-family: "exo"; border-top: 1px solid lightgray;'>
+
+            <div id="divLayoutSlick" style="height: 80px; width: 100%;">
+            </div>
+
+    </div>
+
+    
+    <div id="div_campos" style="position: relative; width: 100%; display: grid; justify-content: center; gap: 10px;">
+
+
+        <div style="align-items: center; display: flex;">
+    
+            <div id="data_destaque" style="width: 100%; gap: 10px; display: none;">
+                <div>
+    
+                    <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem; position: absolute;">description</span>
+    
+    
+                    <input class="cadastro__input" id="txt_data_master" name="txt_data_master" placeholder="Descrição"
+                    style="border: 1px solid darkred;"
+                    required>
+                </div>
+                <div>
+                    <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem; position: absolute;">description</span>
+    
+    
+                    <input class="cadastro__input" id="txt_data_slave" name="txt_data_slave" placeholder="Descrição"
+                    style="border: 1px solid darkred;"
+                    required>
+                </div>
+    
+            </div>
+    
+            <div style="width: 100%;" id="div_display_txt">
+                <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem;
+                position: absolute;">description</span>
+    
+                <textarea class="login__input" id="txt_descricao" type="text" name="txt_descricao" style="border: 1px solid darkred; height: 7rem;"></textarea>
+            </div>
+        </div>
+    
+        <div style="display: flex; gap: 15px;">
+            <div>
+                
+                <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem;
+                position: absolute;">serif</span>
+    
+                <select class="login__input" id="fonte_master" name="fonte_master"
+                    style="border: 1px solid darkred;"
+                    required>
+                    <option value="exo">Exo</option>
+                    <option value="arial">Arial</option>
+                    <option value='"Dancing Script", cursive'>Cursiva</option>
+                    <option value="sans-serif">Sans-serif</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="serif">Serif</option>
+                    <option value="math">Math</option>
+    
+                </select>
+            </div>
+            
+            <div>
+    
+                <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; margin-left: 1rem;
+                position: absolute;">format_size</span>
+                
+                <select class="login__input" id="tamanho_fonte" name="tamanho_fonte"
+                    style="border: 1px solid darkred;"
+                    required>
+                    <option value="12pt">12</option>
+                    <option value="15pt">15</option>
+                    <option value="18pt">18</option>
+                    <option value="24pt">24</option>
+    
+                </select>
+            </div>
+    
+            <div style="height: 3.5rem; width: 3.5rem; background-color: white;" id="cor">
+                <span class="material-symbols-outlined" style="color: lightgray; padding: 6px;
+                position: absolute;">format_color_text</span>
+            </div>
+    
+    
+            <div class="modal" id="cores">
+    
+                <div class="modal-colors">
+                    <span class="material-symbols-outlined" id="close_colors" style="color: black; position: relative; left: 90%;">close</span>
+    
+                    <div id="div_cores" style="display:flex">
+                        <div>
+                            <div class="color" style="background-color: blue;"></div>   
+                
+                            <div class="color" style="background: red"></div>
+                
+                            <div class="color" style="background: green"></div>
+                        </div>	
+                        <div>
+                            <div class="color" style="background-color: yellow"></div>   
+                
+                            <div class="color" style="background: orange"></div>
+                
+                            <div class="color" style="background: gray"></div>
+                        </div>
+                        <div>
+                            <div class="color" style="background-color: black"></div>   
+                
+                            <div class="color" style="background: brown"></div>
+                            
+                            <div class="color" style="background: white"></div>
+                        </div>
+                    
+                    </div>	
+                </div>
+            </div>
+    
+        </div>
+    
     </div>
 
 
