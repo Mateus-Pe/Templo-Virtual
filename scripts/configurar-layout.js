@@ -76,7 +76,7 @@ function busca_agenda(agenda_id ){
       $("#divImg").html(obj.agenda.agenda_layout);
     }
     evento_agenda(obj.agenda);
-    
+    eventosElementosImg();
   });
 }
 
@@ -658,50 +658,33 @@ function set_style(strStyle, divElement){
       var styles = $div.attr('style');
     }
 
+function eventosElementosImg(){
 
-    $('#evento').click(function(e){
-      modalHeader();
-    });
-
-    $('#data').click(function(e){
-      modalData()
-    });
-    $('#modalData').click(function(e){
-      modalData()
-    });
-    function modalData(){
-      $('#modal_data').show();
-    
-      $('#confirmar2').click(function (e) {
-        $('#modal_data').hide();      
-      });
-    }
-
-    $('#rodape').click(function(e){
-     modalFooter();
+  $('#evento').click(function(e){
+    $('#elemento').val('cabecalho');
+    var option = $('#elemento').find(":selected").val();
+    mudaElemento(option);
   });
-  $('#modalFooter').click(function(e){
-    modalFooter();
-  });
-
-  $('#modalHeader').click(function(e){
-    modalHeader();
-  });
-  function modalFooter(){
-    $('#modal_rodape').show();
   
-    $('#confirmar3').click(function (e) {
-        $('#modal_rodape').hide();
-    });
-  }
-  function modalHeader(){
-    $('#modal_evento').show();
-    $('#confirmar').click(function (e) {
-      $('#modal_evento').hide();
-      
-      });
-  }
+  $('#data').click(function(e){
+    $('#elemento').val('corpo');
+    var option = $('#elemento').find(":selected").val();
+    mudaElemento(option);
+  });
   
+  $('#rodape').click(function(e){
+    $('#elemento').val('rodape');
+    var option = $('#elemento').find(":selected").val();
+    mudaElemento(option);
+  });
+
+}
+$('#txt_descricao').focus(function(e){
+  $(window).scrollTop(55);
+});
+
+ 
+
   var popup_edit = 0;
 
   function button_edit(){
