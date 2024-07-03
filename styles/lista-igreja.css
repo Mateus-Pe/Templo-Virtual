@@ -6,7 +6,7 @@
     position:absolute;
     display: flex;
     right: 2%;
-    gap: 15px;
+    gap: 30px;
 }
 
 .list-line {
@@ -214,4 +214,20 @@
     .move-right {
         transform: translateX(93.6%); 
     }
+}
+
+.calendario{
+    font-size: 25px !important; 
+}
+
+.configurar-igreja{
+    font-size: 25px !important;
+}
+
+.editar-igreja{
+    font-size: 25px !important;
+}
+
+.remove-igreja{
+    font-size: 25px !important;
 }

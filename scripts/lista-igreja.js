@@ -74,7 +74,7 @@ function listaEscolhida(data) {
                  '</div>'+
                  '</h3>' +
                  '<div class="modal-container endereco-lista" >' +
-                    '<div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 9px; font-size: 10px;">' +
+                    '<div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 9px; font-size: 13px; gap: 9px;">' +
                     '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_logradouro +', '+ l.igreja_endereco_numero + '</p>' +
                     '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_bairro + '</p>' +
                     '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_cidade + '</p>' +

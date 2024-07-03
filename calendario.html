@@ -46,7 +46,7 @@
 
     </nav>
 
-    <div class="page-menu">
+    
 
         <header class="header1">
 
@@ -71,47 +71,48 @@
 
         </header>
 
+    <div class="page-menu">
+        <div id="divPrincipal">
 
+            <div class="container">
 
+                <div class="calendarYearMonth center">
+                    <p class="left calBtn material-symbols-outlined" onclick="prevMonth()"> navigate_before</p>
+                    <p id="yearMonth"> 2023 Dez </p>
+                    <p class="right calBtn material-symbols-outlined" onclick="nextMonth()"> navigate_next </p>
+                </div>
 
-        <div class="container">
+                <div>
+                    <ol class="calendarList1">
+                        <li class="day-name">Seg</li>
+                        <li class="day-name">Ter</li>
+                        <li class="day-name">Qua</li>
+                        <li class="day-name">Qui</li>
+                        <li class="day-name">Sex</li>
+                        <li class="day-name">Sab</li>
+                        <li class="day-name">Dom</li>
+                    </ol>
 
-            <div class="calendarYearMonth center">
-                <p class="left calBtn material-symbols-outlined" onclick="prevMonth()"> navigate_before</p>
-                <p id="yearMonth"> 2023 Dez </p>
-                <p class="right calBtn material-symbols-outlined" onclick="nextMonth()"> navigate_next </p>
+                    <ol class="calendarList2" id="calendarList">
+
+                    </ol>
+
+                </div>
+
+                <div id="divListaAgenda" style="padding-bottom:150px;height: 300px;overflow-y: auto;"></div>
+
             </div>
 
-            <div>
-                <ol class="calendarList1">
-                    <li class="day-name">Seg</li>
-                    <li class="day-name">Ter</li>
-                    <li class="day-name">Qua</li>
-                    <li class="day-name">Qui</li>
-                    <li class="day-name">Sex</li>
-                    <li class="day-name">Sab</li>
-                    <li class="day-name">Dom</li>
-                </ol>
 
-                <ol class="calendarList2" id="calendarList">
+            <div id="adicionar">
 
-                </ol>
+                <div id="add">
 
-            </div>
+                    <span class="plus">
+                        +
+                    </span>
 
-            <div id="divListaAgenda" style="padding-bottom:150px;height: 300px;overflow-y: auto;"></div>
-
-        </div>
-
-
-        <div id="adicionar">
-
-            <div id="add">
-
-                <span class="plus">
-                    +
-                </span>
-
+                </div>
             </div>
         </div>
     </div>

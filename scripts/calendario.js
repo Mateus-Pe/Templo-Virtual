@@ -442,21 +442,24 @@ $('.page-menu--toggle').click(function(e){
         
         $('.mobile-nav').css('display', 'none');
         $('#add').css('bottom', '10px');
+        $('#div_principal').removeClass('move-right');
         
     }
     else{
   
       $('.mobile-nav').css('display', 'block');
       $('#add').css('bottom', 'calc(10px + var(--nav-height))');
+      $('#div_principal').addClass('move-right');
   
     }
   
     $(this).toggleClass('page-menu__hamburger--open');
   
-    $('.page-menu').toggleClass();
-  
+    $('.page-menu').toggleClass('disabled');
 
-    $('body').toggleClass('no-scroll');
+    $('#divPrincipal').toggleClass('disabled');
+
+    $('.page-menu').toggleClass('no-scroll');
 
   
     efeitoBlur()
@@ -481,8 +484,9 @@ $('.page-menu--toggle').click(function(e){
   
     $('.search-market').toggleClass('is-blur');
 
-    $('.container').toggleClass('is-blur');
+    //$('#divPrincipal').toggleClass('is-blur');
 
+    $('.container').toggleClass('is-blur');
   
   }
   

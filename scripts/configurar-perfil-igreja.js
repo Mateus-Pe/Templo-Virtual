@@ -287,8 +287,6 @@ function carregarIgreja(){
         $('#txt_desc_resumida').val(obj.igreja.igreja_desc_resumida);
         $("#nome_da_igreja").text(obj.igreja.igreja_nome);
         $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
-        $("#img_igreja_selected").attr('src', obj.igreja.igreja_logo_url);
-        $("#img_igreja_desc_resumida").attr('src', obj.igreja.igreja_logo_url);
         $("#img_fundo_src").attr('src', obj.igreja.igreja_fundo_url);
         atualizarContatos();
         alterar_desc_resumida();
@@ -297,7 +295,17 @@ function carregarIgreja(){
 
         var nomeIgreja = obj.igreja.igreja_nome;
         $('#nome_igreja').val(nomeIgreja);
-        $("#img_fundo_src").css('display', 'flex');
+
+        if(obj.igreja.igreja_logo_url != null && obj.igreja.igreja_logo_url != ''){
+          $("#img_igreja_selected").attr('src', obj.igreja.igreja_logo_url);
+          $("#img_igreja_desc_resumida").attr('src', obj.igreja.igreja_logo_url);
+        }
+
+        if(obj.igreja.igreja_fundo_url != null && obj.igreja.igreja_fundo_url != ''){
+          
+          $("#img_fundo_src").css('display', 'flex');
+        }
+        
       }
 
     });
@@ -546,6 +554,7 @@ document.getElementById('imageFileInput').addEventListener('change', function(ev
         const img = new Image();
         
         previewImg = false;
+        
             img.onload = function() {
                 //const height = img.height;
                 //const width = img.width;
@@ -559,7 +568,7 @@ document.getElementById('imageFileInput').addEventListener('change', function(ev
             img.src = e.target.result;
 
           //document.getElementById('previewImg').src = e.target.result;
-          document.getElementById('img_igreja_selected').src = e.target.result;
+          //document.getElementById('img_igreja_selected').src = e.target.result;
           //$("#imagem_selecionada").css("background-image", "url("+e.target.result+")");
           
           
@@ -591,7 +600,7 @@ document.getElementById('imageFundoFileInput').addEventListener('change', functi
             img.src = e.target.result;
 
           //document.getElementById('previewImg').src = e.target.result;
-          document.getElementById('img_fundo_src').src = e.target.result;
+          //document.getElementById('img_fundo_src').src = e.target.result;
           //$("#imagem_selecionada").css("background-image", "url("+e.target.result+")");
           
           
