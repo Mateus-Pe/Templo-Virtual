@@ -47,7 +47,7 @@ function montaHtml(linha, i) {
   html += '<div class="feed_principal">';
   html += '<div class="div_feed_secundario">';
   html += '<div>';
-  html += '<div>';
+  html += '<div style="display: flex; justify-content: space-between;">';
   html += '<a class="div_perfil" >';
   html += '<div class="perfil_div" data-igreja_id = "' + linha.igreja_id + '">';
   html += '<img class="img_igreja" src="' + linha.igreja_logo + '">';
@@ -56,6 +56,16 @@ function montaHtml(linha, i) {
   html += '</span>';
   html += '</div>';
   html += '</a>';
+
+  html += '<div style="border: 1px solid black; align-items: center; display: grid; padding-right: 10px; padding-left: 10px; font-family: exo;">';
+  html += '<span id="dia_evento" style="font-size: 1.2rem; color: grey; display: flex; justify-content: center;">';
+  html += 'Amanhã';
+  html += '</span>';
+  html += '<span id="hora_evento" style="font-size: 1.2rem; color: grey; display: flex; justify-content: center;">';
+  html += '19h';
+  html += '</span>';
+  html += '</div>';
+
   html += '</div>';
   html += '<div class="div_layout_feed">';
   html += '<a class="a_img_layout">';
