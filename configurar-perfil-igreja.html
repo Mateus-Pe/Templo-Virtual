@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -215,12 +216,12 @@
                     <img id="img_igreja_selected" class="img_igreja1" src="./imgs/imgs-igreja/perfil-sem-foto.jpg">
 
                     <div style="border: 3px solid white; border-radius: 50%; position: absolute; top: 80px; right: 0px; background-color: lightgrey; width: 30px; height: 30px; align-items: center; justify-content: center; display: flex;">
-                        <span id="select_img_igreja" class="material-symbols-outlined"
-                        style="position: relative; font-size: 20px; color: darkred;">
+                        <span id="select_img_igreja" class="material-symbols-outlined" style="position: relative; font-size: 20px; color: darkred;">
                         photo_camera
-                    </span>
+                        </span>
+                    </div>
                 </div>
-                </div>
+
                 <div style="display: flex; align-items: center;">
                     <h1 id="nome_da_igreja" class="nome_da_igreja">
                 
@@ -229,18 +230,17 @@
                 </div>
             </div>
 
-            <div>
-                <span class="abrir_map">
 
-                    <span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432">
-                        Ver no mapa
+            <div style="position: relative; bottom: 70px; justify-content: right; display: flex; align-items: center;">
+                <span class="abrir_hora_fixo">
+                    <span id="horarios_fixos">
+                        Editar horários fixos
                     </span>
-
                     <span class="material-symbols-outlined icone_editar ion_map">
-                        location_on
+                        schedule
                     </span>
-
                 </span>
+
             </div>
 
 
@@ -399,6 +399,71 @@
         </div>
       </div>
 
+
+
+      <div class="modal1" id="modal_horarios_fixos">
+
+        <!-- Conteudo do modal -->
+  
+        <div class="modal_content">
+  
+          <div class="modal_header">
+  
+            <span id="close_horarios" class="modal_close ion-android-close"></span>
+  
+            <h3 class="h3_modal">Horários</h3>
+
+            <h6 id="click_sugestao1" style="color: lightgreen;"> Sugestão 1</h6>
+
+            <div id="sugestao1" style="display: none;">
+                <p>
+                    <strong>
+                        Missa:
+                    </strong>
+                    &nbsp;
+                </p>
+                
+                <p>
+                    s &aacute;bado &aacute;s 19h30;
+                </p>
+                
+                <p>
+                    domingo &aacute;s 20h;
+                </p>
+                
+                <p>
+                    <strong>
+                        Confiss &otilde;es:
+                    </strong>
+                    &nbsp;
+                </p>
+                
+                <p>
+                    quarta e quinta das 14h &aacute;s 17h;
+                </p>
+
+            </div>
+  
+          </div>
+  
+          <div class="modal_body">
+
+  
+            <textarea class="cadastro__input" id="adicionar_horarios_fixos"></textarea>
+  
+          </div>
+  
+          <div class="modal_footer">
+  
+  
+  
+          </div>
+  
+        </div>
+  
+      </div>
+
+
       <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
       <input type="file" id="imageFundoFileInput" accept="image/*" style="display: none;">
         <footer>
@@ -406,11 +471,12 @@
 
             <script src="./scripts/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 
-
-
+            
             <script src="./scripts/slick/slick.min.js"></script>
             <script src="./scripts/slick/slick.js"></script>
-
+            
+            <script src="https://cdn.tiny.cloud/1/txixhs2kyot0muep1k6v2mp5hd6wqk30jmbvp6hv8pk3g4b7/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+            
             <script src="./scripts/configurar-perfil-igreja.js"></script>
             <script src="scripts/modal-igrejas.js"></script>
             <script src="./scripts/geolocation.js"></script>

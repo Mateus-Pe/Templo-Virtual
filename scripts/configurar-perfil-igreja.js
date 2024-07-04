@@ -1,6 +1,8 @@
 igrejaId = "" ;
 nomeIgrejaVerificado = "";
 origem_imagem = "";
+horarioFixoHtml = '';
+editaHorarioFixo = '';
 //evento_agenda();
 
 
@@ -60,6 +62,21 @@ function carregar_perfil(){
       html += '</div>';
       html += '</div>';
       $("#divPerfil").html(html);
+
+      modalHorariosFixos();
+      
+}
+
+function modalHorariosFixos(){
+
+  $("#horarios_fixos").click(function(e){
+    $("#modal_horarios_fixos").show();
+    textoArea();
+  });
+  
+  $("#close_horarios").click(function(e){
+    $("#modal_horarios_fixos").hide();
+  });
 }
 
   function slick(){
@@ -203,7 +220,7 @@ function atualizarContatos() {
 */
 $('#whatsapp_txt').on('keyup', function(event) {
   mascaraTelefone(event);
-  
+  atualizarContatos();
 });
 
 $('#facebook_txt').on('input', function() {
@@ -227,7 +244,6 @@ $('#btn_salvar').on('click', function() {
   if (descResumida === ''){
     $('#modal_validacao').show();
   } else{
-    
     salvar();
   }
 });
@@ -245,6 +261,7 @@ function salvar(){
   formData.append('igreja_face', $('#facebook_txt').val());
   formData.append('igreja_instagram', $('#instagram_txt').val());
   formData.append('igreja_email', $('#email_txt').val());
+  formData.append('igreja_horario_fixo', horarioFixoHtml);
   formData.append('file_background', $('#imageFundoFileInput')[0].files[0]);
   formData.append('file', $('#imageFileInput')[0].files[0]);
   
@@ -288,6 +305,9 @@ function carregarIgreja(){
         $("#nome_da_igreja").text(obj.igreja.igreja_nome);
         $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
         $("#img_fundo_src").attr('src', obj.igreja.igreja_fundo_url);
+        if(obj.igreja.igreja_horario_fixo != null)
+          editaHorarioFixo = obj.igreja.igreja_horario_fixo;
+        
         atualizarContatos();
         alterar_desc_resumida();
 
@@ -610,3 +630,51 @@ document.getElementById('imageFundoFileInput').addEventListener('change', functi
       
   }
 });
+
+
+  $("#click_sugestao1").click(function(e){
+    editaHorarioFixo = $("#sugestao1").html();
+
+  });
+
+
+function textoArea(){//document.addEventListener('DOMContentLoaded', function() {
+  console.log("testessda");
+    // Inicialize o TinyMCE
+    tinymce.init({
+      selector: '#adicionar_horarios_fixos',
+      height: '170px',
+      plugins: [],
+      toolbar: 'undo redo | fontselect fontsizeselect | forecolor backcolor | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | removeformat | code',
+      fontsize_formats: '8px 10px 12px 14px 18px 24px 36px',
+      content_style: 'body { font-family: Arial, Helvetica, sans-serif; font-size: 14px; }',
+      ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("txixhs2kyot0muep1k6v2mp5hd6wqk30jmbvp6hv8pk3g4b7")),
+      setup: function(editor) {
+        editor.on('init', function() {
+          console.log("ta no init");
+          // Remove a barra de status ao inicializar o editor
+          var statusbarDiv = document.querySelector('.tox .tox-statusbar');
+          if (statusbarDiv) {
+            statusbarDiv.remove();
+          } else {
+            console.error('A div com a classe .tox .tox-statusbar não foi encontrada.');
+          }
+          //if(agenda.agenda_layout_upload_desc != null && agenda.agenda_layout_upload_desc != ''){
+              
+            //editor.setContent(agenda.agenda_layout_upload_desc);
+          //}
+            // Verifica e atualiza o conteúdo do editor ao inicializar
+            if(editaHorarioFixo != ''){
+                
+              editor.setContent(editaHorarioFixo);
+            }
+            horarioFixoHtml = editor.getContent();
+        });
+
+        // Atualiza o conteúdo da div ao modificar o texto no editor
+        editor.on('keyup change', function() {
+          horarioFixoHtml = editor.getContent();
+        });
+      }
+    });
+}

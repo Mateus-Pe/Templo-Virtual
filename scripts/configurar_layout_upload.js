@@ -250,7 +250,6 @@ function get_agenda(){
             }
               // Verifica e atualiza o conteúdo do editor ao inicializar
               conteudoHtml = editor.getContent();
-              console.log(conteudoHtml);
               if (!conteudoHtml.trim()) {
                 descricaoTexto.innerHTML = 'Adicione um comentário para visualiza-lo';
               } else {

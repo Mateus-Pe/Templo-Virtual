@@ -79,7 +79,6 @@ body{
 
 .img_layout_feed{
     align-self: center;
-    max-height: 200px;
     max-width: 100%;
     width: 100%;
 }
@@ -230,17 +229,28 @@ body{
 .a_div_perfil{
     display: grid;
     text-decoration: none;
+    position: relative;
+    padding-top: 4rem;
 }
 
 .nome_da_igreja{
     position: relative;
-    margin-top: 50px; 
-    margin-bottom: 20px; 
     align-self: center; 
     color: #363636; 
-    margin-left: 1.6rem; 
     font-size: 1.7rem; 
     font-family: exo;
+    max-width: 120px;
+    text-align: center;
+    left: 2.5rem;
+}
+
+.abrir_hora_fixo{
+    bottom: 50px;
+    position: relative;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    font-size: 1.2rem;
 }
 
 .abrir_map{

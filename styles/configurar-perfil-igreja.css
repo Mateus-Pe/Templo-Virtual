@@ -228,12 +228,21 @@ body{
 }
 
 .abrir_map{
-    bottom: 13px;
     position: relative;
     display: flex;
     justify-content: right;
     align-items: center;
     font-size: 1.2rem;
+    gap: 5px;
+}
+
+.abrir_hora_fixo{
+    position: relative;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 5px;
 }
 
 .ion_map{

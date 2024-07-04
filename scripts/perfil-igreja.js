@@ -25,22 +25,38 @@ function carregar_perfil(){
     html += '<div class="perfil" style="width: 100%; background-color: lightgrey">';
     html += '<div class="div_imgFundo_perfil">';
     html += '<div class="imgFundo_perfil">';
-    html += '<img class="img_fundo1" style="width: 100%; height: 250px;" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">';
+    html += '<img class="img_fundo1" style="width: 100%; height: 250px;" src="./imgs/imgs-igreja/loading.gif">';
     html += '</div>';
     html += '</div>';
-    html += '<div id="imagem_igreja" class="div_img_igreja">';
-    html += '<img class="img_igreja1" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">';
+    html += '<div class="div_img_igreja">';
+    html += '<div id="imagem_igreja" >';
+    html += '<img class="img_igreja1" src="./imgs/imgs-igreja/loading-perfil.webp">';
     html += '</div>';
+    
+    html += '</div>';
+
     html += '<div class="div_publicacao">';
     html += '<div class="feed_principal">';
     html += '<div class="div_feed_secundario">';
     html += '<div>';
     html += '<div>';
-    html += '<a class="a_div_perfil">';
-    html += '<div>';
+
+    html += '<div style="top: 3rem; position: relative;">';
     html += '<h1 id="nome_da_igreja" class="nome_da_igreja">';
     html += '</h1>';
+
+    html += '<span class="abrir_hora_fixo">';
+    html += '<span id="horarios_fixos">';
+    html += 'Ver horários fixos';
+    html += '</span>';
+    html += '<span class="material-symbols-outlined icone_editar ion_map">';
+    html += 'schedule';
+    html += '</span>';
+    html += '</span>';
+
     html += '</div>';
+
+    html += '<div class="a_div_perfil">';
     html += '<span class="abrir_map">';
     html += '<span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432" >';
     html += 'Ver no mapa';
@@ -50,7 +66,7 @@ function carregar_perfil(){
     html += '</span>';
     html += '</span>';
     html += '<span id="endereco_da_igreja" class="endereco_igreja">';
-    html += 'Rua da igreja, 78, Vila Santana, Sorocaba';
+    html += '';
     html += '</span>';
     html += '<div class="contatos">';
     html += '<span id="whatsapp_txt" class="contato"></span>';
@@ -58,7 +74,7 @@ function carregar_perfil(){
     html += '<span id="instagram_txt" class="contato"></span>';
     html += '<span id="email_txt" class="contato"></span>';
     html += '</div>';
-    html += '</a>';
+    html += '</div>';
     html += '</div>';
     html += '</div>';
     html += '</div>';
@@ -68,6 +84,7 @@ function carregar_perfil(){
     $("#divPerfil").html(html);
 
     eventoPerfil();
+    modalHorariosFixos();
     modalVisualizarPerfil();
     modalVisualizarImgFundo();
     
@@ -209,6 +226,7 @@ function carregarIgreja(){
         $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
         $(".img_igreja1").attr('src', obj.igreja.igreja_logo_url);
         $(".img_fundo1").attr('src', obj.igreja.igreja_fundo_url);
+        $("#horario_fixo").html(obj.igreja.igreja_horario_fixo);
         atualizarContatos();
 
         nomeIgrejaVerificado = obj.igreja.igreja_nome;
@@ -275,6 +293,17 @@ function eventoPerfil(){
   });
   $(".modal_close").click(function(e) {
    $('#modal_addproduto').hide(); 
+  });
+}
+
+function modalHorariosFixos(){
+
+  $("#horarios_fixos").click(function(e){
+    $("#modal_horarios_fixos").show();
+  });
+  
+  $("#close_horarios").click(function(e){
+    $("#modal_horarios_fixos").hide();
   });
 }
 

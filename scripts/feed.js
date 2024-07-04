@@ -5,7 +5,7 @@ window.onload = function() {
   var url = window.location.href; 
   var imageUrl = "URL_da_Imagem.jpg";
 
-  atualizarMetaTagsOG(description, url, imageUrl);
+  //atualizarMetaTagsOG(description, url, imageUrl);
 };
 
 evento_agenda();
@@ -33,7 +33,7 @@ function evento_agenda(){
       
 
       configurarEventos();
-      iniciarIntersectionObserver();
+      //iniciarIntersectionObserver();
       compartilha();
       
     });
@@ -144,15 +144,15 @@ function configurarEventos(){
     location.href = "perfil-igreja.html";
   });
 
-  $(window).scroll(function() {
+ /* $(window).scroll(function() {
     //if(($(window).scrollTop() % 500)== 0){
-      /*if(sessionStorage.getItem('arrayOfertaAcesso') != null && sessionStorage.getItem('arrayOfertaAcesso') != ''){
+      if(sessionStorage.getItem('arrayOfertaAcesso') != null && sessionStorage.getItem('arrayOfertaAcesso') != ''){
         arrayOfertaAcesso = JSON.parse(sessionStorage.getItem('arrayOfertaAcesso')); 
       }else{
         arrayOfertaAcesso = [];
       }
      console.log($(window).scrollTop());
-     console.log(JSON.parse(sessionStorage.getItem('arrayOfertaAcesso')));*/
+     console.log(JSON.parse(sessionStorage.getItem('arrayOfertaAcesso')));
     
       
      $('.div_publicacao').each(function(){
@@ -165,7 +165,7 @@ function configurarEventos(){
         }
      });
     //}
-    });
+    });*/
 }
 
 
@@ -235,7 +235,7 @@ function efeitoBlur(){
 }
 
 
-
+/*
 
 function iniciarIntersectionObserver() {
   const options = {
@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-
+*/
 
 function compartilha() {
   var buttons = document.querySelectorAll('.span_rodape_botao');
