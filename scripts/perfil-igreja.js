@@ -3,7 +3,7 @@ nomeIgrejaVerificado = "";
 
 
 $(document).ready(function() {
-  getFeed();
+  evento_agenda();
   carregar_perfil();
   igrejaId = window.sessionStorage.getItem('igreja_id');
   if(igrejaId != null && igrejaId != ''){
@@ -91,62 +91,151 @@ function carregar_perfil(){
 }
 
 
-function getFeed(){
+
+function evento_agenda(){
   $.ajax({
     method: "POST",
     url: "https://pedeoferta.com.br/templo/index.php/welcome/get_feed",
    
   })
   .done(function(ret) {
-   
-    var obj = jQuery.parseJSON(ret);
     var html = '';
-   
-    console.log(obj);
+    var classVideo = 0;
+    var obj = jQuery.parseJSON(ret);
     $.each(obj.lista_feed, function (k, lpp) {
-      html += '<div class="div_publicacao">';
-      html += '<div class="feed_principal">';
-      html += '<div class="div_feed_secundario">';
-      html += '<div>';
-      html += '<div>';
-      html += '<a class="div_perfil" >';
-      html += '<div class="perfil_div" data-igreja_id = "'+lpp.igreja_id+'">';
-      html += '<img class="img_igreja" src="'+lpp.igreja_logo+'">';
-      html += '<span class="nome_igreja">';
-      html += lpp.igreja_nome;
-      html += '</span>';
-      html += '</div>';
-      html += '</a>';
-      html += '</div>';
-      html += '<div class="div_layout_feed">';
-      html += '<a class="a_img_layout">';
-      html += '<img class="img_layout_feed" src="'+lpp.agenda_img+'">';
-      html += '</a>';
-      html += '<div class="div_descricao">';
-      html += '<span class="span_descricao">';
-      html += lpp.descricao_evento;
-      html += '</span>';
-      html += '</div>';
-      html += '</div>';
-      html += '<div class="div_rodape_feed">';
-      html += '<div class="rodape_feed_botao">';
-      html += '<span class="material-symbols-outlined span_rodape_botao">';
-      html += 'share';
-      html += '</span>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
+      
+      classVideo ++;
+      html = montaHtmlVideo(classVideo);
+      if(classVideo < 2){
+        //$("#divHistoria").append(html);
+        //readyVideo(classVideo);
+      }
+      html = montaHtml(lpp, k);
+      $("#divFeed").append(html);
     });
-   
-
-    $("#divFeed").html(html);
+    
 
     configurarEventos();
-});
+    //iniciarIntersectionObserver();
+    compartilha();
+    
+  });
 }
+
+
+function compartilha() {
+  var buttons = document.querySelectorAll('.span_rodape_botao');
+  buttons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      var postagem = this.closest('.div_publicacao');
+      var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
+      var imagemUrl = postagem.querySelector('.img_layout_feed').getAttribute('src');
+      var postId = extrairIdDaImagem(imagemUrl);
+
+      if (postId) {
+        var nomeInstituicao = postagem.querySelector('.nome_igreja').innerText;
+        var timestamp = Date.now();
+        var parametros = "?a="+encodeURIComponent(nomeInstituicao)+"&c="+imagemUrl+"&timestamp="+timestamp;
+        var postUrl = 'http://pedeoferta.com.br/site/servitus/compartilha.html'+parametros;
+        console.log('Link compartilhado:', postUrl);
+        
+        // Abre um menu de compartilhamento com opções para WhatsApp, Facebook e Instagram
+        var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
+        compartilhamentoMenu.style.display = 'flex';
+
+        var whatsappButton = compartilhamentoMenu.querySelector('.btn-whatsapp');
+        var facebookButton = compartilhamentoMenu.querySelector('.btn-facebook');
+        var instagramButton = compartilhamentoMenu.querySelector('.btn-instagram');
+
+        whatsappButton.addEventListener('click', function() {
+          abrirLinkParaWhatsApp(postUrl);
+        });
+
+        facebookButton.addEventListener('click', function() {
+          abrirLink('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(postUrl));
+        });
+
+        instagramButton.addEventListener('click', function() {
+          abrirLink('https://www.instagram.com/' + encodeURIComponent(postUrl));
+        });
+
+        // Alternar a visibilidade dos botões de compartilhamento
+        toggleShareButtons(compartilhamentoMenu);
+        hideShareButtonsFromOtherPosts(compartilhamentoMenu);
+      } else {
+        console.error('Erro ao obter o ID da publicação.');
+      }
+    });
+  });
+}
+
+function toggleShareButtons(compartilhamentoMenu) {
+  compartilhamentoMenu.offsetHeight;
+  // Alterna a classe 'show' para controlar a exibição dos botões
+  compartilhamentoMenu.classList.toggle('show');
+  // Atualiza o estilo de exibição dos botões
+  var shareButtons = compartilhamentoMenu.querySelectorAll('.btn-compartilhar');
+  shareButtons.forEach(function(button) {
+    if (compartilhamentoMenu.classList.contains('show')) {
+      button.style.display = 'flex'; // Exibe os botões
+    } else {
+      button.style.display = 'none'; // Oculta os botões
+    }
+  });
+}
+
+
+function hideShareButtonsFromOtherPosts(currentCompartilhamentoMenu) {
+  var allCompartilhamentoMenus = document.querySelectorAll('.compartilhamento');
+  allCompartilhamentoMenus.forEach(function(compartilhamentoMenu) {
+    if (compartilhamentoMenu !== currentCompartilhamentoMenu) {
+      compartilhamentoMenu.classList.remove('show');
+      var shareButtons = compartilhamentoMenu.querySelectorAll('.btn-compartilhar');
+      shareButtons.forEach(function(button) {
+        button.style.display = 'none';
+      });
+    }
+  });
+}
+
+
+function abrirLink(url) {
+  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    // Se estiver em um dispositivo móvel, tentamos abrir o link diretamente
+    window.location.href = url;
+  } else {
+    // Se estiver em um computador, abrimos o link em uma nova aba do navegador
+    window.open(url, '_blank');
+  }
+}
+
+function abrirLinkParaWhatsApp(url) {
+  var whatsappLink = 'whatsapp://send?text=' + encodeURIComponent(url);
+  var whatsappWebLink = 'https://web.whatsapp.com/send?text=' + encodeURIComponent(url);
+  
+  // Verifica se o navegador suporta o protocolo whatsapp://
+  if (navigator.userAgent.match(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i)) {
+    window.open(whatsappLink, '_blank');
+  } else {
+    // Se não suportar, abre o link para o WhatsApp Web
+    window.open(whatsappWebLink, '_blank');
+  }
+}
+
+
+function extrairIdDaImagem(imagemUrl) {
+  // Extrai o ID da imagem do URL
+  var idMatch = imagemUrl.match(/\/(\d+)\.jpg$/);
+  if (idMatch) {
+    return idMatch[1];
+  } else {
+    return null;
+  }
+}
+
+
 
 
 function getComunidade(){

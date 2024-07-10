@@ -30,7 +30,6 @@ body{
 }
 
 .div_feed_secundario{
-    border-radius: 10px;
     border: 1px solid white;
     margin-left: 0.2rem;
     margin-bottom: 0.1rem;
@@ -385,4 +384,60 @@ body{
     align-items: center;
     display: flex;
     justify-content: center;
+}
+
+.compartilhamento {
+    display: none;
+    justify-content: center;
+    gap: 2rem;
+    overflow: hidden;
+    max-height: 0px;
+    transition: max-height 0.6s ease-in-out;
+}
+
+.show {
+    max-height: 200px;
+}
+
+.btn-compartilhar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Adicionando margem para separar os botões */
+    margin: 0 5px;
+}
+
+.btn-whatsapp {
+    background-color: #25D366;
+    /* Verde do WhatsApp */
+}
+
+.btn-facebook {
+    background-color: #1877F2;
+    /* Azul do Facebook */
+}
+
+.btn-instagram {
+    background-color: #E4405F;
+    /* Cor característica do Instagram */
+}
+
+.btn-instagram:hover {
+    background-color: #CA3754;
+    /* Cor de destaque ao passar o mouse */
+}
+
+.btn-compartilhar img {
+    width: 24px;
+    /* Tamanho dos ícones */
+    height: 24px;
+    filter: invert(1);
+}
+
+.btn-compartilhar:hover {
+    opacity: 0.8;
+    /* Opacidade reduzida ao passar o mouse */
 }
