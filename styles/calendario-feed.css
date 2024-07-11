@@ -106,6 +106,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 10%;
+    border-bottom: 1px solid darkred;
 }
 
 .calendarYearMonth p {

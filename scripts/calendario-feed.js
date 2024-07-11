@@ -1,7 +1,7 @@
 currentDay = 0;
 var igrejaId = null;
 var dtReferencia;
-
+var currentDia = carregarDia();
 $(document).ready(function() {
 
   igrejaId = window.sessionStorage.getItem('igreja_id');
@@ -90,18 +90,18 @@ $(document).ready(function() {
 });
 
 const months = [
-    { 'id': 1, 'name': 'Jan' },
-    { 'id': 2, 'name': 'Fev' },
-    { 'id': 3, 'name': 'Mar' },
-    { 'id': 4, 'name': 'Abr' },
-    { 'id': 5, 'name': 'Mai' },
-    { 'id': 6, 'name': 'Jun' },
-    { 'id': 7, 'name': 'Jul' },
-    { 'id': 8, 'name': 'Ago' },
-    { 'id': 9, 'name': 'Set' },
-    { 'id': 10, 'name': 'Out' },
-    { 'id': 11, 'name': 'Nov' },
-    { 'id': 12, 'name': 'Dez' },
+    { 'id': 1, 'name': 'Janeiro' },
+    { 'id': 2, 'name': 'Fevereiro' },
+    { 'id': 3, 'name': 'Março' },
+    { 'id': 4, 'name': 'Abril' },
+    { 'id': 5, 'name': 'Maio' },
+    { 'id': 6, 'name': 'Junho' },
+    { 'id': 7, 'name': 'Julho' },
+    { 'id': 8, 'name': 'Agosto' },
+    { 'id': 9, 'name': 'Setembro' },
+    { 'id': 10, 'name': 'Outubro' },
+    { 'id': 11, 'name': 'Novembro' },
+    { 'id': 12, 'name': 'Dezembro' },
 ];
 var currentYear = new Date().getFullYear();
 var currentMonth = new Date().getMonth() + 1;
@@ -123,7 +123,7 @@ function letsCheck(year, month) {
 
 
 function makeCalendar(year, month) {
-    var getChek = letsCheck(year, month);
+    var getChek = letsCheck(year, month); 
     getChek.firstDay === 0 ? getChek.firstDay = 7 : getChek.firstDay;
     $('#calendarList').empty();
     for (let i = 1; i <= getChek.daysInMonth; i++) {
@@ -135,7 +135,11 @@ function makeCalendar(year, month) {
         $('#calendarList').append(div);
     }
     monthName = months.find(x => x.id === month).name;
-    $('#yearMonth').text(year + ' ' + monthName);
+    
+    
+    $('#' + currentDia).addClass('dia_selecionado');
+
+    $('#yearMonth').text(currentDia + ' ' + monthName );
     configuraEventos();
     
     
@@ -146,6 +150,8 @@ function makeCalendar(year, month) {
     var idDiaAnterior = ''; // Inicializa a variável idDiaAnterior
 
 $('#calendarList').on('click', 'li', function() {
+  currentDia = $(this).attr('id');
+  $('#yearMonth').text(currentDia + ' ' + monthName);
 
   if (idDiaAnterior !== '') {
       
@@ -166,7 +172,49 @@ $('#calendarList').on('click', 'li', function() {
 });
 }
 
+$('.calendarYearMonth ').click(function(e){
+  $('#div_dias').css('display', 'grid');
+});
 
+function carregarDia(){
+  //var data =  window.sessionStorage.getItem('data_referencia');
+  hoje = new Date();
+  return hoje.getDate();
+  
+}
+
+function nextDay(){
+  var getChek = letsCheck(currentYear, currentMonth);
+  currentDia += 1;
+
+  if(currentDia > getChek.daysInMonth){
+    currentDia = 1;
+    nextMonth();
+    console.log(getChek.daysInMonth);
+  }else{
+    console.log('else');
+    $('#calendarList li').removeClass('dia_selecionado');
+    $('#' + currentDia).addClass('dia_selecionado');
+  
+    $('#yearMonth').text(currentDia + ' ' + monthName);
+  }
+}
+
+function prevDay(){
+  var getChek = letsCheck(currentYear, currentMonth - 1);
+  currentDia -= 1;
+
+  if(currentDia < 1){
+    currentDia = getChek.daysInMonth;
+    prevMonth();
+  }else{
+    $('#calendarList li').removeClass('dia_selecionado');
+    $('#' + currentDia).addClass('dia_selecionado');
+  
+    $('#yearMonth').text(currentDia + ' ' + monthName);
+    
+  }
+}
 
 
 function nextMonth() {
@@ -176,7 +224,6 @@ function nextMonth() {
         currentMonth = 1;
     }
     $('#calendarList').empty();
-    $('#yearMonth').text(currentYear + ' ' + currentMonth);
     makeCalendar(currentYear, currentMonth);
 
 }
@@ -189,7 +236,6 @@ function prevMonth() {
         currentMonth = 12;
     }
     $('#calendarList').empty();
-    $('#yearMonth').text(currentYear + ' ' + currentMonth);
     makeCalendar(currentYear, currentMonth);
 
 }
@@ -202,7 +248,7 @@ function configuraEventos(){
             data =currentYear +'-'+currentMonth+"-"+$(this).attr('id') ;
             currentDay = $(this).attr('id');
             get_calendario_hora(data);
-          });    
+          });
 
     
 }
