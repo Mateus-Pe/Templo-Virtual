@@ -367,47 +367,23 @@ function appendMercados(data, de, ate){
 
 
 
+document.getElementById('salva_filtro').addEventListener('click', function() {
+  //salvarFiltros();
 
+  window.location = 'feed.html';
 
-
-
-
-document.getElementById('filtro').addEventListener('click', function() {
-  document.querySelector('#input_pesq').style.display = 'none';
-  document.getElementById('barra-caminhos').style.display = 'none'; 
-  document.querySelector('#header').style.display = 'flex';
-  document.querySelector('#filtros_selects').style.display = 'grid';
+  //const valoresSelecionados = obterValoresSelecionados();
+  //const barraCaminhos = document.getElementById('barra-caminhos');
+  //if (valoresSelecionados.length > 0) {
+   // barraCaminhos.style.display = 'flex';
+  //} else {
+    //barraCaminhos.style.display = 'none';
+ // }
 });
 
 document.getElementById('fecha_filtro').addEventListener('click', function(){
-  document.querySelector('#header').style.display = 'none';
-  document.querySelector('#filtros_selects').style.display = 'none';
-  document.getElementById('barra-caminhos').style.display = 'none';
-  document.querySelector('#input_pesq').style.display = 'flex';
-  
-  document.querySelectorAll('select').forEach(select => {
-  select.value = '';
-  });
+  window.location = 'feed.html';
 });
-
-document.getElementById('salva_filtro').addEventListener('click', function() {
-  salvarFiltros();
-
-  document.getElementById('barra-caminhos').style.display = 'flex';
-  document.querySelector('#input_pesq').style.display = 'flex';
-  document.querySelector('#header').style.display = 'none';
-  document.querySelector('#filtros_selects').style.display = 'none';
-
-  const valoresSelecionados = obterValoresSelecionados();
-  const barraCaminhos = document.getElementById('barra-caminhos');
-  if (valoresSelecionados.length > 0) {
-    barraCaminhos.style.display = 'flex';
-  } else {
-    barraCaminhos.style.display = 'none';
-  }
-});
-
-
 
 
 const slider = document.getElementById('slider');

@@ -347,3 +347,12 @@ function extrairIdDaImagem(imagemUrl) {
   }
 }
 
+$('#filtro').click(function () {
+  //sessionStorage.setItem('origem', 'feed');
+  window.location = 'pesquisa.html';
+});
+
+$('#calendario-feed').click(function () {
+  //sessionStorage.setItem('origem', 'feed');
+  window.location = 'calendario-feed.html';
+});
