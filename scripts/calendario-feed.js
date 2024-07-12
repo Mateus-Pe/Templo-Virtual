@@ -171,9 +171,21 @@ $('#calendarList').on('click', 'li', function() {
     }
 });
 }
+$('#yearMonth').data('click-count', 0);
 
-$('.calendarYearMonth ').click(function(e){
-  $('#div_dias').css('display', 'grid');
+$('#yearMonth ').click(function(e){
+  var clickCount = $(this).data('click-count'); 
+  clickCount++;
+  $(this).data('click-count', clickCount);
+
+  if(clickCount % 2 == 0){
+    $('#div_dias').css('display', 'none');
+    $('#divListaAgenda').removeClass('calendar_open')
+    
+  }else{
+    $('#div_dias').css('display', 'grid');
+    $('#divListaAgenda').addClass('calendar_open')
+  }
 });
 
 function carregarDia(){
@@ -365,13 +377,39 @@ function mock_agenda(){
   $('#ok').click(function(){
     $('#modalStatus').hide();
   });
+
+  function montaHorario(ch){
+
+    var html = '';
+    if(ch.tipo == 'E'){
+
+      html ='<div style="width: 30%; justify-content: center; display: flex; align-items: center;">'+
+                    '<div style="width: 70px; height: 40px; border: 1px solid; border-radius: 20px; background-color: darkred; font-size: 16px; align-items: center; justify-content: center; display: flex; color: white;"> '+
+                    ch.agenda_hora+
+                    '</div>'+
+              '</div>';
+    }else{
+      html = '<div style="width: 30%; justify-content: center; display: flex; align-items: center;">'+
+                    '<div style="width: 70px; height: 40px; border: 1px solid; border-radius: 20px; background-color: darkred; font-size: 16px; align-items: center; justify-content: center; display: flex; color: white;">'+
+                    ch.agenda_hora+
+                  '</div>'+
+              '</div>'+
+
+              '<div style="width: 30%; justify-content: center; display: flex; align-items: center;">'+
+                    '<div style="width: 70px; height: 40px; border: 1px solid; border-radius: 20px; background-color: darkred; font-size: 16px; align-items: center; justify-content: center; display: flex; color: white;">'+
+                    ch.agenda_fim+
+                  '</div>'+
+              '</div>';
+    }
+    return html;
+  }
   
   function get_calendario_hora(dtReferencia){
 
 	$.ajax({
 	   method: "POST",
-	   url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_calendario_hora",
-	   data: {  'igreja_id': igrejaId, 
+	   url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_calendario_feed",
+	   data: {  'cidade_id': 9240, 
                 data_referencia: dtReferencia,
                 
 			 }
@@ -386,24 +424,35 @@ function mock_agenda(){
             var total_checked = 0;
 			$.each(obj.calendario_hora, function (k, ch) {
 				checked = '';
+        
 				
-				html =  '<div class="pesq" style="background-color: white;height:50px;line-height:50px; padding-bottom: 10px; border-bottom: 1px solid #5b318a36">';
+				html =  '<div class="pesq" style="background-color: white; border-bottom: 1px solid #5b318a36">';
 
 				html +=     '<div class="add" style="display: flex;" data-agenda_id="'+ ch.agenda_id +'">' +
-								'<div style="width: 35%; text-align: left;">'+
-									'<span style="font-size:1.5rem; color: black; margin-left: 15px;">'+ ch.agenda_hora +'</span>'+
-								'</div>'+
-                                '<div style="width: 35%; text-align: left;">'+
+
+
+
+                    '<div  style="display: inline-grid; padding-top: 10px;">'+
+                        '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">'+
+                            '<img id="img_igreja_desc_resumida" src="'+ch.igreja_logo_url+'" style="height:50px; width: 50px; border-radius: 50%;">'+
+                        '</div>'+
+                        '<span id="desc_resumida" style="font-size: 1.3rem;text-align:center;text-decoration:none; width: 100px; padding-bottom: 5px;">'+
+                          ch.igreja_nome+
+                        '</span>'+
+                    '</div>'+
+
+
+                    
+
+                '<div style="width: 50%; text-align: center; justify-content: center; align-items: center; display: flex;">'+
 									'<span style="font-size:1.5rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
 								'</div>'+
-                statusLayout(ch.agenda_layout_tipo, ch)+
-                                '<div class="columns">' +
-                                '<span data-agenda_img="'+ ch.agenda_img +'"data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'" data-status="'+ch.agenda_layout_tipo+'" data-logo_url="'+ch.igreja_logo_url+'" data-igreja_nome="'+ch.igreja_nome+'" data-agenda_desc=\''+ch.agenda_layout_upload_desc+'\'  class="material-symbols-outlined acToggle config">more_horiz</span>'+
-                                //'<span data-agenda_img="'+ ch.agenda_img +'" class="material-symbols-outlined acToggle ver_layout">visibility</span>'+
-                                //'<span data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'"  class="material-symbols-outlined acToggle configurar_layout">edit</span>'+
-                                '</div>'+
-                            '</div>' +
+                
 
+                
+                montaHorario(ch)+
+
+              '</div>' +
 					   '</div>';
 
 				$('#divListaAgenda').append(html);

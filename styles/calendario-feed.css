@@ -353,4 +353,30 @@ body {
 .disabled {
     pointer-events: none;
     opacity: 0.2;
-  }
+}
+
+.igreja_lista_agenda{
+    width: 20%;
+    align-items: center;
+    display: grid;
+    justify-content: center;
+}
+
+.img_igreja_lista_agenda{
+    border: 1px solid;
+    width: 50px;
+    display: flex;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.nome_igreja_lista_agenda{
+    font-size: 1.3rem;
+    text-align:center; 
+    text-decoration:none;
+}
+
+.calendar_open{
+    height: 300px;
+    overflow-y: auto;
+}
