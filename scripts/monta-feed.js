@@ -27,7 +27,7 @@ function montaHtml(linha, i) {
   var html = "";
   var postId = 'post_' + i;
 
-  html += '<div id="' + postId + '" class="div_publicacao">';
+  html += '<div id="' + postId + '" data-feed="' + linha.agenda_id + '" class="div_publicacao">';
   html += '<div class="feed_principal">';
   html += '<div class="div_feed_secundario">';
   html += '<div>';

@@ -139,7 +139,6 @@ function makeCalendar(year, month) {
     
     
     $('#' + currentDia).addClass('dia_selecionado');
-    console.log(currentDia);
     data =currentYear +'-'+currentMonth+"-"+currentDia;
     get_calendario_hora(data);
 
@@ -392,7 +391,6 @@ function mock_agenda(){
 function estiloEventoPassado(hora, minuto, segundo) {
     var dataRef= new Date(currentYear, currentMonth - 1, currentDia, hora, minuto, segundo);
     //dataRef.setHours(hora, minuto, segundo, 0);
-    console.log(dataRef);
 
     const dataAtual = new Date();
      var htmlAncoraHora = '';
@@ -455,7 +453,7 @@ function estiloEventoPassado(hora, minuto, segundo) {
                 var arrHora = ch.agenda_hora.split(":");
               
               
-                html =  '<div class="pesq" style="background-color: white; border-bottom: 1px solid #5b318a36; '+estiloEventoPassado(arrHora[0], arrHora[1], 0)+'">';
+                html =  '<div class="pesq" data-agenda_id="'+ch.agenda_id+'" data-igreja_id="'+ch.igreja_id+'" style="background-color: white; border-bottom: 1px solid #5b318a36; '+estiloEventoPassado(arrHora[0], arrHora[1], 0)+'">';
 
                 html +=     '<div class="add" style="display: flex;" data-agenda_id="'+ ch.agenda_id +'">' +
 
@@ -487,32 +485,14 @@ function estiloEventoPassado(hora, minuto, segundo) {
                 $('#divListaAgenda').append(html);
                 $('#divListaAgenda').scrollTop((contLista * tamanhoItemLista));
 
-                console.log(obj);
             });
             disableConfig();
-            $('.config').click(function () {
-                var agenda_img = $(this).data('agenda_img');
-                var status = $(this).data('status');
+            $('.pesq').click(function () {
                 var agenda_id = $(this).data('agenda_id');
-                var agenda_hora = $(this).data('agenda_hora');
-                var igreja_logo_url = $(this).data('logo_url');
-                var igreja_nome = $(this).data('igreja_nome');
-                var agenda_desc = $(this).data('agenda_desc');
-            
-                // Definir os dados nos elementos do modal
-                $('#modal_config').find('[data-agenda_img]').data('agenda_img', agenda_img);
-                $('#modal_config').find('[data-agenda_id]').data('agenda_id', agenda_id);
-                $('#modal_config').find('[data-agenda_hora]').data('agenda_hora', agenda_hora);
-                $('#modal_config').find('[data-status]').data('status', status);
-                $('#modal_config').find('[data-logo_url]').data('logo_url', igreja_logo_url);
-                $('#modal_config').find('[data-igreja_nome]').data('igreja_nome', igreja_nome);
-                $('#modal_config').find('[data-agenda_desc]').data('agenda_desc', agenda_desc);
-
-
-                
-            
-                
-                $('#modal_config').show();
+                window.sessionStorage.setItem('feed_igreja_id', $(this).data('igreja_id'));
+                window.sessionStorage.setItem('feed_agenda_id', $(this).data('agenda_id'));
+                window.location = 'perfil-igreja.html';
+              
             });
 
             $('.status_layout').click(function(){

@@ -44,7 +44,7 @@ function evento_agenda(){
 
 function configurarEventos(){
   $(".perfil_div").click(function(){
-    window.sessionStorage.setItem('igreja_id',$(this).data("igreja_id"));
+    window.sessionStorage.setItem('feed_igreja_id',$(this).data("igreja_id"));
     location.href = "perfil-igreja.html";
   });
 

@@ -1,12 +1,11 @@
 igrejaId = "" ;
 nomeIgrejaVerificado = "";
 
-
 $(document).ready(function() {
-  evento_agenda();
-  carregar_perfil();
-  igrejaId = window.sessionStorage.getItem('igreja_id');
+  igrejaId = window.sessionStorage.getItem('feed_igreja_id');
   if(igrejaId != null && igrejaId != ''){
+    evento_agenda();
+    carregar_perfil();
     carregarIgreja();
     getComunidade();
   }
@@ -15,7 +14,16 @@ $(document).ready(function() {
   $('#nome_igreja').on('input', verificarNomeIgreja);
 });
 
-
+function posicaoScrollEspecifica(){
+  
+  agendaId = window.sessionStorage.getItem('feed_agenda_id');
+  console.log(agendaId);
+  if(agendaId != null && agendaId != ""){
+    scroll = $('.div_publicacao[data-feed="'+agendaId+'"]').position().top;
+    console.log(scroll);
+  }
+  
+}
 
 
 // Função para carregar o perfil
@@ -96,6 +104,7 @@ function evento_agenda(){
   $.ajax({
     method: "POST",
     url: "https://pedeoferta.com.br/templo/index.php/welcome/get_feed",
+    data: {feed_igreja_id : igrejaId}
    
   })
   .done(function(ret) {
@@ -117,6 +126,7 @@ function evento_agenda(){
 
     configurarEventos();
     //iniciarIntersectionObserver();
+    posicaoScrollEspecifica();
     compartilha();
     
   });
