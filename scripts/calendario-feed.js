@@ -2,12 +2,13 @@ currentDay = 0;
 var igrejaId = null;
 var dtReferencia;
 var currentDia = carregarDia();
+const tamanhoItemLista = 80;
+var contLista = 0;
 $(document).ready(function() {
-
+  
   igrejaId = window.sessionStorage.getItem('igreja_id');
 
   makeCalendar(currentYear, currentMonth);
-
 
   $('#visualizar_layout').click(function(){
     var agenda_img = $(this).find('[data-agenda_img]').data('agenda_img');
@@ -138,6 +139,10 @@ function makeCalendar(year, month) {
     
     
     $('#' + currentDia).addClass('dia_selecionado');
+    console.log(currentDia);
+    data =currentYear +'-'+currentMonth+"-"+currentDia;
+    get_calendario_hora(data);
+
 
     $('#yearMonth').text(currentDia + ' ' + monthName );
     configuraEventos();
@@ -150,7 +155,7 @@ function makeCalendar(year, month) {
     var idDiaAnterior = ''; // Inicializa a variável idDiaAnterior
 
 $('#calendarList').on('click', 'li', function() {
-  currentDia = $(this).attr('id');
+  currentDia = parseInt($(this).attr('id'));
   $('#yearMonth').text(currentDia + ' ' + monthName);
 
   if (idDiaAnterior !== '') {
@@ -170,6 +175,7 @@ $('#calendarList').on('click', 'li', function() {
         idDiaAnterior =  $(this).attr('id'); // Atualiza idDiaAnterior com o ID do dia clicado
     }
 });
+//$('#divListaAgenda').removeClass('calendar_open');
 }
 $('#yearMonth').data('click-count', 0);
 
@@ -180,11 +186,11 @@ $('#yearMonth ').click(function(e){
 
   if(clickCount % 2 == 0){
     $('#div_dias').css('display', 'none');
-    $('#divListaAgenda').removeClass('calendar_open')
+    $('#divListaAgenda').css('height', '90%');
     
   }else{
     $('#div_dias').css('display', 'grid');
-    $('#divListaAgenda').addClass('calendar_open')
+    $('#divListaAgenda').css('height', '50%');
   }
 });
 
@@ -197,12 +203,13 @@ function carregarDia(){
 
 function nextDay(){
   var getChek = letsCheck(currentYear, currentMonth);
+  console.log(currentDia);
   currentDia += 1;
-
+  console.log(currentDia);
   if(currentDia > getChek.daysInMonth){
     currentDia = 1;
     nextMonth();
-    console.log(getChek.daysInMonth);
+   // console.log(getChek.daysInMonth);
   }else{
     console.log('else');
     $('#calendarList li').removeClass('dia_selecionado');
@@ -210,6 +217,8 @@ function nextDay(){
   
     $('#yearMonth').text(currentDia + ' ' + monthName);
   }
+    data =currentYear +'-'+currentMonth+"-"+currentDia;
+    get_calendario_hora(data);
 }
 
 function prevDay(){
@@ -226,6 +235,8 @@ function prevDay(){
     $('#yearMonth').text(currentDia + ' ' + monthName);
     
   }
+  data =currentYear +'-'+currentMonth+"-"+currentDia;
+  get_calendario_hora(data);
 }
 
 
@@ -378,12 +389,28 @@ function mock_agenda(){
     $('#modalStatus').hide();
   });
 
-  function montaHorario(ch){
+function estiloEventoPassado(hora, minuto, segundo) {
+    var dataRef= new Date(currentYear, currentMonth - 1, currentDia, hora, minuto, segundo);
+    //dataRef.setHours(hora, minuto, segundo, 0);
+    console.log(dataRef);
 
+    const dataAtual = new Date();
+     var htmlAncoraHora = '';
+     
+     if(dataAtual > dataRef){
+       htmlAncoraHora = 'opacity: 50%;';
+       contLista += 1;
+     }
+
+    return htmlAncoraHora;
+}
+
+  function montaHorario(ch){
+   
     var html = '';
     if(ch.tipo == 'E'){
 
-      html ='<div style="width: 30%; justify-content: center; display: flex; align-items: center;">'+
+      html ='<div style="width: 60%; justify-content: center; display: flex; align-items: center;">'+
                     '<div style="width: 70px; height: 40px; border: 1px solid; border-radius: 20px; background-color: darkred; font-size: 16px; align-items: center; justify-content: center; display: flex; color: white;"> '+
                     ch.agenda_hora+
                     '</div>'+
@@ -422,42 +449,46 @@ function mock_agenda(){
             
 
             var total_checked = 0;
-			$.each(obj.calendario_hora, function (k, ch) {
-				checked = '';
-        
-				
-				html =  '<div class="pesq" style="background-color: white; border-bottom: 1px solid #5b318a36">';
+            
+              $.each(obj.calendario_hora, function (k, ch) {
+                checked = '';
+                var arrHora = ch.agenda_hora.split(":");
+              
+              
+                html =  '<div class="pesq" style="background-color: white; border-bottom: 1px solid #5b318a36; '+estiloEventoPassado(arrHora[0], arrHora[1], 0)+'">';
 
-				html +=     '<div class="add" style="display: flex;" data-agenda_id="'+ ch.agenda_id +'">' +
+                html +=     '<div class="add" style="display: flex;" data-agenda_id="'+ ch.agenda_id +'">' +
 
 
 
-                    '<div  style="display: inline-grid; padding-top: 10px;">'+
-                        '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">'+
-                            '<img id="img_igreja_desc_resumida" src="'+ch.igreja_logo_url+'" style="height:50px; width: 50px; border-radius: 50%;">'+
+                            '<div  style="display: inline-grid; padding-top: 10px;">'+
+                                '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">'+
+                                    '<img id="img_igreja_desc_resumida" src="'+ch.igreja_logo_url+'" style="height:50px; width: 50px; border-radius: 50%;">'+
+                                '</div>'+
+                                '<span id="desc_resumida" style="font-size: 1.3rem;text-align:center;text-decoration:none; width: 100px; padding-bottom: 5px;">'+
+                                  ch.igreja_nome+
+                                '</span>'+
+                            '</div>'+
+
+
+                            
+
+                        '<div style="width: 50%; text-align: center; justify-content: center; align-items: center; display: flex;">'+
+                          '<span style="font-size:1.5rem; color: black;">'+ ch.evento_nome +'</span>'+
                         '</div>'+
-                        '<span id="desc_resumida" style="font-size: 1.3rem;text-align:center;text-decoration:none; width: 100px; padding-bottom: 5px;">'+
-                          ch.igreja_nome+
-                        '</span>'+
-                    '</div>'+
+                        
 
+                        
+                        montaHorario(ch)+
 
-                    
+                      '</div>' +
+                    '</div>';
 
-                '<div style="width: 50%; text-align: center; justify-content: center; align-items: center; display: flex;">'+
-									'<span style="font-size:1.5rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
-								'</div>'+
-                
+                $('#divListaAgenda').append(html);
+                $('#divListaAgenda').scrollTop((contLista * tamanhoItemLista));
 
-                
-                montaHorario(ch)+
-
-              '</div>' +
-					   '</div>';
-
-				$('#divListaAgenda').append(html);
-        console.log(obj);
-			});
+                console.log(obj);
+            });
             disableConfig();
             $('.config').click(function () {
                 var agenda_img = $(this).data('agenda_img');
