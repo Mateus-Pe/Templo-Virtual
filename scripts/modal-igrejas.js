@@ -35,6 +35,10 @@ function igrejaDesc(){
 }
 
 
+igrejaId = window.sessionStorage.getItem("igreja_id");
+if(igrejaId == '' || igrejaId == null){
+    igrejaId = window.sessionStorage.getItem("feed_igreja_id")
+} 
 
 
 function getIgrejas() {
@@ -49,7 +53,7 @@ function getIgrejas() {
 
         dataType: 'json',
 
-        data: { 'igreja_id': window.sessionStorage.getItem("igreja_id")},
+        data: { 'igreja_id': igrejaId},
 
         success: function (data) {
 

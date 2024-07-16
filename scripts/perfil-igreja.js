@@ -11,7 +11,6 @@ $(document).ready(function() {
   }
   
 
-  $('#nome_igreja').on('input', verificarNomeIgreja);
 });
 
 function posicaoScrollEspecifica(){
@@ -19,8 +18,9 @@ function posicaoScrollEspecifica(){
   agendaId = window.sessionStorage.getItem('feed_agenda_id');
   console.log(agendaId);
   if(agendaId != null && agendaId != ""){
-    scroll = $('.div_publicacao[data-feed="'+agendaId+'"]').position().top;
+    scroll = $('body .div_publicacao[data-feed="'+agendaId+'"]').position().top;
     console.log(scroll);
+    $('body').scrollTop(scroll + parseInt($("#divPerfil").css("height")) + 5);
   }
   
 }
@@ -88,7 +88,16 @@ function carregar_perfil(){
     html += '</div>';
     html += '</div>';
     html += '</div>';
-    html += '<div class="div_comunidade"> </div>';
+
+    html += '<div>'
+    html += '<div style="width: 100%; height: 20px; background-color: darkred; color: white; align-items: center; display: flex; justify-content: center; font-size: 13px; font-family: exo;" >';
+    html += '<span>';
+    html += 'COMUNIDADES RELACIONADAS';
+    html += '</span>';
+    html += '</div>';
+    html += '<div class="div_comunidade">';
+    html += '</div>';
+    html += '</div>';
     $("#divPerfil").html(html);
 
     eventoPerfil();
@@ -124,7 +133,7 @@ function evento_agenda(){
     });
     
 
-    configurarEventos();
+   // configurarEventos();
     //iniciarIntersectionObserver();
     posicaoScrollEspecifica();
     compartilha();
@@ -260,21 +269,18 @@ function getComunidade(){
     console.log(obj);
 
     var html = '';
-    html += '<section class="regular slider">';
 
     $.each(obj.lista_igreja, function (k, lpp) {
 
-        html += '<a data-evento_cod="'+lpp.igreja_id+'" class="produtos_perfil"><div class="divPerfilEC" style="opacity: 0.5;height: 90px; display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center; gap:"18px";">';
+        html += '<div><div class="divPerfilEC" style="height: 90px; display: flex; align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center; gap:"18px";">';
             html += '<div style="display: grid;">';
-        html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.igreja_logo+'" style="height:50px; border-radius: 50%; width: 50px"/></div>';
-              html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;">'+lpp.igreja_desc+'</span></div>';
-            html += '</div></a>';
+        html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.igreja_logo+'" style="height:80px; border-radius: 50%; width: 80px"/></div>';
+              html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none; font-family: exo;">'+lpp.igreja_nome+'</span></div>';
+            html += '</div></div>';
     });
-    html += '</section>';
 
     $(".div_comunidade").html(html);
 
-    slick();
     $('#carregando').hide();
     $('.produtos_perfil').click(function(e){
 
@@ -291,14 +297,7 @@ function getComunidade(){
   });
 }
 
-function slick() {
-  $(".regular").slick({
-      dots: false,
-      infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 2
-  });
-}
+
 
 
 function carregarIgreja(){
@@ -321,7 +320,7 @@ function carregarIgreja(){
         $('#instagram_txt').val(obj.igreja.igreja_instagram);
         $('#email_txt').val(obj.igreja.igreja_email);
         $('#txt_desc_resumida').val(obj.igreja.igreja_desc_resumida);
-        $("#nome_da_igreja").text(obj.igreja.igreja_nome);
+        $("#nome_igreja_fixo").text(obj.igreja.igreja_nome);
         $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
         $(".img_igreja1").attr('src', obj.igreja.igreja_logo_url);
         $(".img_fundo1").attr('src', obj.igreja.igreja_fundo_url);

@@ -57,9 +57,7 @@
 
   <link rel="stylesheet" href="./styles/jquery-ui.min.css">
 
-  <link href="./styles/slick.css" rel="stylesheet">
 
-  <link href="./styles/slick-theme.css" rel="stylesheet">
 
   <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
 
@@ -69,14 +67,23 @@
 
 <body>
 
-      <div id="divPerfil"></div>
+  <div style="height: 60px; width: 100%; position: fixed; align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 1.9rem;
+  font-family: exo;
+  z-index: 100;
+  background-color: white;
+  border-bottom: 1px solid lightgrey;" id="nome_igreja_fixo"></div>
+
+      <div id="divPerfil" style="top: 60px; position: relative;"></div>
 
       <main class="feed_main feed_main_top">
 
 
 
 
-        <div id="divFeed" style="top: 0.2rem; position: relative;">
+        <div id="divFeed" style="top: 60px; position: relative;">
 
         </div>
 
@@ -175,12 +182,9 @@
 
 
 
-      <script src="./scripts/slick/slick.min.js"></script>
-      <script src="./scripts/slick/slick.js"></script>
-
       <script src="./scripts/perfil-igreja.js"></script>
       <script src="./scripts/monta-feed.js"></script>
-      <script src="scripts/modal-igrejas.js"></script>
+      <!--<script src="scripts/modal-igrejas.js"></script>-->
       <script src="./scripts/geolocation.js"></script>
       <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjVDWPYDC5zoxBw0zW4bdnnaelnyCWdkw&callback=initMap">

@@ -3,7 +3,6 @@ body{
     height: 100%;
     width: 100%;
     font-size: 62.5%;
-    overflow-x: hidden;
 }
 
 .feed_main{
@@ -213,7 +212,7 @@ body{
 .div_img_igreja{
     position: absolute; 
     z-index: 3; 
-    top: 18.6rem; 
+    top: 18.4rem; 
     left: 4rem;
 }
 
@@ -244,7 +243,7 @@ body{
 }
 
 .abrir_hora_fixo{
-    bottom: 50px;
+    bottom: 20px;
     position: relative;
     display: flex;
     justify-content: right;
@@ -308,13 +307,18 @@ body{
 }
 
 .div_comunidade{
-    height: 90px; 
+    height: 150px; 
     position: relative;
     width: 98.5%; 
     left:3px; 
-    border-radius: 10px; 
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.7); 
     background-color: white;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    align-items: center;
 }
 
 .div_feed{

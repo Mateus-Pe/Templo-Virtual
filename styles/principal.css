@@ -1,0 +1,71 @@
+body{
+    background-color: lightgray;
+    margin: unset;
+}
+
+.div_local{
+    width: 100%;
+    height: 20px;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    gap: 10px;
+}
+
+.ion_local{
+    color: darkred;
+}
+
+.div_cidade{
+    font-size: 17px;
+    font-family: exo;
+    text-transform: none;
+    color: darkred
+}
+
+#eventos{
+    margin-top: 20px;
+    position: relative;
+    display: grid;
+    gap: 10px;
+}
+
+.div_evento{
+    width: 100%;
+    height: 200px;
+    display: grid;
+    background-color: white;
+}
+
+#evento{
+    font-family: exo;
+    font-size: 18px;
+}
+
+#horizontal_eventos{
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    gap: 30px;
+}
+
+.agenda{
+    width: 120px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+#div_img{
+    width: 120px;
+}
+
+#descricao{
+    font-family: exo;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
