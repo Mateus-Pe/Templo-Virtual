@@ -44,8 +44,8 @@ body{
 }
 
 #horizontal_eventos{
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow-y: hidden;
+    overflow-x: auto;
     display: flex;
     gap: 30px;
 }
