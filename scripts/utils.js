@@ -9,18 +9,18 @@ const dias = [
 ];
 
 const months = [
-    { 'id': 1, 'name': 'Jan' },
-    { 'id': 2, 'name': 'Fev' },
-    { 'id': 3, 'name': 'Mar' },
-    { 'id': 4, 'name': 'Abr' },
-    { 'id': 5, 'name': 'Mai' },
-    { 'id': 6, 'name': 'Jun' },
-    { 'id': 7, 'name': 'Jul' },
-    { 'id': 8, 'name': 'Ago' },
-    { 'id': 9, 'name': 'Set' },
-    { 'id': 10, 'name': 'Out' },
-    { 'id': 11, 'name': 'Nov' },
-    { 'id': 12, 'name': 'Dez' },
+    { 'id': 1, 'name': 'Janeiro' },
+    { 'id': 2, 'name': 'Fevereiro' },
+    { 'id': 3, 'name': 'Março' },
+    { 'id': 4, 'name': 'Abril' },
+    { 'id': 5, 'name': 'Maio' },
+    { 'id': 6, 'name': 'Junho' },
+    { 'id': 7, 'name': 'Julho' },
+    { 'id': 8, 'name': 'Agosto' },
+    { 'id': 9, 'name': 'Setembro' },
+    { 'id': 10, 'name': 'Outubro' },
+    { 'id': 11, 'name': 'Novembro' },
+    { 'id': 12, 'name': 'Dezembro' },
 ];
 
 
@@ -43,7 +43,6 @@ function formata_hora(data){
 function formata_dia(data){
     //var data =  window.sessionStorage.getItem('data_referencia');
     dataHora = data.split(' ');
-    console.log(data);
     var hashdata = dataHora[0].split("-");
     ano = hashdata[0];
     mes = hashdata[1];
@@ -74,7 +73,7 @@ function formata_dia(data){
     D = '0'+ parseInt(D);
     }
     if(strDia == "")
-    strDia = D+"/"+mes;
+    strDia = D+" de "+mes;
 
     return strDia;
 

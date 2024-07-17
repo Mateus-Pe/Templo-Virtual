@@ -58,6 +58,7 @@ body{
     align-items: center;
     justify-content: center;
     padding: 10px;
+    border: 1px solid;
 }
 
 #div_img{
@@ -78,4 +79,13 @@ body{
     justify-content: center;
     text-align: center;
     display: grid;
+}
+
+.span_nome_igreja{
+    font-weight: bold;
+}
+
+.span_agenda{
+    padding-top: 10px;
+    font-size: 10px;
 }

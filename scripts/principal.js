@@ -25,14 +25,11 @@ function eventos_principal(){
         html +=                 '<img id="div_img" src="'+agenda.agenda_img+'">';
         html +=             '</div>';
         html +=             '<div id="descricao">';
-        html +=                 '<span>';
+        html +=                 '<span class="span_nome_igreja">';
         html +=                     agenda.igreja_nome;
         html +=                 '</span>';
-        html +=                 '<span>';
-        html +=                     formata_dia(agenda.agenda_horario);
-        html +=                 '</span>';
-        html +=                 '<span>';
-        html +=                     formata_hora(agenda.agenda_horario);
+        html +=                 '<span class="span_agenda">';
+        html +=                     formata_dia(agenda.agenda_horario) +' ás '+ formata_hora(agenda.agenda_horario);
         html +=                 '</span>';
         html +=             '</div>';
         html +=         '</div>';
@@ -43,7 +40,6 @@ function eventos_principal(){
         
         
       });
-      console.log(obj);
       $("#eventos").html(html);
     });
 }
