@@ -35,14 +35,14 @@ body{
 
 .div_evento{
     width: 100%;
-    height: 250px;
+    height: 300px;
     display: grid;
     background-color: white;
 }
 
 #evento{
     font-family: exo;
-    font-size: 18px;
+    font-size: 13px;
 }
 
 #horizontal_eventos{
@@ -58,7 +58,14 @@ body{
     align-items: center;
     justify-content: center;
     padding: 10px;
-    border: 1px solid;
+}
+
+.div_agenda{
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+    align-items: center;
 }
 
 #div_img{
@@ -72,6 +79,7 @@ body{
     display: grid;
     align-items: center;
     justify-content: center;
+    height: 30px;
 }
 
 #descricao span{
@@ -86,6 +94,29 @@ body{
 }
 
 .span_agenda{
-    padding-top: 10px;
-    font-size: 10px;
+    color: white;
+    font-size: 15px;
+    font-family: 'VT323', monospace;
+}
+
+.span_agenda_left{
+    padding-left: 3px;
+}
+
+.span_agenda_right{
+    padding-right: 3px;
+}
+
+.div_ver_mais{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.div_ver_mais span{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: exo;
+    color: blue;
 }
