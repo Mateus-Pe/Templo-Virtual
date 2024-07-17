@@ -11,17 +11,19 @@ body{
     position: relative;
     display: flex;
     gap: 10px;
+    background-color: darkred;
 }
 
 .ion_local{
-    color: darkred;
+    color: white;
+    font-size: 20px !important;
 }
 
 .div_cidade{
     font-size: 17px;
     font-family: exo;
     text-transform: none;
-    color: darkred
+    color: white
 }
 
 #eventos{
@@ -33,7 +35,7 @@ body{
 
 .div_evento{
     width: 100%;
-    height: 200px;
+    height: 250px;
     display: grid;
     background-color: white;
 }
@@ -60,12 +62,20 @@ body{
 
 #div_img{
     width: 120px;
+    height: 120px;
 }
 
 #descricao{
     font-family: exo;
     font-size: 13px;
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
+}
+
+#descricao span{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: grid;
 }
