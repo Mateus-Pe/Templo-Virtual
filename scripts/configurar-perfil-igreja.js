@@ -79,38 +79,27 @@ function modalHorariosFixos(){
   });
 }
 
-  function slick(){
-    $(".regular").slick({
-      dots: false,
-      infinite: true,
-      slidesToShow: 3,
-      slidesToScroll: 2
-    });
+  
+function abreviarNomeIgreja(nome) {
+  var palavras = nome.split(' ');
+  var nomeAbreviado = '';
 
+  for (var i = 0; i < palavras.length; i++) {
+    if (nomeAbreviado.length + palavras[i].length <= 15) {
+      nomeAbreviado += palavras[i] + ' ';
+    } else {
+      nomeAbreviado = nomeAbreviado.trim() + ' ' + (palavras[i][0] || '') + '.';
+      for (var j = i + 1; j < palavras.length; j++) {
+          nomeAbreviado += ' ' + (palavras[j][0] || '') + '.';
+      }
+      break;
+    }
   }
 
+  // Remover os pontos no final se não houverem mais palavras
+  nomeAbreviado = nomeAbreviado.trim().replace(/\.$/, '');
 
-  
-  function abreviarNomeIgreja(nome) {
-    var palavras = nome.split(' ');
-    var nomeAbreviado = '';
-
-    for (var i = 0; i < palavras.length; i++) {
-        if (nomeAbreviado.length + palavras[i].length <= 15) {
-            nomeAbreviado += palavras[i] + ' ';
-        } else {
-            nomeAbreviado = nomeAbreviado.trim() + ' ' + (palavras[i][0] || '') + '.';
-            for (var j = i + 1; j < palavras.length; j++) {
-                nomeAbreviado += ' ' + (palavras[j][0] || '') + '.';
-            }
-            break;
-        }
-    }
-
-    // Remover os pontos no final se não houverem mais palavras
-    nomeAbreviado = nomeAbreviado.trim().replace(/\.$/, '');
-
-    return nomeAbreviado.trim();
+  return nomeAbreviado.trim();
 }
 
 

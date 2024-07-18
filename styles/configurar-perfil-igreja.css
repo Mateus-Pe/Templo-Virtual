@@ -107,26 +107,6 @@ body{
     color: lightslategray;
 }
 
-.slick-prev {
-    left: 0px;
-}
-
-.slick-next {
-    right: 0px;
-}
-
-.slick-prev:before {
-    content: "<";
-    color: black;
-    font-size: 30px;
-}
-
-.slick-next:before {
-    content: ">";
-    color: black;
-    font-size: 30px;
-}
-
 .perfil_ec_selected {
     opacity: 1 !important;
 }
@@ -273,14 +253,47 @@ body{
 }
 
 .div_comunidade{
-    height: 90px; 
-    position: relative; 
-    top: 2.2rem; 
-    width: 98.5%; 
-    left:3px; 
-    border-radius: 10px; 
+    height: 150px; 
+    position: relative;
+    width: 100%;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.7); 
     background-color: white;
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    align-items: center;
+}
+.comunidade_desc {
+    display: flex;
+}
+
+.comunidade_select{
+    height: 130px; 
+    padding-left: 10px;
+    padding-right: 10px;
+    display: grid; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.comunidade_select img{
+    height:80px; 
+    border-radius: 50%; 
+    width: 80px
+}
+
+.comunidade_select span{
+    font-size: 1.3rem; 
+    text-align:center; 
+    text-decoration:none; 
+    font-family: exo;
+}
+
+.ion_edit_desc{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .div_feed{

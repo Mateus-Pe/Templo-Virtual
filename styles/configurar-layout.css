@@ -165,3 +165,32 @@ input[type="checkbox"]:checked::before {
     width: 100%;
     z-index: 3;
 }
+
+.layout_css{
+    padding-left: 10px;
+    opacity: 0.5;
+    height: 80px;
+    display: flex;
+    align-items: center; 
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: center;
+}
+
+.layout_css img{
+    height:55px;
+    width:60px;
+    border-radius:50%;
+}
+
+.layoutImg{
+    height: 80px; 
+    position: relative; 
+    width: 100%; 
+    border-bottom:1px solid lightgray; 
+    border-top: 1px solid lightgray;
+    display: flex; 
+    gap: 50px; 
+    overflow-x: auto;
+    overflow-y: hidden;
+}

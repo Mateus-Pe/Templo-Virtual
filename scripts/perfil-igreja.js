@@ -31,73 +31,68 @@ function carregar_perfil(){
   var html = '';
 
     html += '<div class="perfil" style="width: 100%; background-color: lightgrey">';
-    html += '<div class="div_imgFundo_perfil">';
-    html += '<div class="imgFundo_perfil">';
-    html += '<img class="img_fundo1" style="width: 100%; height: 250px;" src="./imgs/imgs-igreja/loading.gif">';
-    html += '</div>';
-    html += '</div>';
-    html += '<div class="div_img_igreja">';
-    html += '<div id="imagem_igreja" >';
-    html += '<img class="img_igreja1" src="./imgs/imgs-igreja/loading-perfil.webp">';
-    html += '</div>';
-    
+    html +=   '<div class="div_imgFundo_perfil">';
+    html +=     '<div class="imgFundo_perfil">';
+    html +=       '<img class="img_fundo1" style="width: 100%; height: 250px;" src="./imgs/imgs-igreja/loading.gif">';
+    html +=     '</div>';
+    html +=   '</div>';
+    html +=   '<div class="div_img_igreja">';
+    html +=     '<div id="imagem_igreja" >';
+    html +=       '<img class="img_igreja1" src="./imgs/imgs-igreja/loading-perfil.webp">';
+    html +=   '</div>';
     html += '</div>';
 
     html += '<div class="div_publicacao">';
-    html += '<div class="feed_principal">';
-    html += '<div class="div_feed_secundario">';
-    html += '<div>';
-    html += '<div>';
+    html +=   '<div class="feed_principal">';
+    html +=     '<div class="div_feed_secundario">';
+    html +=       '<div>';
+    html +=         '<div>';
+    html +=           '<div style="top: 3rem; position: relative;">';
+    html +=             '<h1 id="nome_da_igreja" class="nome_da_igreja">';
+    html +=             '</h1>';
+    html +=             '<span class="abrir_hora_fixo">';
+    html +=               '<span id="horarios_fixos">';
+    html +=                 'Ver horários fixos';
+    html +=               '</span>';
+    html +=               '<span class="material-symbols-outlined icone_editar ion_map">';
+    html +=                 'schedule';
+    html +=               '</span>';
+    html +=             '</span>';
+    html +=            '</div>';
+    html +=             '<div class="a_div_perfil">';
+    html +=               '<span class="abrir_map">';
+    html +=                 '<span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432" >';
+    html +=                   'Ver no mapa';
+    html +=                 '</span>';
+    html +=                 '<span class="material-symbols-outlined icone_editar ion_map">';
+    html +=                   'location_on';
+    html +=                 '</span>';
+    html +=                '</span>';
+    html +=                '<span id="endereco_da_igreja" class="endereco_igreja">';
+    html +=                 '';
+    html +=                '</span>';
+    html +=                '<div class="contatos">';
+    html +=                 '<span id="whatsapp_txt" class="contato"></span>';
+    html +=                 '<span id="facebook_txt" class="contato"></span>';
+    html +=                 '<span id="instagram_txt" class="contato"></span>';
+    html +=                 '<span id="email_txt" class="contato"></span>';
+    html +=                '</div>';
+    html +=               '</div>';
+    html +=              '</div>';
+    html +=             '</div>';
+    html +=            '</div>';
+    html +=           '</div>';
+    html +=         '</div>';
 
-    html += '<div style="top: 3rem; position: relative;">';
-    html += '<h1 id="nome_da_igreja" class="nome_da_igreja">';
-    html += '</h1>';
-
-    html += '<span class="abrir_hora_fixo">';
-    html += '<span id="horarios_fixos">';
-    html += 'Ver horários fixos';
-    html += '</span>';
-    html += '<span class="material-symbols-outlined icone_editar ion_map">';
-    html += 'schedule';
-    html += '</span>';
-    html += '</span>';
-
-    html += '</div>';
-
-    html += '<div class="a_div_perfil">';
-    html += '<span class="abrir_map">';
-    html += '<span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432" >';
-    html += 'Ver no mapa';
-    html += '</span>';
-    html += '<span class="material-symbols-outlined icone_editar ion_map">';
-    html += 'location_on';
-    html += '</span>';
-    html += '</span>';
-    html += '<span id="endereco_da_igreja" class="endereco_igreja">';
-    html += '';
-    html += '</span>';
-    html += '<div class="contatos">';
-    html += '<span id="whatsapp_txt" class="contato"></span>';
-    html += '<span id="facebook_txt" class="contato"></span>';
-    html += '<span id="instagram_txt" class="contato"></span>';
-    html += '<span id="email_txt" class="contato"></span>';
-    html += '</div>';
-    html += '</div>';
-    html += '</div>';
-    html += '</div>';
-    html += '</div>';
-    html += '</div>';
-    html += '</div>';
-
-    html += '<div>'
-    html += '<div style="width: 100%; height: 20px; background-color: darkred; color: white; align-items: center; display: flex; justify-content: center; font-size: 13px; font-family: exo;" >';
-    html += '<span>';
-    html += 'COMUNIDADES RELACIONADAS';
-    html += '</span>';
-    html += '</div>';
-    html += '<div class="div_comunidade">';
-    html += '</div>';
-    html += '</div>';
+    html +=         '<div>'
+    html +=           '<div style="width: 100%; height: 20px; background-color: darkred; color: white; align-items: center; display: flex; justify-content: center; font-size: 13px; font-family: exo;" >';
+    html +=             '<span>';
+    html +=               'COMUNIDADES RELACIONADAS';
+    html +=             '</span>';
+    html +=           '</div>';
+    html +=           '<div class="div_comunidade">';
+    html +=           '</div>';
+    html +=         '</div>';
     $("#divPerfil").html(html);
 
     eventoPerfil();
@@ -272,11 +267,10 @@ function getComunidade(){
 
     $.each(obj.lista_igreja, function (k, lpp) {
 
-        html += '<div><div class="divPerfilEC" style="height: 90px; display: flex; align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center; gap:"18px";">';
-            html += '<div style="display: grid;">';
-        html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.igreja_logo+'" style="height:80px; border-radius: 50%; width: 80px"/></div>';
-              html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none; font-family: exo;">'+lpp.igreja_nome+'</span></div>';
-            html += '</div></div>';
+        html += '<div class="comunidade_select">';
+              html += '<img  src="'+lpp.igreja_logo+'">';
+              html += '<span>'+lpp.igreja_nome+'</span>';
+        html += '</div>';
     });
 
     $(".div_comunidade").html(html);
@@ -287,9 +281,6 @@ function getComunidade(){
       var perfilId = $(this).data('evento_cod');
       window.sessionStorage.setItem('igreja_id', perfilId); 
       location.reload();
-      
-      $('.divPerfilEC').removeClass('perfil_ec_selected');
-      $(this).children().addClass('perfil_ec_selected');
                   
       atual_evento_cod = $(this).data('evento_cod');
       console.log(atual_evento_cod);
@@ -497,11 +488,11 @@ function setStorageMenu(item_menu) {
 
 }
 
-/*
+
 var didScroll;
 var lastScrollTop = 0;
 var delta = 5;
-var headerHeight = $('header').outerHeight();
+var headerHeight = $('#nome_igreja_fixo').outerHeight();
 var isVisible = true;
 
 $(window).scroll(function(event){
@@ -524,20 +515,20 @@ function hasScrolled() {
     if (st > lastScrollTop && st > headerHeight) {
         // Rolagem para baixo
         if (isVisible) {
-            $('header').removeClass('header-down').addClass('header-up');
+            $('#nome_igreja_fixo').removeClass('header-down').addClass('header-up');
             isVisible = false;
         }
     } else {
         // Rolagem para cima
         if (st < lastScrollTop) {
-            $('header').removeClass('header-up').addClass('header-down');
+            $('#nome_igreja_fixo').removeClass('header-up').addClass('header-down');
             isVisible = true;
         }
     }
 
     lastScrollTop = st;
 }
-*/
+
 
 function toggleDivVisibility(value, targetDiv) {
   if (value.trim() !== "") {

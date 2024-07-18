@@ -1,29 +1,3 @@
-.slick-slide {
-    margin: 0px 30px;
-}
-
-.slick-prev {
-    left: 0px;
-}
-
-.slick-next {
-    right: 0px;
-}
-
-.slick-prev:before {
-    content: "<";
-    color: black;
-    font-size: 30px;
-}
-
-.slick-next:before {
-    content: ">";
-    color: black;
-    font-size: 30px;
-}
-
-
-
 .perfil_ec_selected {
     opacity: 1 !important;
 }
@@ -158,3 +132,66 @@ input[type="checkbox"]:checked::before {
     transition: background-color 0.5s, color 0.5s;  
 }
 
+.divPerfilEC{
+    opacity: 0.5;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.eventos_select{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.eventos_select div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eventos_select img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.eventos_select span{
+    font-size: 1.3rem; 
+    text-align:center; 
+    text-decoration:none;
+}
+
+.div_eventos{
+    height: 90px; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    gap: 80px; 
+    overflow-x: auto; 
+    overflow-y: hidden; 
+    position: relative; 
+    border-bottom:1px solid lightgray;
+}
+
+.div_btn_salvar{
+    bottom: 30px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.div_btn_salvar button{
+    font-family: Exo; 
+    border: 1px solid darkred; 
+    background-color: white; 
+    color: darkred; 
+    width: 70%; 
+    border-radius: 10px; 
+    height: 4.5rem;
+    font-size: 2rem;
+}

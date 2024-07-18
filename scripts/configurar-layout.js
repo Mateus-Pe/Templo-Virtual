@@ -91,7 +91,6 @@ function evento_agenda(agenda){
     var obj = jQuery.parseJSON(ret);
 
     var html = '';
-    html += '<section class="regular slider">';
     var layout_id = 0;
     $.each(obj.lista_layout_evento, function (k, lpp) {
       
@@ -103,24 +102,17 @@ function evento_agenda(agenda){
       }
 
         
-        html += '<a id="'+k+'"  data-layout_id="'+lpp.layout_id+'"  data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" data-evento_sub_descricao="'+lpp.evento_sub_descricao+'" class="layout_css produtos_perfil"><div  class="divPerfilEC" style="opacity: 0.5;height: 80px;display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">';
-            html += '<div style="display: grid;">';
-        html += '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;"><img  src="'+lpp.layout_background_icone+'" style="height:55px;width:60px;border-radius:50%;"/></div>';
-              html += '<span style="font-size: 1.3rem; text-align:center; text-decoration:none;"></span></div>';
-            html += '</div></a>';
-
-
+        html += '<div id="'+k+'"  data-layout_id="'+lpp.layout_id+'"  data-img_background="'+lpp.layout_background+'" data-evento_css="'+lpp.layout_evento_css+'" data-rodape_css="'+lpp.layout_rodape_css+'"  data-data_css="'+lpp.layout_data_css+'" data-master_css="'+lpp.layout_data_master_css+'" data-slave1_css="'+lpp.layout_data_slave1_css+'" data-evento_cod="'+lpp.evento_id+'" data-evento_nome="'+lpp.evento_nome+'" data-evento_sub_descricao="'+lpp.evento_sub_descricao+'" class="layout_css divPerfilEC">';
+          html += '<img  src="'+lpp.layout_background_icone+'">';
+        html += '</div>';
     });
-    html += '</section>';
 
-    $("#divLayoutSlick").html(html);
-
-    slick();
+    $("#layoutImg").html(html);
      
     $('.layout_css').click(function(e){
       //inicio deixa layout slick selecionado
       $('.divPerfilEC').removeClass('layout_slick_selected');
-      $(this).children().addClass('layout_slick_selected');
+      $(this).addClass('layout_slick_selected');
       //fim deixa layout slick selecionado
       obj_layout = data2objLayout($(this));
       atualiza_layout(obj_layout, agenda);
@@ -592,15 +584,6 @@ function set_style(strStyle, divElement){
  
 
 
-  function slick(){
-    $(".regular").slick({
-      dots: false,
-      infinite: true,
-      slidesToShow: 4,
-      slidesToScroll: 2
-    });
-
-  }
 
   $('#fonte').change(function() {
     var option = $('#fonte').find(":selected").text();
