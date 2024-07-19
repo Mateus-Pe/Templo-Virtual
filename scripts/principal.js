@@ -60,3 +60,15 @@ function configurarEventos(){
     location.href = "calendario-feed.html";
   });
 }
+
+$('#pesquisar').click(function(e){
+  window.location = 'pesquisa.html'
+});
+
+$('#calendario').click(function(e){
+  window.location = 'calendario-feed.html'
+});
+
+$('#feed').click(function(e){
+  window.location = 'feed.html'
+});

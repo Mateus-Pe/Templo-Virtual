@@ -129,6 +129,8 @@ input[type="checkbox"]:checked::before {
     display: flex; 
     justify-content: center; 
     gap: 80px;
+    overflow-x: auto; 
+    overflow-y: hidden;
 }
 
 .eventos_select{

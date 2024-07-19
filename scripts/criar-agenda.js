@@ -82,12 +82,15 @@ evento_agenda();
       var obj = jQuery.parseJSON(ret);
 
       var html = '';
-
+      html += '<div class="eventos_select divPerfilEC">';
+            html += '<div> </div>';
+            html += '<span></span>';
+      html += '</div>';
       $.each(obj.lista_evento_agenda, function (k, lpp) {
           html += '<div data-evento_cod="'+lpp.evento_id+'" class="eventos_select divPerfilEC">';
-          html += '<div>  <img  src="'+lpp.evento_icone_img+'">  </div>';
-                html += '<span>'+lpp.evento_nome+'</span>';
-              html += '</div>';
+            html += '<div>  <img  src="'+lpp.evento_icone_img+'">  </div>';
+            html += '<span>'+lpp.evento_nome+'</span>';
+          html += '</div>';
       });
 
       $("#divEventos").html(html);
