@@ -1,14 +1,31 @@
 currentDay = 0;
 var igrejaId = null;
 var dtReferencia;
-var currentDia = carregarDia();
+var arrDay = {
+  numberDay : new Date().getDate(),
+  day : new Date()
+}
+var lastDayWeek;
 const tamanhoItemLista = 80;
 var contLista = 0;
+
+const dias = [
+  { 'id': 1, 'name': 'Segunda', 'name_caps' : 'SEGUNDA', 'name_small' : 'Seg'},
+  { 'id': 2, 'name': 'Terça', 'name_caps' : 'TERÇA', 'name_small' : 'Ter' },
+  { 'id': 3, 'name': 'Quarta', 'name_caps' : 'QUARTA', 'name_small' : 'Qua' },
+  { 'id': 4, 'name': 'Quinta', 'name_caps' : 'QUINTA', 'name_small' : 'Qui' },
+  { 'id': 5, 'name': 'Sexta', 'name_caps' : 'SEXTA', 'name_small' : 'Sex' },
+  { 'id': 6, 'name': 'Sábado', 'name_caps' : 'SÁBADO', 'name_small' : 'Sab' },
+  { 'id': 0, 'name': 'Domingo', 'name_caps' : 'DOMINGO', 'name_small' : 'Dom' },
+];
+
+
 $(document).ready(function() {
   
   igrejaId = window.sessionStorage.getItem('igreja_id');
-
-  makeCalendar(currentYear, currentMonth);
+  ref = new Date(); 
+  makeDayWeek(ref);
+  makeCalendar(ref, currentYear, currentMonth);
 
   $('#visualizar_layout').click(function(){
     var agenda_img = $(this).find('[data-agenda_img]').data('agenda_img');
@@ -122,28 +139,57 @@ function letsCheck(year, month) {
     return array;
 }
 
+function makeDayWeek(ref){
+  refN = new Date(ref.getFullYear(), ref.getMonth(), ref.getDate()); 
+  
+  html = '';
+  for (let i = 1; i <= 7 ;i++) {
+    dw = parseInt(refN.getUTCDay()) ;
+    console.log(dw);
+    dayWeek = dias.find(x => x.id == dw).name_small;
+    html += '<li class="day-name">'+dayWeek+'</li>';
+    refN.setDate(refN.getDate() + 1);     
+  }
+  $('.calendarList1').html(html);  
+}
 
-function makeCalendar(year, month) {
+function compareDates (dt1, dt2) {
+  let d1 = new Date(dt1); 
+  let d2 = new Date(dt2);     
+  return d1 > d2 ? true : false
+}
+
+
+function makeCalendar(ref, year, month) {
+    
     var getChek = letsCheck(year, month); 
     getChek.firstDay === 0 ? getChek.firstDay = 7 : getChek.firstDay;
     $('#calendarList').empty();
-    for (let i = 1; i <= getChek.daysInMonth; i++) {
-        if (i === 1) {
-            var div = '<li id="' + i + '" style="grid-column-start: ' + getChek.firstDay + ';">1</li>';
-        } else {
-            var div = '<li id="' + i + '" >' + i + '</li>'
-        }
-        $('#calendarList').append(div);
-    }
+    d = parseInt(ref.getDate())
+    i = 0;
+    do {
+      var div = '<li id="' + d+ '" >' + d + '</li>'
+      $('#calendarList').append(div);
+      lastDayWeek = d; 
+      if(d >= getChek.daysInMonth)d=0;
+      d+=1;
+      i++;  
+    }while(i < 7)
+
+
+    //ref.setDate(ref.getDate() - 1);  
+    lastDayWeek = new Date(ref);
+    lastDayWeek.setDate(lastDayWeek.getDate() + 6);  
+
     monthName = months.find(x => x.id === month).name;
     
     
-    $('#' + currentDia).addClass('dia_selecionado');
-    data =currentYear +'-'+currentMonth+"-"+currentDia;
+    $('#' + arrDay.numberDay).addClass('dia_selecionado');
+    data =currentYear +'-'+currentMonth+"-"+arrDay.numberDay;
     get_calendario_hora(data);
 
 
-    $('#yearMonth').text(currentDia + ' ' + monthName );
+    $('#yearMonth').text(arrDay.numberDay + ' ' + monthName );
     configuraEventos();
     
     
@@ -154,8 +200,8 @@ function makeCalendar(year, month) {
     var idDiaAnterior = ''; // Inicializa a variável idDiaAnterior
 
 $('#calendarList').on('click', 'li', function() {
-  currentDia = parseInt($(this).attr('id'));
-  $('#yearMonth').text(currentDia + ' ' + monthName);
+  arrDay.numberDay = parseInt($(this).attr('id'));
+  $('#yearMonth').text(arrDay.numberDay + ' ' + monthName);
 
   if (idDiaAnterior !== '') {
       
@@ -193,48 +239,58 @@ $('#yearMonth ').click(function(e){
   }
 });
 
-function carregarDia(){
+function loadDay(){
   //var data =  window.sessionStorage.getItem('data_referencia');
-  hoje = new Date();
-  return hoje.getDate();
+    day = new Date();
+  var array = {
+    numberDay : day.getDate(),
+    day : day
+  }
+  
+  return array;
   
 }
 
 function nextDay(){
   var getChek = letsCheck(currentYear, currentMonth);
-  console.log(currentDia);
-  currentDia += 1;
-  console.log(currentDia);
-  if(currentDia > getChek.daysInMonth){
-    currentDia = 1;
-    nextMonth();
+  
+  arrDay.day.setDate(arrDay.day.getDate() + 1); 
+  arrDay.numberDay = arrDay.day.getDate(); 
+  
+
+  if(compareDates(arrDay.day,lastDayWeek)){
+    
+    console.log("if")
+   
+    makeCalendar(arrDay.day , currentYear, currentMonth);
    // console.log(getChek.daysInMonth);
   }else{
     console.log('else');
     $('#calendarList li').removeClass('dia_selecionado');
-    $('#' + currentDia).addClass('dia_selecionado');
+    $('#' + arrDay.day.getDate()).addClass('dia_selecionado');
   
-    $('#yearMonth').text(currentDia + ' ' + monthName);
+    m = parseInt(arrDay.day.getMonth()) + 1; 
+    $('#yearMonth').text(arrDay.day.getDate() + ' ' + months.find(x => x.id == m).name);
   }
-    data =currentYear +'-'+currentMonth+"-"+currentDia;
+    data =currentYear +'-'+currentMonth+"-"+arrDay.numberDay;
     get_calendario_hora(data);
 }
 
 function prevDay(){
   var getChek = letsCheck(currentYear, currentMonth - 1);
-  currentDia -= 1;
+  arrDay.numberDay -= 1;
 
-  if(currentDia < 1){
-    currentDia = getChek.daysInMonth;
+  if(arrDay.numberDay < 1){
+    arrDay.numberDay = getChek.daysInMonth;
     prevMonth();
   }else{
     $('#calendarList li').removeClass('dia_selecionado');
-    $('#' + currentDia).addClass('dia_selecionado');
-  
-    $('#yearMonth').text(currentDia + ' ' + monthName);
+    $('#' + arrDay.day.getDate()).addClass('dia_selecionado');
+    m = parseInt(arrDay.day.getMonth()) + 1; 
+    $('#yearMonth').text(arrDay.day.getDate() + ' ' + m);
     
   }
-  data =currentYear +'-'+currentMonth+"-"+currentDia;
+  data =arrDay.day.getFullYear() +'-'+m+"-"+arrDay.numberDay;
   get_calendario_hora(data);
 }
 
@@ -246,7 +302,7 @@ function nextMonth() {
         currentMonth = 1;
     }
     $('#calendarList').empty();
-    makeCalendar(currentYear, currentMonth);
+    //makeCalendar(currentYear, currentMonth);
 
 }
 
@@ -258,7 +314,7 @@ function prevMonth() {
         currentMonth = 12;
     }
     $('#calendarList').empty();
-    makeCalendar(currentYear, currentMonth);
+    //makeCalendar(currentYear, currentMonth);
 
 }
 
@@ -389,7 +445,7 @@ function mock_agenda(){
   });
 
 function estiloEventoPassado(hora, minuto, segundo) {
-    var dataRef= new Date(currentYear, currentMonth - 1, currentDia, hora, minuto, segundo);
+    var dataRef= new Date(currentYear, currentMonth - 1, arrDay.numberDay, hora, minuto, segundo);
     //dataRef.setHours(hora, minuto, segundo, 0);
 
     const dataAtual = new Date();
