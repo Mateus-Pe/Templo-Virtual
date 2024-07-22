@@ -60,7 +60,7 @@ body {
     text-align: center;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(6, 20px);
+    grid-template-rows: repeat(1, 30px);
     align-items: center;
     justify-items: center;
     grid-gap: 8px;
@@ -105,13 +105,13 @@ body {
     color: #707070;
     display: flex;
     justify-content: center;
-    /*gap: 10%;*/
-    border-bottom: 1px solid darkred;
 }
 
 .calendarYearMonth p {
-    display: inline-block !important;
-    vertical-align: middle !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 4% 3%;
 
 }
 
@@ -119,7 +119,6 @@ body {
     user-select: none;
     cursor: pointer;
     background: white;
-    margin: 4% 30px;
     padding: 1px 6px;
     border-radius: 12px;
     font-size: 14px;
@@ -377,8 +376,11 @@ body {
 }
 
 .calendar_open{
-    height: 90%;
+    position: relative;
+    height: 100%;
     overflow-y: auto;
+    padding-top: 50%;
+    z-index: 1;
 }
 
 .container {
@@ -387,4 +389,8 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
+}
+
+#div_dias{
+    border: 1px solid darkred;
 }

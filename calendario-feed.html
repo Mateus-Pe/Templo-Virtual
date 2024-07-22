@@ -32,163 +32,35 @@
 <body>
 
 
-    <div id="divPrincipal">
 
-        <div class="container">
+    <div style="overflow: hidden; position: fixed; width: 100%; z-index: 3; background-color: white;">
 
-            <div class="calendarYearMonth center">
-                <p class="left calBtn material-symbols-outlined" onclick="prevWeek()"> navigate_before</p>
-                <p class="left calBtn material-symbols-outlined" onclick="prevDay()"> navigate_before</p>
-                <p id="yearMonth"> 2023 Dez </p>
-                <p class="right calBtn material-symbols-outlined" onclick="nextDay()"> navigate_next </p>
-                <p class="right calBtn material-symbols-outlined" onclick="nextWeek()"> navigate_next </p>
-            </div>
-
-            <div id="div_dias">
-                <ol class="calendarList1">
-                    <li class="day-name">Seg</li>
-                    <li class="day-name">Ter</li>
-                    <li class="day-name">Qua</li>
-                    <li class="day-name">Qui</li>
-                    <li class="day-name">Sex</li>
-                    <li class="day-name">Sab</li>
-                    <li class="day-name">Dom</li>
-                </ol>
-
-                <ol class="calendarList2" id="calendarList">
-
-                </ol>
-
-            </div>
-
-            <div id="divListaAgenda" class="calendar_open"></div>
-
+        <div class="calendarYearMonth center">
+            <p class="left calBtn material-symbols-outlined" onclick="prevWeek()"> keyboard_double_arrow_left</p>
+            <p class="left calBtn material-symbols-outlined" onclick="prevDay()"> navigate_before</p>
+            <p id="yearMonth"> 2023 Dez </p>
+            <p class="right calBtn material-symbols-outlined" onclick="nextDay()"> navigate_next </p>
+            <p class="right calBtn material-symbols-outlined" onclick="nextWeek()"> keyboard_double_arrow_right </p>
         </div>
 
-    </div>
+        <div id="div_dias">
+            <ol class="calendarList1">
+                <li class="day-name">Seg</li>
+                <li class="day-name">Ter</li>
+                <li class="day-name">Qua</li>
+                <li class="day-name">Qui</li>
+                <li class="day-name">Sex</li>
+                <li class="day-name">Sab</li>
+                <li class="day-name">Dom</li>
+            </ol>
 
-    
+            <ol class="calendarList2" id="calendarList">
 
-    <div id="modal_config" class="modal">
-        <div class="modal-content1">
-            <div class="cadastro" style="justify-content: center; display: grid; gap: 1.5rem;">
+            </ol>
 
-                <div id="visualizar_layout">
-
-                    <div style="gap: 0.5rem; align-items: center; display: flex;">
-
-                        <span class="material-symbols-outlined" style="color: lightgray;">image</span>
-                        <span data-agenda_img="" data-logo_url="" data-igreja_nome="" data-agenda_desc=""
-                            class="acToggle">Visualizar layout</span>
-                    </div>
-
-                </div>
-
-                <div id="editar_layout">
-
-                    <div style="gap: 0.5rem; align-items: center; display: flex;">
-
-                        <span class="material-symbols-outlined" style="color: lightgray;">settings</span>
-                        <span data-agenda_id="" data-agenda_hora="" data-status="" class="acToggle">Editar layout</span>
-                    </div>
-                </div>
-
-                <div id="excluir">
-
-                    <div style="gap: 0.5rem; align-items: center; display: flex;">
-
-                        <span data-agenda_id="" class="material-symbols-outlined"
-                            style="color: lightgray;">delete</span>
-                        <span>Excluir</span>
-                    </div>
-                </div>
-
-                <div id="cancelar">
-
-                    <div
-                        style="gap: 0.5rem; align-items: center; display: flex; justify-content: center; background-color: white; border: 1px solid darkred; color: darkred; border-radius: 30px;">
-
-                        <span>Cancelar</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-
-    <div id="modal_visualizar_layout" class="modal" style="background-color: black;">
-        <span class="material-symbols-outlined"
-            style="color: white;font-size: 3rem; position: absolute; right: 0.5rem; top: 0.5rem;">
-            close
-        </span>
-        <div class="modal-content">
-            <div>
-                <div class="feed_principal">
-                    <div class="div_feed_secundario">
-                        <div>
-                            <div>
-                                <a class="div_perfil">
-                                    <div class="perfil_div" data-igreja_id="1">
-                                        <img id="imagem_igreja" class="img_igreja" src="">
-                                        <span class="nome_igreja">Nossa Senhora de Fátima Socorro</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="div_layout_feed">
-                                <a class="a_img_layout">
-                                    <img id="visualiza_layout_feed" src="">
-                                </a>
-                                <div class="div_descricao">
-                                    <span id="descricao_layout_feed" class="span_descricao">Adicione um comentário para
-                                        visualiza-lo</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="modalConfirmacao" class="modal">
-        <div class="modal-content1" style="display: grid; justify-content: center;">
-            <h1>Deseja excluir este agendamento?</h1>
-            <div class="modal-footer">
-                <button href="#!" id="cancelarRemocao" class="modal-close">Cancelar</button>
-                <button href="#!" data-agenda_id="" id="confirmarRemocao">Confirmar</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="modalStatus" class="modal">
-        <div class="modal-status" style="display: grid; justify-content: center; gap: 10px;">
-            <div style="border: 1px solid black;">
-                <span style="display: flex; align-items: center; gap: 15px;">
-                    <div
-                        style="border-radius: 50%; background-color: green; width: 16px; height: 13px; border: 1px solid green; position: relative; left: 5px;">
-                    </div>
-                    <h1>Evento configurado para aparecer no feed.</h1>
-                </span>
-                <span style="display: flex; align-items: center; gap: 15px;">
-                    <div
-                        style="border-radius: 50%; background-color: red; width: 16px; height: 13px; border: 1px solid red; position: relative; left: 5px;">
-                    </div>
-                    <h1>Evento não configurado para aparecer no feed.</h1>
-                </span>
-                <span style="display: flex; align-items: center; gap: 15px;">
-                    <div
-                        style="border-radius: 50%; background-color: orange; width: 13px; height: 13px; border: 1px solid orange; position: relative; left: 5px;">
-                    </div>
-                    <h1>Evento já realizado.</h1>
-                </span>
-            </div>
-            <h1 style="text-align: center;" id="mensagem_status">Condição do layout</h1>
-            <div class="modal-footer">
-                <button href="#!" data-agenda_id="" data-status="" id="configurar_layout" class="modal-close">Configurar
-                    layout</button>
-                <button href="#!" id="ok" class="modal-close">OK</button>
-            </div>
-        </div>
-    </div>
+    <div id="divListaAgenda" class="calendar_open"></div>
 
     <script src="./scripts/jquery/jquery-3.2.1.min.js"></script>
     <script src="scripts/calendario-feed.js"></script>
