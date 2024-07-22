@@ -5,6 +5,7 @@ var arrDay = {
   numberDay : new Date().getDate(),
   day : new Date()
 }
+var startDayWeek;
 var lastDayWeek;
 const tamanhoItemLista = 80;
 var contLista = 0;
@@ -176,20 +177,22 @@ function makeCalendar(ref, year, month) {
       i++;  
     }while(i < 7)
 
-
+    arrDay.day = new Date(ref);
     //ref.setDate(ref.getDate() - 1);  
     lastDayWeek = new Date(ref);
     lastDayWeek.setDate(lastDayWeek.getDate() + 6);  
+    startDayWeek = new Date(ref);
 
-    monthName = months.find(x => x.id === month).name;
+    m = parseInt(arrDay.day.getMonth()) + 1; 
+    monthName = months.find(x => x.id === m).name;
     
     
-    $('#' + arrDay.numberDay).addClass('dia_selecionado');
+    $('#' + ref.getDate()).addClass('dia_selecionado');
     data =currentYear +'-'+currentMonth+"-"+arrDay.numberDay;
     get_calendario_hora(data);
 
 
-    $('#yearMonth').text(arrDay.numberDay + ' ' + monthName );
+    $('#yearMonth').text(arrDay.day.getDate() + ' ' + monthName );
     configuraEventos();
     
     
@@ -224,21 +227,6 @@ $('#calendarList').on('click', 'li', function() {
 }
 $('#yearMonth').data('click-count', 0);
 
-$('#yearMonth ').click(function(e){
-  var clickCount = $(this).data('click-count'); 
-  clickCount++;
-  $(this).data('click-count', clickCount);
-
-  if(clickCount % 2 == 0){
-    $('#div_dias').css('display', 'none');
-    $('#divListaAgenda').css('height', '90%');
-    
-  }else{
-    $('#div_dias').css('display', 'grid');
-    $('#divListaAgenda').css('height', '50%');
-  }
-});
-
 function loadDay(){
   //var data =  window.sessionStorage.getItem('data_referencia');
     day = new Date();
@@ -272,7 +260,32 @@ function nextDay(){
     m = parseInt(arrDay.day.getMonth()) + 1; 
     $('#yearMonth').text(arrDay.day.getDate() + ' ' + months.find(x => x.id == m).name);
   }
-    data =currentYear +'-'+currentMonth+"-"+arrDay.numberDay;
+    data = arrDay.day.getFullYear() +'-'+m+"-"+arrDay.numberDay;
+    console.log(data);
+    get_calendario_hora(data);
+}
+
+function nextWeek(){
+  var getChek = letsCheck(currentYear, currentMonth);
+  
+  
+  
+    //dt = new Date(startDayWeek) 
+    startDayWeek.setDate(startDayWeek.getDate() + 7); 
+
+
+    $('#calendarList li').removeClass('dia_selecionado');
+    $('#' + startDayWeek.getDate()).addClass('dia_selecionado');
+
+    m = parseInt(startDayWeek.getMonth()) + 1; 
+    $('#yearMonth').text(startDayWeek.getDate() + ' ' + months.find(x => x.id == m).name);
+    
+
+    makeCalendar(startDayWeek , currentYear, currentMonth);
+  
+    //$('#calendarList li').removeClass('dia_selecionado');
+    //$('#' + arrDay.day.getDate()).addClass('dia_selecionado');
+    data = startDayWeek.getFullYear() +'-'+m+"-"+startDayWeek.getDate();
     get_calendario_hora(data);
 }
 

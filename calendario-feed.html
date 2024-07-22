@@ -37,12 +37,14 @@
         <div class="container">
 
             <div class="calendarYearMonth center">
+                <p class="left calBtn material-symbols-outlined" onclick="prevWeek()"> navigate_before</p>
                 <p class="left calBtn material-symbols-outlined" onclick="prevDay()"> navigate_before</p>
                 <p id="yearMonth"> 2023 Dez </p>
                 <p class="right calBtn material-symbols-outlined" onclick="nextDay()"> navigate_next </p>
+                <p class="right calBtn material-symbols-outlined" onclick="nextWeek()"> navigate_next </p>
             </div>
 
-            <div id="div_dias" style="display: none;">
+            <div id="div_dias">
                 <ol class="calendarList1">
                     <li class="day-name">Seg</li>
                     <li class="day-name">Ter</li>
