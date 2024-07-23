@@ -5,6 +5,7 @@ var arrDay = {
   day : new Date()
 }
 var startDayWeek;
+var startDayWeekNumber;
 var lastDayWeek;
 const tamanhoItemLista = 80;
 var contLista = 0;
@@ -40,19 +41,35 @@ $(document).ready(function() {
   ref = new Date(); 
   makeDayWeek(ref);
   makeCalendarWeek(ref, ref);
+  var currentYear = arrDay.day.getFullYear();
+  var currentMonth = arrDay.day.getMonth();
+  makeCalendar(currentYear, currentMonth);
+
+
+  $(document).on('selectDate', function(event, data){
+      makeCalendarWeek(data.returnDate, getStartWeekDayUtil(data.returnDate));
+  })
 
 });
 
+function getStartWeekDayUtil(dt){
+  dtR = new Date(dt)
+  for (let i = 1; i <= 7 ;i++) {
+    if(dtR.getUTCDay() == startDayWeekNumber){
+      return dtR;
+    }
+    dtR.setDate(dtR.getDate() -1);
+  }  
+}
 
-var currentYear = new Date().getFullYear();
-var currentMonth = new Date().getMonth() + 1;
+
 
 
 
 
 
 function letsCheck(year, month) {
-    var mes = month +1;
+    var mes = month;
     var daysInMonth = new Date(year, month, 0).getDate();
     var firstDay = new Date(year, mes, 1).getUTCDay();
     var array = {
@@ -64,16 +81,15 @@ function letsCheck(year, month) {
 
 function makeDayWeek(ref){
   refN = new Date(ref.getFullYear(), ref.getMonth(), ref.getDate()); 
-  
+  startDayWeekNumber = refN.getUTCDay();
   html = '';
   for (let i = 1; i <= 7 ;i++) {
     dw = parseInt(refN.getUTCDay()) ;
-    console.log(dw);
     dayWeek = dias.find(x => x.id == dw).name_small;
     html += '<li class="day-name">'+dayWeek+'</li>';
     refN.setDate(refN.getDate() + 1);     
   }
-  $('.calendarList1').html(html);  
+  $('.calendarWeekList1').html(html);  
 }
 
 function compareDatesMinur (dt1, dt2) {
@@ -118,8 +134,6 @@ function makeCalendarWeek(ref, refWeek) {
 
     m = parseInt(arrDay.day.getMonth()) + 1; 
     monthName = months.find(x => x.id === m).name;
-    
-    
     $('#' + ref.getDate()).addClass('dia_selecionado');
     data =arrDay.day.getFullYear() +'-'+m+"-"+arrDay.day.getDate(); 
     get_calendario_hora(data);
@@ -161,7 +175,6 @@ function nextDay(){
     $('#dayMonth').text(arrDay.day.getDate() + ' ' + months.find(x => x.id == m).name);
   }
   data = arrDay.day.getFullYear() +'-'+m+"-"+arrDay.numberDay;
-  console.log(data);
   get_calendario_hora(data);
 }
 
@@ -188,14 +201,9 @@ function prevDay(){
   
 
   if(compareDatesMinur(arrDay.day,startDayWeek)){
-    
-    console.log("if");
     startDayWeek.setDate(startDayWeek.getDate() - 7);
     makeCalendarWeek(arrDay.day, startDayWeek);
-    
-   // console.log(getChek.daysInMonth);
   }else{
-    console.log('else');
     $('#calendarEvents li').removeClass('dia_selecionado');
     $('#' + arrDay.day.getDate()).addClass('dia_selecionado');
   
@@ -203,7 +211,6 @@ function prevDay(){
     $('#dayMonth').text(arrDay.day.getDate() + ' ' + months.find(x => x.id == m).name);
   }
     data = arrDay.day.getFullYear() +'-'+m+"-"+arrDay.numberDay;
-    console.log(data);
     get_calendario_hora(data);
 }
 
@@ -221,7 +228,7 @@ function prevWeek(){
 }
 
 function configuraEventos(){
-  $('.calendarList2 li').click(function (e) {
+  $('.calendarWeekList2 li').click(function (e) {
     arrDay.day = new Date($(this).data('ano'), $(this).data('mes'), $(this).attr('id'));
     m = parseInt(arrDay.day.getMonth()) + 1; 
     monthName = months.find(x => x.id === m).name;
@@ -237,7 +244,7 @@ function configuraEventos(){
 
   
 function estiloEventoPassado(hora, minuto, segundo) {
-    var dataRef= new Date(currentYear, currentMonth - 1, arrDay.numberDay, hora, minuto, segundo);
+    /*var dataRef= new Date(currentYear, currentMonth - 1, arrDay.numberDay, hora, minuto, segundo);
     //dataRef.setHours(hora, minuto, segundo, 0);
 
     const dataAtual = new Date();
@@ -248,7 +255,8 @@ function estiloEventoPassado(hora, minuto, segundo) {
        contLista += 1;
      }
 
-    return htmlAncoraHora;
+    return htmlAncoraHora;*/
+    return '';
 }
 
   function montaHorario(ch){

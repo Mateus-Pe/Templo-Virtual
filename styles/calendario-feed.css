@@ -37,7 +37,7 @@ body {
     font-size: 15px;
 }
 
-.calendarList1 {
+.calendarWeekList1 {
     list-style: none;
     width: 100%;
     margin: 0;
@@ -53,7 +53,7 @@ body {
     color: #707070;
 }
 
-.calendarList2 {
+.calendarWeekList2 {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -68,7 +68,7 @@ body {
     color: #707070;
 }
 
-.calendarList2 li {
+.calendarWeekList2 li {
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -80,7 +80,7 @@ body {
     border-radius: 5px;
 }
 
-.calendarList2 li.dia_eventos{
+.calendarWeekList2 li.dia_eventos{
     background-color: #EAEAEA;
     color: #606060;
     border-radius: 10%; 
@@ -91,13 +91,13 @@ body {
     justify-content: center;
 }
 
-.calendarList2 li:active {
+.calendarWeekList2 li:active {
     background-color: darkred;
     color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.calendarList1, .calendarList2 {
+.calendarWeekList1, .calendarWeekList2 {
     transition: margin-left 0.5s ease;
 }
 
