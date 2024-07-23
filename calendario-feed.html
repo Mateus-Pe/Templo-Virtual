@@ -38,7 +38,7 @@
         <div class="calendarYearMonth center">
             <p class="left calBtn material-symbols-outlined" onclick="prevWeek()"> keyboard_double_arrow_left</p>
             <p class="left calBtn material-symbols-outlined" onclick="prevDay()"> navigate_before</p>
-            <p id="yearMonth"> 2023 Dez </p>
+            <p id="dayMonth"> 2023 Dez </p>
             <p class="right calBtn material-symbols-outlined" onclick="nextDay()"> navigate_next </p>
             <p class="right calBtn material-symbols-outlined" onclick="nextWeek()"> keyboard_double_arrow_right </p>
         </div>
@@ -54,7 +54,7 @@
                 <li class="day-name">Dom</li>
             </ol>
 
-            <ol class="calendarList2" id="calendarList">
+            <ol class="calendarList2" id="calendarEvents">
 
             </ol>
 
@@ -62,8 +62,42 @@
     </div>
     <div id="divListaAgenda" class="calendar_open"></div>
 
+
+    <div id="modalCalendario" class="modal">
+        <div class="modal-calendario">
+            <div id="calendario" style="height: 100%;">
+                <div class="container">
+
+                    <div class="calendarYearMonth center">
+                        <p class="left calBtn material-symbols-outlined" onclick="prevMonth()"> navigate_before </p>
+                        <p id="yearMonth"> 2023 Dez </p>
+                        <p class="right calBtn material-symbols-outlined" onclick="nextMonth()"> navigate_next </p>
+                    </div>
+
+                    <div>
+                        <ol class="calendarList1">
+                            <li class="day-name">Seg</li>
+                            <li class="day-name">Ter</li>
+                            <li class="day-name">Qua</li>
+                            <li class="day-name">Qui</li>
+                            <li class="day-name">Sex</li>
+                            <li class="day-name">Sab</li>
+                            <li class="day-name">Dom</li>
+                        </ol>
+
+                        <ol class="calendarList2" id="calendarList">
+
+                        </ol>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="./scripts/jquery/jquery-3.2.1.min.js"></script>
     <script src="scripts/calendario-feed.js"></script>
+    <script src="scripts/calendario-utils.js"></script>
 
 
 

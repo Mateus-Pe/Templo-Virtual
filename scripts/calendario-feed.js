@@ -39,7 +39,7 @@ $(document).ready(function() {
 
   ref = new Date(); 
   makeDayWeek(ref);
-  makeCalendar(ref, ref);
+  makeCalendarWeek(ref, ref);
 
 });
 
@@ -89,12 +89,12 @@ function compareDatesMajor (dt1, dt2) {
 }
 
 
-function makeCalendar(ref, refWeek) {
+function makeCalendarWeek(ref, refWeek) {
     
 
     var getChek = letsCheck(arrDay.day.getFullYear(), arrDay.day.getMonth()); 
     getChek.firstDay === 0 ? getChek.firstDay = 7 : getChek.firstDay;
-    $('#calendarList').empty();
+    $('#calendarEvents').empty();
     d = parseInt(refWeek.getDate())
     i = 0;
     dtHtml = new Date(refWeek);
@@ -103,7 +103,7 @@ function makeCalendar(ref, refWeek) {
       mesHtml = dtHtml.getMonth();  
       anoHtml = dtHtml.getFullYear();    
       var div = '<li id="' + diaHtml + '" data-mes='+mesHtml+' data-ano='+anoHtml+'>' + diaHtml + '</li>'
-      $('#calendarList').append(div);
+      $('#calendarEvents').append(div);
       lastDayWeek = d; 
       if(d >= getChek.daysInMonth)d=0;
       dtHtml.setDate(dtHtml.getDate() + 1);
@@ -125,17 +125,13 @@ function makeCalendar(ref, refWeek) {
     get_calendario_hora(data);
 
 
-    $('#yearMonth').text(arrDay.day.getDate() + ' ' + monthName );
+    $('#dayMonth').text(arrDay.day.getDate() + ' ' + monthName );
     configuraEventos();
     
     
     if(igrejaId != null && igrejaId != ''){
       carregarCalendario();
     }
-
-    var idDiaAnterior = ''; // Inicializa a variável idDiaAnterior
-
-
 }
 
 function loadDay(){
@@ -159,10 +155,10 @@ function nextDay(){
   if(compareDatesMajor(arrDay.day,lastDayWeek)){
     nextWeek();
   }else{
-    $('#calendarList li').removeClass('dia_selecionado');
+    $('#calendarEvents li').removeClass('dia_selecionado');
     $('#' + arrDay.day.getDate()).addClass('dia_selecionado');
     m = parseInt(arrDay.day.getMonth()) + 1; 
-    $('#yearMonth').text(arrDay.day.getDate() + ' ' + months.find(x => x.id == m).name);
+    $('#dayMonth').text(arrDay.day.getDate() + ' ' + months.find(x => x.id == m).name);
   }
   data = arrDay.day.getFullYear() +'-'+m+"-"+arrDay.numberDay;
   console.log(data);
@@ -176,10 +172,10 @@ function nextWeek(){
 
 
     m = parseInt(startDayWeek.getMonth()) + 1; 
-    $('#yearMonth').text(startDayWeek.getDate() + ' ' + months.find(x => x.id == m).name);
+    $('#dayMonth').text(startDayWeek.getDate() + ' ' + months.find(x => x.id == m).name);
     
 
-    makeCalendar(startDayWeek, startDayWeek);
+    makeCalendarWeek(startDayWeek, startDayWeek);
   
     data = startDayWeek.getFullYear() +'-'+m+"-"+startDayWeek.getDate();
     get_calendario_hora(data);
@@ -193,18 +189,18 @@ function prevDay(){
 
   if(compareDatesMinur(arrDay.day,startDayWeek)){
     
-    console.log("if")
+    console.log("if");
     startDayWeek.setDate(startDayWeek.getDate() - 7);
-    makeCalendar(arrDay.day, startDayWeek);
+    makeCalendarWeek(arrDay.day, startDayWeek);
     
    // console.log(getChek.daysInMonth);
   }else{
     console.log('else');
-    $('#calendarList li').removeClass('dia_selecionado');
+    $('#calendarEvents li').removeClass('dia_selecionado');
     $('#' + arrDay.day.getDate()).addClass('dia_selecionado');
   
     m = parseInt(arrDay.day.getMonth()) + 1; 
-    $('#yearMonth').text(arrDay.day.getDate() + ' ' + months.find(x => x.id == m).name);
+    $('#dayMonth').text(arrDay.day.getDate() + ' ' + months.find(x => x.id == m).name);
   }
     data = arrDay.day.getFullYear() +'-'+m+"-"+arrDay.numberDay;
     console.log(data);
@@ -215,28 +211,28 @@ function prevWeek(){
   
   startDayWeek.setDate(startDayWeek.getDate() - 7); 
   m = parseInt(startDayWeek.getMonth()) + 1; 
-  $('#yearMonth').text(startDayWeek.getDate() + ' ' + months.find(x => x.id == m).name);
+  $('#dayMonth').text(startDayWeek.getDate() + ' ' + months.find(x => x.id == m).name);
   
 
-  makeCalendar(startDayWeek, startDayWeek);
+  makeCalendarWeek(startDayWeek, startDayWeek);
 
   data = startDayWeek.getFullYear() +'-'+m+"-"+startDayWeek.getDate();
   get_calendario_hora(data);
 }
 
-function configuraEventos(){    
+function configuraEventos(){
   $('.calendarList2 li').click(function (e) {
     arrDay.day = new Date($(this).data('ano'), $(this).data('mes'), $(this).attr('id'));
     m = parseInt(arrDay.day.getMonth()) + 1; 
     monthName = months.find(x => x.id === m).name;
     
-    $('#yearMonth').text(arrDay.day.getDate() + ' ' + monthName);
-    $('#calendarList li').removeClass('dia_selecionado');
+    $('#dayMonth').text(arrDay.day.getDate() + ' ' + monthName);
+    $('#calendarEvents li').removeClass('dia_selecionado');
     $(this).addClass('dia_selecionado');
 
     data =($(this).data('ano') +'-'+m+"-"+$(this).attr('id'));
     get_calendario_hora(data);
-  });    
+  });
 }
 
   
@@ -347,44 +343,10 @@ function estiloEventoPassado(hora, minuto, segundo) {
               
             });
 
-            $('.status_layout').click(function(){
-              var agenda_id = $(this).data('agenda_id');
-              var status = $(this).data('status');
-
-              $('#modalStatus').find('[data-agenda_id]').data('agenda_id', agenda_id);
-              $('#modalStatus').find('[data-status]').data('status', status);
-
-              $('#modalStatus').show();
-              if(status == 2){
-                 $('#mensagem_status').text('Este evento já está configurado para aparecer no feed');
-                 $('#configurar_layout').css('display', 'none');
-              }else if(status == 3){
-                $('#mensagem_status').text('Este evento já foi realizado');
-                $('#configurar_layout').css('display', 'none');
-              }else{
-                $('#mensagem_status').text('Este evento ainda não foi configurado, para configurar basta clicar em configurar layout');
-                $('#configurar_layout').css('display', 'flex');
-              }
-            });
-
-            $('#configurar_layout').click(function(){
-              var agenda_id = $(this).data('agenda_id');
-              window.sessionStorage.setItem('agenda_id', agenda_id);
-              $('#modalStatus').hide();
-              window.location = 'escolha-layout.html';
-            });
-
-            $('.remove-igreja').click(function () {
-
-              var id = $(this).data('id');
-              remover(id);
-          });
-
 	   });
 
 }
 
-
-
-
-  
+$("#dayMonth").click(function(e){
+  $("#modalCalendario").show();
+});
