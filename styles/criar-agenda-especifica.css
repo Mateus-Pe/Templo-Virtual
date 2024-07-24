@@ -78,6 +78,22 @@ input[type="checkbox"]:checked::before {
     text-align: center !important;
 }
 
+.modal-calendario {
+    background-color: white !important;
+    margin: auto !important;
+    padding: 0px !important;
+    border: 1px solid #888 !important;
+    border-radius: 30px !important;
+    width: 90% !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    position: fixed !important;
+    max-width: 400px !important;
+    text-align: center !important;
+    height: 50%;
+}
+
 .modal-content p {
     font-family: Exo !important;
     font-size: 1.5rem !important;

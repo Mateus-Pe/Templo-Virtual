@@ -56,13 +56,13 @@ document.getElementById('imageFileInput').addEventListener('change', function(ev
 function validarImagem(height, width){
   retorno = true;
 
-  if ((1.33 * width) > height && height > width) {
+  if ((1.5 * width) > height && height > width) { // antes 1.33
     $("#modalConfirmacao").show();
     texto_modal = "<p> Erro ao carregar a imagem, procure uma imagem com as dimensões de largura e altura próximas.</p><br>";
       $('#mensagem_modal').html(texto_modal);
       retorno = false;
   }
-  if ((1.8 * height) > width && width > height) {
+  if ((1.5 * height) > width && width > height) {// antes 1.8
     $("#modalConfirmacao").show();
     texto_modal = "<p> Erro ao carregar a imagem, procure uma imagem com as dimensões de largura e altura próximas.</p><br>";
       $('#mensagem_modal').html(texto_modal);

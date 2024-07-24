@@ -52,7 +52,7 @@
 
     <link rel="stylesheet" href="./styles/criar-agenda-especifica.css">
 
-    <link rel="stylesheet" href="./styles/calendario.css">
+    <link rel="stylesheet" href="./styles/calendario-utils.css">
 
     <link rel="stylesheet" href="./styles/jquery-ui.min.css">
 
@@ -65,34 +65,13 @@
 <body style="background-color: white">
 
     <div id="modalCalendario" class="modal">
-        <div class="modal-content">
-            <div id="calendario">
-                <div class="container">
-
-                    <div class="calendarYearMonth center">
-                        <p class="left calBtn material-symbols-outlined" onclick="prevMonth()"> < </p>
-                        <p id="yearMonth"> 2023 Dez </p>
-                        <p class="right calBtn material-symbols-outlined" onclick="nextMonth()"> > </p>
-                    </div>
-
-                    <div>
-                        <ol class="calendarList1">
-                            <li class="day-name">Seg</li>
-                            <li class="day-name">Ter</li>
-                            <li class="day-name">Qua</li>
-                            <li class="day-name">Qui</li>
-                            <li class="day-name">Sex</li>
-                            <li class="day-name">Sab</li>
-                            <li class="day-name">Dom</li>
-                        </ol>
-
-                        <ol class="calendarList2" id="calendarList">
-
-                        </ol>
-
-                    </div>
-                </div>
+        <div class="modal-calendario">
+            <div class="calendarYearMonth center">
+                <p class="left calBtn material-symbols-outlined" onclick="prevMonth()"> navigate_before </p>
+                <p id="yearMonth"> 2023 Dez </p>
+                <p class="right calBtn material-symbols-outlined" onclick="nextMonth()"> navigate_next </p>
             </div>
+            <div class="calendario-utils"></div>
         </div>
     </div>
 
@@ -221,6 +200,8 @@
 
         <!--  <script src="cordova.js"></script> -->
         <script src="./scripts/criar-agenda-especifica.js"></script>
+
+        <script src="./scripts/calendario-utils.js"></script>
 
     </footer>
 

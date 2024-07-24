@@ -61,3 +61,34 @@
 .calendarList1, .calendarList2 {
     transition: margin-left 0.5s ease;
 }
+
+.calendarYearMonth {
+    color: #707070;
+    display: flex;
+    justify-content: center;
+}
+
+.calendarYearMonth p {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 4% 3%;
+
+}
+
+.calBtn {
+    user-select: none;
+    cursor: pointer;
+    background: white;
+    padding: 1px 6px;
+    border-radius: 12px;
+    font-size: 24px;
+    line-height: 22px;
+    color: darkred;
+    border: 1px solid darkred;
+}
+
+.center {
+    text-align: center;
+    font-size: 15px;
+}

@@ -50,6 +50,10 @@ $(document).ready(function() {
       makeCalendarWeek(data.returnDate, getStartWeekDayUtil(data.returnDate));
   })
 
+  $('.select_filter div').click(function() {
+    $('.select_filter div').removeClass('selected');
+    $(this).addClass('selected');
+  });
 });
 
 function getStartWeekDayUtil(dt){
@@ -264,22 +268,13 @@ function estiloEventoPassado(hora, minuto, segundo) {
     var html = '';
     if(ch.tipo == 'E'){
 
-      html ='<div style="width: 60%; justify-content: center; display: flex; align-items: center;">'+
-                    '<div style="width: 70px; height: 40px; border: 1px solid; border-radius: 20px; background-color: darkred; font-size: 16px; align-items: center; justify-content: center; display: flex; color: white;"> '+
-                    ch.agenda_hora+
-                    '</div>'+
+      html =  '<div class="agenda_hora"> '+
+                'Ás '+ch.agenda_hora+
               '</div>';
+              
     }else{
-      html = '<div style="width: 30%; justify-content: center; display: flex; align-items: center;">'+
-                    '<div style="width: 70px; height: 40px; border: 1px solid; border-radius: 20px; background-color: darkred; font-size: 16px; align-items: center; justify-content: center; display: flex; color: white;">'+
-                    ch.agenda_hora+
-                  '</div>'+
-              '</div>'+
-
-              '<div style="width: 30%; justify-content: center; display: flex; align-items: center;">'+
-                    '<div style="width: 70px; height: 40px; border: 1px solid; border-radius: 20px; background-color: darkred; font-size: 16px; align-items: center; justify-content: center; display: flex; color: white;">'+
-                    ch.agenda_fim+
-                  '</div>'+
+      html =  '<div class="agenda_hora">'+
+                  'Das '+ch.agenda_hora+' ás '+ch.agenda_fim+
               '</div>';
     }
     return html;
@@ -311,29 +306,32 @@ function estiloEventoPassado(hora, minuto, segundo) {
               
                 html =  '<div class="pesq" data-agenda_id="'+ch.agenda_id+'" data-igreja_id="'+ch.igreja_id+'" style="background-color: white; border-bottom: 1px solid #5b318a36; '+estiloEventoPassado(arrHora[0], arrHora[1], 0)+'">';
 
-                html +=     '<div class="add" style="display: flex;" data-agenda_id="'+ ch.agenda_id +'">' +
+                html +=     '<div class="add"" data-agenda_id="'+ ch.agenda_id +'">' +
 
 
 
-                            '<div  style="display: inline-grid; padding-top: 10px;">'+
-                                '<div style="display: flex;align-items: center; flex-direction: row;flex-wrap: wrap; justify-content: center;">'+
-                                    '<img id="img_igreja_desc_resumida" src="'+ch.igreja_logo_url+'" style="height:50px; width: 50px; border-radius: 50%;">'+
-                                '</div>'+
-                                '<span id="desc_resumida" style="font-size: 1.3rem;text-align:center;text-decoration:none; width: 100px; padding-bottom: 5px;">'+
+                            '<div  class="agenda">'+
+
+                              '<div class="div_img">'+
+                                  '<img id="img_igreja_desc_resumida" src="'+ch.igreja_fundo_url+'">'+
+                              '</div>'+
+
+                              '<div>'+
+                                '<div id="desc_resumida" class="igreja_nome">'+
                                   ch.igreja_nome+
+                                '</div>'+
+
+                                '<span id="endereco_igreja" class="endereco_igreja">'+
+                                  ch.endereco_bairro+ '  -  '+ ch.endereco_cidade+
                                 '</span>'+
+
+                                '<div class="div_evento_agenda">'+
+                                  '<span>'+ ch.evento_nome +'</span>'+
+                                '</div>'+
+                                montaHorario(ch)+
+                              '</div>'+
                             '</div>'+
-
-
-                            
-
-                        '<div style="width: 50%; text-align: center; justify-content: center; align-items: center; display: flex;">'+
-                          '<span style="font-size:1.5rem; color: black;">'+ ch.evento_nome +'</span>'+
-                        '</div>'+
                         
-
-                        
-                        montaHorario(ch)+
 
                       '</div>' +
                     '</div>';
