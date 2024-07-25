@@ -10,31 +10,6 @@ var lastDayWeek;
 const tamanhoItemLista = 80;
 var contLista = 0;
 
-const dias = [
-  { 'id': 1, 'name': 'Segunda', 'name_caps' : 'SEGUNDA', 'name_small' : 'Seg'},
-  { 'id': 2, 'name': 'Terça', 'name_caps' : 'TERÇA', 'name_small' : 'Ter' },
-  { 'id': 3, 'name': 'Quarta', 'name_caps' : 'QUARTA', 'name_small' : 'Qua' },
-  { 'id': 4, 'name': 'Quinta', 'name_caps' : 'QUINTA', 'name_small' : 'Qui' },
-  { 'id': 5, 'name': 'Sexta', 'name_caps' : 'SEXTA', 'name_small' : 'Sex' },
-  { 'id': 6, 'name': 'Sábado', 'name_caps' : 'SÁBADO', 'name_small' : 'Sab' },
-  { 'id': 0, 'name': 'Domingo', 'name_caps' : 'DOMINGO', 'name_small' : 'Dom' },
-];
-
-const months = [
-  { 'id': 1, 'name': 'Janeiro' },
-  { 'id': 2, 'name': 'Fevereiro' },
-  { 'id': 3, 'name': 'Março' },
-  { 'id': 4, 'name': 'Abril' },
-  { 'id': 5, 'name': 'Maio' },
-  { 'id': 6, 'name': 'Junho' },
-  { 'id': 7, 'name': 'Julho' },
-  { 'id': 8, 'name': 'Agosto' },
-  { 'id': 9, 'name': 'Setembro' },
-  { 'id': 10, 'name': 'Outubro' },
-  { 'id': 11, 'name': 'Novembro' },
-  { 'id': 12, 'name': 'Dezembro' },
-];
-
 
 $(document).ready(function() {
 
@@ -64,23 +39,6 @@ function getStartWeekDayUtil(dt){
     }
     dtR.setDate(dtR.getDate() -1);
   }  
-}
-
-
-
-
-
-
-
-function letsCheck(year, month) {
-    var mes = month;
-    var daysInMonth = new Date(year, month, 0).getDate();
-    var firstDay = new Date(year, mes, 1).getUTCDay();
-    var array = {
-        daysInMonth: daysInMonth,
-        firstDay: firstDay
-    };
-    return array;
 }
 
 function makeDayWeek(ref){
@@ -295,8 +253,6 @@ function estiloEventoPassado(hora, minuto, segundo) {
 
 			$('#divListaAgenda').html('');
 
-            
-
             var total_checked = 0;
             
               $.each(obj.calendario_hora, function (k, ch) {
@@ -307,7 +263,6 @@ function estiloEventoPassado(hora, minuto, segundo) {
                 html =  '<div class="pesq" data-agenda_id="'+ch.agenda_id+'" data-igreja_id="'+ch.igreja_id+'" style="background-color: white; border-bottom: 1px solid #5b318a36; '+estiloEventoPassado(arrHora[0], arrHora[1], 0)+'">';
 
                 html +=     '<div class="add"" data-agenda_id="'+ ch.agenda_id +'">' +
-
 
 
                             '<div  class="agenda">'+

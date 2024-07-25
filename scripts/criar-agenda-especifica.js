@@ -19,27 +19,15 @@ $(document).ready(function() {
   evento_agenda();
   
   var currentAno = arrDay.day.getFullYear();
-  var currentMes = arrDay.day.getMonth() +1;
+  var currentMes = arrDay.day.getMonth();
   makeCalendar(currentAno, currentMes);
-  
+
+  $(document).on('selectDate', function(event, data){
+    $('#data_evento').val(formata_data(data.returnDate));
+})
 
 });
 
-
-const months = [
-    { 'id': 1, 'name': 'Jan' },
-    { 'id': 2, 'name': 'Fev' },
-    { 'id': 3, 'name': 'Mar' },
-    { 'id': 4, 'name': 'Abr' },
-    { 'id': 5, 'name': 'Mai' },
-    { 'id': 6, 'name': 'Jun' },
-    { 'id': 7, 'name': 'Jul' },
-    { 'id': 8, 'name': 'Ago' },
-    { 'id': 9, 'name': 'Set' },
-    { 'id': 10, 'name': 'Out' },
-    { 'id': 11, 'name': 'Nov' },
-    { 'id': 12, 'name': 'Dez' },
-];
 var currentYear = new Date().getFullYear();
 var currentMonth = new Date().getMonth() + 1;
 
@@ -65,32 +53,31 @@ function configuraEventos(){
         $('.calendarList2 li').click(function (e) {
             $('.calendarList2 li').removeClass('selected');
             $(this).addClass('selected');
-            $('#data_evento').val(formata_data($(this).attr('id')));
             $('#modalCalendario').hide();
-          });    
+          });
 
     
 }
 
-function formata_data(day){
-    var mes = '';
-    var dia = '';
+function formata_data(dateRef){
+    var m = dateRef.getMonth() + 1;
+    var d = dateRef.getDate();
+    var y = dateRef.getFullYear();
 
-    if(parseInt(day) < 10){
-        dia = '0'+day;
+    if(parseInt(d) < 10){
+        d = '0'+d;
     }else{
-        dia = day;
+        d = d;
     }
 
-    if(parseInt(currentMonth) < 10){
-        mes = '0'+currentMonth;
+    if(parseInt(m) < 10){
+        m = '0'+m;
     }else{
-        mes = currentMonth;
+        m = m;
     }
 
-    data =dia+'/'+mes+"/"+ currentYear;
+    return d+'/'+m+"/"+ y;
 
-    return data;
 
 }
 

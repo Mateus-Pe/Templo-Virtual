@@ -1,8 +1,13 @@
 var globalCY;
 var globalCM;
 
+htmlUtilDayWeek =  '<div class="calendarYearMonth center">'
+htmlUtilDayWeek +=  '<p class="left calBtn material-symbols-outlined" onclick="prevMonth()"> navigate_before </p>'
+htmlUtilDayWeek +=  '<p id="yearMonth"> 2023 Dez </p>'
+htmlUtilDayWeek +=  '<p class="right calBtn material-symbols-outlined" onclick="nextMonth()"> navigate_next </p>'
+htmlUtilDayWeek +=  '</div>'
 
-htmlUtilDayWeek =   '<ol class="calendarList1">';
+htmlUtilDayWeek +=   '<ol class="calendarList1">';
 htmlUtilDayWeek += '<li class="day-name">Seg</li>';
 htmlUtilDayWeek += '<li class="day-name">Ter</li>';
 htmlUtilDayWeek +=   '<li class="day-name">Qua</li>';
@@ -30,8 +35,15 @@ function makeCalendar(year, month) {
         }
         $('#calendarList').append(div);
     }
-    month = month + 1;
-    monthName = months.find(x => x.id === month).name;
+    console.log(month);
+    if(parseInt(month) == 12){
+        m = 1;
+    }
+    else{
+        m = parseInt(month) + 1;
+    }
+    console.log(year);
+    monthName = months.find(x => x.id === m).name;
     $('#yearMonth').text(year + ' ' + monthName);
     configuraEventosCalendar();
     
@@ -53,19 +65,16 @@ function nextMonth() {
         globalCM = 1;
     }
     $('#calendarList').empty();
-    $('#yearMonth').text(globalCY + ' ' + globalCM);
     makeCalendar(globalCY, globalCM);
 }
 
 function prevMonth() {
-
     globalCM = globalCM - 1;
     if (globalCM < 1) {
         globalCY = globalCY - 1;
         globalCM = 12;
     }
     $('#calendarList').empty();
-    $('#yearMonth').text(globalCY + ' ' + globalCM);
     makeCalendar(globalCY, globalCM);
 }
 
@@ -81,4 +90,14 @@ function configuraEventosCalendar(){
 
         $(document).trigger('selectDate', {returnDate: returnDate})
     });
+}
+
+function letsCheck(year, month) {
+    var daysInMonth = new Date(year, month + 1, 0).getDate();
+    var firstDay = new Date(year, month, 1).getUTCDay();
+    var array = {
+        daysInMonth: daysInMonth,
+        firstDay: firstDay
+    };
+    return array;
 }

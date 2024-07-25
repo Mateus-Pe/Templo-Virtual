@@ -1,12 +1,12 @@
 const dias = [
-    { 'id': 1, 'name': 'Segunda', 'name_caps' : 'SEGUNDA' },
-    { 'id': 2, 'name': 'Terça', 'name_caps' : 'TERÇA' },
-    { 'id': 3, 'name': 'Quarta', 'name_caps' : 'QUARTA' },
-    { 'id': 4, 'name': 'Quinta', 'name_caps' : 'QUINTA' },
-    { 'id': 5, 'name': 'Sexta', 'name_caps' : 'SEXTA' },
-    { 'id': 6, 'name': 'Sábado', 'name_caps' : 'SÁBADO' },
-    { 'id': 0, 'name': 'Domingo', 'name_caps' : 'DOMINGO' },
-];
+    { 'id': 1, 'name': 'Segunda', 'name_caps' : 'SEGUNDA', 'name_small' : 'Seg'},
+    { 'id': 2, 'name': 'Terça', 'name_caps' : 'TERÇA', 'name_small' : 'Ter' },
+    { 'id': 3, 'name': 'Quarta', 'name_caps' : 'QUARTA', 'name_small' : 'Qua' },
+    { 'id': 4, 'name': 'Quinta', 'name_caps' : 'QUINTA', 'name_small' : 'Qui' },
+    { 'id': 5, 'name': 'Sexta', 'name_caps' : 'SEXTA', 'name_small' : 'Sex' },
+    { 'id': 6, 'name': 'Sábado', 'name_caps' : 'SÁBADO', 'name_small' : 'Sab' },
+    { 'id': 0, 'name': 'Domingo', 'name_caps' : 'DOMINGO', 'name_small' : 'Dom' },
+  ];
 
 const months = [
     { 'id': 1, 'name': 'Janeiro', 'name_small' : 'JAN' },
