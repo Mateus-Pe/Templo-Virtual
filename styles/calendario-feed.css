@@ -110,9 +110,15 @@ body {
 }
 
 .igreja_nome{
-    font-size: 1.3rem; 
+    font-size: 13px; 
     padding-top: 10px; 
     font-weight: bold;
+    width: 40vh;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: exo;
+
 }
 
 .endereco_igreja{
@@ -120,6 +126,13 @@ body {
     text-align:center;
     text-decoration:none; 
     padding-top: 10px;
+    font-family: exo;
+    width: 40vh;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: exo;
+
 }
 
 .div_evento_agenda{
@@ -129,13 +142,17 @@ body {
 }
 
 .div_evento_agenda span{
-    font-size:1.5rem; 
+    font-size:1.3rem; 
     color: black;
+    font-family: exo;
+
 }
 
 .agenda_hora{
     font-size: 12px;
     padding-top: 25px;
+    font-family: exo;
+
 }
 
 .select_filter{

@@ -227,7 +227,7 @@ function estiloEventoPassado(hora, minuto, segundo) {
     if(ch.tipo == 'E'){
 
       html =  '<div class="agenda_hora"> '+
-                'Ás '+ ch.agenda_hora+
+                'Ás '+timeFormat(ch.agenda_hora,'h', true)+
               '</div>';
               
     }else{
@@ -273,11 +273,11 @@ function estiloEventoPassado(hora, minuto, segundo) {
 
                               '<div>'+
                                 '<div id="desc_resumida" class="igreja_nome">'+
-                                  ch.igreja_nome+
+                                upperText(ch.igreja_nome)+
                                 '</div>'+
 
                                 '<span id="endereco_igreja" class="endereco_igreja">'+
-                                  ch.endereco_bairro+ '  -  '+ ch.endereco_cidade+
+                                  ch.endereco_bairro+ '  -  '+ removerUf(ch.endereco_cidade)+
                                 '</span>'+
 
                                 '<div class="div_evento_agenda">'+

@@ -86,12 +86,20 @@ function formata_dia_extenso(data){
  */
 
 
-function timeFormat(t, s){
+function timeFormat(t, s, withMinute){
     var hashTime = t.split(":");
     H = hashTime[0];
     m = hashTime[1];
 
-    return H + s + m;
+    if(withMinute){
+        return H + s + m;
+    }
+    else{
+        if(m == '00')
+            return H + s;
+        else
+            return H + s + m;
+    }
 }
 
 /**
@@ -151,4 +159,18 @@ function splitDateTime(d){
     }
    
     return arrDateTime;
+}
+
+function removerUf(cidadeUf) {
+    // Verifica se a string termina com " - XX"
+    var regex = / - [A-Z]{2}$/;
+    if (regex.test(cidadeUf)) {
+        // Remove a UF usando a regex
+        return cidadeUf.replace(regex, '');
+    }
+    return cidadeUf;
+}
+
+function upperText(t){
+    return t.toUpperCase();
 }
