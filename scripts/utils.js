@@ -79,55 +79,76 @@ function formata_dia_extenso(data){
 
 }
 
+/**
+ * 
+ * @param t exemplo: HH:mm, s exemplo: h, :, -
+ * @returns exemplo: 19:30 ou, 19h30 
+ */
 
-function formata_hora_resumido(data){
-    dataHora = data.split(' ');
-    //var data =  window.sessionStorage.getItem('data_referencia');
-    var hashdata = dataHora[1].split(":");
-    H = hashdata[0];
-    m = hashdata[1];
 
-    strHora = H +':'+ m;
-    return strHora;
+function timeFormat(t, s){
+    var hashTime = t.split(":");
+    H = hashTime[0];
+    m = hashTime[1];
+
+    return H + s + m;
 }
 
+/**
+ * 
+ * @param d exemplo: YYYY-MM-DD 
+ * @returns exemplo: HOJE, AMANHÃ ou dia especificado
+ */
 
-
-function formata_dia_resumido(data){
-    //var data =  window.sessionStorage.getItem('data_referencia');
-    dataHora = data.split(' ');
-    var hashdata = dataHora[0].split("-");
-    ano = hashdata[0];
-    mes = hashdata[1];
-    D = hashdata[2];
-    hoje = new Date();
-    S = new Date(ano,mes -1,D).getUTCDay();
-    date_ref = new  Date(ano,mes -1,D);
-    diff = new Date(date_ref - hoje);
+function dateText(d){
+    var hashDate = d.split('-');
+    Y = hashDate[0];
+    M = hashDate[1];
+    D = hashDate[2];
+    today = new Date();
+    S = new Date(Y,M -1,D).getUTCDay();
+    ref = new  Date(Y,M -1,D);
+    diff = new Date(ref - today);
     diff_days = diff/1000/60/60/24;
 
-    diaName = dias.find(x => x.id === S).name_caps;
-    mes = months.find(x => x.id == mes).name_small;
+    dayName = dias.find(x => x.id === S).name_caps;
+    monthName = months.find(x => x.id == M).name_small;
 
-    strDia = "";
+    ret = "";
     if(Math.floor(diff_days) < 7){
         if(Math.floor(diff_days) < 2){
-        if(D == hoje.getDate()){
-            strDia = 'HOJE';
+        if(D == today.getDate()){
+            ret = 'HOJE';
         }
-        if(parseInt(D) == parseInt(hoje.getDate()) + 1){
-            strDia = 'AMANHÃ';
+        if(parseInt(D) == parseInt(today.getDate()) + 1){
+            ret = 'AMANHÃ';
         }
         }else{
-        strDia = diaName;
+            ret = dayName;
         }
     }
     if(parseInt(D) < 10){
-    D = '0'+ parseInt(D);
+        D = '0'+ parseInt(D);
     }
-    if(strDia == "")
-    strDia = D+"/"+mes;
+    if(ret == "")
+        ret = D+"/"+M;
 
-    return strDia;
+    return ret;
 
+}
+
+/**
+ * 
+ * @param d exemplo: YYYY-MM-DD HH:mm
+ * @returns exemplo: {date: YYYY-MM-DD, time: HH:mm}
+ */
+
+function splitDateTime(d){
+    hashDateTime = d.split(' ');
+    var arrDateTime = {
+        date : hashDateTime[0],
+        time : hashDateTime[1]
+    }
+   
+    return arrDateTime;
 }

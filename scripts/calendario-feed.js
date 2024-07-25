@@ -227,7 +227,7 @@ function estiloEventoPassado(hora, minuto, segundo) {
     if(ch.tipo == 'E'){
 
       html =  '<div class="agenda_hora"> '+
-                'Ás '+ch.agenda_hora+
+                'Ás '+ ch.agenda_hora+
               '</div>';
               
     }else{

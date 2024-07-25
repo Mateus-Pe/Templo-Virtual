@@ -24,10 +24,10 @@ function eventos_principal(){
         html +=             '<div>';
         html +=             '<div class="div_agenda">'
         html +=                 '<span class="span_agenda span_agenda_left">';
-        html +=                     formata_dia_resumido(agenda.agenda_horario);
+        html +=                     dateText(splitDateTime(agenda.agenda_horario).date);
         html +=                 '</span>';
         html +=                 '<span class="span_agenda span_agenda_right">';
-        html +=                     formata_hora_resumido(agenda.agenda_horario);
+        html +=                     timeFormat(splitDateTime(agenda.agenda_horario).time, 'h');
         html +=                 '</span>';
         html +=             '</div>'
         html +=                 '<img id="div_img" src="'+agenda.agenda_img+'">';
