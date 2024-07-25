@@ -9,7 +9,7 @@ var startDayWeekNumber;
 var lastDayWeek;
 const tamanhoItemLista = 80;
 var contLista = 0;
-
+var listaTotalCh;
 
 $(document).ready(function() {
 
@@ -251,11 +251,32 @@ function estiloEventoPassado(hora, minuto, segundo) {
 	   .done(function(ret) {
       var obj = jQuery.parseJSON(ret);
 
-			$('#divListaAgenda').html('');
+      listaTotalCh = obj.calendario_hora;
+
+			montaHtmlCalendarioHora(listaTotalCh);
+            
+            $('.pesq').click(function () {
+                var agenda_id = $(this).data('agenda_id');
+                window.sessionStorage.setItem('feed_igreja_id', $(this).data('igreja_id'));
+                window.sessionStorage.setItem('feed_agenda_id', $(this).data('agenda_id'));
+                window.location = 'perfil-igreja.html';
+              
+            });
+
+	   });
+
+}
+
+$("#dayMonth").click(function(e){
+  $("#modalCalendario").show();
+});
+
+function montaHtmlCalendarioHora(listaCalendarioHora){
+  $('#divListaAgenda').html('');
 
             var total_checked = 0;
             
-              $.each(obj.calendario_hora, function (k, ch) {
+              $.each(listaCalendarioHora, function (k, ch) {
                 checked = '';
                 var arrHora = ch.agenda_hora.split(":");
               
@@ -295,19 +316,22 @@ function estiloEventoPassado(hora, minuto, segundo) {
                 $('#divListaAgenda').scrollTop((contLista * tamanhoItemLista));
 
             });
-            
-            $('.pesq').click(function () {
-                var agenda_id = $(this).data('agenda_id');
-                window.sessionStorage.setItem('feed_igreja_id', $(this).data('igreja_id'));
-                window.sessionStorage.setItem('feed_agenda_id', $(this).data('agenda_id'));
-                window.location = 'perfil-igreja.html';
-              
-            });
-
-	   });
-
 }
 
-$("#dayMonth").click(function(e){
-  $("#modalCalendario").show();
+$("#select_missa").click(function(e){
+  listaMissa = listaTotalCh.filter(function(a, b){
+    return a['evento_nome'] == 'Missa';
+  });
+  montaHtmlCalendarioHora(listaMissa);
 });
+
+$("#select_confissao").click(function(e){
+  listaMissa = listaTotalCh.filter(function(a, b){
+    return a['evento_nome'] == 'Confissão';
+  });
+  montaHtmlCalendarioHora(listaMissa);
+});
+
+$("#select_todos").click(function(e){
+  montaHtmlCalendarioHora(listaTotalCh);
+})
