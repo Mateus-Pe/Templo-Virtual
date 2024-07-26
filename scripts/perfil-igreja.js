@@ -580,9 +580,17 @@ function modalVisualizarPerfil(){
     $('#imagem').attr('src', imgSrc);
   
     $('#modal_visualizar_img').show();
-   
 
-    
+   
+  });
+
+  $('.img_fundo1').click(function(){
+    var imgSrc = $(this).attr('src');
+  
+    $('#imagem').attr('src', imgSrc);
+  
+    $('#modal_visualizar_img').show();
+   
   });
   
   $('.modal_close').click(function() {
