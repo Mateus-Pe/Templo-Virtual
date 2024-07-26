@@ -60,22 +60,37 @@ function makeCalendar(year, month) {
 
 function nextMonth() {
     globalCM = globalCM + 1;
+    m = globalCM; 
+    
     if (globalCM > 12) {
         globalCY = globalCY + 1;
         globalCM = 1;
     }
+    
     $('#calendarList').empty();
     makeCalendar(globalCY, globalCM);
+
+    y = globalCY;
+    monthName = months.find(x => x.id === m).name;
+    if(globalCM == 12)
+        y = y+1;
+    $('#yearMonth').text(y + ' ' + monthName);
 }
 
 function prevMonth() {
     globalCM = globalCM - 1;
+    m = globalCM; 
+    y = globalCY;
     if (globalCM < 1) {
         globalCY = globalCY - 1;
         globalCM = 12;
     }
+    
     $('#calendarList').empty();
     makeCalendar(globalCY, globalCM);
+    
+    monthName = months.find(x => x.id === m).name;
+    $('#yearMonth').text(y + ' ' + monthName);
 }
 
 function configuraEventosCalendar(){
