@@ -248,6 +248,12 @@ body {
     font-size: 1.5rem;
 }
 
+#divFixa{
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+}
+
 #horizontal_eventos{
     overflow-y: hidden;
     overflow-x: auto;
