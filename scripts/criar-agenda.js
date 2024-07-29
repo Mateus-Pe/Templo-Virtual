@@ -38,6 +38,11 @@ evento_agenda();
       $('#texto_confirmacao').html(texto_modal);
       erro = true;
     }
+    if ($('#agenda_de').val() >= $('#agenda_ate').val()){
+      texto_modal = "<p> A hora de início deve ser menor que a hora do fim. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
+    }
     if($('#tempo_duracao').val() == '0'){
       texto_modal = "<p> Selecione o tempo de duração do evento. </p><br>";
       $('#texto_confirmacao').html(texto_modal);
@@ -119,7 +124,11 @@ function gerar_agenda(){
           'agenda_dias': $('#agenda_dias').val(),
           'tempo_duracao': $('#tempo_duracao').val(),
           'agenda_de': $('#agenda_de').val(),
-          'agenda_ate': $('#agenda_ate').val()
+          'agenda_ate': $('#agenda_ate').val(),
+          'agenda_de_hora': splitHourMinute($('#agenda_de').val()).hour,
+          'agenda_de_minuto': splitHourMinute($('#agenda_de').val()).minute,
+          'agenda_ate_hora': splitHourMinute($('#agenda_ate').val()).hour,
+          'agenda_ate_minuto': splitHourMinute($('#agenda_ate').val()).minute
           
         }
     })
@@ -141,6 +150,11 @@ function gerar_agenda(){
       });
   }
 
-  $('#especifica').click(function(e){
-    window.location = "criar-agenda-especifica.html";
-  });
+$('#especifica').click(function(e){
+  window.location = "criar-agenda-especifica.html";
+});
+
+$('#agenda_de').change(function (e) {
+  var val = $("#agenda_de option:selected").next().next().val();
+  $("#agenda_ate").val(val);
+});

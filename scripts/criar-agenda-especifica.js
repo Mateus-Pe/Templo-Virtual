@@ -132,7 +132,7 @@ function formata_data(dateRef){
           'agenda_de_hora': splitHourMinute($('#agenda_de').val()).hour,
           'agenda_de_minuto': splitHourMinute($('#agenda_de').val()).minute,
           'agenda_ate_hora': splitHourMinute($('#agenda_ate').val()).hour,
-          'agenda_ate_minuto': splitHourMinute($('#agenda_ate').val()).minute,
+          'agenda_ate_minuto': splitHourMinute($('#agenda_ate').val()).minute
           
         }
     })
@@ -182,13 +182,11 @@ function formata_data(dateRef){
       $('#texto_confirmacao').html(texto_modal);
       erro = true;
     } 
-    if(!erro){
 
-      if ($('#agenda_de').val() >= $('#agenda_ate').val()){
-        texto_modal = "<p> A hora de início deve ser menor que a hora do fim. </p><br>";
-        $('#texto_confirmacao').html(texto_modal);
-        erro = true;
-      }
+    if ($('#agenda_de').val() >= $('#agenda_ate').val()){
+      texto_modal = "<p> A hora de início deve ser menor que a hora do fim. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
     }
 
     $('#modalConfirmacao').show();
@@ -204,8 +202,8 @@ function formata_data(dateRef){
     }
   }
 
-  $('#agenda_de').change(function (e) {
-    var val = $("#agenda_de option:selected").next().next().val();
-    $("#agenda_ate").val(val);
-  });
+$('#agenda_de').change(function (e) {
+  var val = $("#agenda_de option:selected").next().next().val();
+  $("#agenda_ate").val(val);
+});
 
