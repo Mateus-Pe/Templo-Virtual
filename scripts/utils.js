@@ -161,6 +161,16 @@ function splitDateTime(d){
     return arrDateTime;
 }
 
+function splitHourMinute(t){
+    hashTime = t.split(':');
+    var arrTime = {
+        hour : hashTime[0],
+        minute : hashTime[1]
+    }
+   
+    return arrTime;
+}
+
 function removerUf(cidadeUf) {
     // Verifica se a string termina com " - XX"
     var regex = / - [A-Z]{2}$/;

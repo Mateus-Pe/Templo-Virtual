@@ -129,8 +129,10 @@ function formata_data(dateRef){
           'agenda_igreja_id': igrejaId,
           'agenda_evento_id': atual_evento_cod,    
           'agenda_data': $('#data_evento').val(),     
-          'agenda_de': $('#agenda_de').val(),
-          'agenda_ate': $('#agenda_ate').val()
+          'agenda_de_hora': splitHourMinute($('#agenda_de').val()).hour,
+          'agenda_de_minuto': splitHourMinute($('#agenda_de').val()).minute,
+          'agenda_ate_hora': splitHourMinute($('#agenda_ate').val()).hour,
+          'agenda_ate_minuto': splitHourMinute($('#agenda_ate').val()).minute,
           
         }
     })
