@@ -143,26 +143,10 @@ function makeCalendar(year, month) {
       carregarCalendario();
     }
 
-    var idDiaAnterior = ''; // Inicializa a variável idDiaAnterior
 
 $('#calendarList').on('click', 'li', function() {
-
-  if (idDiaAnterior !== '') {
-      
-    $('#' + idDiaAnterior).addClass('dia_eventos');
-  }
-    // Remove a classe dia_selecionado de todos os dias
-    $('#calendarList li').removeClass('dia_selecionado');
-    
-    // Adiciona a classe dia_selecionado ao dia clicado para destacá-lo
-    $(this).addClass('dia_selecionado');
-    
-    // Verifica se o dia clicado possui a classe dia_eventos
-    if ($(this).hasClass('dia_eventos')) {
-        // Remove a classe dia_eventos do dia clicado
-        $(this).removeClass('dia_eventos');
-        idDiaAnterior =  $(this).attr('id'); // Atualiza idDiaAnterior com o ID do dia clicado
-    }
+  $('.calendarList2').children().removeClass('dia_selecionado');
+  $(this).addClass('dia_selecionado');
 });
 }
 
@@ -225,8 +209,9 @@ function carregarCalendario(){
                 ano = o.agenda_data.substr(6,4);
         
                 
-                if(ano = currentYear && mes == currentMonth){
-                    $('#'+parseInt(dia)).addClass("dia_eventos")
+                if(ano == currentYear && mes == currentMonth){
+                    $('#'+parseInt(dia)).addClass("dia_eventos");
+                    console.log(mes);
                 }
         
             });

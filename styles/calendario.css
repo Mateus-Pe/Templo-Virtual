@@ -137,10 +137,10 @@ body {
 }
 
 .dia_selecionado{
-    background-color: #ffaaaa;
-    color: white;
-    transition: background-color 0.5s ease;
-    border: 1px solid darkred;
+    background-color: #ffaaaa !important;
+    color: white !important;
+    transition: background-color 0.5s ease !important;
+    border: 1px solid darkred !important;
 }
 
 #add {
