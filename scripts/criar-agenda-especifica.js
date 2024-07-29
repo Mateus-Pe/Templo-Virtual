@@ -162,12 +162,12 @@ function formata_data(dateRef){
   function validacao_evento_agenda(){
     var erro = false;
 
-    if($('#agenda_ate').val() == '0'){
+    if($('#agenda_ate').val() == '0' || $('#agenda_ate').val() == undefined){
       texto_modal = "<p> Selecione quando o evento terminará. </p><br>";
       $('#texto_confirmacao').html(texto_modal);
       erro = true;
     }
-    if($('#agenda_de').val() == '0'){
+    if($('#agenda_de').val() == '0' || $('#agenda_de').val() == undefined){
       texto_modal = "<p> Selecione quando o evento iniciará. </p><br>";
       $('#texto_confirmacao').html(texto_modal);
       erro = true;
@@ -203,4 +203,9 @@ function formata_data(dateRef){
       gerar_agenda_especifica();
     }
   }
+
+  $('#agenda_de').change(function (e) {
+    var val = $("#agenda_de option:selected").next().next().val();
+    $("#agenda_ate").val(val);
+  });
 
