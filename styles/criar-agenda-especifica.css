@@ -70,6 +70,7 @@ input[type="checkbox"]:checked::before {
     border: 1px solid #888 !important;
     border-radius: 30px !important;
     width: 90% !important;
+    height: 105px !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;

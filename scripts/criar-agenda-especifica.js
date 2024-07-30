@@ -114,8 +114,25 @@ function formata_data(dateRef){
                     
         atual_evento_cod = $(this).data('evento_cod');
         console.log(atual_evento_cod);
+
+        if (atual_evento_cod == 3){
+          $("#divSelectEventos").css('display', 'block');
+          console.log(atual_evento_cod);
+        }else{
+          $("#divSelectEventos").css('display', 'none');
+        }
       });
     });
+  }
+
+  function pegarEvento(){
+    var ret = '';
+    if($('#select_evento').val() != 0 && $('#select_evento').val() != 'Outros'){
+      ret = $('#select_evento').val();
+    }else if($('#select_evento').val() == 'Outros'){
+      ret = $('#text_evento').val();
+    }
+    return ret;
   }
 
   function gerar_agenda_especifica(){
@@ -127,8 +144,9 @@ function formata_data(dateRef){
       url: "https://pedeoferta.com.br/templo/index.php/welcome/gerar_agenda_especifica",
       data: { 
           'agenda_igreja_id': igrejaId,
-          'agenda_evento_id': atual_evento_cod,    
-          'agenda_data': $('#data_evento').val(),     
+          'agenda_evento_id': atual_evento_cod,
+          'agenda_evento_outro': pegarEvento(),
+          'agenda_data': $('#data_evento').val(),
           'agenda_de_hora': splitHourMinute($('#agenda_de').val()).hour,
           'agenda_de_minuto': splitHourMinute($('#agenda_de').val()).minute,
           'agenda_ate_hora': splitHourMinute($('#agenda_ate').val()).hour,
@@ -189,6 +207,19 @@ function formata_data(dateRef){
       erro = true;
     }
 
+    if (atual_evento_cod == 3){
+      if($('#select_evento').val() == 0){
+        texto_modal = "<p> Selecione o evento que irá realizar. </p><br>";
+        $('#texto_confirmacao').html(texto_modal);
+        erro = true;
+      }
+      if($('#select_evento').val() == 'Outros' && $('#text_evento').val() == ''){
+        texto_modal = "<p> Digite qual evento irá realizar. </p><br>";
+        $('#texto_confirmacao').html(texto_modal);
+        erro = true;
+      }
+    }
+
     $('#modalConfirmacao').show();
     
     $('#confirmar').click(function (e) {
@@ -207,3 +238,11 @@ $('#agenda_de').change(function (e) {
   $("#agenda_ate").val(val);
 });
 
+$("#select_evento").change(function(e){
+  var opcaoSelecionada = $(this).val();
+  if(opcaoSelecionada == 'Outros'){
+    $("#divTextEvento").css('display', 'block');
+  }else{
+    $("#divTextEvento").css('display', 'none');
+  }
+});
