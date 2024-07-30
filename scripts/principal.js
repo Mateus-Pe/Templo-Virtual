@@ -21,16 +21,21 @@ function eventos_principal(){
 
         $.each(evento.agendas, function (k, agenda) {
         html +=        '<div id="agenda" class="agenda">';
-        html +=             '<div>';
-        html +=             '<div class="div_agenda">'
-        html +=                 '<span class="span_agenda span_agenda_left">';
-        html +=                     dateText(splitDateTime(agenda.agenda_horario).date);
-        html +=                 '</span>';
-        html +=                 '<span class="span_agenda span_agenda_right">';
-        html +=                     timeFormat(splitDateTime(agenda.agenda_horario).time, ':', true);
-        html +=                 '</span>';
-        html +=             '</div>'
-        html +=                 '<img id="div_img" src="'+agenda.agenda_img+'">';
+        html +=             '<div class="div_principal_eventos">';
+        html +=               '<div class="div_agenda">'
+        html +=                   '<span class="span_agenda span_agenda_left">';
+        html +=                       dateText(splitDateTime(agenda.agenda_horario).date);
+        html +=                   '</span>';
+        html +=                   '<span class="span_agenda span_agenda_right">';
+        html +=                       timeFormat(splitDateTime(agenda.agenda_horario).time, ':', true);
+        html +=                   '</span>';
+        html +=               '</div>'
+        html +=               '<img id="div_img" src="'+agenda.agenda_img+'">';
+        html +=               '<div id="nome_evento_outros">';
+        html +=                   '<span class="span_nome_evento_outros">';
+        html +=                     agenda.agenda_evento_outro;
+        html +=                   '</span>';
+        html +=               '</div>';
         html +=             '</div>';
         html +=             '<div id="descricao">';
         html +=                 '<span class="span_nome_igreja">';

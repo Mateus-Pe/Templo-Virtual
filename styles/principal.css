@@ -53,12 +53,36 @@ body{
     gap: 30px;
 }
 
+.div_principal_eventos{
+    background-color: black;
+}
+
 .agenda{
     width: 120px;
     display: grid;
     align-items: center;
     justify-content: center;
     padding: 10px;
+}
+
+#nome_evento_outros{
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    margin-top: -4px;
+}
+
+#nome_evento_outros span{
+    color: white;
+    font-family: 'VT323', monospace;
+    white-space: nowrap;         /* Impede a quebra de linha */
+    overflow: hidden;            /* Esconde o excesso de texto */
+    text-overflow: ellipsis;     /* Adiciona os três pontinhos */
+    display: inline-block; 
+    max-width: 100%;
+    font-size: 10pt;
 }
 
 .div_agenda{
