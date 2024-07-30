@@ -120,6 +120,7 @@ function formata_data(dateRef){
           console.log(atual_evento_cod);
         }else{
           $("#divSelectEventos").css('display', 'none');
+          $("#divTextEvento").css('display', 'none');
         }
       });
     });
