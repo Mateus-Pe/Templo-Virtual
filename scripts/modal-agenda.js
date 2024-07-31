@@ -11,7 +11,8 @@ function getAgendaById(agenda_id){
       console.log(obj);
       htmlEvents = '';
       html =  '<div class="div_perfil" >'+
-                  '<div class="perfil_div">'+
+                  '<span id="back_modal" class="material-symbols-outlined">arrow_back</span>'+
+                  '<div class="perfil_div" data-igreja_id="'+obj.agenda.agenda_igreja_id+'">'+
                     '<img class="img_igreja" src="' + obj.agenda.igreja_logo_url + '">'+
                     '<span class="nome_igreja">'+
                       obj.agenda.igreja_nome+
@@ -31,11 +32,6 @@ function getAgendaById(agenda_id){
                 '<div class="div_img_layout">'+
                     '<img id="visualiza_layout_feed" src="'+obj.agenda.agenda_img+'">'+
                 '</div>'+
-                '<div class="div_descricao">'+
-                    '<span id="descricao_layout_feed" class="span_descricao">'+
-                        obj.agenda.agenda_layout_upload_desc+
-                    '</span>'+
-                '</div>'+
               '</div>'+
               '<div id="divFixa"></div>';
 
@@ -43,8 +39,8 @@ function getAgendaById(agenda_id){
 
         htmlEvents = '<div id="horizontal_eventos">';
           $.each(obj.eventos_igreja, function (k, ei) {
-            htmlEvents +=        '<div id="agenda" class="agenda_events">';
-            htmlEvents +=             '<div>';
+            htmlEvents +=        '<div id="agenda" class="agenda_events" data-agenda_id="'+ei.agenda_id+'">';
+            htmlEvents +=             '<div class="div_principal_agendas">';
             htmlEvents +=             '<div class="div_agenda">'
             htmlEvents +=                 '<span class="span_agenda span_agenda_left">';
             htmlEvents +=                     dateText(splitDateTime(ei.agenda_horario).date);
@@ -67,16 +63,24 @@ function getAgendaById(agenda_id){
         $("#divFixa").html(htmlEvents);
 
         $('.div_ver_mais').click(function () {
-          var agenda_id = $(this).data('agenda_id');
           window.sessionStorage.setItem('feed_igreja_id', $(this).data('igreja_id'));
           window.location = 'perfil-igreja.html';
-          console.log('clicou');
           
+        });
+
+        $('.perfil_div').click(function () {
+          window.sessionStorage.setItem('feed_igreja_id', $(this).data('igreja_id'));
+          window.location = 'perfil-igreja.html';
+          
+        });
+
+        $(".agenda_events").click(function(e){
+          getAgendaById($(this).data('agenda_id'));
+        });
+
+        $("#back_modal").click(function(e){
+            $("#modalPublicacaoEvento").hide();
+            $('body').css('overflow', 'auto');
         });
 	  });
 }
-
-$("#modalPublicacaoEvento").click(function(e){
-    $("#modalPublicacaoEvento").hide();
-    $('body').css('overflow', 'auto');
-  });

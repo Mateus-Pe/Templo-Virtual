@@ -13,6 +13,10 @@
     padding: 10px;
 }
 
+.div_principal_agendas{
+    border: 1px solid white;
+}
+
 .div_agenda{
     background-color: black;
     display: flex;
@@ -51,6 +55,6 @@
     justify-content: center;
     display: flex;
     font-family: exo;
-    color: blue;
+    color: white;
     font-size: 15px;
 }

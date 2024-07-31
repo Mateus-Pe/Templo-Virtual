@@ -1,6 +1,7 @@
 body{
     background-color: lightgray !important;
     margin: unset !important;
+    box-sizing: unset;
 }
 
 .div_local{

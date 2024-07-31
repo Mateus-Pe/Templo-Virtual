@@ -48,12 +48,6 @@
   }
 }
 
-@charset "UTF-8";
-/*** BASE ***/
-
-*, *:before, *:after {
-  box-sizing: border-box;
-}
 
 button, hr, input {
   overflow: visible;
