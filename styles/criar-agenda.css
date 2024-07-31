@@ -11,7 +11,6 @@ input[type="checkbox"] {
     width: 23px;
     height: 23px;
     border: 1px solid #ddd;
-    margin: 10px 10px 0 0;
     vertical-align: middle;
     cursor: pointer;
 }
@@ -45,7 +44,6 @@ input[type="checkbox"]:checked::before {
 .span_chk_dia {
     font-size: 1.5rem;
     color: black;
-    margin-left: 15px;
 }
 
 .inputs_agenda {
