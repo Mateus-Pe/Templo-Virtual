@@ -63,6 +63,18 @@ evento_agenda();
       $('#texto_confirmacao').html(texto_modal);
       erro = true;
     } 
+    if (atual_evento_cod == 3){
+      if($('#select_evento').val() == 0){
+        texto_modal = "<p> Selecione o evento que irá realizar. </p><br>";
+        $('#texto_confirmacao').html(texto_modal);
+        erro = true;
+      }
+      if($('#select_evento').val() == 'Outros' && $('#text_evento').val() == ''){
+        texto_modal = "<p> Digite qual evento irá realizar. </p><br>";
+        $('#texto_confirmacao').html(texto_modal);
+        erro = true;
+      }
+    }
     
     if(erro) {
       $('#modalConfirmacao').show();
@@ -107,9 +119,29 @@ evento_agenda();
                     
         atual_evento_cod = $(this).data('evento_cod');
         console.log(atual_evento_cod);
+        if (atual_evento_cod == 3){
+          $("#divSelectEventos").css('display', 'block');
+          console.log(atual_evento_cod);
+        }else{
+          $("#divSelectEventos").css('display', 'none');
+          $("#divTextEvento").css('display', 'none');
+        }
       });
     });
   }
+
+function pegarEvento(){
+  var ret = '';
+  if(atual_evento_cod == 3){
+
+    if($('#select_evento').val() != 0 && $('#select_evento').val() != 'Outros'){
+      ret = $('#select_evento').val();
+    }else if($('#select_evento').val() == 'Outros'){
+      ret = $('#text_evento').val();
+    }
+  }
+  return ret;
+}
 
 function gerar_agenda(){
 
@@ -121,6 +153,7 @@ function gerar_agenda(){
           'dias': dias_checked.join(),
           'agenda_igreja_id': igrejaId,
           'agenda_evento_id': atual_evento_cod,
+          'agenda_evento_outro': pegarEvento(),
           'agenda_dias': $('#agenda_dias').val(),
           'tempo_duracao': $('#tempo_duracao').val(),
           'agenda_de': $('#agenda_de').val(),
@@ -157,4 +190,14 @@ $('#especifica').click(function(e){
 $('#agenda_de').change(function (e) {
   var val = $("#agenda_de option:selected").next().next().val();
   $("#agenda_ate").val(val);
+});
+
+$("#select_evento").change(function(e){
+  var opcaoSelecionada = $(this).val();
+  console.log(opcaoSelecionada);
+  if(opcaoSelecionada == 'Outros'){
+    $("#divTextEvento").css('display', 'block');
+  }else{
+    $("#divTextEvento").css('display', 'none');
+  }
 });

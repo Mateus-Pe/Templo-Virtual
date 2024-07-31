@@ -128,11 +128,15 @@ function formata_data(dateRef){
 
   function pegarEvento(){
     var ret = '';
-    if($('#select_evento').val() != 0 && $('#select_evento').val() != 'Outros'){
-      ret = $('#select_evento').val();
-    }else if($('#select_evento').val() == 'Outros'){
-      ret = $('#text_evento').val();
+    if(atual_evento_cod == 3){
+
+      if($('#select_evento').val() != 0 && $('#select_evento').val() != 'Outros'){
+        ret = $('#select_evento').val();
+      }else if($('#select_evento').val() == 'Outros'){
+        ret = $('#text_evento').val();
+      }
     }
+    console.log(ret);
     return ret;
   }
 
