@@ -329,11 +329,11 @@ function mock_agenda(){
 				html =  '<div class="pesq" style="background-color: white;height:50px;line-height:50px; padding-bottom: 10px; border-bottom: 1px solid #5b318a36">';
 
 				html +=     '<div class="add" style="display: flex;" data-agenda_id="'+ ch.agenda_id +'">' +
-								'<div style="width: 35%; text-align: left;">'+
+								'<div style="width: 20%; text-align: left;">'+
 									'<span style="font-size:1.5rem; color: black; margin-left: 15px;">'+ ch.agenda_hora +'</span>'+
 								'</div>'+
-                                '<div style="width: 35%; text-align: left;">'+
-									'<span style="font-size:1.5rem; color: black; margin-left: 15px;">'+ ch.evento_nome +'</span>'+
+                                '<div style="width: 50%; text-align: left;">'+
+									'<span style="font-size:1.5rem; color: black;">'+ ch.evento_nome +'</span>'+
 								'</div>'+
                 statusLayout(ch.agenda_layout_tipo, ch)+
                                 '<div class="columns">' +

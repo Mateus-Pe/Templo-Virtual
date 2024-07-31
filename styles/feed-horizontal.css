@@ -1,0 +1,56 @@
+#horizontal_eventos{
+    overflow-y: hidden;
+    overflow-x: auto;
+    display: flex;
+    gap: 30px;
+}
+
+.agenda_events{
+    width: 120px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.div_agenda{
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    height: 25px;
+    align-items: center;
+}
+
+.span_agenda{
+    color: white;
+    font-size: 15px;
+    font-family: 'VT323', monospace;
+}
+
+.span_agenda_left{
+    padding-left: 3px;
+}
+
+.span_agenda_right{
+    padding-right: 3px;
+}
+
+#div_img{
+    width: 120px;
+    height: 120px;
+}
+
+.div_ver_mais{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.div_ver_mais span{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: exo;
+    color: blue;
+    font-size: 15px;
+}

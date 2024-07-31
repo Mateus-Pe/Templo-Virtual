@@ -20,7 +20,7 @@ function eventos_principal(){
         html +=     '<div id="horizontal_eventos">';
 
         $.each(evento.agendas, function (k, agenda) {
-        html +=        '<div id="agenda" class="agenda">';
+        html +=        '<div id="agenda" class="agenda" data-agenda_id="'+agenda.agenda_id+'">';
         html +=             '<div class="div_principal_eventos">';
         html +=               '<div class="div_agenda">'
         html +=                   '<span class="span_agenda span_agenda_left">';
@@ -64,6 +64,11 @@ function configurarEventos(){
   $(".div_ver_mais").click(function(){
     location.href = "calendario-feed.html";
   });
+
+  $('.agenda').click(function(e){
+    getAgendaById($(this).data('agenda_id'))
+    $("#modalPublicacaoEvento").show();
+  });
 }
 
 $('#pesquisar').click(function(e){
@@ -77,3 +82,4 @@ $('#calendario').click(function(e){
 $('#feed').click(function(e){
   window.location = 'feed.html'
 });
+

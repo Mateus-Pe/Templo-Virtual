@@ -1,6 +1,6 @@
 body{
-    background-color: lightgray;
-    margin: unset;
+    background-color: lightgray !important;
+    margin: unset !important;
 }
 
 .div_local{
@@ -46,13 +46,6 @@ body{
     font-size: 13px;
 }
 
-#horizontal_eventos{
-    overflow-y: hidden;
-    overflow-x: auto;
-    display: flex;
-    gap: 30px;
-}
-
 .div_principal_eventos{
     background-color: black;
 }
@@ -77,73 +70,12 @@ body{
 #nome_evento_outros span{
     color: white;
     font-family: 'VT323', monospace;
-    white-space: nowrap;         /* Impede a quebra de linha */
-    overflow: hidden;            /* Esconde o excesso de texto */
-    text-overflow: ellipsis;     /* Adiciona os três pontinhos */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     display: inline-block; 
     max-width: 100%;
     font-size: 10pt;
-}
-
-.div_agenda{
-    background-color: black;
-    display: flex;
-    justify-content: space-between;
-    height: 25px;
-    align-items: center;
-}
-
-#div_img{
-    width: 120px;
-    height: 120px;
-}
-
-#descricao{
-    font-family: exo;
-    font-size: 13px;
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    height: 30px;
-}
-
-#descricao span{
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    display: grid;
-}
-
-.span_nome_igreja{
-    font-weight: bold;
-}
-
-.span_agenda{
-    color: white;
-    font-size: 15px;
-    font-family: 'VT323', monospace;
-}
-
-.span_agenda_left{
-    padding-left: 3px;
-}
-
-.span_agenda_right{
-    padding-right: 3px;
-}
-
-.div_ver_mais{
-    align-items: center;
-    justify-content: center;
-    display: flex;
-}
-
-.div_ver_mais span{
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    font-family: exo;
-    color: blue;
 }
 
 .div_bottom_fixa{
