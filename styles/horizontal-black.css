@@ -2,14 +2,13 @@
     overflow-y: hidden;
     overflow-x: auto;
     display: flex;
-    gap: 12px;
+    gap: 20px;
 }
 
 .agenda_events{
-    width: 120px;
+    width: 140px;
     display: grid;
     align-items: center;
-    justify-content: center;
     padding: 10px;
 }
 
@@ -44,7 +43,7 @@
     height: 120px;
 }
 
-.div_ver_mais{
+.div_ver_mais .div_ver_mais_white{
     align-items: center;
     justify-content: center;
     display: flex;
@@ -56,5 +55,14 @@
     display: flex;
     font-family: exo;
     color: white;
+    font-size: 15px;
+}
+
+.div_ver_mais_white span{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-family: exo;
+    color: blue;
     font-size: 15px;
 }

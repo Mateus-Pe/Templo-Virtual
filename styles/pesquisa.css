@@ -3,6 +3,7 @@
     height: 55px;
     position: fixed;
     justify-content: space-between;
+    display: flex;
     top: 0;
     width: 100%;
     z-index: 5;

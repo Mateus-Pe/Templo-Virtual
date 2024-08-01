@@ -45,7 +45,7 @@ function eventos_principal(){
         html +=         '</div>';
         });
         html +=      '</div>';
-        html +=      '<div class="div_ver_mais">';
+        html +=      '<div class="div_ver_mais_white">';
         html +=         '<span>';
         html +=             'Ver mais';
         html +=         '</span>';

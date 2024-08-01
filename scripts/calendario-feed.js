@@ -269,10 +269,6 @@ function configurarEventosCalendarioHora(){
 });
 }
 
-$("#modalPublicacaoEvento").click(function(e){
-  $("#modalPublicacaoEvento").hide();
-});
-
 $("#dayMonth").click(function(e){
   $("#modalCalendario").show();
 });

@@ -31,7 +31,6 @@ body{
     margin-top: 20px;
     position: relative;
     display: grid;
-    gap: 10px;
     padding-bottom: 55px;
 }
 
@@ -39,6 +38,7 @@ body{
     width: 100%;
     height: 300px;
     display: grid;
+    margin-bottom: 12px;
     background-color: white;
 }
 
@@ -52,10 +52,9 @@ body{
 }
 
 .agenda{
-    width: 120px;
+    width: 140px;
     display: grid;
     align-items: center;
-    justify-content: center;
     padding: 10px;
 }
 
