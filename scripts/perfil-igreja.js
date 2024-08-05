@@ -33,12 +33,12 @@ function carregar_perfil(){
     html += '<div class="perfil" style="width: 100%; background-color: lightgrey">';
     html +=   '<div class="div_imgFundo_perfil">';
     html +=     '<div class="imgFundo_perfil">';
-    html +=       '<img class="img_fundo1" style="width: 100%; height: 250px;" src="./imgs/imgs-igreja/loading.gif">';
+    html +=       '<img class="img_fundo1" style="width: 100%; height: 250px;" src="">';
     html +=     '</div>';
     html +=   '</div>';
     html +=   '<div class="div_img_igreja">';
     html +=     '<div id="imagem_igreja" >';
-    html +=       '<img class="img_igreja1" src="./imgs/imgs-igreja/loading-perfil.webp">';
+    html +=       '<img class="img_igreja1" src="">';
     html +=   '</div>';
     html += '</div>';
 
@@ -186,11 +186,11 @@ function compartilha() {
 function toggleShareButtons(compartilhamentoMenu) {
   compartilhamentoMenu.offsetHeight;
   // Alterna a classe 'show' para controlar a exibição dos botões
-  compartilhamentoMenu.classList.toggle('show');
+  compartilhamentoMenu.classList.toggle('show_compartilha');
   // Atualiza o estilo de exibição dos botões
   var shareButtons = compartilhamentoMenu.querySelectorAll('.btn-compartilhar');
   shareButtons.forEach(function(button) {
-    if (compartilhamentoMenu.classList.contains('show')) {
+    if (compartilhamentoMenu.classList.contains('show_compartilha')) {
       button.style.display = 'flex'; // Exibe os botões
     } else {
       button.style.display = 'none'; // Oculta os botões
@@ -203,7 +203,7 @@ function hideShareButtonsFromOtherPosts(currentCompartilhamentoMenu) {
   var allCompartilhamentoMenus = document.querySelectorAll('.compartilhamento');
   allCompartilhamentoMenus.forEach(function(compartilhamentoMenu) {
     if (compartilhamentoMenu !== currentCompartilhamentoMenu) {
-      compartilhamentoMenu.classList.remove('show');
+      compartilhamentoMenu.classList.remove('show_compartilha');
       var shareButtons = compartilhamentoMenu.querySelectorAll('.btn-compartilhar');
       shareButtons.forEach(function(button) {
         button.style.display = 'none';

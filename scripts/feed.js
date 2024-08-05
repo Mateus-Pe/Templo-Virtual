@@ -281,11 +281,11 @@ function compartilha() {
 function toggleShareButtons(compartilhamentoMenu) {
   compartilhamentoMenu.offsetHeight;
   // Alterna a classe 'show' para controlar a exibição dos botões
-  compartilhamentoMenu.classList.toggle('show');
+  compartilhamentoMenu.classList.toggle('show_compartilha');
   // Atualiza o estilo de exibição dos botões
   var shareButtons = compartilhamentoMenu.querySelectorAll('.btn-compartilhar');
   shareButtons.forEach(function(button) {
-    if (compartilhamentoMenu.classList.contains('show')) {
+    if (compartilhamentoMenu.classList.contains('show_compartilha')) {
       button.style.display = 'flex'; // Exibe os botões
     } else {
       button.style.display = 'none'; // Oculta os botões
@@ -298,7 +298,7 @@ function hideShareButtonsFromOtherPosts(currentCompartilhamentoMenu) {
   var allCompartilhamentoMenus = document.querySelectorAll('.compartilhamento');
   allCompartilhamentoMenus.forEach(function(compartilhamentoMenu) {
     if (compartilhamentoMenu !== currentCompartilhamentoMenu) {
-      compartilhamentoMenu.classList.remove('show');
+      compartilhamentoMenu.classList.remove('show_compartilha');
       var shareButtons = compartilhamentoMenu.querySelectorAll('.btn-compartilhar');
       shareButtons.forEach(function(button) {
         button.style.display = 'none';

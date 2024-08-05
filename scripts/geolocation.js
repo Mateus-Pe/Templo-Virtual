@@ -13,7 +13,7 @@ function successFunction(position) {
 }
 
 function errorFunction(){
-  alert("Geocoder failed");
+  //alert("Geocoder failed");
 }
 
 function initialize() {
@@ -39,7 +39,7 @@ function codeLatLng(lat, lng) {
               break;
           }
       }
-      alert('The good number is: '+j);
+      //alert('The good number is: '+j);
       console.log(results[j].formatted_address);
       for (var i=0; i<results[j].address_components.length; i++)
           {
@@ -58,15 +58,15 @@ function codeLatLng(lat, lng) {
           }
 
           //city data
-          alert(city.long_name + " || " + region.long_name + " || " + country.short_name)
+          //alert(city.long_name + " || " + region.long_name + " || " + country.short_name)
 
 
           } else {
-            alert("No results found");
+            //alert("No results found");
           }
       //}
     } else {
-      alert("Geocoder failed due to: " + status);
+      //alert("Geocoder failed due to: " + status);
     }
   });
 }

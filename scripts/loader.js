@@ -33,10 +33,12 @@
 
         $(document).ajaxStart(function () {
             $.showLoader();
+            console.log("passou aqui startou");
         });
 
         $(document).ajaxStop(function () {
             $.hideLoader();
+            console.log("passou aqui parou");
         });
     });
 })(jQuery);
