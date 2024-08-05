@@ -1,6 +1,6 @@
 $(document).ready(function () {
     eventos_principal();
-  });
+});
 
 function eventos_principal(){
     $.ajax({
@@ -61,7 +61,7 @@ function eventos_principal(){
 
 
 function configurarEventos(){
-  $(".div_ver_mais").click(function(){
+  $(".div_ver_mais_white").click(function(){
     location.href = "calendario-feed.html";
   });
 
