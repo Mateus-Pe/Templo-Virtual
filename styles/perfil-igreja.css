@@ -320,6 +320,12 @@ body{
     text-align:center; 
     text-decoration:none; 
     font-family: exo;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
 }
 
 .div_feed{
