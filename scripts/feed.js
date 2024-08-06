@@ -2,6 +2,18 @@ var players = {};
 
 
 
+$(document).ready(function () {
+  //navigator.geolocation.getCurrentPosition(function(data){console.log(data)})
+  $('#cidade_nome').html(' ' + window.sessionStorage.getItem("cidade_nome"));
+  cidade_id = window.sessionStorage.getItem("cidade_id");
+  window.sessionStorage.setItem('igreja_id','');
+
+  if(cidade_id != null && cidade_id != ''){
+      //get_paroquias(cidade_id);
+  }
+  evento_agenda();
+});
+
 window.onload = function() {
   var descricao = "Descrição da publicação";
   var url = window.location.href; 
@@ -10,7 +22,6 @@ window.onload = function() {
   //atualizarMetaTagsOG(description, url, imageUrl);
 };
 
-evento_agenda();
 function evento_agenda(){
     $.ajax({
       method: "POST",
@@ -76,18 +87,6 @@ function configurarEventos(){
 $('#cidade_nome').click(function () {
   //sessionStorage.setItem('origem', 'feed');
   window.location = 'estado.html?req=feed';
-});
-
-
-$(document).ready(function () {
-  //navigator.geolocation.getCurrentPosition(function(data){console.log(data)})
-  $('#cidade_nome').html(' ' + window.sessionStorage.getItem("cidade_nome"));
-  cidade_id = window.sessionStorage.getItem("cidade_id");
-  window.sessionStorage.setItem('igreja_id','');
-
-  if(cidade_id != null && cidade_id != ''){
-      //get_paroquias(cidade_id);
-  }
 });
 
 
