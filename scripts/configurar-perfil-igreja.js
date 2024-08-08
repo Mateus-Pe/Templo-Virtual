@@ -547,7 +547,7 @@ function hasScrolled() {
     lastScrollTop = st;
 }
 
-document.getElementById("select_img_igreja").addEventListener("click", function() {
+document.getElementById("imagem_igreja").addEventListener("click", function() {
   document.getElementById("imageFileInput").click();
 });
 

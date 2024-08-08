@@ -90,10 +90,12 @@
 }
 
 #descricao span{
-    align-items: center;
-    justify-content: center;
     text-align: center;
-    display: grid;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    width: 100%;
+    overflow: hidden;
 }
 
 .span_nome_igreja{

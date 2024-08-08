@@ -19,6 +19,7 @@ $(document).ready(function() {
   existeMatriz();
   getCidades();
   igrejaId = window.sessionStorage.getItem('igreja_id');
+  $('#cep_instituicao').mask('00000000');
   
   if(igrejaId != null && igrejaId != ''){
     carregarIgreja(igrejaId);
@@ -70,10 +71,9 @@ $('#btn_salvar').click(function(e){
 }); 
 
 
-
-    $(document).ready(function() {
-        $('#cep_instituicao').mask('00000000');
-    });
+$("#voltar").click(function(e){
+  window.location = 'lista-igreja.html';
+});
 
 
 
@@ -363,10 +363,11 @@ function salvar(){
            atualizar_matriz();
         }
         else{
-          window.location = "lista-igreja.html";
-        }  
+          window.sessionStorage.setItem('igreja_desc', descricaoResumida);
+          window.sessionStorage.setItem('igreja_id', obj.igreja_id);
+          window.location = "configurar-perfil-igreja.html";
+        }
       }
-      
     });
     console.log(descricaoResumida);
 }

@@ -232,7 +232,7 @@ $('.page-menu--toggle').click(function(e){
     else{
   
       $('.mobile-nav').css('display', 'block');
-      $('#add').css('bottom', 'calc(10px + var(--nav-height))');
+      $('#add').css('bottom', '-1000px');
       $('#divListaPrincipal').addClass('move-right');
   
     }

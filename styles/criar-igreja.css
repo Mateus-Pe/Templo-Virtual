@@ -53,8 +53,7 @@ body{
 .span_criar-igreja{
     font-size: 2rem; 
     color: #fff; 
-    position: relative; 
-    right: 2.0rem; 
+    position: relative;
     padding: 1.5rem;
     font-family: Exo;
 }
@@ -128,9 +127,6 @@ body{
 
 .input-icon {
     position: absolute;
-    left: 11%; 
-    top: 40%; 
-    transform: translateY(-50%);
 }
 
 

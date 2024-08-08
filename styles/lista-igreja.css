@@ -49,20 +49,16 @@
 
 #add {
     font-size: 60px;
-    font-weight: 400;
+    height: 55px;
     width: 55px;
     border-radius: 50%;
     color: white;
-    height: 55px;
-    box-shadow: 3px 1px 5px black;
     cursor: pointer;
     background: darkred;
     position: fixed;
     right: 30px;
     bottom: 10px;
-    z-index: 3;     
-    flex-direction: row;
-    flex-wrap: wrap;
+    z-index: 3;
 }
 
 .plus{
