@@ -9,6 +9,7 @@ $(document).ready(function() {
 
   igrejaId = window.sessionStorage.getItem('igreja_id');
   displaySelectDias();
+  get_dias_semana();
 });
 
 var searchParams = new URLSearchParams(window.location.search);
@@ -208,14 +209,13 @@ $("#btn_close").click(function(e){
 });
 
 function displaySelectDias(){
-  var contador = 0;
   $("#divDiaSemana").click(function(e){
-    contador += 1;
-    if(contador % 2 == 0){
-      $("#divLista").css('display','grid');
+    if($("#divLista").hasClass('hide')){
+      $("#divLista").removeClass('hide');
     }else{
-      $("#divLista").css('display','none');
+      $("#divLista").addClass('hide');
     }
+   
   });
 }
 
@@ -227,14 +227,22 @@ function get_dias_semana(){
       html += '<div class="dias_selecionados">'+diaName+'</div>'; 
     }
   });
-  $('#divDiaSemana').html(html);
+  if ($('.dias:checked').length == 0) {
+    texto_modal = "<p> Selecione ao menos 1 dia da semana. </p><br>";
+    $('#texto_confirmacao').html(texto_modal);
+    $('#divDiaSemana').html('<div class="dias_selecionados">Adicione ao menos 1 dia</div>');
+    $('#modalConfirmacao').show();
+  }
+  else{
+    $('#divDiaSemana').html(html);
+  }
 }
 
 $('select').focus(function(){
   get_dias_semana();
-  $("#divLista").css('display','none');
+  $("#divLista").addClass("hide");
 });
 
-$("#divDiaSemana").click(function(e){
-  $("#divLista").css('display','grid');
+$('input[type=checkbox]').click(function () {
+    get_dias_semana();
 });

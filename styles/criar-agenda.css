@@ -35,10 +35,10 @@ input[type="checkbox"]:checked::before {
 
 .pesq {
     background-color: white;
-    height: 41px;
+    height: 50px;
     line-height: 45px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #5b318a36
+    border-bottom: 1px solid #5b318a36;
+    display: grid;
 }
 
 .span_chk_dia {
@@ -49,8 +49,6 @@ input[type="checkbox"]:checked::before {
 .inputs_agenda {
     position: relative;
     top: 15px;
-    max-height: 200px;
-    overflow-y: auto;
 }
 
 .div_input {
@@ -177,8 +175,9 @@ input[type="checkbox"]:checked::before {
     align-items: center;
     display: flex;
     padding: 6px;
-    border-end-end-radius: 40%;
-    border-top-right-radius: 40%;
-    border-top-left-radius: 40%;
-    border-bottom-left-radius: 40%;
+    border-radius: 10px;
+}
+
+.hide{
+    display: none;
 }

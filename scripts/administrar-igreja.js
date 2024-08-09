@@ -78,11 +78,6 @@ function listaEscolhida(data) {
                     '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_cidade + '</p>' +
                     '</div>' +
                     '<div class="list-line">'+
-                    '<div class="columns">' +
-                    '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle configurar-igreja">manufacturing</span>' +
-                    '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle editar-igreja">edit</span>' +
-                    span_remove +
-                    '</div>' +
                     '</div>'+
                '</div>';
                

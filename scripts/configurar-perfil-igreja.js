@@ -667,3 +667,7 @@ function textoArea(){//document.addEventListener('DOMContentLoaded', function() 
       }
     });
 }
+
+$("#btn_close").click(function(){
+  window.location = 'lista-igreja.html';
+})
