@@ -251,3 +251,7 @@ $("#select_evento").change(function(e){
     $("#divTextEvento").css('display', 'none');
   }
 });
+
+$("#btn_close").click(function(e){
+  window.location = 'calendario.html';
+})

@@ -413,7 +413,7 @@ function mock_agenda(){
 
 
 $('#add').click(function () {
-    window.location = "criar-agenda.html";
+    window.location = "escolha-tipo-agenda.html";
 });
 
 // menu

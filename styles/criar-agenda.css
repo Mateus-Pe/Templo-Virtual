@@ -156,3 +156,29 @@ input[type="checkbox"]:checked::before {
     text-align:center; 
     text-decoration:none;
 }
+
+.header1{
+    background-color: darkred;
+    height: 55px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+.dias_selecionados{
+    background-color: darkred;
+    color: white;
+    margin-left: 8px;
+    margin-right: 8px;
+    font-size: 14px;
+    align-items: center;
+    display: flex;
+    padding: 6px;
+    border-end-end-radius: 40%;
+    border-top-right-radius: 40%;
+    border-top-left-radius: 40%;
+    border-bottom-left-radius: 40%;
+}

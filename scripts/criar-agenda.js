@@ -8,6 +8,7 @@ var igrejaId = null;
 $(document).ready(function() {
 
   igrejaId = window.sessionStorage.getItem('igreja_id');
+  displaySelectDias();
 });
 
 var searchParams = new URLSearchParams(window.location.search);
@@ -99,10 +100,10 @@ evento_agenda();
       var obj = jQuery.parseJSON(ret);
 
       var html = '';
-      html += '<div class="eventos_select divPerfilEC">';
+      /*html += '<div class="eventos_select divPerfilEC">';
             html += '<div> </div>';
             html += '<span></span>';
-      html += '</div>';
+      html += '</div>';*/
       $.each(obj.lista_evento_agenda, function (k, lpp) {
           html += '<div data-evento_cod="'+lpp.evento_id+'" class="eventos_select divPerfilEC">';
             html += '<div>  <img  src="'+lpp.evento_icone_img+'">  </div>';
@@ -200,4 +201,40 @@ $("#select_evento").change(function(e){
   }else{
     $("#divTextEvento").css('display', 'none');
   }
+});
+
+$("#btn_close").click(function(e){
+  window.location = 'calendario.html';
+});
+
+function displaySelectDias(){
+  var contador = 0;
+  $("#divDiaSemana").click(function(e){
+    contador += 1;
+    if(contador % 2 == 0){
+      $("#divLista").css('display','grid');
+    }else{
+      $("#divLista").css('display','none');
+    }
+  });
+}
+
+function get_dias_semana(){
+  html = '';
+  $('input[type=checkbox]').each(function () {
+    if (this.checked) {
+      diaName = dias.find(x => x.id == $(this).val()).name_small;
+      html += '<div class="dias_selecionados">'+diaName+'</div>'; 
+    }
+  });
+  $('#divDiaSemana').html(html);
+}
+
+$('select').focus(function(){
+  get_dias_semana();
+  $("#divLista").css('display','none');
+});
+
+$("#divDiaSemana").click(function(e){
+  $("#divLista").css('display','grid');
 });

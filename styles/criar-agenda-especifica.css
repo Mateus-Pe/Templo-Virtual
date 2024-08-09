@@ -212,3 +212,14 @@ input[type="checkbox"]:checked::before {
     height: 4.5rem;
     font-size: 2rem;
 }
+
+.header1{
+    background-color: darkred;
+    height: 55px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}

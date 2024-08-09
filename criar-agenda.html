@@ -70,37 +70,34 @@
             </div>
         </div>
     </div>
-    
 
+    <header class="header1">
 
-    <div id="divHeader" style="background-color: white; top: 0px; width: 100%; height: 70px; z-index: 2; position: relative; border-bottom: 1px solid darkred">
+        <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn_close">
 
-        <div id="especifica" style="width: 50%; float: left; text-align: center;display: grid; height: 100%">
-            <div>
-                <span class="ion-android-checkmark-circle" style="font-size: 5rem;color: darkred;"></span>
-
-            </div>
-            <div>
-                <span style="font-size: 1.2rem; color: darkred;">Especifica</span>
-            </div>
+            <span class="material-symbols-outlined" id="btn_close" style="color: white;">close</span>
         </div>
 
-        <div id="recorrente"
-            style="width: 50%;float:left; text-align: center;display: grid; height:100%; background-color: darkred;">
-            <span class="ion-android-refresh" style="font-size: 5rem;color: white"></span>
-            <span style="font-size: 1.2rem; color: white">Recorrente</span>
+        <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn-salvar">
+
+        <span class="material-symbols-outlined" id="btn_seguir" style="color: white;">check</span>
+        
         </div>
+
+    </header>
+
+
+    <div id="divEventos" class="div_eventos">
     </div>
-
-
-
-        <div id="divEventos" class="div_eventos">
-        </div>
 
     <main class="cadastro" id="gSignInWrapper" style="background-color: white; font-family: Exo; position: relative;">
 
-        <div id="divLista" style="height: 125px;overflow-y: auto; 
-        position: relative; top: 10px;">
+        <div id="divDiaSemana" style="width: 100%; background-color: white; display: flex; align-items: center; justify-content: center;">
+            
+        </div>
+
+        <div id="divLista" style="height: 370px;overflow-y: auto; 
+        position: relative;">
             <div class="pesq">
                 <div class="add" style="display: flex; justify-content: space-between; padding-left: 40px; padding-right: 40px; align-items: center;" data-oferta_cod="14384">
                     <div style="width: 80%; display: flex;"><span class="span_chk_dia">SÁBADO
@@ -340,18 +337,6 @@
                     </select>
                 </div>
             </div>
-        </div>
-
-
-
-
-
-
-        <div class="checkout-entrega__buttons" id="divBotoes" style="bottom: 30px; display: block;">
-
-            <button class="checkout-entrega__button" type="button" id="btn_seguir"
-                style="font-family: Exo; border: 1px solid darkred; background-color: white; color: darkred; width: 70%; border-radius: 10px; height: 4.5rem;font-size: 2rem;">SEGUIR</button>
-
         </div>
 
     </main>

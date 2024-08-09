@@ -6,7 +6,7 @@ const dias = [
     { 'id': 5, 'name': 'Sexta', 'name_caps' : 'SEXTA', 'name_small' : 'Sex' },
     { 'id': 6, 'name': 'Sábado', 'name_caps' : 'SÁBADO', 'name_small' : 'Sab' },
     { 'id': 0, 'name': 'Domingo', 'name_caps' : 'DOMINGO', 'name_small' : 'Dom' },
-  ];
+];
 
 const months = [
     { 'id': 1, 'name': 'Janeiro', 'name_small' : 'JAN' },
