@@ -13,6 +13,7 @@ body{
     display: flex;
     gap: 10px;
     background-color: darkred;
+    align-items: center;
 }
 
 .ion_local{
