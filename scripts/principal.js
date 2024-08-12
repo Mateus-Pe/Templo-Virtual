@@ -1,4 +1,7 @@
 $(document).ready(function () {
+  //solução provisória
+    window.sessionStorage.setItem('cidade_id', 9240);
+    window.sessionStorage.setItem("cidade_nome", "Itapetininga");
     eventos_principal();
 });
 

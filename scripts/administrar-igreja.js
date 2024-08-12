@@ -248,6 +248,9 @@ function remover(id){
 /*-------------------------NOVO JS APAGAR ACIMA-----------------*/
 
 $(document).ready(function () {
+    //solução provisória
+    window.sessionStorage.setItem('cidade_id', 9240);
+    window.sessionStorage.setItem("cidade_nome", "Itapetininga");
     $('#cidade_nome').html(' ' + window.sessionStorage.getItem("cidade_nome"));
     cidade_id = window.sessionStorage.getItem("cidade_id");
     window.sessionStorage.setItem('igreja_id','');
