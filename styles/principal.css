@@ -66,6 +66,7 @@ body{
     justify-content: center;
     width: 120px;
     margin-top: -4px;
+    line-height: 1.6rem;
 }
 
 #nome_evento_outros span{
