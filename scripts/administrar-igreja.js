@@ -49,7 +49,7 @@ function listaEscolhida(data) {
                     '<span class="span-igreja">' + data[i].tipo + '</span>' +
                     '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined botao_adicionar" style="color:white; position:absolute; right:10%; font-size:2rem"> person_add </span>'+
                     '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined editar-paroquia" style="color:white; position:absolute; right:20%; font-size:2rem"> edit </span>'+
-                    '<span class="ion-android-arrow-dropleft-circle acToggle" style="position:absolute; right: 2%; color: white; font-size: 1.3rem"></span>' +
+                    '<span class="material-symbols-outlined acToggle" style="position:absolute; right: 2%; color: white; font-size: 16px">expand_circle_right</span>' +
                 '</div>';
 
         html += '<div class="accordion div-igreja-detalhes" style="font-family: Exo; display: none">';
@@ -68,7 +68,7 @@ function listaEscolhida(data) {
                  
                  
                  '</label>' +
-                 '<span class="ion-android-arrow-dropleft-circle acToggle"></span>' +
+                 '<span class="material-symbols-outlined acToggle">expand_circle_right</span>' +
                  '</div>'+
                  '</h3>' +
                  '<div class="modal-container endereco-lista" >' +

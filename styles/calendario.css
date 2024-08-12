@@ -155,13 +155,18 @@ body {
     right: 30px;
     bottom: 10px;
     z-index: 3;
-}
-
-.plus{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 55px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 1.2);
+}
+
+.plus{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 55px !important;
+    font-size: 35px !important;
 }
 
 .header1{

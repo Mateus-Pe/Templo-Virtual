@@ -21,7 +21,7 @@
     <meta name="twitter:url" content="http://pedeoferta.com.br/">
     <meta name="twitter:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
 
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main-new.css">
     <link rel="stylesheet" href="styles/lista-igreja.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
@@ -32,7 +32,17 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
     <style>
+.cadastro__input{
+    padding-left: 4rem;
+    height: 3.5rem;
+    width: 100%;
+}
 
+.cadastro span{
+    color: #363636;
+    font-size: 2.5rem;
+    position: absolute;
+}
 
 
 .modal-content {
@@ -77,7 +87,7 @@
             
         <div style="position: absolute; top: 6%; left: 16%;">
 
-            <span class="ion-ios-people" style="color: lightgray; margin-top: 0.5rem;"></span>
+            <span class="material-symbols-outlined" style="color: lightgray;">person</span>
 
             <input class="cadastro__input" id="uauario_nome" name="usuario_nome" placeholder="Nome"
                 style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
@@ -86,7 +96,7 @@
 
         <div style="position: absolute; top: 25%; left: 16%;">
 
-            <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; position: absolute; margin-left: 0.5rem;">call</span>
+            <span class="material-symbols-outlined" style="color: lightgray; position: absolute;">call</span>
 
             <input class="cadastro__input" id="usuario_celular" name="usuario_celular" placeholder="Celular"
                 style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
@@ -95,7 +105,7 @@
 
         <div style="position: absolute; top: 45%; left: 16%; width: 225px;">
 
-            <span class="material-symbols-outlined" style="color: lightgray; margin-top: 0.5rem; position: absolute; margin-left: 0.5rem;">work</span>
+            <span class="material-symbols-outlined" style="color: lightgray; position: absolute;">work</span>
 
             <select class="cadastro__input" id="usuario_tipo" name="usuario_tipo" placeholder="Função"
                 style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
@@ -110,7 +120,7 @@
 
         <div style="position: absolute; top: 63%; left: 16%;">
 
-            <span class="material-symbols-outlined" id="copy_link" style="color: lightgray; margin-top: 0.5rem; position: absolute; left: 1rem;" >content_copy</span>
+            <span class="material-symbols-outlined" id="copy_link" style="color: lightgray; position: absolute;" >content_copy</span>
 
             
             <input class="cadastro__input" id="link_usuario" name="link_usuario" placeholder="Link"
@@ -133,8 +143,9 @@
         </div>
     </div>
 
-    <div style="background-color: #f6f2fb;width: 100%;height: 20px;border-bottom: 1px solid lightgray; text-align: center;">
-        <span class="ion-ios-location" id="cidade_nome" style="font-size: 1.6rem; text-transform: none; color: #5b318a"> Sorocaba - SP</span>
+    <div style="background-color: #f6f2fb;width: 100%;height: 20px;border-bottom: 1px solid lightgray; text-align: center; display: flex; justify-content: center; align-items: center;">
+        <span class="material-symbols-outlined" style="font-size: 1.6rem; text-transform: none; color: darkred">location_on </span>
+        <span class="ion-ios-location" id="cidade_nome" style="font-size: 1.6rem; text-transform: none; color: darkred"> Sorocaba - SP</span>
       </div>
     <div id="divCorpo">
        
@@ -142,23 +153,12 @@
        
         </div>
     </div>
-
-
-    <div id="modalConfirmacao" class="modal">
-        <div class="modal-content">
-            <h1>Deseja excluir esta instituição?</h1>
-            <div class="modal-footer">
-                <button href="#!" id="cancelarRemocao" class="modal-close">Cancelar</button>
-                <button href="#!" id="confirmarRemocao">Confirmar</button>
-            </div>
-        </div>
-    </div>
   
 
     <div id="add">
 
-        <span class="plus">
-            +
+        <span class="plus material-symbols-outlined">
+            add
         </span>
 
     </div>
