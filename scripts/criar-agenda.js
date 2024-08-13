@@ -174,7 +174,7 @@ function gerar_agenda(){
 
         if(obj.status == 1){
             window.sessionStorage.setItem('agenda_id', obj.agenda_id);
-            window.location = "escolha-layout.html";
+            window.location = "configurar_layout_upload.html";
         }else{
           texto_modal = "<p> Nenhum evento criado, os dias da semana não batem com os dias a serem gerados </p><br>";
           $('#texto_confirmacao').html(texto_modal);

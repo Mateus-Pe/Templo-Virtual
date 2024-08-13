@@ -149,9 +149,14 @@ $("#trocar_img").click(function(e){
   $("#modal_trocarImg").hide();
 });
 
-$("#editImg").click(function(e){
-  $("#modal_trocarImg").show();
+//$("#editImg").click(function(e){
+  //$("#modal_trocarImg").show();
+//});
+
+document.getElementById("editImg").addEventListener("click", function() {
+  document.getElementById("imageFileInput").click();
 });
+
 $("#cancelar").click(function(e){
   $("#modal_trocarImg").hide();
 });

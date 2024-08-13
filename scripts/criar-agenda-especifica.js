@@ -166,7 +166,7 @@ function formata_data(dateRef){
         
         if(obj.status ==1){
             window.sessionStorage.setItem('agenda_id', obj.agenda_id);
-            window.location = "escolha-layout.html";
+            window.location = "configurar_layout_upload.html";
         }
 
 
