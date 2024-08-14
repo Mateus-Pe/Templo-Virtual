@@ -81,7 +81,6 @@
 }
 
 .modal {
-    padding-top: 150px;
     background-color: rgba(0, 0, 0, 0.1);
     z-index: 3;
 }

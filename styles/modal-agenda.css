@@ -101,3 +101,23 @@
 .span_nome_igreja{
     font-weight: bold;
 }
+#nome_igreja_desc{
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    margin-top: -4px;
+    line-height: 1.6rem;
+}
+
+#nome_igreja_desc span{
+    color: white;
+    font-family: 'VT323', monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block; 
+    max-width: 100%;
+    font-size: 10pt;
+}

@@ -492,7 +492,7 @@ function setStorageMenu(item_menu) {
 var didScroll;
 var lastScrollTop = 0;
 var delta = 5;
-var headerHeight = $('#nome_igreja_fixo').outerHeight();
+var headerHeight = $('#div_nome_igreja_fixo').outerHeight();
 var isVisible = true;
 
 $(window).scroll(function(event){
@@ -515,13 +515,13 @@ function hasScrolled() {
     if (st > lastScrollTop && st > headerHeight) {
         // Rolagem para baixo
         if (isVisible) {
-            $('#nome_igreja_fixo').removeClass('header-down').addClass('header-up');
+            $('#div_nome_igreja_fixo').removeClass('header-down').addClass('header-up');
             isVisible = false;
         }
     } else {
         // Rolagem para cima
         if (st < lastScrollTop) {
-            $('#nome_igreja_fixo').removeClass('header-up').addClass('header-down');
+            $('#div_nome_igreja_fixo').removeClass('header-up').addClass('header-down');
             isVisible = true;
         }
     }
@@ -616,3 +616,7 @@ function modalVisualizarImgFundo(){
   });
   
 }
+
+$('#voltar_feed').click(function(){
+  window.location = 'feed.html';
+});

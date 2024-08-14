@@ -254,6 +254,7 @@ function get_calendario_hora(dtReferencia){
       listaTotalCh = obj.calendario_hora;
 
 			montaHtmlCalendarioHora(listaTotalCh);
+      $("#select_todos").click();
 	  });
 }
 
@@ -337,4 +338,4 @@ $("#select_confissao").click(function(e){
 
 $("#select_todos").click(function(e){
   montaHtmlCalendarioHora(listaTotalCh);
-})
+});

@@ -50,6 +50,11 @@ function getAgendaById(agenda_id){
             htmlEvents +=                 '</span>';
             htmlEvents +=             '</div>'
             htmlEvents +=                 '<img id="div_img" src="'+ei.agenda_img+'">';
+            htmlEvents +=               '<div id="nome_igreja_desc">';
+            htmlEvents +=                   '<span>';
+            htmlEvents +=                     ei.igreja_desc_resumida;
+            htmlEvents +=                   '</span>';
+            htmlEvents +=               '</div>';
             htmlEvents +=             '</div>';
             htmlEvents +=         '</div>';
         });
