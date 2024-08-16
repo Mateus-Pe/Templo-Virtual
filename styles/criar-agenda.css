@@ -31,6 +31,7 @@ input[type="checkbox"]:checked::before {
     content: '\2713';
     font-size: 3rem;
     color: darkred;
+    line-height: 1.15;
 }
 
 .pesq {
