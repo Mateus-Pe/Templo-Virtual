@@ -47,7 +47,7 @@
 
     <link rel="stylesheet" href="./styles/ion.css">
 
-    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/main-new.css">
 
     <link rel="stylesheet" href="./styles/configurar-perfil-igreja.css">
 
@@ -80,14 +80,9 @@
                 <span class="material-symbols-outlined" id="btn_close" style="color: white;">close</span>
             </div>
 
-            <span class="span_criar-igreja" id="span_criar-igreja">IGREJA</span><br>
-
-
-
-            <span class="page-menu__cart ion-android-arrow-back" style="    margin-left: 1rem; display: none"
-                id="btnVoltar"></span>
-
-            <span class="page-menu__qtd-itens"></span>
+            <div  class="span_criar-igreja">
+                <span id="span_criar-igreja">IGREJA</span>
+            </div>
 
             <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn_salvar">
 
@@ -118,14 +113,10 @@
             </div>
 
             <div id="modal_contato" class="modal1">
-                <div class="modal-content cadastro">
+                <div class="modal-content">
 
-                    <div style="position: absolute; top: 6%; left: 16%;">
-
-                        <span>
-                            <img src="./imgs/whatsapp.png"
-                                style="position: absolute; left: 1.2rem; width: 1.9rem; top: 0.8rem;">
-                        </span>
+                    <div class="inputs-modal-contatos">
+                        <img src="./imgs/whatsapp.png">
 
                         <input class="cadastro__input" id="whatsapp_txt" name="whatsapp_txt" type="text"
                             placeholder="Whatsapp"
@@ -133,44 +124,30 @@
                             required>
                     </div>
 
-                    <div style="position: absolute; top: 24%; left: 16%; width: 225px;">
-
-                        <span>
-                            <img src="./imgs/facebook.png"
-                                style="position: absolute; left: 1.2rem; width: 1.9rem; top: 0.8rem;">
-                        </span>
-
+                    <div class="inputs-modal-contatos">
+                        <img src="./imgs/facebook.png">
+                        
                         <input class="cadastro__input" id="facebook_txt" name="facebook_txt" placeholder="Facebook"
                             style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
                             required>
-
                     </div>
 
-                    <div style="position: absolute; top: 42%; left: 16%; width: 225px;">
-
-                        <span>
-                            <img src="./imgs/instagram.png"
-                                style="position: absolute; left: 1.2rem; width: 1.7rem; top: 0.8rem;">
-                        </span>
+                    <div class="inputs-modal-contatos">
+                        <img src="./imgs/instagram.png">
 
                         <input class="cadastro__input" id="instagram_txt" name="instagram_txt" placeholder="Instagram"
                             style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
                             required>
-
                     </div>
 
-                    <div style="position: absolute; top: 60%; left: 16%; width: 225px;">
-
-                        <span>
-                            <img src="./imgs/email.png"
-                                style="position: absolute; left: 1.2rem; width: 1.9rem; top: 0.8rem;">
-                        </span>
+                    <div class="inputs-modal-contatos">
+                        <img src="./imgs/email.png">
 
                         <input class="cadastro__input" id="email_txt" name="email_txt" placeholder="Email"
                             style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
                             required>
-
                     </div>
+
                     <div class="modal-footer">
                         <button href="#!" id="confirmar">OK</button>
                     </div>
@@ -179,12 +156,11 @@
 
 
             <div id="modal_descricao" class="modal1">
-                <div class="modal-content3 cadastro">
+                <div class="modal-content" style="height: 150px !important; gap: 30px !important;">
 
-                    <div>
+                    <div class="input_nome_igreja_modal">
 
-                        <span class="material-symbols-outlined"
-                            style="color: lightgray; margin-top: 0.5rem; position: absolute;">church</span>
+                        <span class="material-symbols-outlined" style="color: lightgray;">church</span>
 
                         <input class="cadastro__input" id="nome_igreja" name="nome_igreja" type="text" placeholder=""
                             style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
@@ -310,12 +286,12 @@
 
 
             <div id="modal_editar" class="modal1">
-                <div class="modal-content2 cadastro">
+                <div class="modal-content" style="height: 150px !important; gap: 30px !important;">
 
-                    <div>
+                    <div class="input_nome_igreja_modal">
 
                         <span class="material-symbols-outlined"
-                            style="color: lightgray; margin-top: 0.5rem; position: absolute; left: 4.8rem;">groups</span>
+                            style="color: lightgray;">groups</span>
 
                         <input class="cadastro__input" id="txt_desc_resumida" name="txt_desc_resumida"
                             placeholder="Editar"

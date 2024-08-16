@@ -11,7 +11,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link type="text/css" rel="stylesheet" href="styles/main.css">
+    <link type="text/css" rel="stylesheet" href="styles/main-new.css">
 
     <link type="text/css" rel="stylesheet" href="styles/calendario.css">
 
@@ -28,16 +28,20 @@
 
 </head>
 
-
-
 <body>
 
     <nav class="mobile-nav mobile_nav" role="navigation" style="display: none;">
 
         <ul class="mobile-nav__items">
 
-            <li><a class="mobile-nav__link-produtos3" href="lista-igreja.html"><span
-                        class="material-symbols-outlined">lists</span>Igrejas</a></li>
+            <li>
+                <a class="mobile-nav__link-produtos3"  href="lista-igreja.html">
+                    <span class="material-symbols-outlined">
+                        lists
+                    </span>
+                    Igrejas
+                </a>
+            </li>
 
             <li><a class="mobile-nav__link-categorias2" href="configurar-perfil-igreja.html"><span
                         class="ion-grid"></span>Perfil</a></li>
@@ -45,12 +49,13 @@
         </ul>
 
     </nav>
-
     
-
+    
+    
+    <div class="page-menu">
         <header class="header1">
 
-            <a class="page-menu--toggle page-menu__hamburger" href="#" id="btnMenu">
+            <div class="page-menu--toggle page-menu__hamburger" href="#" id="btnMenu">
 
                 <span class="page-menu__item"></span>
 
@@ -58,7 +63,7 @@
 
                 <span class="page-menu__item"></span>
 
-            </a>
+            </div>
 
             <span class="span_criar-igreja" id="span_criar-igreja">CALENDÁRIO</span><br>
 
@@ -67,11 +72,8 @@
             <span class="page-menu__cart ion-android-arrow-back" style="    margin-left: 1rem; display: none"
                 id="btnVoltar"></span>
 
-            <span class="page-menu__qtd-itens"></span>
-
         </header>
 
-    <div class="page-menu">
         <div id="divPrincipal">
 
             <div class="container">
@@ -113,94 +115,94 @@
 
             </div>
         </div>
-    </div>
-
-    <div id="divModal">
-        <div id="lista-igrejas">
-            <div id="divPesquisa">
-                <span class="ion-ios-search-strong search__icon"></span>
-                <div class="search-igreja_container">
-                    <!--<div class="app" style="position: fixed;">
-                    <p>
-                        <button onclick="app.vai();">vai</button>
-                        <button onclick="app.stop();">Para</button>
-                    </p>
-                </div>-->
-                    <input class="search-igreja_input" type="text" id="search-igreja" placeholder="Pesquisar igreja">
-                </div>
-                <!--<span class="ion-ios-search-strong search-market__icon"></span>-->
-            </div>
-            <div id="divLista" style="height: 80%; overflow-y: auto;"></div>
-        </div>
         
-    </div>
-
-    <div id="modal_config" class="modal">
-        <div class="modal-content1">
-            <div class="cadastro" style="justify-content: center; display: grid; gap: 1.5rem;">
-
-                <div id="visualizar_layout">
-
-                    <div style="gap: 0.5rem; align-items: center; display: flex;">
+        <div id="divModal">
+            <div id="lista-igrejas">
+                <div id="divPesquisa">
+                    <span class="ion-ios-search-strong search__icon"></span>
+                    <div class="search-igreja_container">
+                        <!--<div class="app" style="position: fixed;">
+                        <p>
+                            <button onclick="app.vai();">vai</button>
+                            <button onclick="app.stop();">Para</button>
+                        </p>
+                    </div>-->
+                        <input class="search-igreja_input" type="text" id="search-igreja" placeholder="Pesquisar igreja">
+                    </div>
+                    <!--<span class="ion-ios-search-strong search-market__icon"></span>-->
+                </div>
+                <div id="divLista" style="height: 80%; overflow-y: auto;"></div>
+            </div>
+            
+        </div>
+    
+        <div id="modal_config" class="modal">
+            <div class="modal-content1">
+                <div class="cadastro" style="justify-content: center; display: grid; gap: 1.5rem; font-size: 1.6rem;">
+                    
+                    <div id="visualizar_layout">
                         
-                        <span class="material-symbols-outlined" style="color: lightgray;">image</span>
-                        <span data-agenda_img="" data-logo_url="" data-igreja_nome="" data-agenda_desc="" class="acToggle">Visualizar layout</span>
+                        <div style="gap: 0.5rem; align-items: center; display: flex;">
+                            
+                            <span class="material-symbols-outlined" style="color: lightgray;">image</span>
+                            <span data-agenda_img="" data-logo_url="" data-igreja_nome="" data-agenda_desc="" class="acToggle">Visualizar layout</span>
+                        </div>
+                        
                     </div>
                     
-                </div>
-
-                <div id="editar_layout">
+                    <div id="editar_layout">
+                        
+                        <div style="gap: 0.5rem; align-items: center; display: flex;">
+                            
+                            <span class="material-symbols-outlined" style="color: lightgray;">settings</span>
+                            <span data-agenda_id="" data-agenda_hora="" data-status="" class="acToggle">Editar layout</span>
+                        </div>
+                    </div>
                     
-                    <div style="gap: 0.5rem; align-items: center; display: flex;">
-                     
-                        <span class="material-symbols-outlined" style="color: lightgray;">settings</span>
-                        <span data-agenda_id="" data-agenda_hora="" data-status="" class="acToggle">Editar layout</span>
+                    <div id="excluir">
+                        
+                        <div style="gap: 0.5rem; align-items: center; display: flex;">
+                        
+                            <span data-agenda_id="" class="material-symbols-outlined" style="color: lightgray;">delete</span>
+                            <span>Excluir</span>
+                        </div>
                     </div>
-                </div>
-
-                <div id="excluir">
-        
-                    <div style="gap: 0.5rem; align-items: center; display: flex;">
-                     
-                        <span data-agenda_id="" class="material-symbols-outlined" style="color: lightgray;">delete</span>
-                        <span>Excluir</span>
-                    </div>
-                </div>
-
-                <div id="cancelar">
-        
-                    <div style="gap: 0.5rem; align-items: center; display: flex; justify-content: center; background-color: white; border: 1px solid darkred; color: darkred; border-radius: 30px;">
-                     
-                        <span>Cancelar</span>
+                    
+                    <div id="cancelar">
+            
+                        <div style="gap: 0.5rem; align-items: center; display: flex; justify-content: center; background-color: white; border: 1px solid darkred; color: darkred; border-radius: 30px;">
+                        
+                            <span>Cancelar</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <div id="modal_visualizar_layout" class="modal" style="background-color: black;">
-        <span class="material-symbols-outlined" style="color: white;font-size: 3rem; position: absolute; right: 0.5rem; top: 0.5rem;">
-            close
-            </span>
-        <div class="modal-content">
-            <div>
-                <div class="feed_principal">
-                    <div class="div_feed_secundario">
-                        <div>
-                            <div>
-                                <a class="div_perfil">
-                                    <div class="perfil_div" data-igreja_id="1">
-                                        <img id="imagem_igreja" class="img_igreja" src="">
-                                        <span class="nome_igreja">Nossa Senhora de Fátima Socorro</span>
+    
+        <div id="modal_visualizar_layout" class="modal" style="background-color: black;">
+            <span class="material-symbols-outlined" style="color: white;font-size: 3rem; position: absolute; right: 0.5rem; top: 0.5rem;">
+                close
+                </span>
+                <div class="modal-content">
+                    <div>
+                        <div class="feed_principal">
+                            <div class="div_feed_secundario">
+                                <div>
+                                    <div>
+                                    <a class="div_perfil">
+                                        <div class="perfil_div" data-igreja_id="1">
+                                            <img id="imagem_igreja" class="img_igreja" src="">
+                                            <span class="nome_igreja">Nossa Senhora de Fátima Socorro</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="div_layout_feed">
+                                    <a class="a_img_layout">
+                                        <img id="visualiza_layout_feed" src="">
+                                    </a>
+                                    <div class="div_descricao">
+                                        <span id="descricao_layout_feed" class="span_descricao">Adicione um comentário para visualiza-lo</span>
                                     </div>
-                                </a>
-                            </div>
-                            <div class="div_layout_feed">
-                                <a class="a_img_layout">
-                                    <img id="visualiza_layout_feed" src="">
-                                </a>
-                                <div class="div_descricao">
-                                    <span id="descricao_layout_feed" class="span_descricao">Adicione um comentário para visualiza-lo</span>
                                 </div>
                             </div>
                         </div>
@@ -208,48 +210,47 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="modalConfirmacao" class="modal">
-        <div class="modal-content1" style="display: grid; justify-content: center;">
-            <h1>Deseja excluir este agendamento?</h1>
-            <div class="modal-footer">
-                <button href="#!" id="cancelarRemocao" class="modal-close">Cancelar</button>
-                <button href="#!" data-agenda_id=""  id="confirmarRemocao">Confirmar</button>
+        <div id="modalConfirmacao" class="modal">
+            <div class="modal-content1" style="display: grid; justify-content: center;">
+                <h1>Deseja excluir este agendamento?</h1>
+                <div class="modal-footer">
+                    <button href="#!" id="cancelarRemocao" class="modal-close">Cancelar</button>
+                    <button href="#!" data-agenda_id=""  id="confirmarRemocao">Confirmar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modalStatus" class="modal">
+            <div class="modal-status" style="display: grid; justify-content: center; gap: 10px;">
+                <div style="border: 1px solid black;">
+                    <span style="display: flex; align-items: center; gap: 15px;">
+                        <div style="border-radius: 50%; background-color: green; width: 13px; height: 13px; border: 1px solid green; position: relative; left: 5px;"></div>
+                    <h1>Evento configurado para aparecer no feed.</h1>
+                    </span>
+                    <span style="display: flex; align-items: center; gap: 15px;">
+                        <div style="border-radius: 50%; background-color: red; width: 13px; height: 13px; border: 1px solid red; position: relative; left: 5px;"></div>
+                        <h1>Evento não configurado para aparecer no feed.</h1>
+                    </span>
+                    <span style="display: flex; align-items: center; gap: 15px;">
+                        <div style="border-radius: 50%; background-color: orange; width: 13px; height: 13px; border: 1px solid orange; position: relative; left: 5px;"></div>
+                        <h1>Evento já realizado.</h1>
+                    </span>
+                </div>
+                <h1 style="text-align: center;" id="mensagem_status">Condição do layout</h1>
+                <div class="modal-footer">
+                    <button href="#!" data-agenda_id="" data-status="" id="configurar_layout" class="modal-close">Configurar layout</button>
+                    <button href="#!" id="ok" class="modal-close">OK</button>
+                </div>
             </div>
         </div>
     </div>
+</body>
 
-    <div id="modalStatus" class="modal">
-        <div class="modal-status" style="display: grid; justify-content: center; gap: 10px;">
-            <div style="border: 1px solid black;">
-                <span style="display: flex; align-items: center; gap: 15px;">
-                    <div style="border-radius: 50%; background-color: green; width: 16px; height: 13px; border: 1px solid green; position: relative; left: 5px;"></div>
-                <h1>Evento configurado para aparecer no feed.</h1>
-                </span>
-                <span style="display: flex; align-items: center; gap: 15px;">
-                    <div style="border-radius: 50%; background-color: red; width: 16px; height: 13px; border: 1px solid red; position: relative; left: 5px;"></div>
-                    <h1>Evento não configurado para aparecer no feed.</h1>
-                </span>
-                <span style="display: flex; align-items: center; gap: 15px;">
-                    <div style="border-radius: 50%; background-color: orange; width: 13px; height: 13px; border: 1px solid orange; position: relative; left: 5px;"></div>
-                    <h1>Evento já realizado.</h1>
-                </span>
-            </div>
-            <h1 style="text-align: center;" id="mensagem_status">Condição do layout</h1>
-            <div class="modal-footer">
-                <button href="#!" data-agenda_id="" data-status="" id="configurar_layout" class="modal-close">Configurar layout</button>
-                <button href="#!" id="ok" class="modal-close">OK</button>
-            </div>
-        </div>
-    </div>
-
+<footer>
     <script src="./scripts/jquery/jquery-3.2.1.min.js"></script>
     <script src="scripts/calendario.js"></script>
     <script src="scripts/modal-igrejas.js"></script>
-
-
-
-</body>
+</footer>
 
 </html>

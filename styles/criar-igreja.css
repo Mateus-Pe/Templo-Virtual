@@ -37,6 +37,8 @@ body{
     height: 55px; 
     z-index: 2; 
     position: fixed; 
+    display: flex;
+    justify-content: space-between;
 }
 
 .div_botao-salvar{
@@ -218,4 +220,17 @@ body{
     margin: 0; 
     font-family: Exo; 
     color:darkgrey;
+}
+
+.cadastro {
+    font-family: sans-serif;
+    font-size: 1.6rem; 
+    text-align: center; 
+}
+
+.is-alert{
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    font-family: Exo;
 }

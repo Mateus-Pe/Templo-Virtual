@@ -305,54 +305,26 @@ body{
 .modal-content {
     background-color: white;
     margin: auto;
-    padding: 110px;
     border: 1px solid #888;
     border-radius: 30px;
     width: 80%;
+    height: 250px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
     max-width: 400px;
-}
-
-.modal-content2 {
-    gap: 3rem;
-    display: grid;
+    align-items: center;
     justify-content: center;
-    background-color: white;
-    margin: auto;
-    padding: 40px;
-    border: 1px solid #888;
-    border-radius: 30px;
-    width: 80%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    max-width: 400px;
-}
-
-.modal-content3 {
-    display: grid;
-    justify-content: center;
-    gap: 5rem;
-    background-color: white;
-    margin: auto;
-    padding: 27px;
-    border: 1px solid #888;
-    border-radius: 30px;
-    width: 80%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    max-width: 400px;
+    gap: 1px;
+    display: flex;
+    flex-direction: column;
 }
 
 .modal-footer {
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .modal-footer button {
@@ -364,11 +336,9 @@ body{
     border: 1px solid darkred;
     border-radius: 30px;
     width: 40%;
-    position: absolute;
-    bottom: 6px;
+    position: relative;
 }
 .modal1 {
-    background-color: black;
     background-color: rgba(0, 0, 0, 0.4);
     color: #363636;
     display: none;
@@ -405,9 +375,9 @@ body{
   }
 
   .contato img{
-    max-width: 16px;
+    max-width: 20px;
     position: relative;
-    right: 5px;
+    margin-right: 5px;
   }
 
   .div_btn-salvar {
@@ -432,8 +402,7 @@ body{
     height: 55px;
     position: fixed;
     display: flex;
-    justify-content: center;
-    gap: 40%;
+    justify-content: space-between;
     top: 0;
     width: 100%;
     z-index: 4;
@@ -452,7 +421,6 @@ body{
 .span_criar-igreja{
     font-size: 2rem; 
     color: #fff; 
-    position: absolute; 
     padding: 1.5rem;
     font-family: Exo;
 }
@@ -521,4 +489,26 @@ body{
     left: 0;
     right: 0;
     z-index: 1000; 
+}
+
+.inputs-modal-contatos{
+    display: flex;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 40px;
+}
+
+.inputs-modal-contatos img{
+    width: 20px;
+}
+
+.input_nome_igreja_modal{
+    display: flex;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 40px;
 }

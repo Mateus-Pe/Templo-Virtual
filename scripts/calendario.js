@@ -296,7 +296,7 @@ function mock_agenda(){
     $('.config').each(function() {
       var status = $(this).data('status');
       if (status == 3) {
-        $(this).addClass('disabled');
+        $(this).addClass('disabilitado');
       }
     });
   }
@@ -441,8 +441,7 @@ $('.page-menu--toggle').click(function(e){
     $(this).toggleClass('page-menu__hamburger--open');
   
     $('.page-menu').toggleClass('disabled');
-
-    $('#divPrincipal').toggleClass('disabled');
+    
 
     $('.page-menu').toggleClass('no-scroll');
 

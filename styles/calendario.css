@@ -6,7 +6,7 @@ html,* {
 body {
      background-color: white !important; 
      line-height: unset;
-    
+    overflow: hidden;
     }
 
 .lead { 
@@ -102,7 +102,6 @@ body {
 }
 
 .calendarYearMonth {
-    margin-top: 5rem;
     color: #707070;
     display: flex;
     justify-content: center;
@@ -172,8 +171,9 @@ body {
 .header1{
     background-color: darkred;
     height: 55px;
-    position: absolute;
+    position: relative;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     top: 0;
     width: 100%;
@@ -351,7 +351,7 @@ body {
     color: lightslategray;
 }
 
-.disabled {
+.disabilitado {
     pointer-events: none;
     opacity: 0.2;
   }
