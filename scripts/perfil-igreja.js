@@ -392,10 +392,12 @@ function eventoPerfil(){
     var lat = $(this).data('lat');
     var lng = $(this).data('long');
     marker(lat, lng, '');
-   $('#modal_addproduto').show(); 
+   $('#modal_addproduto').show();
+   $('body').css('overflow', 'hidden');
   });
   $(".modal_close").click(function(e) {
-   $('#modal_addproduto').hide(); 
+   $('#modal_addproduto').hide();
+   $('body').css('overflow', 'auto');
   });
 }
 
