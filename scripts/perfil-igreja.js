@@ -9,7 +9,7 @@ $(document).ready(function() {
     carregarIgreja();
     getComunidade();
   }
-  
+  //marker('-23.5909968','-48.0534713', null);
 
 });
 
@@ -61,7 +61,7 @@ function carregar_perfil(){
     html +=            '</div>';
     html +=             '<div class="a_div_perfil">';
     html +=               '<span class="abrir_map">';
-    html +=                 '<span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432" >';
+    html +=                 '<span id="localizacao" data-lat="" data-long="" >';
     html +=                   'Ver no mapa';
     html +=                 '</span>';
     html +=                 '<span class="material-symbols-outlined icone_editar ion_map">';
@@ -316,6 +316,8 @@ function carregarIgreja(){
         $(".img_igreja1").attr('src', obj.igreja.igreja_logo_url);
         $(".img_fundo1").attr('src', obj.igreja.igreja_fundo_url);
         $("#horario_fixo").html(obj.igreja.igreja_horario_fixo);
+        $("#localizacao").data('lat',obj.igreja.endereco_latitude);
+        $("#localizacao").data('long',obj.igreja.endereco_longitude);
         atualizarContatos();
 
         nomeIgrejaVerificado = obj.igreja.igreja_nome;
@@ -357,12 +359,24 @@ function carregarIgreja(){
 
 function marker(lat, lng, img) {
   var myLatLng = { lat: parseFloat(lat), lng: parseFloat(lng) };
+  var icon = {
+
+    url: img, // url
+
+    scaledSize: new google.maps.Size(60, 60), // scaled size
+
+    origin: new google.maps.Point(0,0), // origin
+
+    anchor: new google.maps.Point(0, 0) // anchor
+
+  };
   var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 14,
+      zoom: 15,
       center: myLatLng
   });
   var marker = new google.maps.Marker({
       position: myLatLng,
+      //icon: icon,
       map: map,
       title: ''
   });
