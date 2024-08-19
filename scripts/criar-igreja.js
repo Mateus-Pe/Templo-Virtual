@@ -5,27 +5,17 @@ var myJsonPesq;
 
 var igrejaId = null;
 
-var matriz = null;
-
-var status_matriz_inicial = 0;
-
-alteracao_matriz = false;
-
 
 $(document).ready(function() {
 
   paroquia_id = window.sessionStorage.getItem('paroquia_id');  
 
-  existeMatriz();
   getCidades();
   igrejaId = window.sessionStorage.getItem('igreja_id');
   $('#cep_instituicao').mask('00000000');
   
   if(igrejaId != null && igrejaId != ''){
     carregarIgreja(igrejaId);
-  }
-  else{
-    verificarNome()
   }
   
 
@@ -63,7 +53,8 @@ $('#btn_salvar').click(function(e){
         atualizar();
       }
       else{
-        salvar();
+        //salvar();
+        apiGeoLocation();
       }
       
     // window.location = 'lista-igreja.html';
@@ -333,7 +324,7 @@ function mock_cep(cep){
 
 }
 
-function salvar(){
+function salvar(objGeo){
   descricaoResumida = igreja_desc_resumida_new($('#nome_instituicao').val());
 
   $.ajax({
@@ -346,6 +337,8 @@ function salvar(){
       endereco_bairro: $('#bairro_instituicao').val(),
       endereco_cidade: $('#cidade_instituicao').val(),
       endereco_cidade_id: $('#cidade_id_instituicao').val(),
+      endereco_latitude: objGeo.lat,
+      endereco_longitude: objGeo.lng,
       igreja_nome : $('#nome_instituicao').val(),
       igreja_logo_url : "",
       igreja_matriz : "0",
@@ -357,17 +350,11 @@ function salvar(){
     .done(function (ret) {
       var obj = jQuery.parseJSON(ret);
       if(obj.status == '1'){
-        
-        if($('#chk_matriz').is(':checked')){
-          igrejaId = obj.igreja_id;
-           atualizar_matriz();
-        }
-        else{
-          window.sessionStorage.setItem('igreja_desc', descricaoResumida);
-          window.sessionStorage.setItem('igreja_id', obj.igreja_id);
-          window.location = "configurar-perfil-igreja.html";
-        }
+        window.sessionStorage.setItem('igreja_desc', descricaoResumida);
+        window.sessionStorage.setItem('igreja_id', obj.igreja_id);
+        window.location = "configurar-perfil-igreja.html";
       }
+      
     });
     console.log(descricaoResumida);
 }
@@ -405,151 +392,13 @@ function carregarIgreja(){
         $('#bairro_instituicao').val(obj.igreja.igreja_endereco_bairro).prop('disabled', true);
         $('#cidade_instituicao').val(obj.igreja.igreja_endereco_cidade).prop('disabled', true);
         $('#cep_instituicao').val(obj.igreja.igreja_endereco_cep).prop('disabled', true);
-        verificarNome();
+
       
       }
        
     });
 }
 
-function atualizar(){
-  $.ajax({
-    method: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_igreja",
-    data: {
-      igreja_id : igrejaId,
-      igreja_nome : $('#nome_instituicao').val()
-     
-    }
-  })
-    .done(function (ret) {
-      var obj = jQuery.parseJSON(ret);
-      
-      if(obj.status == '1'){
-        window.sessionStorage.setItem('igreja_id', '');
-        
-        if($('#chk_matriz').is(':checked')){
-          if(status_matriz_inicial == 1){
-            window.location = "lista-igreja.html";
-          }
-            
-          else{
-            atualizar_matriz();
-          }
-        }
-        else{
-          window.location = "lista-igreja.html";
-        }  
-      
-      
-      }
-       
-    });
-}
-
-function existeMatriz(){
-  $.ajax({
-    method: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/existe_matriz",
-    data: { paroquia_id: paroquia_id },
-    
-  })
-    .done(function (ret) {
-      var obj = jQuery.parseJSON(ret);
-      
-      if(obj.status == '1'){
-        if(obj.matriz != null && obj.matriz != '' && obj.matriz.igreja_nome != ''){
-          matriz = obj.matriz.igreja_nome;
-          if(igrejaId != null && igrejaId == obj.matriz.igreja_id){
-            $('#chk_matriz').prop('checked',true);
-            alteracao_matriz = true;
-            status_matriz_inicial = 1;
-          }
-        } 
-        else{
-          $('#chk_matriz').prop('checked',true);
-        } 
-
-        verificarNome();
-
-      }
-       
-    });
-}
-$('#chk_matriz').click(function (e) {
-  
-  if($('#chk_matriz').is(':checked')){
-    
-    if(matriz != null){
-      
-      texto_modal = "<p> A Matriz atual é a <b>"+ matriz +"</b>.</p><br>";
-      texto_modal += "<p> Deseja tornar a <b>"+ $('#nome_instituicao').val() +"</b> Matriz? </p>";
-      
-      $('#texto_confirmacao').html(texto_modal);
-    }
-    else{
-
-      texto_modal = "<p>Deseja tornar a <b>"+ $('#nome_instituicao').val()+"</b> Matriz?</p>";
-      
-      $('#texto_confirmacao').html(texto_modal);
-    }  
-    $('#modalConfirmacao').show();
-  }
-
-  
-});
-
-$('#nome_instituicao').on('input', function(){
-  verificarNome()
-
-});
-
-
-
-function verificarNome(){
-  var nomeInst = $('#nome_instituicao').val();
-
-  if (nomeInst.trim() === '' || alteracao_matriz){
-    $('#chk_matriz').prop('disabled', true);
-  }
-  else{
-    $('#chk_matriz').prop('disabled', false);
-  }
-};
-
-
-
-
-$('#confirmarTransicao').click(function (e) {
-  $('#chk_matriz').prop('checked',true);
-  $('#modalConfirmacao').hide();
-  
-});
-$('#cancelarTransicao').click(function (e) {
-  $('#chk_matriz').prop('checked',false);
-  $('#modalConfirmacao').hide();
-});
-
-function atualizar_matriz(){
-  if(igrejaId != null){
-    $.ajax({
-      method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_matriz",
-      data: {
-        igreja_id : igrejaId,
-        paroquia_id: paroquia_id
-       
-      }
-    })
-      .done(function (ret) {
-        var obj = jQuery.parseJSON(ret);
-        if(obj.status == '1'){
-          window.location = "lista-igreja.html";
-        }
-        
-      });
-  }
-}
 
 function igreja_desc_resumida_old(nome) {
   var palavrasARemover = [
@@ -679,4 +528,53 @@ function igreja_desc_resumida_new(nome) {
   console.log(nomeAbreviado);
 
   return  nomeAbreviado;
+}
+
+function apiGeoLocation(){
+  //obj = mock_cep($('#cep_instituicao').val());
+  
+    
+    
+    url = "https://maps.googleapis.com/maps/api/geocode/json";
+    
+    $.ajax({
+      method: "GET",
+      url: url,
+      data: {address:getAddress(),
+             key : 'AIzaSyBjVDWPYDC5zoxBw0zW4bdnnaelnyCWdkw'
+      }
+      
+    })
+    .done(function (ret) {
+      objGeo = {};  
+      if(ret != null){
+        console.log(ret);
+        
+        objGeo.lat =  ret.results[0].geometry.location.lat;
+        objGeo.lng =  ret.results[0].geometry.location.lng;
+        
+        
+      }else{
+       
+        objGeo.lat =  '';
+        objGeo.lng =  '';
+        
+      }   
+      salvar(objGeo); 
+    });
+  
+    
+   
+}
+
+function getAddress(){
+  address = '';
+  address += $('#logradouro_instituicao').val();
+
+  address += ' '+ $('#numero_instituicao').val(),
+  address += ', '+$('#bairro_instituicao').val(),
+  address += ', '+$('#cidade_instituicao').val()
+
+
+  return address;
 }

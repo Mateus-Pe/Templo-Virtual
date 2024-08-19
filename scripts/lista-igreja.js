@@ -58,10 +58,14 @@ function listaEscolhida(data) {
         html += '<div class="accordion" style="font-family: Exo;">';
 
         $.each(data[i].listabycat, function (k, l) {
-            var span_remove = '';
-            if(data[i].permite_excluir == 'S'){
+            var span_remove, chkMatriz = '';
+            if(data[i].tipo_igreja == 'C'){
             
                 span_remove = '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle remove-igreja">delete</span>' ;              
+                chkMatriz = '<div class="toggle">' +
+                            '<input class="chk_matriz" data-igreja_id="'+l.igreja_id+'" data-igreja_nome="'+l.igreja_nome+'" type="checkbox" id="foo'+l.igreja_id+'">' +
+                            '<label for="foo'+l.igreja_id+'"></label>' +
+                            '</div>';
             }
 
             html += '<h3 style="border: 1px solid #ddd; border-radius:0px; display: block; color: #484848; font-weight: bold; cursor: pointer; position: relative; margin-top:0px; padding: 1.5em .5em 1.5em .7em; background: white;">' +
@@ -80,7 +84,7 @@ function listaEscolhida(data) {
                     '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_cidade + '</p>' +
                     '</div>' +
                     '<div class="list-line">'+
-                    '<div class="columns">' +
+                    '<div class="columns">' +chkMatriz+
                     '<span data-id="'+l.igreja_id+'" data-igreja_desc="'+l.igreja_desc_resumida+'" class="material-symbols-outlined acToggle calendario">calendar_month</span>' +
                     '<span data-id="'+l.igreja_id+'" data-igreja_desc="'+l.igreja_desc_resumida+'" class="material-symbols-outlined acToggle configurar-igreja">manufacturing</span>' +
                     '<span data-id="'+l.igreja_id+'" data-igreja_desc="'+l.igreja_desc_resumida+'" class="material-symbols-outlined acToggle editar-igreja">edit</span>' +
@@ -170,6 +174,15 @@ function configurarEventos(){
             this.checked = !this.checked;
         }.bind(this), 100);
     });
+
+    $('.chk_matriz').click(function (e) {
+        
+        if($('.chk_matriz').is(':checked')){
+          existeMatriz($(this).data('igreja_nome'), $(this).data('igreja_id'));       
+        }
+     });
+
+    
 }
 
 $('#add').click(function () {
@@ -304,3 +317,52 @@ $('.page-menu--toggle').click(function(e){
     sessionStorage.setItem("item_menu", item_menu);
   
   }
+
+  function existeMatriz(igrejaNome, id){
+    $.ajax({
+      method: "POST",
+      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_matriz",
+      data: { paroquia_id: window.sessionStorage.getItem('paroquia_id') },
+      
+    })
+      .done(function (ret) {
+        var obj = jQuery.parseJSON(ret);
+        
+        if(obj.status == '1'){
+          matriz = obj.matriz.igreja_nome;
+          texto_modal = "<p> A Matriz atual é a <b>"+ matriz +"</b>.</p><br>";
+          texto_modal += "<p> Deseja tornar a <b>"+ igrejaNome +"</b> Matriz? </p>";
+          $('#confirmarTransicao').data('id', id);  
+          $('#texto_confirmacao').html(texto_modal);  
+          $('#modalConfirmacao').show(); 
+        }
+         
+      });
+  }
+
+  function atualizar_matriz(igrejaId){
+    if(igrejaId != null){
+      $.ajax({
+        method: "POST",
+        url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_matriz",
+        data: {
+          igreja_id : igrejaId,
+          paroquia_id: window.sessionStorage.getItem('paroquia_id')
+         
+        }
+      })
+        .done(function (ret) {
+          var obj = jQuery.parseJSON(ret);
+          if(obj.status == '1'){
+            window.location = "lista-igreja.html";
+          }
+          
+        });
+    }
+  }
+
+  $('#confirmarTransicao').click(function(e){
+    atualizar_matriz($(this).data('id'));
+  });  
+
+ 
