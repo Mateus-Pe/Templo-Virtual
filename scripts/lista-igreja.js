@@ -3,8 +3,8 @@ $(document).ready(function() {
     paroquia_id = window.sessionStorage.getItem('paroquia_id'); 
     if(paroquia_id != null && paroquia_id != ''){
         get_listaitem(paroquia_id);
+        eventos_gerais(paroquia_id);
     }    
-    
 }); 
 
 function get_listaitem(paroquiaId) {
@@ -58,39 +58,25 @@ function listaEscolhida(data) {
         html += '<div class="accordion" style="font-family: Exo;">';
 
         $.each(data[i].listabycat, function (k, l) {
-            var span_remove, chkMatriz = '';
-            if(data[i].tipo_igreja == 'C'){
             
-                span_remove = '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle remove-igreja">delete</span>' ;              
-                chkMatriz = '<div class="toggle">' +
-                            '<input class="chk_matriz" data-igreja_id="'+l.igreja_id+'" data-igreja_nome="'+l.igreja_nome+'" type="checkbox" id="foo'+l.igreja_id+'">' +
-                            '<label for="foo'+l.igreja_id+'"></label>' +
-                            '</div>';
-            }
-
-            html += '<h3 style="border: 1px solid #ddd; border-radius:0px; display: block; color: #484848; font-weight: bold; cursor: pointer; position: relative; margin-top:0px; padding: 1.5em .5em 1.5em .7em; background: white;">' +
+            html += '<h3 style="border: 1px solid #ddd; border-radius:0px; display: flex; color: #484848; font-weight: bold; cursor: pointer; position: relative; margin-top:0px; padding: 1.5em .5em 1.5em .7em; background: white;">' +
+            '<span class="material-symbols-outlined acToggle" style="font-size: 17px !important; color: darkred; display: flex; align-items: center">expand_circle_down</span>' +
                  '<div class="list-line">'+
                  '<label for="itens-check" class="label-lista">' +
-                 '<p style="display:inline; padding:10px;">'+l.igreja_nome+'</p>' +
+                 '<p style="display:inline; padding:5px;">'+l.igreja_nome+'</p>' +
                  
                  '</label>' +
-                 '<span class="ion-android-arrow-dropleft-circle acToggle"></span>' +
                  '</div>'+
+                 '<span data-id="'+l.igreja_id+'" data-igreja_desc="'+l.igreja_nome+'" data-tipo_igreja="'+data[i].tipo_igreja+'" class="material-symbols-outlined editar-igreja">settings</span>' +
                  '</h3>' +
                  '<div class="modal-container endereco-lista" >' +
-                    '<div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 9px; font-size: 13px; gap: 9px;">' +
+                    
+                    '<div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 9px; font-size: 13px; gap: 9px; padding: 0.4em 1.2em !important;">' +
                     '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_logradouro +', '+ l.igreja_endereco_numero + '</p>' +
                     '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_bairro + '</p>' +
                     '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_cidade + '</p>' +
                     '</div>' +
-                    '<div class="list-line">'+
-                    '<div class="columns">' +chkMatriz+
-                    '<span data-id="'+l.igreja_id+'" data-igreja_desc="'+l.igreja_desc_resumida+'" class="material-symbols-outlined acToggle calendario">calendar_month</span>' +
-                    '<span data-id="'+l.igreja_id+'" data-igreja_desc="'+l.igreja_desc_resumida+'" class="material-symbols-outlined acToggle configurar-igreja">manufacturing</span>' +
-                    '<span data-id="'+l.igreja_id+'" data-igreja_desc="'+l.igreja_desc_resumida+'" class="material-symbols-outlined acToggle editar-igreja">edit</span>' +
-                    span_remove +
-                    '</div>' +
-                    '</div>'+
+                    
                '</div>';
                
 
@@ -108,29 +94,56 @@ function listaEscolhida(data) {
 
 function configurarEventos(){
 
-    $('.calendario').click(function () {
-        window.sessionStorage.setItem('igreja_desc', $(this).data('igreja_desc'));
-        window.sessionStorage.setItem('igreja_id', $(this).data('id'));
-        window.location = 'calendario.html';
-    });
-    
     $('.editar-igreja').click(function () {
         window.sessionStorage.setItem('igreja_desc', $(this).data('igreja_desc'));
         window.sessionStorage.setItem('igreja_id', $(this).data('id'));
-        window.location = 'criar-igreja.html';
+        var id = $(this).data('id');
+        var nome = $(this).data('igreja_desc');
+        $("#hid_igreja_id").val(id);
+        $("#hid_igreja_nome").val(nome);
+        if($(this).data('tipo_igreja') == 'P'){
+            $('#excluir').hide();
+            $('#tornar_matriz').hide();
+        }else{
+            $('#excluir').show();
+            $('#tornar_matriz').show();
+        }
+        $('#modal_config').show();
     });
 
-    $('.configurar-igreja').click(function () {
-        window.sessionStorage.setItem('igreja_desc', $(this).data('igreja_desc'));
-        window.sessionStorage.setItem('igreja_id', $(this).data('id'));
+    $('#calendario').click(function () {
+        //var id = $(this).data('igreja_id');
+        var id =  $("#hid_igreja_id").val();
+        window.sessionStorage.setItem('igreja_id', id);
+        window.location = 'calendario.html';
+    });
+    
+
+    $('#editar_perfil').click(function () {
+        var id =  $("#hid_igreja_id").val();
+        window.sessionStorage.setItem('igreja_id', id);
         window.location = 'configurar-perfil-igreja.html';
     });
 
-    $('.remove-igreja').click(function () {
+    $('#excluir').click(function () {
 
-        var id = $(this).data('id');
-        remover(id);
+        
+        var id =  $("#hid_igreja_id").val();
+        var nome = $("#hid_igreja_nome").val();
+        $('#confirmarRemocao').data('id', id);
+        $('#modal_config').hide();
+        remover(id, nome);
     });
+
+    $('#tornar_matriz').click(function(){
+        var id =  $("#hid_igreja_id").val();
+        var nome = $("#hid_igreja_nome").val();
+        
+        existeMatriz(nome, id);
+        $('#modal_config').hide();
+    })
+
+    
 
     $('.check_lista').click(function () {
         if ($(this).data('listaitem_check') == 0)
@@ -158,11 +171,12 @@ function configurarEventos(){
     $(".accordion").find('h3').on('click', function(){
 
         $(".ui-accordion-content").each(function() {
-            if($(this).attr('aria-hidden')== 'false'){
-                $(this).prev().find('.acToggle').removeClass("ion-android-arrow-dropleft-circle").addClass("ion-android-arrow-dropdown-circle");
-            }
-            else{
-                $(this).prev().find('.acToggle').removeClass("ion-android-arrow-dropdown-circle").addClass("ion-android-arrow-dropleft-circle");
+            var $span = $(this).prev().find('.acToggle');
+            
+            if ($(this).attr('aria-hidden') == 'false') {
+                $span.text('expand_circle_right'); 
+            } else {
+                $span.text('expand_circle_down'); 
             }
         });
     });
@@ -174,14 +188,6 @@ function configurarEventos(){
             this.checked = !this.checked;
         }.bind(this), 100);
     });
-
-    $('.chk_matriz').click(function (e) {
-        
-        if($('.chk_matriz').is(':checked')){
-          existeMatriz($(this).data('igreja_nome'), $(this).data('igreja_id'));       
-        }
-     });
-
     
 }
 
@@ -191,9 +197,10 @@ $('#add').click(function () {
 });
 
 
-function remover(id){
-    
-    $('#modalConfirmacao').show();
+function remover(id, nome){
+    texto_modal = "<p> Deseja remover <b>"+ nome +"</b>?</p><br>";
+    $('#modalRemocao').show();
+    $('#texto_remocao').html(texto_modal); 
 
     $('#cancelarRemocao, .modal-background .modal-close').click(function(){
         $('#modalConfirmacao').hide();
@@ -218,13 +225,35 @@ function remover(id){
                 window.location = "lista-igreja.html";
             
                 $('#modalConfirmacao').hide();
-                window.location = "lista-igreja.html";
             }
             
         });
     });
+}
 
-   
+function eventos_gerais(paroquia_id){
+
+    $.ajax({
+        method: "POST",
+        url: "https://pedeoferta.com.br/templo/index.php/welcome/get_estatistica",
+        data: {
+            paroquia_id : paroquia_id
+        }
+    })
+
+    .done(function (ret) {
+        var obj = jQuery.parseJSON(ret);
+
+        if(obj.status == 1){
+            html =  '<span id="eventos_dias" class="span_eventos_gerais">Eventos dos próximos 7 dias:</span>'+
+                    '<span id="eventos_missas" class="span_eventos_gerais">Missas: '+obj.estatistica.missa+'</span>'+
+                    '<span id="eventos_confissoes" class="span_eventos_gerais">Confissões: '+obj.estatistica.confissao+'</span>'+
+                    '<span id="eventos_outros" class="span_eventos_gerais">Outros eventos: '+obj.estatistica.outro+'</span>';
+            
+            $('#eventos_gerais').html(html);
+        }
+
+    });
 }
 
 // menu
@@ -365,4 +394,15 @@ $('.page-menu--toggle').click(function(e){
     atualizar_matriz($(this).data('id'));
   });  
 
+  $('#cancelarTransicao').click(function(){
+    $('#modalConfirmacao').hide();
+    $('.chk_matriz').prop('checked', false);
+  });
+
+  $('#cancelar').click(function(){
+    $('#modal_config').hide();
+  });
  
+  $('#cancelarRemocao').click(function(){
+    $('#modalRemocao').hide();
+  });

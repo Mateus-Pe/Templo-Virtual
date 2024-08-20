@@ -38,7 +38,7 @@ html, *{
 }
 
 #divListaPrincipal {
-    margin-top: 52px;
+    margin-top: 10px;
     margin-bottom: 90px;
     transition: transform 0.4s ease;
 }
@@ -86,6 +86,8 @@ html, *{
     justify-content: center;
     flex-flow: column;
     height: 10rem;
+    padding: unset !important;
+    overflow: hidden !important;
   }
 
 .modal-content {
@@ -233,14 +235,18 @@ html, *{
 
 .editar-igreja{
     font-size: 25px !important;
+    color: darkred;
+    margin-right: 5px;
 }
 
 .remove-igreja{
     font-size: 25px !important;
 }
 
-.toggle {
-    margin-bottom: 20px;
+.toggle{
+    display: flex;
+    gap: 5px;
+    margin-left: 5px;
 }
 
 .toggle > input {
@@ -250,10 +256,10 @@ html, *{
 .toggle > label {
     position: relative;
     display: block;
-    height: 28px;
-    width: 52px;
+    height: 20px;
+    width: 45px;
     background-color: #f7f7f7;
-    border: 1px #a2e3e6 solid;
+    border: 1px black solid;
     border-radius: 100px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -263,10 +269,10 @@ html, *{
     left: 1px;
     top: 1px;
     display: block;
-    width: 26px;
-    height: 26px;
+    width: 15px;
+    height: 15px;
     border-radius: 100px;
-    background: #fff;
+    background: darkred;
     box-shadow: 0px 3px 3px rgba(0,0,0,0.05);
     content: '';
     transition: all 0.3s ease;
@@ -280,6 +286,7 @@ html, *{
 }
 .toggle > input:checked ~ label:after {
     left: 25px;
+    background-color: white;
 }
 .toggle > input:disabled ~ label {
     background-color: #d5d5d5;
@@ -287,4 +294,25 @@ html, *{
 }
 .toggle > input:disabled ~ label:after {
     background-color: rgba(255, 255, 255, 0.3);
+}
+
+.modal-content1 {
+    background-color: white;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    border-radius: 30px;
+    width: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    max-width: 400px;
+}
+
+.span_eventos_gerais{
+    font-size: 13px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }

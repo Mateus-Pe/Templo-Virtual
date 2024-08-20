@@ -72,9 +72,13 @@
             <span class="page-menu__qtd-itens"></span>
 
         </header>
+
+
         
         
         <div id="divCorpo">
+            <div id="eventos_gerais" style="margin-top: 55px; width: 100%; height: 100px; display: grid; justify-content: center;">
+            </div>
         
             <div id="divListaPrincipal" class="divListaPrincipal">
                 
@@ -84,15 +88,77 @@
 
         <div id="modalConfirmacao" class="modal">
             <div class="modal-content">
-                <div id="texto_confirmacao"></div>
+                <div id="texto_confirmacao" style="font-size: 10px;"></div>
                 <div class="modal-footer">
                     <button href="#!" id="cancelarTransicao" class="modal-close">Cancelar</button>
-                    <button data-id="" href="#!" id="confirmarTransicao">Confirmar</button>
+                    <button data-id="" id="confirmarTransicao">Confirmar</button>
                 </div>
             </div>
         </div>
-        
-      
+
+        <div id="modalRemocao" class="modal">
+            <div class="modal-content">
+                <div id="texto_remocao" style="font-size: 10px;"></div>
+                <div class="modal-footer">
+                    <button href="#!" id="cancelarRemocao" class="modal-close">Cancelar</button>
+                    <button data-id="" id="confirmarRemocao">Confirmar</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="modal_config" class="modal" style="z-index: 100;">
+            <div class="modal-content1">
+                <div class="cadastro" style="justify-content: center; display: grid; gap: 1.5rem; font-size: 1.6rem;">
+                    <input type="hidden" id="hid_igreja_id">
+                    <input type="hidden" id="hid_igreja_nome">
+                    <div id="calendario">
+                        
+                        <div style="gap: 0.5rem; align-items: center; display: flex;">
+                            
+                            <span class="material-symbols-outlined" style="color: lightgray;">calendar_month</span>
+                            <span data-igreja_id="" class="acToggle">Calendário</span>
+                        </div>
+                        
+                    </div>
+                    
+                    <div id="editar_perfil">
+                        
+                        <div style="gap: 0.5rem; align-items: center; display: flex;">
+                            
+                            <span class="material-symbols-outlined" style="color: lightgray;">settings</span>
+                            <span data-igreja_id="" class="acToggle">Editar perfil</span>
+                        </div>
+                    </div>
+                    
+                    <div id="excluir">
+                        
+                        <div style="gap: 0.5rem; align-items: center; display: flex;">
+                        
+                            <span data-igreja_id="" data-igreja_nome="" class="material-symbols-outlined" style="color: lightgray;">delete</span>
+                            <span>Excluir</span>
+                        </div>
+                    </div>
+
+                    <div id="tornar_matriz">
+                        
+                        <div style="gap: 0.5rem; align-items: center; display: flex;">
+                        
+                            <span data-igreja_id=""  class="material-symbols-outlined" style="color: lightgray;">church</span>
+                            <span>Tornar paróquia</span>
+                        </div>
+                    </div>
+                    
+                    <div id="cancelar">
+            
+                        <div style="gap: 0.5rem; align-items: center; display: flex; justify-content: center; background-color: white; border: 1px solid darkred; color: darkred; border-radius: 30px;">
+                        
+                            <span>Cancelar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div id="add">
 
