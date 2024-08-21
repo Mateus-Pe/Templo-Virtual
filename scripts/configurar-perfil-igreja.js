@@ -72,10 +72,12 @@ function modalHorariosFixos(){
   $("#horarios_fixos").click(function(e){
     $("#modal_horarios_fixos").show();
     textoArea();
+    $('body').css('overflow', 'hidden');
   });
   
   $("#close_horarios").click(function(e){
     $("#modal_horarios_fixos").hide();
+    $('body').css('overflow', 'auto');
   });
 }
 
@@ -132,6 +134,7 @@ $("#localizacao").click(function(e) {
 });
 $(".modal_close").click(function(e) {
  $('#modal_addproduto').hide(); 
+ $('body').css('overflow', 'auto');
 });
 
 
@@ -548,8 +551,14 @@ function hasScrolled() {
 }
 
 document.getElementById("imagem_igreja").addEventListener("click", function() {
-  document.getElementById("imageFileInput").click();
+  selecionaImgPerfil();
 });
+
+$('#abrir_select_img').click(function(){
+  document.getElementById("imageFileInput").click();
+  $('#modal_addproduto').hide();
+  $('body').css('overflow', 'auto');
+})
 
 document.getElementById("img_fundo").addEventListener("click", function() {
   document.getElementById("imageFundoFileInput").click();
@@ -673,35 +682,49 @@ $("#btn_close").click(function(){
 })
 
 
-function teste(){
-  
-  
-      $.ajax({
-      method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_banco_imagem",
-      data: {}, 
-      processData: false,
-      contentType: false
-    })
-      .done(function (ret) {
-        var obj = jQuery.parseJSON(ret);
-        if(obj.status == '1'){
-          html = '';
-          $.each(obj.banco_imagem, function (k, l) {
-            html += '<div class="comunidade_select">'+
-                    '<img id="img_igreja_desc_resumida"  src="'+l.igreja_logo_url+'">'+
-                    '<span id="desc_resumida">'+l.igreja_desc_resumida+'</span>'+
-                    '</div>';
-            console.log(l.igreja_logo_url);
-          });
+function montaHtmlBancoImg(bancoImagem){
+  html = '';
+  $.each(bancoImagem, function (k, l) {
+    html += '<div class="comunidade_select">'+
+            '<img id="img_igreja_desc_resumida"  src="'+l.igreja_logo_url+'">'+
+            '<span id="desc_resumida">'+l.igreja_desc_resumida+'</span>'+
+            '</div>';
+  });
 
-          $('#divBancoImg').html(html); 
-          $('#modal_addproduto  ').show();
-        }
+  $(document).ajaxStop(function () {
+    $('body').css('overflow', 'hidden');
+  });
+
+  $('#divBancoImg').html(html); 
+  $('#modal_addproduto  ').show();
+}
+
+
+function selecionaImgPerfil(){
+  
+  
+  $.ajax({
+  method: "POST",
+  url: "https://pedeoferta.com.br/templo/index.php/welcome/get_banco_imagem",
+  data: {}, 
+  processData: false,
+  contentType: false
+  })
+  .done(function (ret) {
+    var obj = jQuery.parseJSON(ret);
+    if(obj.status == '1'){
+      html = '';
+      bancoImagem = obj.banco_imagem;
+      montaHtmlBancoImg(obj.banco_imagem);
+     
+      
+      $("#pesquisa_imagens").on('input', function(e) {
+        bancoImagemFilter = bancoImagem.filter(function(a) {
+          
+            return a['igreja_nome'].includes($("#pesquisa_imagens").val());
+        });
+        montaHtmlBancoImg(bancoImagemFilter);
       });
-
-
-        
-
-  
+    }
+  });
 }
