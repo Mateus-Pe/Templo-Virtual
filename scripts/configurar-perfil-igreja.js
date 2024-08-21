@@ -673,3 +673,35 @@ $("#btn_close").click(function(){
 })
 
 
+function teste(){
+  
+  
+      $.ajax({
+      method: "POST",
+      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_banco_imagem",
+      data: {}, 
+      processData: false,
+      contentType: false
+    })
+      .done(function (ret) {
+        var obj = jQuery.parseJSON(ret);
+        if(obj.status == '1'){
+          html = '';
+          $.each(obj.banco_imagem, function (k, l) {
+            html += '<div class="comunidade_select">'+
+                    '<img id="img_igreja_desc_resumida"  src="'+l.igreja_logo_url+'">'+
+                    '<span id="desc_resumida">'+l.igreja_desc_resumida+'</span>'+
+                    '</div>';
+            console.log(l.igreja_logo_url);
+          });
+
+          $('#divBancoImg').html(html); 
+          $('#modal_addproduto  ').show();
+        }
+      });
+
+
+        
+
+  
+}
