@@ -721,7 +721,7 @@ function selecionaImgPerfil(){
       $("#pesquisa_imagens").on('input', function(e) {
         bancoImagemFilter = bancoImagem.filter(function(a) {
           
-            return a['igreja_nome'].includes($("#pesquisa_imagens").val());
+            return a['igreja_nome'].toUpperCase().includes($("#pesquisa_imagens").val().toUpperCase());
         });
         montaHtmlBancoImg(bancoImagemFilter);
       });
