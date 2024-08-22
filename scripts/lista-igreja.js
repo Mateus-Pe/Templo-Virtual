@@ -266,17 +266,16 @@ $('.page-menu--toggle').click(function(e){
 
         
         $('.mobile-nav').css('display', 'none');
-        $('#add').css('bottom', '10px');
-        $('#divListaPrincipal').removeClass('move-right');
+        $('#divCorpo').css('overflow', 'auto');
+        $('body').css('overflow', 'auto');
         
         
     }
     else{
   
       $('.mobile-nav').css('display', 'block');
-      $('#add').css('bottom', '-1000px');
-      $('#divListaPrincipal').addClass('move-right');
-  
+      $('#divCorpo').css('overflow', 'hidden');
+      $('body').css('overflow', 'hidden');
     }
   
     $(this).toggleClass('page-menu__hamburger--open');
@@ -290,119 +289,115 @@ $('.page-menu--toggle').click(function(e){
   
     efeitoBlur()
   
-  });
-  
-  
-  
-  
-  
-  
-  
-  function efeitoBlur(){
-  
-    $('main').toggleClass('is-blur');
-  
-    $('.show-search').toggleClass('is-blur');
-  
-    $('.categories').toggleClass('is-blur');
-  
-    $('.options').toggleClass('is-blur');
-  
-    $('.search-market').toggleClass('is-blur');
-
-    $('#divListaPrincipal').toggleClass('is-blur');
-
-    $('.container').toggleClass('is-blur');
+});
 
   
-  }
-  
-  
-  
-  //Verifica o item clicado no sidemenu
-  
-  $('.mobile-nav__items li a').click(function(){
-  
-    var classeItemMenu = $(this).attr('class');
-  
-  
-  
-    if(classeItemMenu == 'mobile-nav__link-produtos'   ||
-  
-       classeItemMenu == 'mobile-nav__link-categorias' ||
-  
-       classeItemMenu == 'mobile-nav__link-mercados'){
-  
-        setStorageMenu(classeItemMenu);
-  
-        window.location = 'vitrine-geral.html';
-  
+function efeitoBlur(){
+
+$('main').toggleClass('is-blur');
+
+$('.show-search').toggleClass('is-blur');
+
+$('.categories').toggleClass('is-blur');
+
+$('.options').toggleClass('is-blur');
+
+$('.search-market').toggleClass('is-blur');
+
+$('#divListaPrincipal').toggleClass('is-blur');
+
+$('#eventos_gerais').toggleClass('is-blur');
+
+$('.container').toggleClass('is-blur');
+
+}
+
+
+
+//Verifica o item clicado no sidemenu
+
+$('.mobile-nav__items li a').click(function(){
+
+var classeItemMenu = $(this).attr('class');
+
+
+
+if(classeItemMenu == 'mobile-nav__link-produtos'   ||
+
+    classeItemMenu == 'mobile-nav__link-categorias' ||
+
+    classeItemMenu == 'mobile-nav__link-mercados'){
+
+    setStorageMenu(classeItemMenu);
+
+    window.location = 'vitrine-geral.html';
+
+}
+
+});
+
+function setStorageMenu(item_menu) {
+
+sessionStorage.setItem("item_menu", item_menu);
+
+}
+
+function existeMatriz(igrejaNome, id){
+$.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_matriz",
+    data: { paroquia_id: window.sessionStorage.getItem('paroquia_id') },
+    
+})
+    .done(function (ret) {
+    var obj = jQuery.parseJSON(ret);
+    
+    if(obj.status == '1'){
+        matriz = obj.matriz.igreja_nome;
+        texto_modal = "<p> A Matriz atual é a <b>"+ matriz +"</b>.</p><br>";
+        texto_modal += "<p> Deseja tornar a <b>"+ igrejaNome +"</b> Matriz? </p>";
+        $('#confirmarTransicao').data('id', id);  
+        $('#texto_confirmacao').html(texto_modal);  
+        $('#modalConfirmacao').show(); 
     }
-  
-  });
-
-  function setStorageMenu(item_menu) {
-  
-    sessionStorage.setItem("item_menu", item_menu);
-  
-  }
-
-  function existeMatriz(igrejaNome, id){
-    $.ajax({
-      method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_matriz",
-      data: { paroquia_id: window.sessionStorage.getItem('paroquia_id') },
-      
-    })
-      .done(function (ret) {
-        var obj = jQuery.parseJSON(ret);
         
-        if(obj.status == '1'){
-          matriz = obj.matriz.igreja_nome;
-          texto_modal = "<p> A Matriz atual é a <b>"+ matriz +"</b>.</p><br>";
-          texto_modal += "<p> Deseja tornar a <b>"+ igrejaNome +"</b> Matriz? </p>";
-          $('#confirmarTransicao').data('id', id);  
-          $('#texto_confirmacao').html(texto_modal);  
-          $('#modalConfirmacao').show(); 
-        }
-         
-      });
-  }
+    });
+}
 
-  function atualizar_matriz(igrejaId){
-    if(igrejaId != null){
-      $.ajax({
-        method: "POST",
-        url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_matriz",
-        data: {
-          igreja_id : igrejaId,
-          paroquia_id: window.sessionStorage.getItem('paroquia_id')
-         
-        }
-      })
-        .done(function (ret) {
-          var obj = jQuery.parseJSON(ret);
-          if(obj.status == '1'){
-            window.location = "lista-igreja.html";
-          }
-          
-        });
+function atualizar_matriz(igrejaId){
+if(igrejaId != null){
+    $.ajax({
+    method: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_matriz",
+    data: {
+        igreja_id : igrejaId,
+        paroquia_id: window.sessionStorage.getItem('paroquia_id')
+        
     }
-  }
+    })
+    .done(function (ret) {
+        var obj = jQuery.parseJSON(ret);
+        if(obj.status == '1'){
+        window.location = "lista-igreja.html";
+        }
+        
+    });
+}
+}
 
-  $('#confirmarTransicao').click(function(e){
-    atualizar_matriz($(this).data('id'));
-  });  
+$('#confirmarTransicao').click(function(e){
+atualizar_matriz($(this).data('id'));
+});  
 
-  $('#cancelarTransicao').click(function(){
-    $('#modalConfirmacao').hide();
-    $('.chk_matriz').prop('checked', false);
-  });
+$('#cancelarTransicao').click(function(){
+$('#modalConfirmacao').hide();
+$('.chk_matriz').prop('checked', false);
+});
 
-  $('#cancelar').click(function(){
-    $('#modal_config').hide();
-  });
- 
-  $('#cancelarRemocao').click(function(){
-    $('#modalRemocao').hide();
-  });
+$('#cancelar').click(function(){
+$('#modal_config').hide();
+});
+
+$('#cancelarRemocao').click(function(){
+$('#modalRemocao').hide();
+});

@@ -426,15 +426,11 @@ $('.page-menu--toggle').click(function(e){
 
         
         $('.mobile-nav').css('display', 'none');
-        $('#add').css('bottom', '10px');
-        $('#div_principal').removeClass('move-right');
         
     }
     else{
   
       $('.mobile-nav').css('display', 'block');
-      $('#add').css('bottom', 'calc(10px + var(--nav-height))');
-      $('#div_principal').addClass('move-right');
   
     }
   
