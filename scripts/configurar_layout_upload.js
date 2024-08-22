@@ -118,7 +118,7 @@ document.getElementById("btn_salvar").addEventListener("click", function() {
     texto_modal = "<p> Erro ao compartilhar, selecione uma imagem.</p><br>";
       $('#mensagem_modal').html(texto_modal);
   }else{
-    salvar();
+    pre_salvar();
   }
 });
 
@@ -161,12 +161,13 @@ $("#cancelar").click(function(e){
   $("#modal_trocarImg").hide();
 });
 
-function salvar(){
+function salvar(flagLote){
   //console.log($('#previewImg').attr('src'));
   //file = $("#imageFileInput");
   var formData = new FormData();
   formData.append('agenda_id', agenda_id);
   formData.append('agenda_layout_upload_desc', conteudoHtml);
+  formData.append('flag_lote', flagLote);
   if(origem_imagem == 'L'){
     formData.append('imagem_src', $("#previewImg").attr("src"));
   }
@@ -226,7 +227,56 @@ function get_agenda(){
     verificaBotaoImg();
     textoArea(obj.agenda);
   });
+}
+
+
+function pre_salvar(){
+
+	$.ajax({
+	   method: "POST",
+	   url: "https://pedeoferta.com.br/templo/index.php/welcome/pre_atualizar_layout_agenda_upload",
+	   data: {  
+              "agenda_id" : agenda_id
+			 }
+	 })
+   .done(function(ret) {
+    var obj = jQuery.parseJSON(ret);
+    var quantidade = obj.agendas.length;
+    if(quantidade > 0){ // lote
+      if(verificaHistoricoStatus(obj.agendas[0].agenda_historico_status)){ //ja atualizou
+
+        $("#modalPreSalvar").show();
+        texto_modal = "<p>Já existem agendamenteos:<br>01/JAN ás 00H<br>02/JAN ás 10H<br>03/JAN ás 20H<br>E mais ["+quantidade+"]  </p><br>";
+          $('#mensagem_modalPreSalvar').html(texto_modal);
+      }else{ // primeira vez
+        salvar(0);
+      }
+    }else{//especifica
+      salvar(0);
+    }
+  });
+}
+
+function verificaHistoricoStatus(strHistoricoStatus){
+  if(strHistoricoStatus != null && strHistoricoStatus != ''){
+
+    var arr = strHistoricoStatus.split(";");
+    arr.includes('2');
+    return arr.includes('2'); // ja atualizou
+  }else{
+    return false;
   }
+}
+
+$("#confirmar_alteracao").click(function(){
+  $("#modalPreSalvar").hide();
+  salvar(1);
+})
+
+$("#nao_confirmar_alteracao").click(function(){
+  $("#modalPreSalvar").hide();
+  salvar(0);
+})
 
   function textoArea(agenda){//document.addEventListener('DOMContentLoaded', function() {
     var descricaoTexto = document.getElementById('descricao_layout_feed');

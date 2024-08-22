@@ -129,6 +129,7 @@ input[type="checkbox"]:checked::before {
     gap: 80px;
     overflow-x: auto; 
     overflow-y: hidden;
+    margin-top: 55px;
 }
 
 .eventos_select{
@@ -160,7 +161,7 @@ input[type="checkbox"]:checked::before {
 .header1{
     background-color: darkred;
     height: 55px;
-    position: relative;
+    position: fixed;
     display: flex;
     justify-content: space-between;
     top: 0;
