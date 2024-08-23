@@ -62,9 +62,10 @@ $(document).ready(function() {
   });
 
   $('#excluir').click(function(){
-    
+    var agenda_id = $('#modal_config').find('[data-agenda_id]').data('agenda_id');
+    $("#hid_agenda_id").val(agenda_id);
+    pre_lote();
     $('#modal_config').hide();
-    $('#modalConfirmacao').show();
   });
 
   $('#cancelarRemocao').click(function(){
@@ -74,7 +75,7 @@ $(document).ready(function() {
 
   $('#confirmarRemocao').click(function(){
     var agenda_id = $('#modal_config').find('[data-agenda_id]').data('agenda_id');
-    remover(agenda_id);
+    remover(agenda_id, 0);
     setTimeout(function() {
       // Verificar se ainda existem eventos na lista
       if ($('#divListaAgenda').find('.pesq').length === 0) {
@@ -89,20 +90,6 @@ $(document).ready(function() {
   });
 });
 
-const months = [
-    { 'id': 1, 'name': 'Jan' },
-    { 'id': 2, 'name': 'Fev' },
-    { 'id': 3, 'name': 'Mar' },
-    { 'id': 4, 'name': 'Abr' },
-    { 'id': 5, 'name': 'Mai' },
-    { 'id': 6, 'name': 'Jun' },
-    { 'id': 7, 'name': 'Jul' },
-    { 'id': 8, 'name': 'Ago' },
-    { 'id': 9, 'name': 'Set' },
-    { 'id': 10, 'name': 'Out' },
-    { 'id': 11, 'name': 'Nov' },
-    { 'id': 12, 'name': 'Dez' },
-];
 var currentYear = new Date().getFullYear();
 var currentMonth = new Date().getMonth() + 1;
 
@@ -134,7 +121,7 @@ function makeCalendar(year, month) {
         }
         $('#calendarList').append(div);
     }
-    monthName = months.find(x => x.id === month).name;
+    monthName = months.find(x => x.id === month).name_small;
     $('#yearMonth').text(year + ' ' + monthName);
     configuraEventos();
     
@@ -502,35 +489,82 @@ $('.page-menu--toggle').click(function(e){
   
   }
 
-  function remover(id){
-    
-    
+  function remover(id, flagLote){
+  $.ajax({
+      method: "POST",
+      url: "https://pedeoferta.com.br/templo/index.php/welcome/remove_agenda",
+      data: {
+          agenda_id : id,
+          flag_lote : flagLote
+          
+      }
+  })
 
-        $.ajax({
-            method: "POST",
-            url: "https://pedeoferta.com.br/templo/index.php/welcome/remove_agenda",
-            data: {
-                agenda_id : id
-                
-            }
-        })
-
-        .done(function (ret) {
-            var obj = jQuery.parseJSON(ret);
-            
-            if(obj.status == '1'){
-                
-              if(currentDay > 0){
-                data =currentYear +'-'+currentMonth+"-"+currentDay;
-                get_calendario_hora(data);
-              
-              }
-              
-                
-            }
-            
-        });
-
-
-   
+  .done(function (ret) {
+      var obj = jQuery.parseJSON(ret);
+      
+      if(obj.status == '1'){
+          
+        if(currentDay > 0){
+          data =currentYear +'-'+currentMonth+"-"+currentDay;
+          get_calendario_hora(data);
+        
+        }
+        
+          
+      }
+      
+  });
+  console.log(flagLote);
+  console.log(id);
 }
+
+function pre_lote(){
+
+	$.ajax({
+	   method: "POST",
+	   url: "https://pedeoferta.com.br/templo/index.php/welcome/pre_lote",
+	   data: {  
+              "agenda_id" : $("#hid_agenda_id").val()
+			 }
+	 })
+   .done(function(ret) {
+    var obj = jQuery.parseJSON(ret);
+    var quantidade = obj.agendas.length;
+    if(quantidade > 1){ // lote
+        
+      $("#modalPreExcluir").show();
+      texto_modal = "<p style='line-height:20px'><b>Já existem agendamenteos:</b><br><br>";
+      $.each(obj.agendas, function (k, agenda){
+        if(k > 2){
+          return false;
+        }
+        texto_modal += dateText(splitDateTime(agenda.agenda_horario).date)+" ás "+timeFormat(splitDateTime(agenda.agenda_horario).time, ':', true)+"<br>";
+        quantidade--;
+      });
+      if(quantidade > 0){
+        texto_modal += "<br>E mais ["+quantidade+"]  </p><br>";
+      }
+        $('#mensagem_modalPreExcluir').html(texto_modal);
+      
+    }else{//especifica
+      $("#modalConfirmacao").show()
+    }
+  });
+}
+
+$("#excluirLote").click(function(){
+  agenda_id = $("#hid_agenda_id").val();
+  $("#modalPreExcluir").hide();
+  remover(agenda_id, 1);
+});
+
+$("#excluirEspecifica").click(function(){
+  agenda_id = $("#hid_agenda_id").val();
+  $("#modalPreExcluir").hide();
+  remover(agenda_id, 0);
+});
+
+$("#cancelarExclusao").click(function(){
+  $("#modalPreExcluir").hide();
+});

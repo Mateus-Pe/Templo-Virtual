@@ -6,7 +6,6 @@ var origem_imagem = ''; // U-upload; L-layout
 $(document).ready(function() {
   //alingDivPreviw();
   agenda_id = window.sessionStorage.getItem('agenda_id');
-  console.log(agenda_id);
   get_agenda();
 });
 
@@ -234,7 +233,7 @@ function pre_salvar(){
 
 	$.ajax({
 	   method: "POST",
-	   url: "https://pedeoferta.com.br/templo/index.php/welcome/pre_atualizar_layout_agenda_upload",
+	   url: "https://pedeoferta.com.br/templo/index.php/welcome/pre_lote",
 	   data: {  
               "agenda_id" : agenda_id
 			 }
@@ -244,9 +243,19 @@ function pre_salvar(){
     var quantidade = obj.agendas.length;
     if(quantidade > 0){ // lote
       if(verificaHistoricoStatus(obj.agendas[0].agenda_historico_status)){ //ja atualizou
-
+        
         $("#modalPreSalvar").show();
-        texto_modal = "<p>Já existem agendamenteos:<br>01/JAN ás 00H<br>02/JAN ás 10H<br>03/JAN ás 20H<br>E mais ["+quantidade+"]  </p><br>";
+        texto_modal = "<p style='line-height:20px'><b>Já existem agendamenteos:</b><br><br>";
+        $.each(obj.agendas, function (k, agenda){
+          if(k > 2){
+            return false;
+          }
+          texto_modal += dateText(splitDateTime(agenda.agenda_horario).date)+" ás "+timeFormat(splitDateTime(agenda.agenda_horario).time, ':', true)+"<br>";
+          quantidade--;
+        });
+        if(quantidade > 0){
+          texto_modal += "<br>E mais ["+quantidade+"]  </p><br>";
+        }
           $('#mensagem_modalPreSalvar').html(texto_modal);
       }else{ // primeira vez
         salvar(0);

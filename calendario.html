@@ -221,6 +221,22 @@
             </div>
         </div>
 
+        <div id="modalPreExcluir" class="modal">
+            <input type="hidden" id="hid_agenda_id">
+            <div class="div_modal" style="width: 75% !important;">
+                <div style="font-size: 1.3rem;" id="mensagem_modalPreExcluir"></div>
+                <div class="modal-footer">
+                    <div>
+                        <button href="#!" id="excluirLote" style="font-size: 1.3rem !important; width: 100px;">Excluir todas</button>
+                        <button href="#!" id="excluirEspecifica" style="font-size: 1.3rem !important; width: 100px;">Excluir esta</button>
+                    </div>
+                    <div>
+                        <button href="#!" id="cancelarExclusao" class="modal-close" style=" font-size: 1.3rem !important; background-color: lightcoral; color: white; width: 150px;">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="modalStatus" class="modal">
             <div class="modal-status" style="display: grid; justify-content: center; gap: 10px;">
                 <div style="border: 1px solid black;">
@@ -249,7 +265,9 @@
 
 <footer>
     <script src="./scripts/jquery/jquery-3.2.1.min.js"></script>
+
     <script src="scripts/calendario.js"></script>
+    <script src="scripts/utils.js"></script>
     <script src="scripts/modal-igrejas.js"></script>
 </footer>
 
