@@ -125,7 +125,7 @@ function getCidades(){
 
       type: "GET",
 
-      url: "https://pedeoferta.com.br/oferta/welcome/get_cities",
+      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_cidades_temp",
 
       cache: false,
 
@@ -136,10 +136,9 @@ function getCidades(){
       success: function (data) {
         
         myJson = data;
-        myJsonPesq = data;
+        //myJsonPesq = data;
 
         montaCidades(data);
-        
         configurarEventos();
 
       }
@@ -282,12 +281,29 @@ function ajaxCep(){
 function monta_endereco_cep(obj){
 
   cidade = obj.localidade +" - "+obj.uf;
-   $('#cidade_instituicao').val(cidade) .prop('disabled', true);
-  $('#bairro_instituicao').val(obj.bairro) .prop('disabled', true);
-  $('#logradouro_instituicao').val(obj.logradouro) .prop('disabled', true);
-  $('.div_form').show();
 
-  $('#numero_instituicao').focus();
+  objCidade = myJson.filter(function(a, b) {
+
+    return a['name'].toLowerCase().indexOf(obj.localidade.toLowerCase()) >= 0;
+
+  });
+  if(objCidade.length > 0){
+    $('#cidade_id_instituicao').val(objCidade[0].id);
+    $('#cidade_instituicao').val(cidade) .prop('disabled', true);
+    $('#bairro_instituicao').val(obj.bairro) .prop('disabled', true);
+    $('#logradouro_instituicao').val(obj.logradouro) .prop('disabled', true);
+    $('.div_form').show();
+
+    $('#numero_instituicao').focus();
+  }
+    
+  else{
+    $('#cep_instituicao').val("");
+    $('#cep_instituicao').focus("");
+    alert("Esta Localidade ainda não existe no Servitus");
+  }
+    
+   
 
 }
 function mock_cep(cep){
