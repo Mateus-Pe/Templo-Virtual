@@ -234,9 +234,8 @@ body {
 }
 
 .modal-footer {
-    display: grid;
+    display: flex;
     justify-content: center;
-    gap: 10px;
 }
 
 .modal-footer button {

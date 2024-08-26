@@ -59,12 +59,14 @@ function formata_dia_extenso(data){
     strDia = "";
     if(Math.floor(diff_days) < 7){
         if(Math.floor(diff_days) < 2){
-        if(D == hoje.getDate()){
-            strDia = 'Hoje';
-        }
-        if(parseInt(D) == parseInt(hoje.getDate()) + 1){
-            strDia = 'Amanhã';
-        }
+            if(D == hoje.getDate()){
+                strDia = 'Hoje';
+            }
+           else if(parseInt(D) == parseInt(hoje.getDate()) + 1){
+                strDia = 'Amanhã';
+            }else{
+                strDia = diaName;
+            }
         }else{
         strDia = diaName;
         }
@@ -125,12 +127,14 @@ function dateText(d){
     ret = "";
     if(Math.floor(diff_days) < 7){
         if(Math.floor(diff_days) < 2){
-        if(D == today.getDate()){
-            ret = 'HOJE';
-        }
-        if(parseInt(D) == parseInt(today.getDate()) + 1){
-            ret = 'AMANHÃ';
-        }
+            if(D == today.getDate()){
+                ret = 'HOJE';
+            }
+            else if(parseInt(D) == parseInt(today.getDate()) + 1){
+                ret = 'AMANHÃ';
+            }else{
+                ret = dayName;
+            }
         }else{
             ret = dayName;
         }
