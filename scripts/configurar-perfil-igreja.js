@@ -31,11 +31,13 @@ function carregar_perfil(){
       html += '<div>';
       html += '<div>';
       html += '<a class="a_div_perfil">';
-      html += '<div>';
-      html += '<h1 id="nome_da_igreja" class="nome_da_igreja">';
-      html += '</h1>';
-      html += '<span id="descricao_igreja" class="material-symbols-outlined" style="font-size: 20px; color: darkred; position: relative; left: 1rem; top: 1rem;">edit</span>'
-      html += '</div>';
+
+      //html += '<div>';
+      //html += '<h1 id="nome_da_igreja" class="nome_da_igreja">';
+      //html += '</h1>';
+      //html += '<span id="descricao_igreja" class="material-symbols-outlined" style="font-size: 20px; color: darkred; position: relative; left: 1rem; top: 1rem;">edit</span>'
+      //html += '</div>';
+
       html += '<span class="abrir_map">';
       html += '<span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432" >';
       html += 'Ver no mapa';
@@ -139,28 +141,32 @@ $(".modal_close").click(function(e) {
 
 
 $("#contato_da_igreja").click(function(e){
-    $("#modal_contato").show();
-    
-  });
-  $("#confirmar").click(function(e){
-    $("#modal_contato").hide();
-  });
+  $("#modal_contato").show();
+});
 
-  $("#nome_da_igreja").click(function(e){
-    $("#modal_descricao").show();
-  });
+$(".contatos").click(function(){
+  $("#modal_contato").show();
+})
 
-  $("#descricao_igreja").click(function(e){
-    $("#modal_descricao").show();
-  });
+$("#confirmar").click(function(e){
+  $("#modal_contato").hide();
+});
 
-  $("#ok").click(function(e){
-    $("#modal_descricao").hide();
-  });
+$(".span_criar-igreja").click(function(e){
+  $("#modal_descricao").show();
+});
 
-  $("#nome_igreja").on("input", function() {
-    var novoNome = $(this).val();
-    $("#nome_da_igreja").text(novoNome);
+$("#descricao_igreja").click(function(e){
+  $("#modal_descricao").show();
+});
+
+$("#ok").click(function(e){
+  $("#modal_descricao").hide();
+});
+
+$("#nome_igreja").on("input", function() {
+  var novoNome = $(this).val();
+  $("#span_criar-igreja").text(novoNome);
 });
 
 
@@ -189,6 +195,7 @@ function atualizarContatos() {
   const campos = ['whatsapp_txt', 'facebook_txt', 'instagram_txt', 'email_txt'];
 
   $('.contatos').empty();
+  let contatoAdicionado = false;
 
   campos.forEach((campo, index) => {
     const valor = $('#' + campo).val().trim();
@@ -201,8 +208,20 @@ function atualizarContatos() {
       divContato.append(spanContato);
 
       $('.contatos').append(divContato);
+      contatoAdicionado = true;
     }
   });
+  if(contatoAdicionado){
+      $("#contato_da_igreja").removeClass('opacity_visible');
+      $("#contato_da_igreja").addClass('opacity_hidden');
+        $("#contato_da_igreja").css('display', 'none');
+  }else{
+    $("#contato_da_igreja").css('display', 'flex');
+    setTimeout(function() {
+    $("#contato_da_igreja").removeClass('opacity_hidden');
+    $("#contato_da_igreja").addClass('opacity_visible');
+    },10);
+  }
 }
 
 /*$('#whatsapp_txt').on('input', function() {
@@ -294,7 +313,7 @@ function carregarIgreja(){
         $('#instagram_txt').val(obj.igreja.igreja_instagram);
         $('#email_txt').val(obj.igreja.igreja_email);
         $('#txt_desc_resumida').val(obj.igreja.igreja_desc_resumida);
-        $("#nome_da_igreja").text(obj.igreja.igreja_nome);
+        $("#span_criar-igreja").text(obj.igreja.igreja_nome);
         $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
         $("#img_fundo_src").attr('src', obj.igreja.igreja_fundo_url);
         if(obj.igreja.igreja_horario_fixo != null)
@@ -327,7 +346,7 @@ function verificarNomeIgreja() {
   var novoNome = $('#nome_igreja').val().trim();
   
   if (novoNome === "") {
-    $("#nome_da_igreja").text(nomeIgrejaVerificado);
+    $("#span_criar-igreja").text(nomeIgrejaVerificado);
   }
 }
 
@@ -352,32 +371,44 @@ function alterar_desc_resumida(){
 
 
 function mascaraTelefone(event) {
-  let telefone = event.target.value.replace(/\D+/g, ""); 
+  let telefone = event.target.value.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
 
-  if (["Backspace", "Delete"].includes(event.key)) {
-      event.preventDefault(); 
-      if (telefone.length > 0) {
-          telefone = telefone.slice(0, -1); 
-      }
-  } else if (telefone.length >= 12) {
-      event.preventDefault(); 
-      return false;
+  // Limita o número a 11 dígitos
+  if (telefone.length > 11) {
+      telefone = telefone.slice(0, 11);
   }
 
   let telefoneFormatado = '';
 
+  // Formatação condicional
   if (telefone.length > 2) {
       telefoneFormatado = '(' + telefone.substring(0, 2) + ') ';
-      if (telefone.length > 7) {
-          telefoneFormatado += telefone.substring(2, 7) + '-' + telefone.substring(7, 11);
-      } else {
-          telefoneFormatado += telefone.substring(2, telefone.length);
-      }
+  }
+  if (telefone.length > 7) {
+      telefoneFormatado += telefone.substring(2, 7) + '-' + telefone.substring(7);
+  } else if (telefone.length > 2) {
+      telefoneFormatado += telefone.substring(2);
   } else {
       telefoneFormatado = telefone;
   }
 
-  event.target.value = telefoneFormatado; 
+  // Verifica se Backspace ou Delete foi pressionado
+  if (["Backspace", "Delete"].includes(event.key)) {
+      let posicaoCursor = event.target.selectionStart;
+
+      // Se o cursor estiver após um `)` ou um `-`, remove o caractere especial junto
+      if (telefoneFormatado[posicaoCursor - 1] === ')' || telefoneFormatado[posicaoCursor - 1] === '-') {
+          telefoneFormatado = telefoneFormatado.substring(0, posicaoCursor - 2) + telefoneFormatado.substring(posicaoCursor);
+      }
+
+      // Se o cursor estiver após `(` e o próximo caractere for `)`, remova ambos
+      if (telefoneFormatado[posicaoCursor - 1] === '(' && telefoneFormatado[posicaoCursor + 2] === ')') {
+          telefoneFormatado = telefoneFormatado.substring(2);
+      }
+  }
+
+  // Aplica a formatação
+  event.target.value = telefoneFormatado;
 }
 
 $('#txt_desc_resumida').on('input', function() {
@@ -554,6 +585,13 @@ document.getElementById("imagem_igreja").addEventListener("click", function() {
   selecionaImgPerfil();
 });
 
+$(document).on('click', '.comunidade_select_img', function(){
+  var src = $(this).find('img').attr('src');
+  $("#img_igreja_selected").attr('src', src);
+  $("#modal_addproduto").hide();
+  $("body").css('overflow', 'auto');
+}); 
+
 $('#abrir_select_img').click(function(){
   document.getElementById("imageFileInput").click();
   $('#modal_addproduto').hide();
@@ -685,7 +723,7 @@ $("#btn_close").click(function(){
 function montaHtmlBancoImg(bancoImagem){
   html = '';
   $.each(bancoImagem, function (k, l) {
-    html += '<div class="comunidade_select">'+
+    html += '<div class="comunidade_select_img">'+
             '<img id="img_igreja_desc_resumida"  src="'+l.igreja_logo_url+'">'+
             '<span id="desc_resumida">'+l.igreja_desc_resumida+'</span>'+
             '</div>';

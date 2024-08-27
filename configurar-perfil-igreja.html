@@ -118,7 +118,7 @@
                     <div class="inputs-modal-contatos">
                         <img src="./imgs/whatsapp.png">
 
-                        <input class="cadastro__input" id="whatsapp_txt" name="whatsapp_txt" type="text"
+                        <input class="cadastro__input" id="whatsapp_txt" name="whatsapp_txt" type="text" maxlength="15"
                             placeholder="Whatsapp"
                             style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
                             required>
@@ -188,17 +188,11 @@
                     </div>
                 </div>
 
-                <div style="display: flex; align-items: center;">
-                    <h1 id="nome_da_igreja" class="nome_da_igreja">
-
-                    </h1>
-                    <span id="descricao_igreja" class="material-symbols-outlined"
-                        style="font-size: 20px; color: darkred; position: relative; left: 1rem; top: 1rem;">edit</span>
-                </div>
+                
             </div>
 
 
-            <div style="position: relative; bottom: 70px; justify-content: right; display: flex; align-items: center;">
+            <div style="justify-content: right; display: flex; align-items: center; padding-top: 50px;">
                 <span class="abrir_hora_fixo">
                     <span id="horarios_fixos">
                         Editar horários fixos
@@ -219,16 +213,19 @@
                                 <a class="a_div_perfil">
 
                                     <span id="endereco_da_igreja" class="endereco_igreja">
-                                        Rua da igreja, 78, Vila Santana, Sorocaba
+                                       
                                     </span>
 
-                                    <span id="contato_da_igreja" class="contato_igreja"
-                                        style="display: flex; align-items: center;">
-                                        Contatos
+                                    <span id="contato_da_igreja" class="contato_igreja" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                                        <!--Contatos
                                         <span class="material-symbols-outlined"
                                             style="position: relative; left: 1rem; font-size: 20px; color: darkred;">
                                             edit
-                                        </span>
+                                        </span>-->
+                                        <div><img src="./imgs/whatsapp.png" ></div>
+                                        <div><img src="./imgs/facebook.png" alt=""></div>
+                                        <div><img src="./imgs/instagram.png" alt=""></div>
+                                        <div><img src="./imgs/email.png" alt=""></div>
                                     </span>
 
 
@@ -241,6 +238,7 @@
                 </div>
             </div>
 
+            <!--
             <div>
                 <div
                     style="width: 100%; height: 20px; background-color: darkred; color: white; align-items: center; display: flex; justify-content: center; font-size: 13px; font-family: exo;">
@@ -249,6 +247,7 @@
                         COMUNIDADES RELACIONADAS
                     </span>
                 </div>
+                
                 
                 <div class="div_comunidade">
     
@@ -267,20 +266,7 @@
                     </div>
                 </div>
             </div>
-
-            
-
-            <main class="feed_main feed_main_top">
-
-
-
-
-                <div id="divHistoria" style="top: 0.2rem; position: relative;">
-
-                </div>
-
-
-            </main>
+            -->
 
 
 
@@ -305,26 +291,27 @@
                 </div>
             </div>
 
+           <!--
             <div id="divModal">
-                <div id="lista-igrejas">
-                    <div id="divPesquisa">
-                        <span class="ion-ios-search-strong search__icon"></span>
-                        <div class="search-igreja_container">
-                            <!--<div class="app" style="position: fixed;">
-                              <p>
-                                  <button onclick="app.vai();">vai</button>
-                                  <button onclick="app.stop();">Para</button>
-                              </p>
-                          </div>-->
-                            <input class="search-igreja_input" type="text" id="search-igreja"
-                                placeholder="Pesquisar igreja">
-                        </div>
-                        <!--<span class="ion-ios-search-strong search-market__icon"></span>-->
-                    </div>
-                    <div id="divLista" style="height: 80%; overflow-y: auto;"></div>
-                </div>
-
-            </div>
+                 <div id="lista-igrejas">
+                     <div id="divPesquisa">
+                         <span class="ion-ios-search-strong search__icon"></span>
+                         <div class="search-igreja_container">
+                             <div class="app" style="position: fixed;">
+                               <p>
+                                   <button onclick="app.vai();">vai</button>
+                                   <button onclick="app.stop();">Para</button>
+                               </p>
+                           </div>
+                             <input class="search-igreja_input" type="text" id="search-igreja"
+                                 placeholder="Pesquisar igreja">
+                         </div>
+                         <span class="ion-ios-search-strong search-market__icon"></span>
+                     </div>
+                     <div id="divLista" style="height: 80%; overflow-y: auto;"></div>
+                 </div>
+ 
+             </div>--> 
         </div>
 
 
@@ -349,10 +336,6 @@
                 </div>
 
                 <div class="modal_body">
-
-                    <div id="divFiliais"></div>
-
-                    <div id="divEndObs"></div>
 
                     <div id="divBancoImg" class="comunidade_select_container"></div>
 

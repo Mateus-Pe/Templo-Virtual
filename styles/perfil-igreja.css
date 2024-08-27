@@ -358,7 +358,7 @@ body{
     position: fixed; 
     align-items: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     font-size: 1.9rem;
     font-family: exo;
     z-index: 100;
@@ -453,4 +453,14 @@ body{
 .btn-compartilhar:hover {
     opacity: 0.8;
     /* Opacidade reduzida ao passar o mouse */
+}
+
+#nome_igreja_fixo{
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    margin-right: auto;
 }

@@ -51,6 +51,12 @@
     margin-left: 0.6rem;
     font-size: 1.3rem;
     font-family: exo;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
 }
 
 .div_img_layout {
