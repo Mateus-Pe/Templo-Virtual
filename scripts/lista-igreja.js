@@ -60,14 +60,14 @@ function listaEscolhida(data) {
         $.each(data[i].listabycat, function (k, l) {
             
             html += '<h3 style="border: 1px solid #ddd; border-radius:0px; display: flex; color: #484848; font-weight: bold; cursor: pointer; position: relative; margin-top:0px; padding: 1.5em .5em 1.5em .7em; background: white;">' +
-            '<span class="material-symbols-outlined acToggle" style="font-size: 17px !important; color: darkred; display: flex; align-items: center">expand_circle_down</span>' +
+            '<span class="ion-android-arrow-dropdown-circle acToggle" style="font-size: 17px !important; color: darkred; display: flex; align-items: center"></span>' +
                  '<div class="list-line">'+
                  '<label for="itens-check" class="label-lista">' +
                  '<p style="display:inline; padding:5px;">'+l.igreja_nome+'</p>' +
                  
                  '</label>' +
                  '</div>'+
-                 '<span data-id="'+l.igreja_id+'" data-igreja_desc="'+l.igreja_nome+'" data-tipo_igreja="'+data[i].tipo_igreja+'" class="material-symbols-outlined editar-igreja">settings</span>' +
+                 '<span data-id="'+l.igreja_id+'" data-igreja_desc="'+l.igreja_nome+'" data-tipo_igreja="'+data[i].tipo_igreja+'" class="ion-android-settings editar-igreja" style="line-height: 1;"></span>' +
                  '</h3>' +
                  '<div class="modal-container endereco-lista" >' +
                     
@@ -174,9 +174,11 @@ function configurarEventos(){
             var $span = $(this).prev().find('.acToggle');
             
             if ($(this).attr('aria-hidden') == 'false') {
-                $span.text('expand_circle_right'); 
+                $span.removeClass('ion-android-arrow-dropdown-circle'); 
+                $span.addClass('ion-android-arrow-dropright-circle'); 
             } else {
-                $span.text('expand_circle_down'); 
+                $span.removeClass('ion-android-arrow-dropright-circle'); 
+                $span.addClass('ion-android-arrow-dropdown-circle'); 
             }
         });
     });

@@ -17,7 +17,7 @@ html, *{
 
 .list-line {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     width: 100%;
     justify-content: space-between;
 }
