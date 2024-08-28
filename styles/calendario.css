@@ -109,7 +109,6 @@ body {
 }
 
 .calendarYearMonth p {
-    display: inline-block !important;
     vertical-align: middle !important;
 
 }
@@ -119,12 +118,16 @@ body {
     cursor: pointer;
     background: white;
     margin: 4% 30px;
-    padding: 1px 6px;
+    padding: 1px 15px;
     border-radius: 12px;
-    font-size: 14px;
+    font-size: 20px;
     line-height: 22px;
     color: darkred;
     border: 1px solid darkred;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .columns{

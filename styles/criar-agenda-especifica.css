@@ -126,6 +126,8 @@ input[type="checkbox"]:checked::before {
     left: 3rem;
     top: 0.5rem;
     height: 25px;
+    font-size: 24px;
+    width: 24px;
 }
 
 .span_input{

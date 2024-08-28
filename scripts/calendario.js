@@ -324,7 +324,7 @@ function mock_agenda(){
 								'</div>'+
                 statusLayout(ch.agenda_layout_tipo, ch)+
                                 '<div class="columns">' +
-                                '<span data-agenda_img="'+ ch.agenda_img +'"data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'" data-status="'+ch.agenda_layout_tipo+'" data-logo_url="'+ch.igreja_logo_url+'" data-igreja_nome="'+ch.igreja_nome+'" data-agenda_desc=\''+ch.agenda_layout_upload_desc+'\'  class="material-symbols-outlined acToggle config">more_horiz</span>'+
+                                '<span data-agenda_img="'+ ch.agenda_img +'"data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'" data-status="'+ch.agenda_layout_tipo+'" data-logo_url="'+ch.igreja_logo_url+'" data-igreja_nome="'+ch.igreja_nome+'" data-agenda_desc=\''+ch.agenda_layout_upload_desc+'\'  class="ion-more acToggle config"></span>'+
                                 //'<span data-agenda_img="'+ ch.agenda_img +'" class="material-symbols-outlined acToggle ver_layout">visibility</span>'+
                                 //'<span data-agenda_id="'+ ch.agenda_id +'" data-agenda_hora="'+ ch.agenda_hora +'"  class="material-symbols-outlined acToggle configurar_layout">edit</span>'+
                                 '</div>'+
