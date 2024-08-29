@@ -54,9 +54,6 @@
 
   <link type="text/css" rel="stylesheet" href="styles/modal-igrejas.css">
 
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
   <link rel="stylesheet" href="./styles/jquery-ui.min.css">
 
 
@@ -70,8 +67,8 @@
 <body>
 
   <div id="div_nome_igreja_fixo" class=" div_nome_fixo header-down"> 
-    <span id="voltar_feed" class="material-symbols-outlined" style="margin-left: 5px;">
-      arrow_back
+    <span id="voltar_feed" class="fa-solid fa-arrow-left" style="margin-left: 5px; font-size: 24px;">
+      
     </span>
 
     <span id="nome_igreja_fixo" >
@@ -104,7 +101,7 @@
 
         <div class="modal_header">
 
-          <span class="modal_close ion-android-close"></span>
+          <span class="modal_close fa-solid fa-xmark"></span>
 
           <h3 class="h3_modal">Mapa</h3>
 
@@ -141,7 +138,7 @@
 
         <div class="modal_header">
 
-          <span id="close_horarios" class="modal_close ion-android-close"></span>
+          <span id="close_horarios" class="modal_close fa-solid fa-xmark"></span>
 
           <h3 class="h3_modal">Horários</h3>
 
@@ -166,9 +163,8 @@
 
 
     <div id="modal_visualizar_img" class="modal" style="background-color: black; z-index: 200;">
-      <span class="material-symbols-outlined modal_close" style="color: white;font-size: 3rem; position: absolute; right: 0.5rem; top: 0.5rem;">
-          close
-          </span>
+        <span class="fa-solid fa-xmark modal_close" style="color: white;font-size: 3rem; position: absolute; right: 0.5rem; top: 0.5rem;">
+        </span>
       <div class="modal-content">
           <img id="imagem" src="" alt="Imagem do Perfil" style="width: 100%;">
       </div>
@@ -185,6 +181,7 @@
 
       <script src="./scripts/loader.js"></script>
       <script src="./scripts/perfil-igreja.js"></script>
+      <script src="scripts/ionJs.js"></script>
       <script src="./scripts/monta-feed.js"></script>
       <!--<script src="scripts/modal-igrejas.js"></script>-->
       <script src="./scripts/geolocation.js"></script>

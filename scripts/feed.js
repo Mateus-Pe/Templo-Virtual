@@ -355,3 +355,43 @@ $('#calendario-feed').click(function () {
   //sessionStorage.setItem('origem', 'feed');
   window.location = 'calendario-feed.html';
 });
+
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var headerHeight = $('.header1').outerHeight();
+var isVisible = true;
+
+$(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = $(this).scrollTop();
+
+    if (Math.abs(lastScrollTop - st) <= delta)
+        return;
+
+    if (st > lastScrollTop && st > headerHeight) {
+        // Rolagem para baixo
+        if (isVisible) {
+            $('.header1').removeClass('header-down').addClass('header-up');
+            isVisible = false;
+        }
+    } else {
+        // Rolagem para cima
+        if (st < lastScrollTop) {
+            $('.header1').removeClass('header-up').addClass('header-down');
+            isVisible = true;
+        }
+    }
+
+    lastScrollTop = st;
+}

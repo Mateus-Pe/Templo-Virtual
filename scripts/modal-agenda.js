@@ -11,7 +11,7 @@ function getAgendaById(agenda_id){
       console.log(obj);
       htmlEvents = '';
       html =  '<div class="div_perfil" >'+
-                  '<span id="back_modal" class="material-symbols-outlined">arrow_back</span>'+
+                  '<span id="back_modal" style="font-size: 24px;" class="fa-solid fa-arrow-left"></span>'+
                   '<div class="perfil_div" data-igreja_id="'+obj.agenda.agenda_igreja_id+'">'+
                     '<img class="img_igreja" src="' + obj.agenda.igreja_logo_url + '">'+
                     '<span class="nome_igreja">'+

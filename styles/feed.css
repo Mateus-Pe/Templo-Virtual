@@ -111,12 +111,13 @@ body {
 .header1 {
     background-color: darkred;
     height: 55px;
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: space-between;
     top: 0;
     width: 100%;
     z-index: 3;
+    align-items: center;
 }
 
 .mobile_nav {
@@ -203,4 +204,14 @@ body {
 .btn-compartilhar:hover {
     opacity: 0.8;
     /* Opacidade reduzida ao passar o mouse */
+}
+
+.header-up {
+    top: -100px; 
+    transition: top 0.3s ease-in-out;
+}
+
+.header-down {
+    top: 0;
+    transition: top 0.3s ease-in-out;
 }

@@ -67,6 +67,8 @@ body{
 .span_input{
     color: lightgray !important; 
     margin-top: 0.5rem;
+    font-size: 24px;
+    width: 40px;
 }
 
 .span_div{
