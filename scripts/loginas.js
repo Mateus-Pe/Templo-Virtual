@@ -41,3 +41,9 @@ function loginas(){
   });
 }
  
+$('#togglePassword').click(function() {
+  const senhaInput = $('#senha');
+  const type = senhaInput.attr('type') === 'password' ? 'text' : 'password';
+  senhaInput.attr('type', type);
+  $(this).toggleClass('fa-eye fa-eye-slash'); // Alterna o ícone
+});
