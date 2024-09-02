@@ -1,7 +1,19 @@
-var searchParams = new URLSearchParams(window.location.search);
-var login = searchParams.get("c");
 
-$('#login').val(login);
+
+var chaveSecreta = "key-uri";
+
+// Extrai o valor dos parâmetros criptografados
+var urlParams = new URLSearchParams(window.location.search);
+var dadosCriptografados = urlParams.get('dados');
+
+// Descriptografa os parâmetros
+var bytes = CryptoJS.AES.decrypt(decodeURIComponent(dadosCriptografados), chaveSecreta);
+console.log(bytes);
+var parametrosDescriptografados = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+//getUser(parametrosDescriptografados);
+var userToken = parametrosDescriptografados.usuario_token;
+console.log("Parâmetros Descriptografados: ", parametrosDescriptografados);
+
 
 $('#btn_seguir').click(function(e){
   console.log('entro');
@@ -15,29 +27,55 @@ $('#btn_seguir').click(function(e){
         $('.cadastro__alert').text('Deu algo errado, confirme novamente sua senha!');
     }
     else{
-        loginas();
+      updateSenha();
   }
 });
 
-function loginas(){
+
+function getUser(parametros){
   var dados = {
-    usuario_celular: $('#login').val(),
-    usuario_senha: $('#senha').val()
+    usuario_token : parametros.usuario_token
 
   };
 
   $.ajax({
     type: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/login",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_usuario",
     data: dados,
     dataType: "json",
     success: function (response) {
  
-    console.log(response.status);
+    console.log(response);
+      if(response.status == 1) {
+        //window.location = "lista-igreja.html";
+        usuarioId = usuario.usuario_id;
+      }
+
+    },
+    error: function (error) {
+      console.log(error);
+    }
+  });
+}
+
+
+function updateSenha(){
+  var dados = {
+    usuario_senha : $("#senha").val(),
+    usuario_token : userToken
+  };
+
+  $.ajax({
+    type: "POST",
+    url: "https://pedeoferta.com.br/templo/index.php/welcome/alterar_senha",
+    data: dados,
+    dataType: "json",
+    success: function (response) {
+ 
+    console.log(response);
       if(response.status == 1) {
         window.sessionStorage.setItem('paroquia_id', response.usuario.usuario_paroquia_id);
         window.location = "lista-igreja.html";
-        
       }
 
     },
@@ -85,3 +123,9 @@ $('#toggleConfirmPassword').click(function() {
     confirmarSenhaInput.attr('type', type);
     $(this).toggleClass('fa-eye fa-eye-slash'); // Alterna o ícone
 });
+
+
+
+
+
+

@@ -1,12 +1,7 @@
-var searchParams = new URLSearchParams(window.location.search);
-var login = searchParams.get("c");
-
-$('#login').val(login);
-
 $('#solicitar_senha').click(function(e){
   console.log('entro');
   if($('#celular').val() == ''){
-    $('.cadastro__alert').text('Digite sua celular para continuar');
+    $('.cadastro__alert').text('Digite seu celular para continuar');
   }
   else{
     //loginas();

@@ -196,7 +196,9 @@ $('#confirmarAdicao').click(function () {
 
             console.log(obj.login_url)
             $('#link_usuario').val(obj.login_url);
-        
+            link = criarUrlUser(obj.usuario_token);
+            var linkCodificado = encodeURIComponent(link);
+            window.open('https://api.whatsapp.com/send?text='+linkCodificado, '_blank');
         }
         
     }); 
@@ -301,3 +303,30 @@ $('#add').click(function () {
         
     });
 });
+
+
+
+
+function criarUrlUser(usuario_token){
+
+    // Chave secreta
+    var chaveSecreta = 'key-uri';
+    
+    // Parâmetros a serem criptografados
+    var parametros = {
+        usuario_token : usuario_token
+    };
+    
+    // Converte os parâmetros para string JSON
+    var parametrosString = JSON.stringify(parametros);
+    
+    // Criptografa os parâmetros
+    var parametrosCriptografados = CryptoJS.AES.encrypt(parametrosString, chaveSecreta).toString();
+    
+    // Cria a URL com os parâmetros criptografados
+    var link = "http://localhost:3001/confirmar-senha.html?" + "dados=" + encodeURIComponent(parametrosCriptografados);
+    
+    console.log("Link com Parâmetros Criptografados: " + link);
+    
+    return link;
+}
