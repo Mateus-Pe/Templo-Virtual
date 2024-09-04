@@ -32,6 +32,8 @@ function loginas(){
         window.sessionStorage.setItem('paroquia_id', response.usuario.usuario_paroquia_id);
         window.location = "lista-igreja.html";
         
+      }else{
+        $('.cadastro__alert').text('Usuário ou senha incorretos');
       }
 
     },
@@ -47,3 +49,11 @@ $('#togglePassword').click(function() {
   senhaInput.attr('type', type);
   $(this).toggleClass('fa-eye fa-eye-slash'); // Alterna o ícone
 });
+
+$("#login").focus(function(){
+  $('.cadastro__alert').text('');
+});
+
+$("#senha").focus(function(){
+  $('.cadastro__alert').text('');
+})

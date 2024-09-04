@@ -28,6 +28,14 @@
     font-size: 1.6rem;
 }
 
+.is-verify {
+    color: blue;
+    background-color: #deeff2;
+    border-color: #deeff2;
+    font-family: Exo;
+    font-size: 1.6rem;
+}
+
 .container_input{
     margin-top: 10px;
 }
@@ -61,4 +69,63 @@
     background-color: darkred;
     color: white;
     transition: 0.3s ease-in-out;
+}
+
+
+
+
+
+.success-animation {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #4CAF50; /* Verde */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 20px auto;
+}
+
+.checkmark {
+    width: 25px;
+    height: 50px;
+    border-right: 5px solid white;
+    border-bottom: 5px solid white;
+    transform: rotate(45deg) scale(0);
+    animation: checkmark 0.5s ease-in-out forwards 0.3s;
+}
+
+@keyframes checkmark {
+    0% {
+        transform: rotate(45deg) scale(0);
+    }
+    50% {
+        transform: rotate(45deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(45deg) scale(1);
+    }
+}
+
+.success-animation::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 5px solid rgba(76, 175, 80, 0.5);
+    animation: pulsate 1.5s ease-out infinite;
+    z-index: -1;
+}
+
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }

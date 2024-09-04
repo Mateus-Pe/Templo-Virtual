@@ -193,12 +193,13 @@ $('#confirmarAdicao').click(function () {
         var obj = jQuery.parseJSON(ret);
         
         if(obj.status == '1'){
-
-            console.log(obj.login_url)
+            alert(obj.mensagem);
+           /* console.log(obj.login_url)
             $('#link_usuario').val(obj.login_url);
-            link = criarUrlUser(obj.usuario_token);
+            parametros = criarParametrosUrlUser(obj.usuario_token);
+            link = "http://localhost:3001/confirmar-senha.html?" + parametros;
             var linkCodificado = encodeURIComponent(link);
-            window.open('https://api.whatsapp.com/send?text='+linkCodificado, '_blank');
+            window.open('https://api.whatsapp.com/send?text='+linkCodificado, '_blank');*/
         }
         
     }); 
@@ -307,7 +308,7 @@ $('#add').click(function () {
 
 
 
-function criarUrlUser(usuario_token){
+function criarParametrosUrlUser(usuario_token){
 
     // Chave secreta
     var chaveSecreta = 'key-uri';
@@ -324,9 +325,9 @@ function criarUrlUser(usuario_token){
     var parametrosCriptografados = CryptoJS.AES.encrypt(parametrosString, chaveSecreta).toString();
     
     // Cria a URL com os parâmetros criptografados
-    var link = "http://localhost:3001/confirmar-senha.html?" + "dados=" + encodeURIComponent(parametrosCriptografados);
+    var parametrosGet = "dados=" + encodeURIComponent(parametrosCriptografados);
     
-    console.log("Link com Parâmetros Criptografados: " + link);
+    console.log("Link com Parâmetros Criptografados: " + parametrosGet);
     
-    return link;
+    return parametrosGet;
 }

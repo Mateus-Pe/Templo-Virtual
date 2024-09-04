@@ -4,15 +4,15 @@ var chaveSecreta = "key-uri";
 
 // Extrai o valor dos parâmetros criptografados
 var urlParams = new URLSearchParams(window.location.search);
-var dadosCriptografados = urlParams.get('dados');
+var userToken = urlParams.get('t');
 
 // Descriptografa os parâmetros
-var bytes = CryptoJS.AES.decrypt(decodeURIComponent(dadosCriptografados), chaveSecreta);
+/*var bytes = CryptoJS.AES.decrypt(decodeURIComponent(dadosCriptografados), chaveSecreta);
 console.log(bytes);
 var parametrosDescriptografados = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 //getUser(parametrosDescriptografados);
-var userToken = parametrosDescriptografados.usuario_token;
-console.log("Parâmetros Descriptografados: ", parametrosDescriptografados);
+var userToken = parametrosDescriptografados.usuario_token;*/
+console.log("Parâmetros: ", userToken);
 
 
 $('#btn_seguir').click(function(e){
@@ -84,30 +84,6 @@ function updateSenha(){
     }
   });
 }
- 
-$('#senha').on('input', function() {
-    const senha = $(this).val();
-    const strengthIndicator = $('#password-strength');
-
-    if (senha === '') {
-        strengthIndicator.css('display', 'none'); // Esconde o indicador quando o campo está vazio
-    } else {
-        let strength = 'Fraca';
-        let color = 'red';
-
-        if (senha.length >= 8 && /[A-Z]/.test(senha) && /[0-9]/.test(senha) && /[^A-Za-z0-9]/.test(senha)) {
-            strength = 'Forte';
-            color = 'green';
-        } else if (senha.length >= 6) {
-            strength = 'Razoável';
-            color = 'orange';
-        }
-        setTimeout(function() {
-        strengthIndicator.text('Senha ' + strength).css({'color': color})// Mostra o indicador quando há conteúdo
-        },300);
-        strengthIndicator.css({'color': color, 'display': 'block'})
-    }
-});
 
 
 $('#togglePassword').click(function() {
