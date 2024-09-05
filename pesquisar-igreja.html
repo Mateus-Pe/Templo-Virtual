@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <title>Pé de Oferta</title>
+    <meta name="theme-color" content="darkred" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="description" content="Vitrine de Ofertas">
+    <meta name="robots" content="index,follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Pé de Oferta">
+    <meta property="og:description" content="Vitrine de Ofertas">
+    <meta property="og:url" content="http://pedeoferta.com.br/">
+    <meta property="og:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pé de Oferta">
+    <meta name="twitter:description" content="Vitrine de Ofertas">
+    <meta name="twitter:url" content="http://pedeoferta.com.br/">
+    <meta name="twitter:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
+
+    <link rel="stylesheet" href="styles/main-new.css">
+    <link rel="stylesheet" href="styles/pesquisar-igreja.css">
+    <link rel="stylesheet" href="styles/ion.css">
+    <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+
+    <script src="https://apis.google.com/js/api:client.js"></script>
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+</head>
+
+<body id="idbody" style="overflow: hidden !important;">
+
+    <div style="width: 100%; position: relative; display: grid; margin-top: 60px; gap: 1rem; margin-bottom: 25px;">
+
+        <select type="text" id="estado" placeholder="" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px; gap: 0.5rem;">
+          <option style="display: none;" value="" disabled >Estado</option>
+          <option value="SP" selected>São Paulo</option>
+          <option value="RJ">Rio de Janeiro</option>
+          <option value="MG">Minas Gerais</option>
+          <option value="BA">Bahia</option>
+          <option value="PR">Paraná</option>
+        </select>
+
+
+        <select type="text" id="cidade" placeholder="" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px;">
+          <option style="display: none;" value="" disabled>Cidade</option>
+          <option value="Itapetininga" selected>Itapetininga</option>
+          <option value="Sorocaba">Sorocaba</option>
+          <option value="Votorantim">Votorantim</option>
+          <option value="Itu">Itu</option>
+          <option value="Salto">Salto</option>
+          <option value="Piedade">Piedade</option>
+          <option value="Rio de Janeiro">Rio de Janeiro</option>
+          <option value="Belo Horizonte">Belo Horizonte</option>
+          <option value="Brasília">Brasília</option>
+          <option value="Salvador">Salvador</option>
+          <option value="Recife">Recife</option>
+        </select>
+
+
+        <input type="text" id="nome_igreja" placeholder="" style="height: 4.2rem; width: 90%; margin-left: 5%; border: 1px solid darkred; border-radius: 5px; gap: 0.5rem;">
+      
+      </div>
+
+    
+    <div id="divCorpo">
+       
+        <div id="divListaPrincipal">
+       
+        </div>
+    </div>
+  
+    <footer>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+        <script src="./scripts/pesquisar-igreja.js"></script>
+    </footer>
+</body>
+
+</html>
