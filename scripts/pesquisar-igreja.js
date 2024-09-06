@@ -90,14 +90,16 @@ function listaEscolhida(data) {
                  '<span class="acToggle ion-android-arrow-dropleft-circle"></span>' +
                  '</div>'+
                  '</h3>' +
-                 '<div class="modal-container endereco-lista" >' +
-                    '<div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 9px; font-size: 10px;">' +
-                    '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_logradouro +', '+ l.igreja_endereco_numero + '</p>' +
-                    '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_bairro + '</p>' +
-                    '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_cidade + '</p>' +
-                    '</div>' +
-                    '<div class="list-line">'+
+                 '<div class="modal-container endereco-lista" data-igreja_id = '+l.igreja_id+' >' +
+                 
+                    '<div class="div_img">'+
+                    '<img src="'+l.igreja_fundo_url+'">'+
                     '</div>'+
+                    '<div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 9px; font-size: 10px;">' +
+                    '<p style="margin: 3px 0; text-align: left; line-height: 15px;">' + l.igreja_endereco_logradouro +', '+ l.igreja_endereco_numero + '</p>' +
+                    '<p style="margin: 3px 0; text-align: left; line-height: 15px;">' + l.igreja_endereco_bairro + '</p>' +
+                    '<p style="margin: 3px 0; text-align: left; line-height: 15px;">' + l.igreja_endereco_cidade + '</p>' +
+                    '</div>' +
                '</div>';
                
 
@@ -175,6 +177,14 @@ function configurarEventos(){
         setTimeout(function () {
             this.checked = !this.checked;
         }.bind(this), 100);
+    });
+
+
+    
+    $('.endereco-lista').click(function() {
+        window.sessionStorage.setItem('feed_igreja_id', $(this).data('igreja_id'));
+        window.location = 'perfil-igreja.html';
+        
     });
 }
 
@@ -320,32 +330,57 @@ $("#nome_igreja").on("input", function() {
     }
 });
 
-$('.perfil_div').click(function () {
-    window.sessionStorage.setItem('feed_igreja_id', $(this).data('igreja_id'));
-    window.location = 'perfil-igreja.html';
-    
-});
 
+function pesquisarIgrejas(textFilter) {
+    var listaParoquiaAux = JSON.parse(JSON.stringify(listaParoquias)); // Cópia profunda
+    var rows = listaParoquiaAux.length; // Número de paróquias
+    var arrPesq = textFilter.split(" "); // Termos de pesquisa divididos por espaço
+    var termCounters = {}; // Objeto para contar os resultados por termo
 
-function pesquisarIgrejas(textFilter){
-    var listaParoquiaAux = listaParoquias;
-    var rows = JSON.parse(listaParoquiaAux.length);
-    
+    for (var j = 0; j < arrPesq.length; j++) {
+        if (arrPesq[j] != '') {
+            termCounters[arrPesq[j]] = 0; // Inicializa o contador para cada termo de pesquisa
 
-    for (var i = 0; i < rows; i++) {
-        listaFilter = listaParoquiaAux[i].listabycat.filter(function(a, b){
-            return a['igreja_nome'].toLowerCase().indexOf(textFilter.toLowerCase()) >= 0;
-            
-        });
-        if(listaFilter.length > 0){
-            listaParoquiaAux[i].listabycat = listaFilter;
-            listaParoquiaAux[i].exibe = 1;
-        }else{
-            listaParoquiaAux[i].exibe = 0;
+            for (var i = 0; i < rows; i++) {
+                // Filtrar igrejas pelo nome ou pelo bairro
+                let listaFilter = listaParoquias[i].listabycat.filter(function(a) {
+                    return a['igreja_nome'].toLowerCase().indexOf(arrPesq[j].toLowerCase()) >= 0 || 
+                           a['igreja_endereco_bairro'].toLowerCase().indexOf(arrPesq[j].toLowerCase()) >= 0; // Adiciona a busca por bairro
+                });
+
+                if (listaFilter.length > 0) {
+                    listaParoquiaAux[i].listabycat = listaFilter;
+                    listaParoquiaAux[i].exibe = 1;
+                    termCounters[arrPesq[j]] += listaFilter.length; // Incrementa o contador do termo
+
+                    if (!listaParoquiaAux[i].termMatches) {
+                        listaParoquiaAux[i].termMatches = 0;
+                    }
+                    listaParoquiaAux[i].termMatches += 1; // Incrementa para cada termo que encontrou correspondência
+                } else {
+                    if (j == 0) {
+                        listaParoquiaAux[i].exibe = 0;
+                    }
+                }
+            }
         }
     }
-    listaEscolhida(listaParoquiaAux);
+
+    // Ordenar listaParoquiaAux com base em termMatches (maior para menor)
+    listaParoquiaAux.sort(function(a, b) {
+        return (b.termMatches || 0) - (a.termMatches || 0); // Ordena pelo número de termos correspondentes
+    });
+
+    // Encontrar o termo com o maior número de resultados
+    var termoMaisResultados = Object.keys(termCounters).reduce(function(a, b) {
+        return termCounters[a] > termCounters[b] ? a : b;
+    });
+
+    console.log("Termo com mais resultados: " + termoMaisResultados);
+    console.log("Contador de termos: ", termCounters);
+    listaEscolhida(listaParoquiaAux); // Exibe a lista filtrada
 }
+
 
 function listaParoquiaIgrejaOriginal(){
     var rows = JSON.parse(listaParoquias.length);

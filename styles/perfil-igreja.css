@@ -230,6 +230,7 @@ body{
     justify-content: right;
     align-items: center;
     font-size: 1.2rem;
+    gap: 10px;
 }
 
 .abrir_map{
@@ -239,6 +240,7 @@ body{
     justify-content: right;
     align-items: center;
     font-size: 1.2rem;
+    gap: 10px;
 }
 
 .ion_map{

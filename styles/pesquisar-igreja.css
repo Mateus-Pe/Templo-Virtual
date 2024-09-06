@@ -52,14 +52,11 @@ html, *{
 }
 
 .modal-container {
-    align-items: left;
     display: flex;
     position: relative;
-    justify-content: center;
-    flex-flow: column;
-    height: 10rem;
     padding: unset !important;
     overflow: hidden !important;
+    align-items: center;
   }
 
 .modal-content {
@@ -123,8 +120,6 @@ html, *{
     font-family: Exo; 
     font-size: 10px; 
     display: flex; 
-    justify-content: space-between; 
-    align-items: flex-start;
 }
 
 .header1{
@@ -258,4 +253,13 @@ html, *{
     justify-content: center;
     display: flex;
     align-items: center;
+}
+
+.div_img{
+    padding: 10px;
+}
+
+.div_img img{
+    height: 120px; 
+    width: 150px;
 }

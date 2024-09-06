@@ -54,8 +54,7 @@ function carregar_perfil(){
     html +=               '<span id="horarios_fixos">';
     html +=                 'Ver horários fixos';
     html +=               '</span>';
-    html +=               '<span class="material-symbols-outlined icone_editar ion_map">';
-    html +=                 'schedule';
+    html +=               '<span class="fa-regular fa-clock icone_editar ion_map">';
     html +=               '</span>';
     html +=             '</span>';
     html +=            '</div>';
@@ -64,8 +63,7 @@ function carregar_perfil(){
     html +=                 '<span id="localizacao" data-lat="" data-long="" >';
     html +=                   'Ver no mapa';
     html +=                 '</span>';
-    html +=                 '<span class="material-symbols-outlined icone_editar ion_map">';
-    html +=                   'location_on';
+    html +=                 '<span class="fa-solid fa-location-dot ion_local icone_editar ion_map">';
     html +=                 '</span>';
     html +=                '</span>';
     html +=                '<span id="endereco_da_igreja" class="endereco_igreja">';
