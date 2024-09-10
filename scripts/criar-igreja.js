@@ -44,9 +44,9 @@ $('#btn_salvar').click(function(e){
     else if($('#logradouro_instituicao').val() == ''){
         $('.cadastro__alert').text('Para prosseguir coloque um logradouro');
     }
-    else if($('#numero_instituicao').val() == ''){
-        $('.cadastro__alert').text('Para prosseguir coloque o número');
-    }
+    //else if($('#numero_instituicao').val() == ''){
+      //  $('.cadastro__alert').text('Para prosseguir coloque o número');
+    //}
       
     else{
       if(igrejaId != null && igrejaId != ''){
@@ -198,10 +198,6 @@ function montaCidades(data){
 
 $('#cidade_instituicao').keyup(function (e) {
 
-
-
-
-
   if($('#cidade_instituicao').val().length >= 2){
 
     myJson = myJsonPesq.filter(function(a, b) {
@@ -224,11 +220,6 @@ $('#cidade_instituicao').keyup(function (e) {
   montaCidades(myJson);// this.value);
 
   configurarEventos();
-
-  
-
-  
-
 });
 
 
@@ -289,9 +280,9 @@ function monta_endereco_cep(obj){
   });
   if(objCidade.length > 0){
     $('#cidade_id_instituicao').val(objCidade[0].id);
-    $('#cidade_instituicao').val(cidade) .prop('disabled', true);
-    $('#bairro_instituicao').val(obj.bairro) .prop('disabled', true);
-    $('#logradouro_instituicao').val(obj.logradouro) .prop('disabled', true);
+    //$('#cidade_instituicao').val(cidade) .prop('disabled', true);
+    //$('#bairro_instituicao').val(obj.bairro) .prop('disabled', true);
+    //$('#logradouro_instituicao').val(obj.logradouro) .prop('disabled', true);
     $('.div_form').show();
 
     $('#numero_instituicao').focus();
@@ -300,7 +291,7 @@ function monta_endereco_cep(obj){
   else{
     $('#cep_instituicao').val("");
     $('#cep_instituicao').focus("");
-    alert("Esta Localidade ainda não existe no Servitus");
+    //alert("Esta Localidade ainda não existe no Servitus");
   }
     
    
@@ -586,10 +577,11 @@ function apiGeoLocation(){
 function getAddress(){
   address = '';
   address += $('#logradouro_instituicao').val();
-
-  address += ' '+ $('#numero_instituicao').val(),
-  address += ', '+$('#bairro_instituicao').val(),
-  address += ', '+$('#cidade_instituicao').val()
+  if($('#numero_instituicao').val() != ''){
+    address += ' '+ $('#numero_instituicao').val();
+  }
+  address += ', '+$('#bairro_instituicao').val();
+  address += ', '+$('#cidade_instituicao').val();
 
 
   return address;

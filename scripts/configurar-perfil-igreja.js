@@ -3,6 +3,7 @@ nomeIgrejaVerificado = "";
 origem_imagem = "";
 horarioFixoHtml = '';
 editaHorarioFixo = '';
+imagemVemDoBanco = false;
 //evento_agenda();
 
 
@@ -250,13 +251,13 @@ $('#email_txt').on('input', function() {
 });
 
 $('#btn_salvar').on('click', function() {
-  var descResumida = $('#txt_desc_resumida').val().trim();
+  //var descResumida = $('#txt_desc_resumida').val().trim();
 
-  if (descResumida === ''){
-    $('#modal_validacao').show();
-  } else{
+  //if (descResumida === ''){
+   // $('#modal_validacao').show();
+  //} else{
     salvar();
-  }
+  //}
 });
 
 $('#btnFecharModal').on('click', function(){
@@ -267,14 +268,18 @@ function salvar(){
 
   var formData = new FormData();
   formData.append('igreja_id', igrejaId);
-  formData.append('igreja_desc_resumida', $('#txt_desc_resumida').val());
+  //formData.append('igreja_desc_resumida', $('#txt_desc_resumida').val());
   formData.append('igreja_whats', $('#whatsapp_txt').val());
   formData.append('igreja_face', $('#facebook_txt').val());
   formData.append('igreja_instagram', $('#instagram_txt').val());
   formData.append('igreja_email', $('#email_txt').val());
   formData.append('igreja_horario_fixo', horarioFixoHtml);
   formData.append('file_background', $('#imageFundoFileInput')[0].files[0]);
-  formData.append('file', $('#imageFileInput')[0].files[0]);
+  if(imagemVemDoBanco){
+    formData.append('banco_imagem', $("#img_igreja_selected").attr('src'));
+  }else{
+    formData.append('file', $('#imageFileInput')[0].files[0]);
+  }
   
 
   $.ajax({
@@ -588,12 +593,14 @@ document.getElementById("imagem_igreja").addEventListener("click", function() {
 $(document).on('click', '.comunidade_select_img', function(){
   var src = $(this).find('img').attr('src');
   $("#img_igreja_selected").attr('src', src);
+  imagemVemDoBanco = true;
   $("#modal_addproduto").hide();
   $("body").css('overflow', 'auto');
 }); 
 
 $('#abrir_select_img').click(function(){
   document.getElementById("imageFileInput").click();
+  imagemVemDoBanco = false;
   $('#modal_addproduto').hide();
   $('body').css('overflow', 'auto');
 })

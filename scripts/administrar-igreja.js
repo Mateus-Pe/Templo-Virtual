@@ -37,15 +37,18 @@ function listaEscolhida(data) {
     $('#divListaPrincipal').html('');
 
     var rows = JSON.parse(data.length);
-
+    var cidadeId = 0;
     html = '';
-
+    var arrColor = ['black', 'blue', 'darkred', 'white', 'orange'];
+    var color = arrColor[0];
     categoria_cod = 0;
     for (var i = 0; i < rows; i++) {
-
+        if(cidadeId != data[i].cidade_id){
+            cidadeId = data[i].cidade_id;
+            color = arrColor[ Math.floor(Math.random() * arrColor.length)];
+        }
         
-        
-        html += '<div class="div-igreja" style="display:flex; align-items:center; border-color: white">' +
+        html += '<div class="div-igreja" style="display:flex; align-items:center; border-color: white; background-color: '+color+'">' +
                     '<span class="span-igreja">' + data[i].tipo + '</span>' +
                     '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined botao_adicionar" style="color:white; position:absolute; right:10%; font-size:2rem"> person_add </span>'+
                     '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined editar-paroquia" style="color:white; position:absolute; right:20%; font-size:2rem"> edit </span>'+
@@ -252,8 +255,8 @@ function remover(id){
 
 $(document).ready(function () {
     //solução provisória
-    window.sessionStorage.setItem('cidade_id', 9240);
-    window.sessionStorage.setItem("cidade_nome", "Itapetininga");
+   // window.sessionStorage.setItem('cidade_id', 9240);
+   // window.sessionStorage.setItem("cidade_nome", "Itapetininga");
     $('#cidade_nome').html(' ' + window.sessionStorage.getItem("cidade_nome"));
     cidade_id = window.sessionStorage.getItem("cidade_id");
     window.sessionStorage.setItem('igreja_id','');
