@@ -106,6 +106,8 @@ body {
 .span_rodape_botao {
     background-color: white;
     color: lightslategray;
+    font-size: 22px !important;
+    margin-right: 12px;
 }
 
 .header1 {

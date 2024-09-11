@@ -63,8 +63,7 @@ function montaHtml(linha, i) {
   html += '</div>';
   html += '<div class="div_rodape_feed">';
   html += '<div class="rodape_feed_botao">';
-  html += '<span class="material-symbols-outlined span_rodape_botao">';
-  html += 'share';
+  html += '<span class="fa-solid fa-share-nodes span_rodape_botao">';
   html += '</span>';
   html += '</div>';
   html += '<div class="compartilhamento">';
@@ -117,7 +116,7 @@ function montaHtmlVideo(classVideo){
         html += '</div>';
         html += '<div class="div_rodape_feed">';
         html += '<div class="rodape_feed_botao">';
-        html += '<span class="material-symbols-outlined span_rodape_botao">';
+        html += '<span class="fa-solid fa-share span_rodape_botao">';
         html += 'share';
         html += '</span>';
         html += '</div>';

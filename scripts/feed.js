@@ -41,7 +41,7 @@ function evento_agenda(){
           //readyVideo(classVideo);
         }
         html = montaHtml(lpp, k);
-        $("#divHistoria").append(html);
+        $("#divFeed").append(html);
       });
       
 
@@ -238,17 +238,18 @@ function compartilha() {
       var postagem = this.closest('.div_publicacao');
       var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
       var imagemUrl = postagem.querySelector('.img_layout_feed').getAttribute('src');
-      var postId = extrairIdDaImagem(imagemUrl);
+      var postId = postagem.getAttribute('data-feed'); // Extrai o ID diretamente da div da postagem
 
       if (postId) {
         var nomeInstituicao = postagem.querySelector('.nome_igreja').innerText;
+        var dataFeed = postagem.getAttribute('data-feed');
+        console.log(dataFeed);
         var timestamp = Date.now();
-        var parametros = "?a="+encodeURIComponent(nomeInstituicao)+"&c="+imagemUrl+"&timestamp="+timestamp;
-        var postUrl = 'http://pedeoferta.com.br/site/servitus/compartilha.html'+parametros;
+        //var parametros = "?a="+encodeURIComponent(nomeInstituicao)+"&c="+imagemUrl+"&timestamp="+timestamp;
+        var postUrl = 'https://pedeoferta.com.br/site/new8/compartilha.html?a='+encodeURIComponent(nomeInstituicao)+'&b='+dataFeed+'&c='+imagemUrl+'';
         console.log('Link compartilhado:', postUrl);
         
-        // Abre um menu de compartilhamento com opções para WhatsApp, Facebook e Instagram
-        var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
+        // Abre o menu de compartilhamento
         compartilhamentoMenu.style.display = 'flex';
 
         var whatsappButton = compartilhamentoMenu.querySelector('.btn-whatsapp');
@@ -256,15 +257,15 @@ function compartilha() {
         var instagramButton = compartilhamentoMenu.querySelector('.btn-instagram');
 
         whatsappButton.addEventListener('click', function() {
-          abrirLinkParaWhatsApp(postUrl);
+          abrirLinkParaWhatsApp(postUrl); // Abre o WhatsApp diretamente no app se disponível
         });
 
         facebookButton.addEventListener('click', function() {
-          abrirLink('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(postUrl));
+          abrirLinkParaFacebook(postUrl, imagemUrl); // Abre o Facebook diretamente no app se disponível
         });
 
         instagramButton.addEventListener('click', function() {
-          abrirLink('https://www.instagram.com/' + encodeURIComponent(postUrl));
+          abrirLinkParaInstagram(imagemUrl); // Avisa o usuário sobre o compartilhamento no Instagram
         });
 
         // Alternar a visibilidade dos botões de compartilhamento
@@ -276,6 +277,25 @@ function compartilha() {
     });
   });
 }
+
+
+function abrirLinkParaInstagram(imageUrl) {
+  alert("Por favor, baixe a imagem e compartilhe manualmente no Instagram.");
+  window.location.href = imageUrl; // Isso abrirá a imagem no navegador para o usuário baixar
+}
+
+function abrirLinkParaFacebook(postUrl, imageUrl) {
+  var facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(postUrl) + '&picture=' + encodeURIComponent(imageUrl);
+  window.location.href = facebookUrl;
+}
+
+
+function abrirLinkParaWhatsApp(postUrl) {
+  var whatsappUrl = 'https://api.whatsapp.com/send/?text=' + encodeURIComponent(postUrl);
+  window.open(whatsappUrl, '_blank');
+}
+
+
 
 function toggleShareButtons(compartilhamentoMenu) {
   compartilhamentoMenu.offsetHeight;
@@ -310,7 +330,7 @@ function hideShareButtonsFromOtherPosts(currentCompartilhamentoMenu) {
 
 
 
-function abrirLink(url) {
+/*function abrirLink(url) {
   var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
   if (isMobile) {
@@ -320,23 +340,10 @@ function abrirLink(url) {
     // Se estiver em um computador, abrimos o link em uma nova aba do navegador
     window.open(url, '_blank');
   }
-}
-
-function abrirLinkParaWhatsApp(url) {
-  var whatsappLink = 'whatsapp://send?text=' + encodeURIComponent(url);
-  var whatsappWebLink = 'https://web.whatsapp.com/send?text=' + encodeURIComponent(url);
-  
-  // Verifica se o navegador suporta o protocolo whatsapp://
-  if (navigator.userAgent.match(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i)) {
-    window.open(whatsappLink, '_blank');
-  } else {
-    // Se não suportar, abre o link para o WhatsApp Web
-    window.open(whatsappWebLink, '_blank');
-  }
-}
+}*/
 
 
-function extrairIdDaImagem(imagemUrl) {
+/*function extrairIdDaImagem(imagemUrl) {
   // Extrai o ID da imagem do URL
   var idMatch = imagemUrl.match(/\/(\d+)\.jpg$/);
   if (idMatch) {
@@ -344,7 +351,7 @@ function extrairIdDaImagem(imagemUrl) {
   } else {
     return null;
   }
-}
+}*/
 
 $('#filtro').click(function () {
   //sessionStorage.setItem('origem', 'feed');
