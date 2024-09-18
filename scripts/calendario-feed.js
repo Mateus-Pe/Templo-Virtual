@@ -204,12 +204,39 @@ function configuraEventos(){
   });
 }
 
+
+function eventoPassou(hora, minuto, segundo) {
+  const dataAtual = new Date(); // Data atual
+
+  // Converte strings para números usando parseInt
+  var horaInt = parseInt(hora);
+  var minutoInt = parseInt(minuto);
+  var segundoInt = parseInt(segundo);
+
+  // Cria uma data de referência para comparação (subtrai 1 do mês, pois começa em 0)
+  var dataRef = new Date(arrDay.day.getFullYear(), arrDay.day.getMonth(), arrDay.day.getDate(), horaInt, minutoInt, segundoInt);
+
+  //console.log(horaInt, "hora");
+  //console.log(minutoInt, "minuto");
+  //console.log(segundoInt, "segundo");
+  //console.log(dataRef);
+
+  // Verifica se a data atual é maior que a data de referência
+  if (dataAtual > dataRef) {
+    return false; // Evento já passou
+  } else {
+    return true; // Evento ainda vai acontecer
+  }
+}
+
+
+
   
-function estiloEventoPassado(hora, minuto, segundo) {
-    /*var dataRef= new Date(currentYear, currentMonth - 1, arrDay.numberDay, hora, minuto, segundo);
+/*function estiloEventoPassado(hora, minuto, segundo) {
+  const dataAtual = new Date();
+    var dataRef= new Date(dataAtual.getYear, dataAtual.getMonth, arrDay.numberDay, hora, minuto, segundo);
     //dataRef.setHours(hora, minuto, segundo, 0);
 
-    const dataAtual = new Date();
      var htmlAncoraHora = '';
      
      if(dataAtual > dataRef){
@@ -217,9 +244,9 @@ function estiloEventoPassado(hora, minuto, segundo) {
        contLista += 1;
      }
 
-    return htmlAncoraHora;*/
-    return '';
-}
+    return htmlAncoraHora;
+    //return '';
+}*/
 
 function montaHorario(ch){
    
@@ -274,63 +301,68 @@ $("#dayMonth").click(function(e){
   $("#modalCalendario").show();
 });
 
-function montaHtmlCalendarioHora(listaCalendarioHora){
-  $('#divListaAgenda').html('');
+function montaHtmlCalendarioHora(listaCalendarioHora) {
+  $('#divListaAgenda').html(''); // Limpa o conteúdo atual da lista
 
-            if (listaCalendarioHora.length === 0) {
-              $('#divListaAgenda').html('<div class="sem-eventos">Nenhum evento disponível...</div>');
-              $('#divListaAgenda').css('display', 'flex');
-              $('#divListaAgenda').css('justify-content', 'center');
-            }else{
-              $('#divListaAgenda').css('display', '');
-              $('#divListaAgenda').css('justify-content', '');
-              var total_checked = 0;
-              
-                $.each(listaCalendarioHora, function (k, ch) {
-                  checked = '';
-                  var arrHora = ch.agenda_hora.split(":");
-                
-                
-                  html =  '<div class="pesq" data-agenda_id="'+ch.agenda_id+'" data-igreja_id="'+ch.igreja_id+'" style="background-color: white; border-bottom: 1px solid #5b318a36; '+estiloEventoPassado(arrHora[0], arrHora[1], 0)+'">';
-  
-                  html +=     '<div class="add"" data-agenda_id="'+ ch.agenda_id +'">' +
-  
-  
-                              '<div  class="agenda">'+
-  
-                                '<div class="div_img">'+
-                                    '<img id="img_igreja_desc_resumida" src="'+ch.igreja_fundo_url+'">'+
-                                '</div>'+
-  
-                                '<div>'+
-                                  '<div id="desc_resumida" class="igreja_nome">'+
-                                  upperText(ch.igreja_nome)+
-                                  '</div>'+
-  
-                                  '<span id="endereco_igreja" class="endereco_igreja">'+
-                                    ch.endereco_bairro+ '  -  '+ removerUf(ch.endereco_cidade)+
-                                  '</span>'+
-  
-                                  '<div class="div_evento_agenda">'+
-                                    '<span>'+ ch.evento_nome +'</span>'+
-                                  '</div>'+
-                                  montaHorario(ch)+
-                                '</div>'+
-                              '</div>'+
-                          
-  
-                        '</div>' +
-                      '</div>';
-  
-                  $('#divListaAgenda').append(html);
-                  $('#divListaAgenda').scrollTop((contLista * tamanhoItemLista));
-  
-  
-              });
-              
-            }
-            configurarEventosCalendarioHora();
+  if (listaCalendarioHora.length === 0) {
+      $('#divListaAgenda').html('<div class="sem-eventos">Nenhum evento disponível...</div>');
+      $('#divListaAgenda').css('display', 'flex');
+      $('#divListaAgenda').css('justify-content', 'center');
+  } else {
+      $('#divListaAgenda').css('display', '');
+      $('#divListaAgenda').css('justify-content', '');
+
+      var total_checked = 0;
+      var primeiroEventoFuturoIndex = -1; // Variável para armazenar o índice do primeiro evento futuro
+      var estiloJaPassou = 'opacity: 50%;';
+      $.each(listaCalendarioHora, function (k, ch) {
+          var arrHora = ch.agenda_hora.split(":");
+
+          // Verificar se o evento já passou ou ainda vai acontecer
+          var eventoPassado = eventoPassou(arrHora[0], arrHora[1], 0);
+
+          // Se for o primeiro evento futuro, salvar o índice
+          if (eventoPassado && primeiroEventoFuturoIndex === -1) {
+              primeiroEventoFuturoIndex = k -1;
+              estiloJaPassou = '';
+          }
+
+          var html = '<div class="pesq" data-agenda_id="' + ch.agenda_id + '" data-igreja_id="' + ch.igreja_id + '" style="background-color: white; border-bottom: 1px solid #5b318a36; ' + estiloJaPassou + '">';
+
+          html += '<div class="add" data-agenda_id="' + ch.agenda_id + '">' +
+                      '<div class="agenda">' +
+                          '<div class="div_img">' +
+                              '<img id="img_igreja_desc_resumida" src="' + ch.igreja_fundo_url + '">' +
+                          '</div>' +
+                          '<div>' +
+                              '<div id="desc_resumida" class="igreja_nome">' +
+                                  upperText(ch.igreja_nome) +
+                              '</div>' +
+                              '<span id="endereco_igreja" class="endereco_igreja">' +
+                                  ch.endereco_bairro + '  -  ' + removerUf(ch.endereco_cidade) +
+                              '</span>' +
+                              '<div class="div_evento_agenda">' +
+                                  '<span>' + ch.evento_nome + '</span>' +
+                              '</div>' +
+                              montaHorario(ch) +
+                          '</div>' +
+                      '</div>' +
+                  '</div>' +
+              '</div>';
+
+          $('#divListaAgenda').append(html);
+      });
+
+      // Definir o scroll para o primeiro evento futuro, se houver
+      if (primeiroEventoFuturoIndex !== -1) {
+          var tamanhoItemLista = $('#divListaAgenda .pesq').first().outerHeight(); // Altura de um item
+          $('#divListaAgenda').scrollTop(primeiroEventoFuturoIndex * tamanhoItemLista);
+      }
+  }
+
+  configurarEventosCalendarioHora(); // Configura eventos adicionais
 }
+
 
 $("#select_missa").click(function(e){
   listaMissa = listaTotalCh.filter(function(a, b){
