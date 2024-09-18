@@ -39,7 +39,7 @@ function listaEscolhida(data) {
     var rows = JSON.parse(data.length);
     var cidadeId = 0;
     html = '';
-    var arrColor = ['black', 'blue', 'darkred', 'white', 'orange'];
+    var arrColor = ['black', 'blue', 'darkred', 'darkgray', 'orange'];
     var color = arrColor[0];
     categoria_cod = 0;
     for (var i = 0; i < rows; i++) {

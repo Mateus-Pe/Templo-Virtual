@@ -72,7 +72,14 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 4% 3%;
+    height: 30px;
+}
+
+.calendarYearMonth div{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 4% 5%;
     width: 36px;
     height: 30px;
 }

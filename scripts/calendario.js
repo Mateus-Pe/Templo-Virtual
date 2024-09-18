@@ -557,12 +557,14 @@ $("#excluirLote").click(function(){
   agenda_id = $("#hid_agenda_id").val();
   $("#modalPreExcluir").hide();
   remover(agenda_id, 1);
+  location.reload();
 });
 
 $("#excluirEspecifica").click(function(){
   agenda_id = $("#hid_agenda_id").val();
   $("#modalPreExcluir").hide();
   remover(agenda_id, 0);
+  location.reload();
 });
 
 $("#cancelarExclusao").click(function(){

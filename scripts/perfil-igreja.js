@@ -265,7 +265,7 @@ function getComunidade(){
 
     $.each(obj.lista_igreja, function (k, lpp) {
 
-        html += '<div class="comunidade_select">';
+        html += '<div class="comunidade_select" data-igreja_id="'+lpp.igreja_id+'">';
               html += '<img  src="'+lpp.igreja_logo+'">';
               html += '<span>'+lpp.igreja_nome+'</span>';
         html += '</div>';
@@ -282,6 +282,12 @@ function getComunidade(){
                   
       atual_evento_cod = $(this).data('evento_cod');
       console.log(atual_evento_cod);
+    });
+
+    $('.comunidade_select').click(function () {
+      window.sessionStorage.setItem('feed_igreja_id', $(this).data('igreja_id'));
+      window.location = 'perfil-igreja.html';
+      
     });
   });
 }

@@ -2,9 +2,9 @@ var globalCY;
 var globalCM;
 
 htmlUtilDayWeek =  '<div class="calendarYearMonth center">'
-htmlUtilDayWeek +=  '<p class="left calBtn fa-solid fa-angle-left" onclick="prevMonth()"></p>'
+htmlUtilDayWeek +=  '<div class="left calBtn fa-solid fa-angle-left" onclick="prevMonth()"></div>'
 htmlUtilDayWeek +=  '<p id="yearMonth"> 2023 Dez </p>'
-htmlUtilDayWeek +=  '<p class="right calBtn fa-solid fa-angle-right" onclick="nextMonth()"></p>'
+htmlUtilDayWeek +=  '<div class="right calBtn fa-solid fa-angle-right" onclick="nextMonth()"></div>'
 htmlUtilDayWeek +=  '</div>'
 
 htmlUtilDayWeek +=   '<ol class="calendarList1">';
