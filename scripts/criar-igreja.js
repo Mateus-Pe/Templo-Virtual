@@ -79,7 +79,7 @@ function getCidades(){
       success: function (data) {
         
         myJson = data;
-        //myJsonPesq = data;
+        myJsonPesq = data;
 
         montaCidades(data);
         configurarEventos();
@@ -92,7 +92,7 @@ function getCidades(){
 function montaCidades(data){
 
   $('.cadastro .container .lista').html('');
-  var rows = JSON.parse(data.length);
+  var rows = data.length;
   html = "";
 
   for (var i = 0; i < rows; i++) {
