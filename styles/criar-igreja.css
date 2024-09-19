@@ -3,19 +3,11 @@ body{
     position: relative;
 }
 
-
-
  main{
     display: block;
     background-color: white; 
     padding-top: 50px;
  }
-
-
-.adicionar{
-    padding: 20px; 
-    display: block;
-}
 
 .adicionar_input{
     border: 0;
@@ -28,7 +20,6 @@ body{
     font-family: Exo !important;
 }
 
-
 .div_header{
     background-color: darkred;
     border-bottom: 1px solid darkred;
@@ -39,17 +30,6 @@ body{
     position: fixed; 
     display: flex;
     justify-content: space-between;
-}
-
-.div_botao-salvar{
-    font-family: Exo; 
-    border: 1px solid darkred!important; 
-    background-color: white; 
-    color: darkred; 
-    width: 70%; 
-    border-radius: 10px; 
-    height: 4.5rem;
-    font-size: 2rem;
 }
 
 .span_criar-igreja{
@@ -75,27 +55,12 @@ body{
     font-family: Exo;
 }
 
-.div_btn-salvar{
-    bottom: 30px; display: block;
-}
-
-.container {
+.container{
     position: relative;
     margin-bottom: 20px;
-  }
+}
 
-  .overlay {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-  }
-
-  .lista{
+.lista{
     margin-top: 0px; 
     background-color: white;
     color:solid darkred;
@@ -106,7 +71,7 @@ body{
     overflow: hidden;
     font-family: Exo !important;
     overflow-y: scroll;
-  }
+}
 
 .divLista{
     outline: 0;
@@ -123,104 +88,12 @@ body{
     z-index: 100;
 }
 
-
 .input-with-icon {
     position: relative;
 }
 
 .input-icon {
     position: absolute;
-}
-
-
-.grid-container {
-    display: grid;
-    grid-template-columns: auto 8%; 
-    align-items: center; 
-    margin-top: -7%;
-}
-
-
-.matriz_checkbox {
-    grid-column: 1; 
-    margin-left: 85%; 
-    margin-top: -3%;
-    font-family: EXO;
-}
-
-.input_checkbox{
-    margin-top: 12%;
-    margin-left: 65%;
-}
-
-.modal-container {
-    align-items: left;
-    display: flex;
-    justify-content: center;
-    flex-flow: column;
-    height: 10rem;
-  }
-
-.modal-content {
-    background-color: white;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    border-radius: 30px;
-    width: 60%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: fixed;
-    max-width: 400px;
-    text-align: center;
-}
-
-.modal-content p {
-    font-family: Exo;
-    font-size: 1rem;
-    margin-bottom: 20px;
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: center;
-}
-
-.modal-footer button {
-    margin: 0 10px;
-    padding: 8px 10px;
-    font-size: 1rem;
-    background-color: white;
-    color: darkred;
-    border: 1px solid darkred;
-    border-radius: 30px;
-}
-
-.containerCheckbox{
-    position: relative; 
-    height: 50%;
-}
-
-.div_checkbox{
-    position: absolute; 
-    top: 150%; 
-    right: 10%;
-}
-
-.div_span_check{
-    width: 70%;
-}
-
-.input_chk{
-    margin-right: 5px;
-}
-
-.itens_check{
-    font-size: 1.5rem; 
-    margin: 0; 
-    font-family: Exo; 
-    color:darkgrey;
 }
 
 .cadastro {

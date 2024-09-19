@@ -44,134 +44,96 @@
 
     <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
 
-    
-    
-
-
-
 </head>
 
 <body>
- 
 
     <header id="divHeader" class="div_header">
 
         <span id="voltar" class="ion-arrow-left-c" style="color: white; display: flex; align-items: center; font-size: 30px; margin-left: 10px;">
-            
         </span>
-
         <span class="span_criar-igreja">CRIAR IGREJA</span>
-
         <span id="btn_salvar" class="ion-android-done" style="color: white; display: flex; align-items: center; font-size: 30px; margin-right: 10px;">
-            
         </span>
 
     </header>
 
-
-<main class="cadastro" id="gSignInWrapper">
-
-    
-    <div>
-        <div class="div_input">
-            <span class="cadastro__alert is-alert span_div"></span>
-        </div>
-
-        <div class="div_input div_form input-with-icon">
-
-            <span class="fa-solid fa-church input-icon span_input"> </span>
-
-            <input class="adicionar_input tab_input" id="nome_instituicao" type="text" name="nome_instituicao" autocomplete="off" tabindex="1"  placeholder="Nome instituição">
-        </div>
-        
+    <main class="cadastro" id="gSignInWrapper">
 
         <div>
-    
+            <div class="div_input">
+                <span class="cadastro__alert is-alert span_div"></span>
+            </div>
+
             <div class="div_input div_form input-with-icon">
-    
-                <span class="ion-earth input-icon span_input"></span>
-    
-                <input class="adicionar_input" id="cep_instituicao" type="number" name="cep_instituicao" autocomplete="off" tabindex="2" placeholder="CEP">
-            </div>
-        </div>
-
-    
-        <div>
-                
-            <div class="div_input div_form input-with-icon" id="div_cidade_instituicao">
-    
-                <span class="ion-map input-icon span_input"></span>
-        
-                <input class="adicionar_input" id="cidade_instituicao" type="text" name="cidade_instituicao" autocomplete="off" tabindex="3" placeholder="Cidade">
-                <input id="cidade_id_instituicao" type="hidden" name="cidade_id_instituicao">
+                <span class="fa-solid fa-church input-icon span_input"> </span>
+                <input class="adicionar_input tab_input" id="nome_instituicao" type="text" name="nome_instituicao" autocomplete="off" tabindex="1"  placeholder="Nome instituição">
             </div>
 
-        </div>    
-        <div>
-              
-            <div class="div_input div_form input-with-icon">
-    
-                <span class="ion-flag input-icon span_input"></span>
-        
-                <input class="adicionar_input tab_input" id="bairro_instituicao" type="text" name="bairro_instituicao" autocomplete="off" tabindex="4" placeholder="Bairro">
-            </div>
-        </div>
-
-
-        <div>
-    
-            <div class="div_input div_form input-with-icon">
-    
-                <span class="ion-ios-location input-icon span_input"></span>
-        
-                <input class="adicionar_input tab_input" id="logradouro_instituicao" type="text" name="logradouro_instituicao" autocomplete="off" tabindex="5" placeholder="Logradouro">
-            </div>
-        </div>
-
-
-        <div class="containerCheckbox">
             <div>
-                    
                 <div class="div_input div_form input-with-icon">
-                        
-                    <span class="ion-ios-home input-icon span_input"></span>
-                        
-                    <input class="adicionar_input tab_input" id="numero_instituicao" type="number" name="numero_instituicao" autocomplete="off" tabindex="6" placeholder="Número">
-                
+                    <span class="ion-earth input-icon span_input"></span>
+                    <input class="adicionar_input" id="cep_instituicao" type="number" name="cep_instituicao" autocomplete="off" tabindex="2" placeholder="CEP">
+                </div>
+            </div>
+
+            <div>
+                <div class="div_input div_form input-with-icon" id="div_cidade_instituicao">
+                    <span class="ion-map input-icon span_input"></span>
+                    <input class="adicionar_input" id="cidade_instituicao" type="text" name="cidade_instituicao" autocomplete="off" tabindex="3" placeholder="Cidade">
+                    <input id="cidade_id_instituicao" type="hidden" name="cidade_id_instituicao">
+                </div>
+            </div>
+
+            <div>
+                <div class="div_input div_form input-with-icon">
+                    <span class="ion-flag input-icon span_input"></span>
+                    <input class="adicionar_input tab_input" id="bairro_instituicao" type="text" name="bairro_instituicao" autocomplete="off" tabindex="4" placeholder="Bairro">
+                </div>
+            </div>
+
+            <div>
+                <div class="div_input div_form input-with-icon">
+                    <span class="ion-ios-location input-icon span_input"></span>
+                    <input class="adicionar_input tab_input" id="logradouro_instituicao" type="text" name="logradouro_instituicao" autocomplete="off" tabindex="5" placeholder="Logradouro">
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <div class="div_input div_form input-with-icon">
+                        <span class="ion-ios-home input-icon span_input"></span>
+                        <input class="adicionar_input tab_input" id="numero_instituicao" type="number" name="numero_instituicao" autocomplete="off" tabindex="6" placeholder="Número">
+                    </div>
+                </div>
+            </div>
+
+            <div class="container divLista" id="divLista">
+                <div class="lista">
                 </div>
             </div>
         </div>
-                
-                
-            
-        <div class="container divLista" id="divLista">
-                
-            <div class="lista"></div>
-                
-        </div>  
-    </div>
-            
-</main>
+    </main>
 
-<footer>
+    <footer>
 
 
 
-    <script src="scripts/jquery/jquery-3.2.1.min.js"></script>
+        <script src="scripts/jquery/jquery-3.2.1.min.js"></script>
 
-    <script src="scripts/jquery/jquery.maskedinput.min.js"></script>
-    
-    <script src="scripts/criar-igreja.js"></script>
+        <script src="scripts/jquery/jquery.maskedinput.min.js"></script>
 
-    <script src="scripts/ionJs.js"></script>
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="scripts/criar-igreja.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+        <script src="scripts/ionJs.js"></script>
 
-    <script src="https://apis.google.com/js/api:client.js"></script>
-    
-</footer>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+        <script src="https://apis.google.com/js/api:client.js"></script>
+
+    </footer>
 
 </body>
 
