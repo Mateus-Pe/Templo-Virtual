@@ -4,71 +4,17 @@ origem_imagem = "";
 horarioFixoHtml = '';
 editaHorarioFixo = '';
 imagemVemDoBanco = false;
-//evento_agenda();
 
 
 $(document).ready(function() {
-
-  carregar_perfil();
-  //carregar_feed();
+  modalHorariosFixos();
   igrejaId = window.sessionStorage.getItem('igreja_id');
   if(igrejaId != null && igrejaId != ''){
     carregarIgreja();
   }
-
   $('#nome_igreja').on('input', verificarNomeIgreja);
 });
 
-
-function carregar_perfil(){
-    var html = '';
-  
-      html += '<div id="imagem_igreja" class="div_img_igreja">';
-      html += '<img class="img_igreja1" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">';
-      html += '</div>';
-      html += '<div class="div_publicacao">';
-      html += '<div class="feed_principal">';
-      html += '<div class="div_feed_secundario">';
-      html += '<div>';
-      html += '<div>';
-      html += '<a class="a_div_perfil">';
-
-      //html += '<div>';
-      //html += '<h1 id="nome_da_igreja" class="nome_da_igreja">';
-      //html += '</h1>';
-      //html += '<span id="descricao_igreja" class="material-symbols-outlined" style="font-size: 20px; color: darkred; position: relative; left: 1rem; top: 1rem;">edit</span>'
-      //html += '</div>';
-
-      html += '<span class="abrir_map">';
-      html += '<span id="localizacao" data-lat="-23.6029417" data-long="-48.0633432" >';
-      html += 'Ver no mapa';
-      html += '</span>';
-      html += '<span class="material-symbols-outlined icone_editar ion_map">';
-      html += 'location_on';
-      html += '</span>';
-      html += '</span>';
-      html += '<span id="endereco_da_igreja" class="endereco_igreja">';
-      html += 'Rua da igreja, 78, Vila Santana, Sorocaba';
-      html += '</span>';
-      html += '<span id="contato_da_igreja" class="endereco_igreja" style="display: flex; align-items: center;">';
-      html += 'Contatos';
-      html += '<span class="material-symbols-outlined" style="position: relative; left: 1rem; font-size: 20px; color: darkred;">';
-      html += 'edit';
-      html += '</span>';
-      html += '</span>';
-      html += '<div class="contatos">';
-      html += '</div>';
-      html += '</a>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      html += '</div>';
-      $("#divPerfil").html(html);
-
-      modalHorariosFixos();
-      
-}
 
 function modalHorariosFixos(){
 
@@ -84,32 +30,7 @@ function modalHorariosFixos(){
   });
 }
 
-  
-function abreviarNomeIgreja(nome) {
-  var palavras = nome.split(' ');
-  var nomeAbreviado = '';
-
-  for (var i = 0; i < palavras.length; i++) {
-    if (nomeAbreviado.length + palavras[i].length <= 15) {
-      nomeAbreviado += palavras[i] + ' ';
-    } else {
-      nomeAbreviado = nomeAbreviado.trim() + ' ' + (palavras[i][0] || '') + '.';
-      for (var j = i + 1; j < palavras.length; j++) {
-          nomeAbreviado += ' ' + (palavras[j][0] || '') + '.';
-      }
-      break;
-    }
-  }
-
-  // Remover os pontos no final se não houverem mais palavras
-  nomeAbreviado = nomeAbreviado.trim().replace(/\.$/, '');
-
-  return nomeAbreviado.trim();
-}
-
-
-
-
+/* //Não está sendo usada, mas talvez possa ser
 function marker(lat, lng, img) {
   var myLatLng = { lat: parseFloat(lat), lng: parseFloat(lng) };
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -123,21 +44,22 @@ function marker(lat, lng, img) {
   });
 
   // Ajuste o modal para exibir com base na posição clicada
-  var modal = document.querySelector('#modal_addproduto');
+  //var modal = document.querySelector('#modalBancoImagens');
   $(modal).css('display', 'block');
-}
+}*/
 
 
-
+/*//Não está sendo usada mas talvez possa vir a ser
 $("#localizacao").click(function(e) {
   var lat = $(this).data('lat');
   var lng = $(this).data('long');
   marker(lat, lng, '');
- $('#modal_addproduto').show(); 
-});
+ $('#modalBancoImagens').show(); 
+});*/
+
 $(".modal_close").click(function(e) {
- $('#modal_addproduto').hide(); 
- $('body').css('overflow', 'auto');
+  $('#modalBancoImagens').hide(); 
+  $('body').css('overflow', 'auto');
 });
 
 
@@ -251,19 +173,11 @@ $('#email_txt').on('input', function() {
 });
 
 $('#btn_salvar').on('click', function() {
-  //var descResumida = $('#txt_desc_resumida').val().trim();
-
-  //if (descResumida === ''){
-   // $('#modal_validacao').show();
-  //} else{
-    salvar();
-  //}
+  salvar();
 });
 
-$('#btnFecharModal').on('click', function(){
-  $('#modal_validacao').hide();
-});
 
+//falta salvar o nome caso for alterado
 function salvar(){
 
   var formData = new FormData();
@@ -294,7 +208,6 @@ function salvar(){
       if(obj.status == '1'){
         
        window.location = "lista-igreja.html";
-       console.log(obj);
       }
     });
 }
@@ -306,50 +219,43 @@ function carregarIgreja(){
     url: "https://pedeoferta.com.br/templo/index.php/welcome/get_igreja_by_id",
     data: {
       igreja_id : igrejaId
-     
     }
   })
-    .done(function (ret) {
-      var obj = jQuery.parseJSON(ret);
+  .done(function (ret) {
+    var obj = jQuery.parseJSON(ret);
+    
+    if(obj.status == '1'){
+      $('#whatsapp_txt').val(obj.igreja.igreja_whats);
+      $('#facebook_txt').val(obj.igreja.igreja_face);
+      $('#instagram_txt').val(obj.igreja.igreja_instagram);
+      $('#email_txt').val(obj.igreja.igreja_email);
+      $("#span_criar-igreja").text(obj.igreja.igreja_nome);
+      $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
+      $("#img_fundo_src").attr('src', obj.igreja.igreja_fundo_url);
+      if(obj.igreja.igreja_horario_fixo != null)
+        editaHorarioFixo = obj.igreja.igreja_horario_fixo;
       
-      if(obj.status == '1'){
-        $('#whatsapp_txt').val(obj.igreja.igreja_whats);
-        $('#facebook_txt').val(obj.igreja.igreja_face);
-        $('#instagram_txt').val(obj.igreja.igreja_instagram);
-        $('#email_txt').val(obj.igreja.igreja_email);
-        $('#txt_desc_resumida').val(obj.igreja.igreja_desc_resumida);
-        $("#span_criar-igreja").text(obj.igreja.igreja_nome);
-        $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
-        $("#img_fundo_src").attr('src', obj.igreja.igreja_fundo_url);
-        if(obj.igreja.igreja_horario_fixo != null)
-          editaHorarioFixo = obj.igreja.igreja_horario_fixo;
-        
-        atualizarContatos();
-        alterar_desc_resumida();
+      atualizarContatos();
 
-        nomeIgrejaVerificado = obj.igreja.igreja_nome;
+      nomeIgrejaVerificado = obj.igreja.igreja_nome;
 
-        var nomeIgreja = obj.igreja.igreja_nome;
-        $('#nome_igreja').val(nomeIgreja);
+      var nomeIgreja = obj.igreja.igreja_nome;
+      $('#nome_igreja').val(nomeIgreja);
 
-        if(obj.igreja.igreja_logo_url != null && obj.igreja.igreja_logo_url != ''){
-          $("#img_igreja_selected").attr('src', obj.igreja.igreja_logo_url);
-          $("#img_igreja_desc_resumida").attr('src', obj.igreja.igreja_logo_url);
-        }
-
-        if(obj.igreja.igreja_fundo_url != null && obj.igreja.igreja_fundo_url != ''){
-          
-          $("#img_fundo_src").css('display', 'flex');
-        }
-        
+      if(obj.igreja.igreja_logo_url != null && obj.igreja.igreja_logo_url != ''){
+        $("#img_igreja_selected").attr('src', obj.igreja.igreja_logo_url);
+        $("#img_igreja_desc_resumida").attr('src', obj.igreja.igreja_logo_url);
       }
 
-    });
+      if(obj.igreja.igreja_fundo_url != null && obj.igreja.igreja_fundo_url != ''){
+        $("#img_fundo_src").css('display', 'flex');
+      }
+    }
+  });
 }
 
 function verificarNomeIgreja() {
   var novoNome = $('#nome_igreja').val().trim();
-  
   if (novoNome === "") {
     $("#span_criar-igreja").text(nomeIgrejaVerificado);
   }
@@ -358,21 +264,15 @@ function verificarNomeIgreja() {
 
 $("#perfil_desc_resumida").click(function(e){
   $("#modal_editar").show();
-  
 });
 
 $("#editar").click(function(e){
   $("#modal_editar").show();
-  
-});
-$("#confirmar1").click(function(e){
-  alterar_desc_resumida();
-  $("#modal_editar").hide();
 });
 
-function alterar_desc_resumida(){
-  $("#desc_resumida").html($("#txt_desc_resumida").val());
-}
+$("#confirmar1").click(function(e){
+  $("#modal_editar").hide();
+});
 
 
 function mascaraTelefone(event) {
@@ -416,175 +316,15 @@ function mascaraTelefone(event) {
   event.target.value = telefoneFormatado;
 }
 
-$('#txt_desc_resumida').on('input', function() {
-  var maxLength = 20; 
-  var text = $(this).val();
-  
-  if (text.length > maxLength) {
-      $(this).val(text.substring(0, maxLength));
-  }
-});
-
 //menu
-
-$('.page-menu--toggle').click(function(e){
-
-  e.preventDefault();
-
-  if($(this).hasClass('page-menu__hamburger--open')){
-
-      
-      $('.mobile-nav').css('display', 'none');
-      $('#imagem_igreja').css('top', '2.6rem');
-      $('.div_btn-salvar').css('bottom', '30px');
-      
-  }
-  else{
-
-    $('.mobile-nav').css('display', 'block');
-    $('#imagem_igreja').css('top', '2.49rem');
-    $('.div_btn-salvar').css('bottom', '0px');
-
-  }
-
-  $(this).toggleClass('page-menu__hamburger--open');
-
-  $('.page-menu').toggleClass('disabled');
-
-  $('body').toggleClass('disabled');
-
-  $('body').toggleClass('no-scroll');
-
-
-  efeitoBlur()
-
-});
-
-
-
-
-
-
-
-function efeitoBlur(){
-
-  $('main').toggleClass('is-blur');
-
-  $('.show-search').toggleClass('is-blur');
-
-  $('.categories').toggleClass('is-blur');
-
-  $('.options').toggleClass('is-blur');
-
-  $('.search-market').toggleClass('is-blur');
-
-  $('.perfil').toggleClass('is-blur');
-
-
-}
-
-
-
-//Verifica o item clicado no sidemenu
-
-$('.mobile-nav__items li a').click(function(){
-
-  var classeItemMenu = $(this).attr('class');
-
-
-
-  if(classeItemMenu == 'mobile-nav__link-produtos'   ||
-
-     classeItemMenu == 'mobile-nav__link-categorias' ||
-
-     classeItemMenu == 'mobile-nav__link-mercados'){
-
-      setStorageMenu(classeItemMenu);
-
-      window.location = 'vitrine-geral.html';
-
-  }
-
-});
-
-
-
 function setStorageMenu(item_menu) {
-
   sessionStorage.setItem("item_menu", item_menu);
-
 }
 
 
-function marker(lat, lng, img) {
-  var myLatLng = { lat: parseFloat(lat), lng: parseFloat(lng) };
-  var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 14,
-      center: myLatLng
-  });
-  var marker = new google.maps.Marker({
-      position: myLatLng,
-      map: map,
-      title: ''
-  });
-
-  // Ajuste o modal para exibir com base na posição clicada
-  var modal = document.querySelector('#modal_addproduto');
-  $(modal).css('display', 'block');
-}
-
-
-
-$("#localizacao").click(function(e) {
-  var lat = $(this).data('lat');
-  var lng = $(this).data('long');
-  marker(lat, lng, '');
- $('#modal_addproduto').show(); 
-});
 $(".modal_close").click(function(e) {
- $('#modal_addproduto').hide(); 
+ $('#modalBancoImagens').hide(); 
 });
-
-
-var didScroll;
-var lastScrollTop = 0;
-var delta = 5;
-var headerHeight = $('header').outerHeight();
-var isVisible = true;
-
-$(window).scroll(function(event){
-    didScroll = true;
-});
-
-setInterval(function() {
-    if (didScroll) {
-        hasScrolled();
-        didScroll = false;
-    }
-}, 250);
-
-function hasScrolled() {
-    var st = $(this).scrollTop();
-
-    if (Math.abs(lastScrollTop - st) <= delta)
-        return;
-
-    if (st > lastScrollTop && st > headerHeight) {
-        // Rolagem para baixo
-        if (isVisible) {
-            $('header').removeClass('header-down').addClass('header-up');
-            isVisible = false;
-        }
-    } else {
-        // Rolagem para cima
-        if (st < lastScrollTop) {
-            $('header').removeClass('header-up').addClass('header-down');
-            isVisible = true;
-        }
-    }
-
-    lastScrollTop = st;
-}
 
 document.getElementById("imagem_igreja").addEventListener("click", function() {
   selecionaImgPerfil();
@@ -594,14 +334,14 @@ $(document).on('click', '.comunidade_select_img', function(){
   var src = $(this).find('img').attr('src');
   $("#img_igreja_selected").attr('src', src);
   imagemVemDoBanco = true;
-  $("#modal_addproduto").hide();
+  $("#modalBancoImagens").hide();
   $("body").css('overflow', 'auto');
 }); 
 
 $('#abrir_select_img').click(function(){
   document.getElementById("imageFileInput").click();
   imagemVemDoBanco = false;
-  $('#modal_addproduto').hide();
+  $('#modalBancoImagens').hide();
   $('body').css('overflow', 'auto');
 })
 
@@ -618,27 +358,15 @@ document.getElementById('imageFileInput').addEventListener('change', function(ev
         
         previewImg = false;
         
-            img.onload = function() {
-                //const height = img.height;
-                //const width = img.width;
-                //if (validarImagem(height, width)){
-                  document.getElementById('img_igreja_selected').src = e.target.result;
-                  document.getElementById('img_igreja_desc_resumida').src = e.target.result;
-                  previewImg = true;
-                  origem_imagem = "U";
-                //}
-            }
-            img.src = e.target.result;
-
-          //document.getElementById('previewImg').src = e.target.result;
-          //document.getElementById('img_igreja_selected').src = e.target.result;
-          //$("#imagem_selecionada").css("background-image", "url("+e.target.result+")");
-          
-          
+        img.onload = function() {
+              document.getElementById('img_igreja_selected').src = e.target.result;
+              document.getElementById('img_igreja_desc_resumida').src = e.target.result;
+              previewImg = true;
+              origem_imagem = "U";
+        }
+        img.src = e.target.result;
       };
       reader.readAsDataURL(file);
-      console.log($("#img_igreja_selected").src);
-      
   }
 });
 
@@ -650,35 +378,23 @@ document.getElementById('imageFundoFileInput').addEventListener('change', functi
         const img = new Image();
         
         previewImg = false;
-            img.onload = function() {
-                //const height = img.height;
-                //const width = img.width;
-                //if (validarImagem(height, width)){
-                  document.getElementById('img_fundo_src').src = e.target.result;
-                  previewImg = true;
-                  $("#img_fundo_src").css('display', 'flex');
-                  origem_imagem = "U";
-                //}
-            }
-            img.src = e.target.result;
-
-          //document.getElementById('previewImg').src = e.target.result;
-          //document.getElementById('img_fundo_src').src = e.target.result;
-          //$("#imagem_selecionada").css("background-image", "url("+e.target.result+")");
-          
-          
+        img.onload = function() {
+              document.getElementById('img_fundo_src').src = e.target.result;
+              previewImg = true;
+              $("#img_fundo_src").css('display', 'flex');
+              origem_imagem = "U";
+        }
+        img.src = e.target.result;
       };
       reader.readAsDataURL(file);
-      console.log($("#img_fundo_src").src);
       
   }
 });
 
 
-  $("#click_sugestao1").click(function(e){
-    editaHorarioFixo = $("#sugestao1").html();
-
-  });
+$("#click_sugestao1").click(function(e){
+  editaHorarioFixo = $("#sugestao1").html();
+});
 
 
 function textoArea(){//document.addEventListener('DOMContentLoaded', function() {
@@ -741,13 +457,11 @@ function montaHtmlBancoImg(bancoImagem){
   });
 
   $('#divBancoImg').html(html); 
-  $('#modal_addproduto  ').show();
+  $('#modalBancoImagens').show();
 }
 
 
 function selecionaImgPerfil(){
-  
-  
   $.ajax({
   method: "POST",
   url: "https://pedeoferta.com.br/templo/index.php/welcome/get_banco_imagem",

@@ -5,39 +5,11 @@ body{
     overflow-x: hidden;
 }
 
-.feed_main{
-    background:lightgray;;
-    font-size: 1.6rem;
-    font-family: sans-serif;
-    margin-top: 5rem;
-}
-
-.feed_main_top{
-    font-size: 1.6rem;
-    margin-top: 4.5rem;
-    text-align: center;
-}
-
-.div_publicacao{
-    background-color: white;
-}
-
-.feed_principal{
+.conteudo_perfil{
     position: relative;
-    margin-right: auto;
-    margin-left: auto;
-    padding-top: 2px;
-    padding-left: 2px;
+    padding-left: 6px;
     padding-right: 6px;
-}
-
-.div_feed_secundario{
-  margin-left: 0.2rem;
-  margin-bottom: 0.1rem;
-  margin-right: 0.2rem;
-  background-color: white;
-  width: 100%; 
-  
+    top: -5.4rem;
 }
 
 .div_perfil{
@@ -189,10 +161,11 @@ body{
 }
 
 .div_img_igreja{
-    position: absolute; 
+    position: relative; 
     z-index: 3; 
-    top: 18.6rem; 
+    top: -5.4rem; 
     left: 4rem;
+    width: 10rem;
 }
 
 .img_igreja1{
@@ -426,12 +399,6 @@ body{
     position: relative;
     margin-right: 5px;
   }
-
-  .div_btn-salvar {
-    bottom: 30px;
-    display: block;
-    background-color: transparent;
-}
 
 .div_botao-salvar {
     font-family: Exo;

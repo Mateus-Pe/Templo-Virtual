@@ -9,11 +9,11 @@
 
     <!-- Windows Phone -->
 
-    <meta name="msapplication-navbutton-color" content="#5b318a">
+    <meta name="msapplication-navbutton-color" content="darkred">
 
     <!-- iOS Safari -->
 
-    <meta name="apple-mobile-web-app-status-bar-style" content="#5b318a">
+    <meta name="apple-mobile-web-app-status-bar-style" content="darkred">
 
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 
@@ -55,13 +55,6 @@
 
     <link type="text/css" rel="stylesheet" href="styles/loader.css">
 
-    <link rel="stylesheet"
-        href="styles/material-icons.css">
-
-        
-    <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
     <link rel="stylesheet" href="./styles/jquery-ui.min.css">
 
     <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
@@ -73,387 +66,274 @@
 
 <body>
 
-   
+    <header class="header1">
 
-    <div class="page-menu">
+        <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn_close">
 
-        <header class="header1">
+            <span class="ion-android-close" id="btn_close" style="color: white; font-size: 24px;"></span>
+        </div>
 
-            <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn_close">
+        <div class="span_criar-igreja">
+            <span id="span_criar-igreja">IGREJA</span>
+        </div>
 
-                <span class="ion-android-close" id="btn_close" style="color: white; font-size: 24px;"></span>
-            </div>
+        <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn_salvar">
 
-            <div  class="span_criar-igreja">
-                <span id="span_criar-igreja">IGREJA</span>
-            </div>
+            <span class="ion-android-done" id="btn_salvar" style="color: white; font-size: 24px;"></span>
+        </div>
+    </header>
 
-            <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn_salvar">
+    <div id="img_fundo" class="div_imgFundo_perfil">
+        <div class="imgFundo_perfil">
 
-                <span class="ion-android-done" id="btn_salvar" style="color: white; font-size: 24px;"></span>
-            </div>
-        </header>
+            <img id="img_fundo_src" src="" style="width: 100%; height: 250px; display: none;">
 
-        <div class="perfil" style="width: 100%; height: 100%;">
+            <div
+                style="border-radius: 50%; position: absolute; top: 215px; right: 1.5rem; background-color: lightgrey; width: 30px; height: 30px; align-items: center; justify-content: center; display: flex;">
 
-            <div id="img_fundo" class="div_imgFundo_perfil">
-
-
-                <div class="imgFundo_perfil">
-
-                    <img id="img_fundo_src" src="" style="width: 100%; height: 250px; display: none;">
-
-                    <div
-                        style="border-radius: 50%; position: absolute; top: 215px; right: 1.5rem; background-color: lightgrey; width: 30px; height: 30px; align-items: center; justify-content: center; display: flex;">
-
-                        <span class="ion-android-camera"
-                            style="position: relative; font-size: 20px; color: darkred;">
-                        </span>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div id="modal_contato" class="modal1">
-                <div class="modal-content">
-
-                    <div class="inputs-modal-contatos">
-                        <img src="./imgs/whatsapp.png">
-
-                        <input class="cadastro__input" id="whatsapp_txt" name="whatsapp_txt" type="text" maxlength="15"
-                            placeholder="Whatsapp"
-                            style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
-                            required>
-                    </div>
-
-                    <div class="inputs-modal-contatos">
-                        <img src="./imgs/facebook.png">
-                        
-                        <input class="cadastro__input" id="facebook_txt" name="facebook_txt" placeholder="Facebook"
-                            style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
-                            required>
-                    </div>
-
-                    <div class="inputs-modal-contatos">
-                        <img src="./imgs/instagram.png">
-
-                        <input class="cadastro__input" id="instagram_txt" name="instagram_txt" placeholder="Instagram"
-                            style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
-                            required>
-                    </div>
-
-                    <div class="inputs-modal-contatos">
-                        <img src="./imgs/email.png">
-
-                        <input class="cadastro__input" id="email_txt" name="email_txt" placeholder="Email"
-                            style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
-                            required>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button href="#!" id="confirmar">OK</button>
-                    </div>
-                </div>
-            </div>
-
-
-            <div id="modal_descricao" class="modal1">
-                <div class="modal-content" style="height: 150px !important; gap: 30px !important;">
-
-                    <div class="input_nome_igreja_modal">
-
-                        <span class="material-symbols-outlined" style="color: lightgray;">church</span>
-
-                        <input class="cadastro__input" id="nome_igreja" name="nome_igreja" type="text" placeholder=""
-                            style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
-                            required>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button href="#!" id="ok">OK</button>
-                    </div>
-                </div>
-            </div>
-
-
-            <div style="display: flex; width: 38%; text-align: center; justify-content: center;">
-                <div id="imagem_igreja" class="div_img_igreja">
-
-                    <img id="img_igreja_selected" class="img_igreja1" src="./imgs/imgs-igreja/perfil-sem-foto.jpg">
-
-                    <div
-                        style="border: 3px solid white; border-radius: 50%; position: absolute; top: 80px; right: 0px; background-color: lightgrey; width: 30px; height: 30px; align-items: center; justify-content: center; display: flex;">
-                        <span id="select_img_igreja" class="ion-android-camera"
-                            style="position: relative; font-size: 20px; color: darkred;">
-                        </span>
-                    </div>
-                </div>
-
-                
-            </div>
-
-
-            <div style="justify-content: right; display: flex; align-items: center; padding-top: 50px;">
-                <span class="abrir_hora_fixo">
-                    <span id="horarios_fixos">
-                        Editar horários fixos
-                    </span>
-                    <span class="ion-android-alarm-clock icone_editar ion_map">
-                    </span>
+                <span class="ion-android-camera" style="position: relative; font-size: 20px; color: darkred;">
                 </span>
-
             </div>
 
-
-            <div class="div_publicacao">
-                <div class="feed_principal">
-                    <div class="div_feed_secundario">
-                        <div>
-                            <div>
-                                <a class="a_div_perfil">
-
-                                    <span id="endereco_da_igreja" class="endereco_igreja">
-                                       
-                                    </span>
-
-                                    <span id="contato_da_igreja" class="contato_igreja" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                                        <!--Contatos
-                                        <span class="material-symbols-outlined"
-                                            style="position: relative; left: 1rem; font-size: 20px; color: darkred;">
-                                            edit
-                                        </span>-->
-                                        <div><img src="./imgs/whatsapp.png" ></div>
-                                        <div><img src="./imgs/facebook.png" alt=""></div>
-                                        <div><img src="./imgs/instagram.png" alt=""></div>
-                                        <div><img src="./imgs/email.png" alt=""></div>
-                                    </span>
-
-
-
-                                    <div class="contatos"></div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--
-            <div>
-                <div
-                    style="width: 100%; height: 20px; background-color: darkred; color: white; align-items: center; display: flex; justify-content: center; font-size: 13px; font-family: exo;">
-
-                    <span>
-                        COMUNIDADES RELACIONADAS
-                    </span>
-                </div>
-                
-                
-                <div class="div_comunidade">
-    
-                    <div id="perfil_desc_resumida" class="comunidade_desc">
-                        <div class="comunidade_select">
-                            <img id="img_igreja_desc_resumida"  src="./imgs/imgs-igreja/perfil-sem-foto.jpg">
-                            <span id="desc_resumida"></span>
-                        </div>
-
-                        <div class="ion_edit_desc">
-                            <span class="material-symbols-outlined" id="editar"
-                            style="position: relative; left: 1rem; font-size: 20px; color: darkred;">
-                                edit
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            -->
-
-
-
-
-           <!--<div id="modal_editar" class="modal1">
-                <div class="modal-content" style="height: 150px !important; gap: 30px !important;">
-
-                    <div class="input_nome_igreja_modal">
-
-                        <span class="material-symbols-outlined"
-                            style="color: lightgray;">groups</span>
-
-                        <input class="cadastro__input" id="txt_desc_resumida" name="txt_desc_resumida"
-                            placeholder="Editar"
-                            style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
-                            required>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button href="#!" id="confirmar1">OK</button>
-                    </div>
-                </div>
-            </div>-->
-
-           <!--
-            <div id="divModal">
-                 <div id="lista-igrejas">
-                     <div id="divPesquisa">
-                         <span class="ion-ios-search-strong search__icon"></span>
-                         <div class="search-igreja_container">
-                             <div class="app" style="position: fixed;">
-                               <p>
-                                   <button onclick="app.vai();">vai</button>
-                                   <button onclick="app.stop();">Para</button>
-                               </p>
-                           </div>
-                             <input class="search-igreja_input" type="text" id="search-igreja"
-                                 placeholder="Pesquisar igreja">
-                         </div>
-                         <span class="ion-ios-search-strong search-market__icon"></span>
-                     </div>
-                     <div id="divLista" style="height: 80%; overflow-y: auto;"></div>
-                 </div>
- 
-             </div>--> 
         </div>
 
+    </div>
 
-        <!-- Modal -->
+    <div id="imagem_igreja" class="div_img_igreja">
 
-        <div class="modal1" id="modal_addproduto">
+        <img id="img_igreja_selected" class="img_igreja1" src="./imgs/imgs-igreja/perfil-sem-foto.jpg">
 
-            <!-- Conteudo do modal -->
+        <div
+            style="border: 3px solid white; border-radius: 50%; position: absolute; top: 80px; right: 0px; background-color: lightgrey; width: 30px; height: 30px; align-items: center; justify-content: center; display: flex;">
+            <span id="select_img_igreja" class="ion-android-camera"
+                style="position: relative; font-size: 20px; color: darkred;">
+            </span>
+        </div>
+    </div>
 
-            <div class="modal_content">
 
-                <div class="modal_header" style="height: 50px;">
+    <div class="conteudo_perfil">
 
-                    <span class="modal_close ion-android-close"></span>
+        <div style="justify-content: right; display: flex; align-items: center;">
+            <span class="abrir_hora_fixo">
+                <span id="horarios_fixos">
+                    Editar horários fixos
+                </span>
+                <span class="ion-android-alarm-clock icone_editar ion_map">
+                </span>
+            </span>
 
-                    <!--<h3 class="h3_modal">IMAGENS</h3>-->
-                    <div class="modal_imagens_header">
-                        <input id="pesquisa_imagens" class="input_imagens_header" type="text" placeholder="Pesquisar">
+        </div>
 
-                    </div>
+        <div class="a_div_perfil">
+
+            <span id="endereco_da_igreja" class="endereco_igreja">
+
+            </span>
+
+            <span id="contato_da_igreja" class="contato_igreja"
+                style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <div><img src="./imgs/whatsapp.png"></div>
+                <div><img src="./imgs/facebook.png" alt=""></div>
+                <div><img src="./imgs/instagram.png" alt=""></div>
+                <div><img src="./imgs/email.png" alt=""></div>
+            </span>
+            <div class="contatos"></div>
+        </div>
+
+    </div>
+
+
+    <!-- Modal -->
+
+    <div class="modal1" id="modalBancoImagens">
+
+        <!-- Conteudo do modal -->
+
+        <div class="modal_content">
+
+            <div class="modal_header" style="height: 50px;">
+
+                <span class="modal_close ion-android-close"></span>
+
+                <!--<h3 class="h3_modal">IMAGENS</h3>-->
+                <div class="modal_imagens_header">
+                    <input id="pesquisa_imagens" class="input_imagens_header" type="text" placeholder="Pesquisar">
 
                 </div>
 
-                <div class="modal_body">
+            </div>
 
-                    <div id="divBancoImg" class="comunidade_select_container"></div>
+            <div class="modal_body">
 
-                </div>
+                <div id="divBancoImg" class="comunidade_select_container"></div>
 
-                <div class="modal_footer">
+            </div>
 
-                    <h5 id="abrir_select_img">Nenhuma dessas</h5>
+            <div class="modal_footer">
 
-                </div>
+                <h5 id="abrir_select_img">Nenhuma dessas</h5>
 
             </div>
 
         </div>
 
-        <div id="modal_validacao" class="modal_validacao">
-            <div class="modal-content_validacao">
-                <h2 class="modal-header">Aviso</h2>
-                <p class="modal-message">Preencha o campo de descrição resumida para prosseguir.</p>
-                <div class="modal-footer">
-                    <button id="btnFecharModal" class="modal-close">Fechar</button>
-                </div>
-            </div>
-        </div>
+    </div>
 
-        
+    <div class="modal1" id="modal_horarios_fixos">
 
-        <div class="modal1" id="modal_horarios_fixos">
+        <!-- Conteudo do modal -->
 
-            <!-- Conteudo do modal -->
+        <div class="modal_content">
 
-            <div class="modal_content">
+            <div class="modal_header">
 
-                <div class="modal_header">
+                <span id="close_horarios" class="modal_close ion-android-close"></span>
 
-                    <span id="close_horarios" class="modal_close ion-android-close"></span>
+                <h3 class="h3_modal">Horários</h3>
 
-                    <h3 class="h3_modal">Horários</h3>
+                <h6 id="click_sugestao1" style="color: lightgreen;"> Sugestão 1</h6>
 
-                    <h6 id="click_sugestao1" style="color: lightgreen;"> Sugestão 1</h6>
+                <div id="sugestao1" style="display: none;">
+                    <p>
+                        <strong>
+                            Missa:
+                        </strong>
+                        &nbsp;
+                    </p>
 
-                    <div id="sugestao1" style="display: none;">
-                        <p>
-                            <strong>
-                                Missa:
-                            </strong>
-                            &nbsp;
-                        </p>
+                    <p>
+                        s &aacute;bado &aacute;s 19h30;
+                    </p>
 
-                        <p>
-                            s &aacute;bado &aacute;s 19h30;
-                        </p>
+                    <p>
+                        domingo &aacute;s 20h;
+                    </p>
 
-                        <p>
-                            domingo &aacute;s 20h;
-                        </p>
+                    <p>
+                        <strong>
+                            Confiss&otilde;es:
+                        </strong>
+                        &nbsp;
+                    </p>
 
-                        <p>
-                            <strong>
-                                Confiss &otilde;es:
-                            </strong>
-                            &nbsp;
-                        </p>
-
-                        <p>
-                            quarta e quinta das 14h &aacute;s 17h;
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="modal_body">
-
-
-                    <textarea class="cadastro__input" id="adicionar_horarios_fixos"></textarea>
-
-                </div>
-
-                <div class="modal_footer">
-
-
+                    <p>
+                        quarta e quinta das 14h &aacute;s 17h;
+                    </p>
 
                 </div>
 
             </div>
 
+            <div class="modal_body">
+
+
+                <textarea class="cadastro__input" id="adicionar_horarios_fixos"></textarea>
+
+            </div>
+
+            <div class="modal_footer">
+
+
+
+            </div>
+
         </div>
 
-
-        <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
-        <input type="file" id="imageFundoFileInput" accept="image/*" style="display: none;">
-        <footer>
-            <script src="./scripts/jquery/jquery-3.2.1.min.js"></script>
-
-            <script src="./scripts/jquery-ui-1.12.1/jquery-ui.min.js"></script>
-
-            <script
-                src="https://cdn.tiny.cloud/1/txixhs2kyot0muep1k6v2mp5hd6wqk30jmbvp6hv8pk3g4b7/tinymce/6/tinymce.min.js"
-                referrerpolicy="origin"></script>
-
-            <script src="./scripts/configurar-perfil-igreja.js"></script>
-            <script src="scripts/modal-igrejas.js"></script>
-            <script src="./scripts/loader.js"></script>
-            <script src="./scripts/geolocation.js"></script>
-            <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjVDWPYDC5zoxBw0zW4bdnnaelnyCWdkw&callback=initMap">
-
-                </script>
+    </div>
 
 
 
-            <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+    <div id="modal_descricao" class="modal1">
+        <div class="modal-content" style="height: 150px !important; gap: 30px !important;">
+
+            <div class="input_nome_igreja_modal">
+
+                <span class="fa-solid fa-church" style="color: lightgray; font-size: 20px;"></span>
+
+                <input class="cadastro__input" id="nome_igreja" name="nome_igreja" type="text" placeholder=""
+                    style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                    required>
+            </div>
+
+            <div class="modal-footer">
+                <button href="#!" id="ok">OK</button>
+            </div>
+        </div>
+    </div>
 
 
-        </footer>
+    <div id="modal_contato" class="modal1">
+        <div class="modal-content">
+
+            <div class="inputs-modal-contatos">
+                <img src="./imgs/whatsapp.png">
+
+                <input class="cadastro__input" id="whatsapp_txt" name="whatsapp_txt" type="text" maxlength="15"
+                    placeholder="Whatsapp"
+                    style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                    required>
+            </div>
+
+            <div class="inputs-modal-contatos">
+                <img src="./imgs/facebook.png">
+
+                <input class="cadastro__input" id="facebook_txt" name="facebook_txt" placeholder="Facebook"
+                    style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                    required>
+            </div>
+
+            <div class="inputs-modal-contatos">
+                <img src="./imgs/instagram.png">
+
+                <input class="cadastro__input" id="instagram_txt" name="instagram_txt" placeholder="Instagram"
+                    style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                    required>
+            </div>
+
+            <div class="inputs-modal-contatos">
+                <img src="./imgs/email.png">
+
+                <input class="cadastro__input" id="email_txt" name="email_txt" placeholder="Email"
+                    style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 100%"
+                    required>
+            </div>
+
+            <div class="modal-footer">
+                <button href="#!" id="confirmar">OK</button>
+            </div>
+        </div>
+    </div>
+
+
+    <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
+    <input type="file" id="imageFundoFileInput" accept="image/*" style="display: none;">
+
+    <footer>
+        <script src="./scripts/jquery/jquery-3.2.1.min.js"></script>
+
+        <script src="./scripts/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+
+        <script src="https://cdn.tiny.cloud/1/txixhs2kyot0muep1k6v2mp5hd6wqk30jmbvp6hv8pk3g4b7/tinymce/6/tinymce.min.js"
+            referrerpolicy="origin"></script>
+
+        <script src="./scripts/configurar-perfil-igreja.js"></script>
+        <script src="scripts/modal-igrejas.js"></script>
+        <script src="./scripts/loader.js"></script>
+        <script src="scripts/ionJs.js"></script>
+        <script src="./scripts/geolocation.js"></script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjVDWPYDC5zoxBw0zW4bdnnaelnyCWdkw&callback=initMap">
+
+            </script>
+
+
+
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+
+
+    </footer>
 
 </body>
 
