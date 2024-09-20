@@ -5,45 +5,65 @@
 <head>
 
     <title>Pé de Oferta</title>
-    <meta name="theme-color" content="darkred" />
+    <meta name="theme-color" content="darkred"/>
+
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+
     <meta charset="utf-8">
+
     <meta name="description" content="Vitrine de Ofertas">
+
     <meta name="robots" content="index,follow">
+
     <meta property="og:type" content="website">
+
     <meta property="og:title" content="Pé de Oferta">
+
     <meta property="og:description" content="Vitrine de Ofertas">
+
     <meta property="og:url" content="http://pedeoferta.com.br/">
+
     <meta property="og:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
+
     <meta name="twitter:card" content="summary_large_image">
+
     <meta name="twitter:title" content="Pé de Oferta">
+
     <meta name="twitter:description" content="Vitrine de Ofertas">
+
     <meta name="twitter:url" content="http://pedeoferta.com.br/">
+
     <meta name="twitter:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
 
     <link rel="stylesheet" href="styles/main-new.css">
+
     <link rel="stylesheet" href="styles/ion.css">
+
     <link rel="stylesheet" href="styles/lista-igreja.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
     <link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
+
     <link href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
 
     <script src="https://apis.google.com/js/api:client.js"></script>
-   <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
 </head>
 
 <body id="idbody">
 
     <nav class="mobile-nav mobile_nav" role="navigation" style="display: none;">
-
         <ul class="mobile-nav__items">
-
-            <li><a class="mobile-nav__link-produtos3" href="feed.html"><span
-                        class="ion-ios-paper-outline"></span>Feed</a></li>
-
+            <li>
+                <a class="" href="feed.html">
+                    <span class="ion-ios-paper-outline"></span>
+                    Feed
+                </a>
+            </li>
         </ul>
-
     </nav>
 
     <div class="page-menu">
@@ -61,21 +81,13 @@
             </a>
 
             <span class="span_criar-igreja" id="span_criar-igreja">LISTA DE IGREJAS</span><br>
-
-         
-
-            <span class="page-menu__cart ion-android-arrow-back" style="    margin-left: 1rem; display: none"
-                id="btnVoltar"></span>
-
-            <span class="page-menu__qtd-itens"></span>
-
         </header>
 
 
         
         
         <div id="divCorpo">
-            <div id="eventos_gerais" style="margin-top: 55px; width: 100%; height: 100px; display: grid; justify-content: center;">
+            <div id="eventos_gerais" class="div_eventos_gerais">
             </div>
         
             <div id="divListaPrincipal" class="divListaPrincipal">
@@ -107,14 +119,14 @@
 
         <div id="modal_config" class="modal" style="z-index: 100;">
             <div class="modal-content1">
-                <div class="cadastro" style="justify-content: center; display: grid; gap: 1.5rem; font-size: 1.6rem;">
+                <div class="principal_config">
                     <input type="hidden" id="hid_igreja_id">
                     <input type="hidden" id="hid_igreja_nome">
                     <div id="calendario">
                         
-                        <div style="gap: 0.5rem; align-items: center; display: flex;">
+                        <div class="container_span">
                             
-                            <span class="ion-calendar" style="color: lightgray; font-size: 24px; width: 24px; align-items: center; display: flex; justify-content: center;"></span>
+                            <span class="ion-calendar span_ions_config"></span>
                             <span data-igreja_id="" class="acToggle">Calendário</span>
                         </div>
                         
@@ -122,34 +134,34 @@
                     
                     <div id="editar_perfil">
                         
-                        <div style="gap: 0.5rem; align-items: center; display: flex;">
+                        <div class="container_span">
                             
-                            <span class="ion-android-settings" style="color: lightgray; font-size: 24px; width: 24px; align-items: center; display: flex; justify-content: center;"></span>
+                            <span class="ion-android-settings span_ions_config"></span>
                             <span data-igreja_id="" class="acToggle">Editar perfil</span>
                         </div>
                     </div>
                     
                     <div id="excluir">
                         
-                        <div style="gap: 0.5rem; align-items: center; display: flex;">
+                        <div class="container_span">
                         
-                            <span data-igreja_id="" data-igreja_nome="" class="ion-trash-b" style="color: lightgray; font-size: 24px; width: 24px; align-items: center; display: flex; justify-content: center;"></span>
+                            <span data-igreja_id="" data-igreja_nome="" class="ion-trash-b span_ions_config"></span>
                             <span>Excluir</span>
                         </div>
                     </div>
 
                     <div id="tornar_matriz">
                         
-                        <div style="gap: 0.5rem; align-items: center; display: flex;">
+                        <div class="container_span">
                         
-                            <span data-igreja_id=""  class="material-symbols-outlined" style="color: lightgray; width: 24px; align-items: center; display: flex; justify-content: center;">church</span>
+                            <span data-igreja_id=""  class="fa-solid fa-church span_ions_config"></span>
                             <span>Tornar paróquia</span>
                         </div>
                     </div>
                     
                     <div id="cancelar">
             
-                        <div style="gap: 0.5rem; align-items: center; display: flex; justify-content: center; background-color: white; border: 1px solid darkred; color: darkred; border-radius: 30px;">
+                        <div class="botao_cancelar_config">
                         
                             <span>Cancelar</span>
                         </div>
@@ -169,6 +181,8 @@
         
         
         <script src="./scripts/lista-igreja.js"></script>
+
+        <script src="scripts/ionJs.js"></script>
     </footer>
 </body>
 

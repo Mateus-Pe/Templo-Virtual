@@ -8,33 +8,11 @@ html, *{
     display: none !important;
 }
 
-.columns{
-    position:absolute;
-    display: flex;
-    right: 2%;
-    gap: 30px;
-}
-
 .list-line {
     display: flex;
     align-items: center;
     width: 100%;
     justify-content: space-between;
-}
-
-.list-quantidade {
-    position: absolute;
-    right: 35px;
-    display: inline;
-    font-size: 1.5rem;
-    top: -4px;
-}
-
-.list-line span {
-    right: 0;
-    justify-content: right;
-    font-size: 1.5rem;
-    color: darkred;
 }
 
 #divListaPrincipal {
@@ -104,12 +82,6 @@ html, *{
     text-align: center;
 }
 
-.modal-content h1 {
-    font-family: Exo;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-}
-
 .modal-footer {
     display: flex;
     justify-content: center;
@@ -175,17 +147,6 @@ html, *{
     font-family: Exo;
 }
 
-.container {
-    display: block;
-    position: relative;
-    margin-bottom: 12px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
 .mobile_nav{
     background-color: darkred !important;
     height: 100%;
@@ -196,22 +157,72 @@ html, *{
     z-index: 1;
 }
 
-.calendario{
-    font-size: 25px !important; 
-}
-
-.configurar-igreja{
-    font-size: 25px !important;
-}
-
 .editar-igreja{
     font-size: 25px !important;
     color: darkred;
     margin-right: 5px;
 }
 
-.remove-igreja{
-    font-size: 25px !important;
+.modal-content1 {
+    background-color: white;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    border-radius: 30px;
+    width: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    max-width: 400px;
+}
+
+.span_eventos_gerais{
+    font-size: 13px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.div_eventos_gerais{
+    margin-top: 55px; 
+    width: 100%; 
+    height: 100px; 
+    display: grid; 
+    justify-content: center;
+}
+
+.principal_config{
+    justify-content: center;
+    display: grid;
+    gap: 1.5rem;
+    font-size: 1.6rem;
+}
+
+.container_span{
+    gap: 0.5rem; 
+    align-items: center; 
+    display: flex;
+}
+
+.span_ions_config{
+    color: lightgray;
+    font-size: 24px;
+    width: 24px;
+    align-items: center;
+    display: flex !important;
+    justify-content: center;
+}
+
+.botao_cancelar_config{
+    gap: 0.5rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border: 1px solid darkred;
+    color: darkred;
+    border-radius: 30px;
 }
 
 .toggle{
@@ -265,25 +276,4 @@ html, *{
 }
 .toggle > input:disabled ~ label:after {
     background-color: rgba(255, 255, 255, 0.3);
-}
-
-.modal-content1 {
-    background-color: white;
-    margin: auto;
-    padding: 30px;
-    border: 1px solid #888;
-    border-radius: 30px;
-    width: 70%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    max-width: 400px;
-}
-
-.span_eventos_gerais{
-    font-size: 13px;
-    justify-content: center;
-    display: flex;
-    align-items: center;
 }
