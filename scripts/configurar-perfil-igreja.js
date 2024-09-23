@@ -12,7 +12,6 @@ $(document).ready(function() {
   if(igrejaId != null && igrejaId != ''){
     carregarIgreja();
   }
-  $('#nome_igreja').on('input', verificarNomeIgreja);
 });
 
 
@@ -75,7 +74,7 @@ $("#confirmar").click(function(e){
   $("#modal_contato").hide();
 });
 
-$(".span_criar-igreja").click(function(e){
+$(".div_nome-igreja").click(function(e){
   $("#modal_descricao").show();
 });
 
@@ -85,11 +84,16 @@ $("#descricao_igreja").click(function(e){
 
 $("#ok").click(function(e){
   $("#modal_descricao").hide();
+  var existeNome = $('#nome_igreja').val().trim();
+  if (existeNome === "") {
+    $("#nome_igreja").val(nomeIgrejaVerificado);
+    $("#span_nome-igreja").text(nomeIgrejaVerificado);
+  }
 });
 
 $("#nome_igreja").on("input", function() {
   var novoNome = $(this).val();
-  $("#span_criar-igreja").text(novoNome);
+  $("#span_nome-igreja").text(novoNome);
 });
 
 
@@ -189,6 +193,7 @@ function salvar(){
   formData.append('igreja_email', $('#email_txt').val());
   formData.append('igreja_horario_fixo', horarioFixoHtml);
   formData.append('file_background', $('#imageFundoFileInput')[0].files[0]);
+  console.log($('#imageFundoFileInput')[0].files[0]);
   if(imagemVemDoBanco){
     formData.append('banco_imagem', $("#img_igreja_selected").attr('src'));
   }else{
@@ -229,7 +234,7 @@ function carregarIgreja(){
       $('#facebook_txt').val(obj.igreja.igreja_face);
       $('#instagram_txt').val(obj.igreja.igreja_instagram);
       $('#email_txt').val(obj.igreja.igreja_email);
-      $("#span_criar-igreja").text(obj.igreja.igreja_nome);
+      $("#span_nome-igreja").text(obj.igreja.igreja_nome);
       $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
       $("#img_fundo_src").attr('src', obj.igreja.igreja_fundo_url);
       if(obj.igreja.igreja_horario_fixo != null)
@@ -253,26 +258,6 @@ function carregarIgreja(){
     }
   });
 }
-
-function verificarNomeIgreja() {
-  var novoNome = $('#nome_igreja').val().trim();
-  if (novoNome === "") {
-    $("#span_criar-igreja").text(nomeIgrejaVerificado);
-  }
-}
-
-
-$("#perfil_desc_resumida").click(function(e){
-  $("#modal_editar").show();
-});
-
-$("#editar").click(function(e){
-  $("#modal_editar").show();
-});
-
-$("#confirmar1").click(function(e){
-  $("#modal_editar").hide();
-});
 
 
 function mascaraTelefone(event) {
@@ -314,11 +299,6 @@ function mascaraTelefone(event) {
 
   // Aplica a formatação
   event.target.value = telefoneFormatado;
-}
-
-//menu
-function setStorageMenu(item_menu) {
-  sessionStorage.setItem("item_menu", item_menu);
 }
 
 
