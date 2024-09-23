@@ -2,52 +2,6 @@
     opacity: 1 !important;
 }
 
-input[type="checkbox"] {
-    -webkit-appearance: initial;
-    appearance: initial;
-    background: #ddd;
-    border-radius: 3px;
-    display: inline-block;
-    width: 23px;
-    height: 23px;
-    border: 1px solid #ddd;
-    margin: 10px 10px 0 0;
-    vertical-align: middle;
-    cursor: pointer;
-}
-
-input[type="checkbox"]:focus {
-    outline: none;
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-    -webkit-user-modify: read-write-plaintext-only;
-}
-
-input[type="checkbox"]:checked::before {
-    --webkit-appearance: initial;
-    border-radius: 3px;
-    display: inline-block;
-    height: 19px;
-    margin: -7px 0px 10px 4px;
-    vertical-align: middle;
-    content: '\2713';
-    font-size: 3rem;
-    color: darkred;
-}
-
-.pesq {
-    background-color: white;
-    height: 41px;
-    line-height: 45px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #5b318a36
-}
-
-.span_chk_dia {
-    font-size: 1.5rem;
-    color: black;
-    margin-left: 15px;
-}
-
 .inputs_agenda {
     position: relative;
     top: 15px;
@@ -58,12 +12,9 @@ input[type="checkbox"]:checked::before {
     align-items: center;
 }
 
-.div_input {
-    margin-top: 3%;
-}
-
-.span_div {
-    font-family: Exo;
+#btn_close, #btn_seguir {
+    color: white; 
+    font-size: 24px;
 }
 
 .modal-content {
@@ -98,11 +49,6 @@ input[type="checkbox"]:checked::before {
     height: 50%;
 }
 
-.modal-content p {
-    font-family: Exo !important;
-    font-size: 1.5rem !important;
-    margin-bottom: 20px !important;
-}
 
 .modal-footer {
     display: flex !important;
@@ -128,20 +74,6 @@ input[type="checkbox"]:checked::before {
     height: 25px;
     font-size: 24px;
     width: 24px;
-}
-
-.span_input{
-    position: absolute;
-    color: lightgray !important; 
-    margin-top: 0.5rem;
-    left: 12%;
-}
-
-.span_input_ate{
-    position: absolute;
-    color: lightgray !important; 
-    margin-top: 0.5rem;
-    right: 32%;
 }
 
 .calendarList2 li.selected {
@@ -201,24 +133,6 @@ input[type="checkbox"]:checked::before {
     border-bottom:1px solid lightgray;
 }
 
-.div_btn_salvar{
-    bottom: 30px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-}
-
-.div_btn_salvar button{
-    font-family: Exo; 
-    border: 1px solid darkred; 
-    background-color: white; 
-    color: darkred; 
-    width: 70%; 
-    border-radius: 10px; 
-    height: 4.5rem;
-    font-size: 2rem;
-}
-
 .header1{
     background-color: darkred;
     height: 55px;
@@ -236,7 +150,7 @@ input[type="checkbox"]:checked::before {
     margin-left: -20px;
 }
 
-.cadastro__input{
+.inputs_geral{
     border: 0;  
     outline: 0;  
     background: transparent;  
@@ -250,4 +164,11 @@ input[type="checkbox"]:checked::before {
     display: flex; 
     justify-content: center;
     width: 40%;
+}
+
+.container_de_ate{
+    margin-top: 10px; 
+    width: 85%; 
+    display: flex; 
+    justify-content: space-between;
 }

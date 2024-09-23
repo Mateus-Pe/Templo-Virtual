@@ -62,7 +62,7 @@
 
 </head>
 
-<body style="background-color: white">
+<body>
 
     <div id="modalCalendario" class="modal">
         <div class="modal-calendario">
@@ -85,7 +85,7 @@
 
         <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn_close">
 
-            <span class="ion-android-close" id="btn_close" style="color: white; font-size: 24px;"></span>
+            <span class="ion-android-close" id="btn_close"></span>
         </div>
 
         <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn_close">
@@ -95,7 +95,7 @@
 
         <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn-salvar">
 
-            <span class="ion-android-done" id="btn_seguir" style="color: white; font-size: 24px;"></span>
+            <span class="ion-android-done" id="btn_seguir"></span>
         </div>
 
     </header>
@@ -113,7 +113,7 @@
 
                 <span class="ion-wand input-icon"></span>
     
-                <select class="cadastro__input" id="select_evento" name="select_evento" required>
+                <select class="inputs_geral" id="select_evento" name="select_evento" required>
                     <option value="0" selected>Selecione o evento</option>
                     <option value="Almoço">Almoço</option>
                     <option value="Quermesse">Quermesse</option>
@@ -135,7 +135,7 @@
             <div class="div_inputs_agendas">
                 <span class="ion-document-text input-icon"></span>
     
-                <input class="cadastro__input" id="text_evento" name="text_evento" placeholder="Digite o evento a ser realizado" required>
+                <input class="inputs_geral" id="text_evento" name="text_evento" placeholder="Digite o evento a ser realizado" required>
             </div>
         </div>
 
@@ -144,18 +144,18 @@
             <div class="div_inputs_agendas">
                 <span class="ion-android-calendar input-icon"></span>
     
-                <input type="text" class="cadastro__input" id="data_evento" name="data_evento" placeholder="Data do evento" required>
+                <input type="text" class="inputs_geral" id="data_evento" name="data_evento" placeholder="Data do evento" required>
             </div>
 
         </div>
 
-        <div style="margin-top: 10px; width: 85%; display: flex; justify-content: space-between;">
+        <div class="container_de_ate">
 
             <div class="div_inputs_agendas_de_ate" style="margin-left: -20px;">
 
                 <span class="fa-solid fa-hourglass-start input-icon"></span>
     
-                <select class="cadastro__input" id="agenda_de" name="agenda_de" placeholder="Das" required>
+                <select class="inputs_geral" id="agenda_de" name="agenda_de" placeholder="Das" required>
                     <option value="0" selected>Das</option>
                     <option value="06:00">6:00</option>
                     <option value="06:30">6:30</option>
@@ -200,7 +200,7 @@
 
                 <span class="fa-solid fa-hourglass-end input-icon"></span>
         
-                <select class="cadastro__input" id="agenda_ate" name="agenda_ate" placeholder="Das" required>
+                <select class="inputs_geral" id="agenda_ate" name="agenda_ate" placeholder="Das" required>
                     <option value="0" selected>Até</option>
                     <option value="06:00">6:00</option>
                     <option value="06:30">6:30</option>

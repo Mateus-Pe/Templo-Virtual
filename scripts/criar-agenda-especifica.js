@@ -31,10 +31,6 @@ $(document).ready(function() {
 var currentYear = new Date().getFullYear();
 var currentMonth = new Date().getMonth() + 1;
 
-
-
-
-
 function letsCheck(year, month) {
     var mes = month -1;
     var daysInMonth = new Date(year, month, 0).getDate();
@@ -48,15 +44,11 @@ function letsCheck(year, month) {
 
 
 function configuraEventos(){
-
-    
-        $('.calendarList2 li').click(function (e) {
-            $('.calendarList2 li').removeClass('selected');
-            $(this).addClass('selected');
-            $('#modalCalendario').hide();
-          });
-
-    
+  $('.calendarList2 li').click(function (e) {
+      $('.calendarList2 li').removeClass('selected');
+      $(this).addClass('selected');
+      $('#modalCalendario').hide();
+  });
 }
 
 function formata_data(dateRef){
@@ -141,23 +133,19 @@ function formata_data(dateRef){
   }
 
   function gerar_agenda_especifica(){
-    
-
-
     $.ajax({
       method: "POST",
       url: "https://pedeoferta.com.br/templo/index.php/welcome/gerar_agenda_especifica",
       data: { 
-          'agenda_igreja_id': igrejaId,
-          'agenda_evento_id': atual_evento_cod,
-          'agenda_evento_outro': pegarEvento(),
-          'agenda_data': $('#data_evento').val(),
-          'agenda_de_hora': splitHourMinute($('#agenda_de').val()).hour,
-          'agenda_de_minuto': splitHourMinute($('#agenda_de').val()).minute,
-          'agenda_ate_hora': splitHourMinute($('#agenda_ate').val()).hour,
-          'agenda_ate_minuto': splitHourMinute($('#agenda_ate').val()).minute
-          
-        }
+        'agenda_igreja_id': igrejaId,
+        'agenda_evento_id': atual_evento_cod,
+        'agenda_evento_outro': pegarEvento(),
+        'agenda_data': $('#data_evento').val(),
+        'agenda_de_hora': splitHourMinute($('#agenda_de').val()).hour,
+        'agenda_de_minuto': splitHourMinute($('#agenda_de').val()).minute,
+        'agenda_ate_hora': splitHourMinute($('#agenda_ate').val()).hour,
+        'agenda_ate_minuto': splitHourMinute($('#agenda_ate').val()).minute
+      }
     })
       .done(function(ret) {
 
@@ -168,8 +156,6 @@ function formata_data(dateRef){
             window.sessionStorage.setItem('agenda_id', obj.agenda_id);
             window.location = "configurar_layout_upload.html";
         }
-
-
       });
   }
 
