@@ -23,30 +23,23 @@ $(document).ready(function() {
 
     $('#modal_config').hide();
     $('#modal_visualizar_layout').show();
-   
-    
-    console.log('visualizou o layout');
-    
   });
 
   $('#editar_layout').click(function(){
-          var agenda_id = $(this).find('[data-agenda_id]').data('agenda_id');
-          var status = $(this).find('[data-status]').data('status');
-          var agenda_hora = $(this).find('[data-agenda_hora]').data('agenda_hora');
-          var str_data_referencia =  dtReferencia + '-' +  agenda_hora;
-          window.sessionStorage.setItem('agenda_id', agenda_id);
-          console.log(status);
-          //window.sessionStorage.setItem('data_referencia', str_data_referencia);
-          if(status == 2){
-            window.location = 'configurar_layout_upload.html';
-          }
-          else{
-            window.location = 'escolha-layout.html';
-          }
-        
-          $('#modal_config').hide();
-         console.log(agenda_id);
-        console.log('configurou o layout');
+    var agenda_id = $(this).find('[data-agenda_id]').data('agenda_id');
+    var status = $(this).find('[data-status]').data('status');
+    var agenda_hora = $(this).find('[data-agenda_hora]').data('agenda_hora');
+    var str_data_referencia =  dtReferencia + '-' +  agenda_hora;
+    window.sessionStorage.setItem('agenda_id', agenda_id);
+    console.log(status);
+    //window.sessionStorage.setItem('data_referencia', str_data_referencia);
+    if(status == 2){
+      window.location = 'configurar_layout_upload.html';
+    }
+    else{
+      window.location = 'escolha-layout.html';
+    }
+    $('#modal_config').hide();
   })
 
   $('#cancelar').click(function(){
@@ -93,10 +86,6 @@ $(document).ready(function() {
 var currentYear = new Date().getFullYear();
 var currentMonth = new Date().getMonth() + 1;
 
-
-
-
-
 function letsCheck(year, month) {
     var mes = month -1;
     var daysInMonth = new Date(year, month, 0).getDate();
@@ -138,8 +127,6 @@ $('#calendarList').on('click', 'li', function() {
 }
 
 
-
-
 function nextMonth() {
     currentMonth = currentMonth + 1;
     if (currentMonth > 12) {
@@ -149,7 +136,6 @@ function nextMonth() {
     $('#calendarList').empty();
     $('#yearMonth').text(currentYear + ' ' + currentMonth);
     makeCalendar(currentYear, currentMonth);
-
 }
 
 
@@ -168,14 +154,11 @@ function prevMonth() {
 
 function configuraEventos(){
 
-    
-        $('.calendarList2 li').click(function (e) {
-            data =currentYear +'-'+currentMonth+"-"+$(this).attr('id') ;
-            currentDay = $(this).attr('id');
-            get_calendario_hora(data);
-          });    
-
-    
+  $('.calendarList2 li').click(function (e) {
+    data =currentYear +'-'+currentMonth+"-"+$(this).attr('id') ;
+    currentDay = $(this).attr('id');
+    get_calendario_hora(data);
+  });
 }
 
 function carregarCalendario(){
@@ -190,18 +173,17 @@ function carregarCalendario(){
   
         
         if(obj.status == 1){
-            $.each(obj.calendario, function (k, o) {
-                dia = o.agenda_data.substr(0,2);
-                mes = o.agenda_data.substr(3,2);
-                ano = o.agenda_data.substr(6,4);
-        
-                
-                if(ano == currentYear && mes == currentMonth){
-                    $('#'+parseInt(dia)).addClass("dia_eventos");
-                    console.log(mes);
-                }
-        
-            });
+          $.each(obj.calendario, function (k, o) {
+            dia = o.agenda_data.substr(0,2);
+            mes = o.agenda_data.substr(3,2);
+            ano = o.agenda_data.substr(6,4);
+    
+            
+            if(ano == currentYear && mes == currentMonth){
+                $('#'+parseInt(dia)).addClass("dia_eventos");
+                console.log(mes);
+            }
+          });
         }
       });
 }
@@ -432,60 +414,10 @@ $('.page-menu--toggle').click(function(e){
     efeitoBlur()
   
   });
-  
-  
-  
-  
-  
-  
+
   
   function efeitoBlur(){
-  
-    $('main').toggleClass('is-blur');
-  
-    $('.show-search').toggleClass('is-blur');
-  
-    $('.categories').toggleClass('is-blur');
-  
-    $('.options').toggleClass('is-blur');
-  
-    $('.search-market').toggleClass('is-blur');
-
-    //$('#divPrincipal').toggleClass('is-blur');
-
     $('.container').toggleClass('is-blur');
-  
-  }
-  
-  
-  
-  //Verifica o item clicado no sidemenu
-  
-  $('.mobile-nav__items li a').click(function(){
-  
-    var classeItemMenu = $(this).attr('class');
-  
-  
-  
-    if(classeItemMenu == 'mobile-nav__link-produtos'   ||
-  
-       classeItemMenu == 'mobile-nav__link-categorias' ||
-  
-       classeItemMenu == 'mobile-nav__link-mercados'){
-  
-        setStorageMenu(classeItemMenu);
-  
-        window.location = 'vitrine-geral.html';
-  
-    }
-  
-  });
-  
-  
-  
-  function setStorageMenu(item_menu) {
-  
-    sessionStorage.setItem("item_menu", item_menu);
   
   }
 

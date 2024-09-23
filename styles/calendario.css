@@ -1,27 +1,15 @@
 html,* {
-     font-family: 'Exo'; box-sizing: border-box; 
-    
-    }
+    font-family: 'Exo'; box-sizing: border-box; 
+}
 
 body {
-     background-color: white !important; 
-     line-height: unset;
+    background-color: white !important; 
+    line-height: unset;
     overflow: hidden;
-    }
-
-.lead { 
-    font-size: 1.5rem; font-weight: 300; 
-
 }
 
 .container {
-     max-width: 100%;
-    
-    }
-
-.hbContainer {
-    max-width: 400px;
-    margin: auto;
+    max-width: 100%;
 }
 
 .left {
@@ -193,7 +181,7 @@ body {
     z-index: 1;
 }
 
-.span_criar-igreja{
+.span_header{
     font-size: 2rem; 
     color: #fff; 
     position: relative; 
@@ -263,6 +251,9 @@ body {
     transform: translate(-50%, -50%);
     position: absolute;
     max-width: 400px;
+    display: grid; 
+    justify-content: center; 
+    gap: 10px;
 }
 /*Modal feed*/
 .feed_principal {
@@ -321,13 +312,6 @@ body {
     text-decoration: none;
 }
 
-.img_layout_feed {
-    align-self: center;
-    max-height: 200px;
-    max-width: 100%;
-    width: 100%;
-}
-
 .div_descricao {
     margin-top: 15px;
 }
@@ -338,20 +322,6 @@ body {
     color: rgb(98, 97, 97);
     font-family: exo;
     font-size: 1.5rem;
-}
-
-.div_rodape_feed {
-    margin-top: 1.1rem;
-}
-
-.rodape_feed_botao {
-    text-align: right;
-    display: block;
-}
-
-.span_rodape_botao {
-    background-color: white;
-    color: lightslategray;
 }
 
 .disabilitado {
@@ -366,7 +336,6 @@ body {
     padding: 20px;
     border: 1px solid #888;
     border-radius: 30px;
-    width: 60%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -375,4 +344,86 @@ body {
     text-align: center;
     display: grid;
     gap: 10px;
+    width: 75%;
+}
+
+.config_modal{
+    justify-content: center; 
+    display: grid; 
+    gap: 1.5rem; 
+    font-size: 1.6rem;
+}
+
+.container_config{
+    gap: 0.5rem; 
+    align-items: center; 
+    display: flex;
+}
+
+.config_opcoes{
+    color: lightgray; 
+    font-size: 24px;
+    width: 24px; 
+    align-items: center; 
+    display: flex; 
+    justify-content: center;
+}
+
+#cancelar div{
+    gap: 0.5rem; 
+    align-items: center; 
+    display: flex; 
+    justify-content: center; 
+    background-color: white; 
+    border: 1px solid darkred; 
+    color: darkred; 
+    border-radius: 30px;
+}
+
+.close_modal_visualizar{
+    color: white;
+    font-size: 3rem; 
+    position: absolute; 
+    right: 0.5rem; 
+    top: 0.5rem;
+}
+
+.opcoes_modal_excluir{
+    font-size: 1.3rem !important; 
+    width: 100px;
+}
+
+.cancelar_modal_excluir{
+    font-size: 1.3rem !important; 
+    background-color: lightcoral !important; 
+    color: white !important;
+    width: 150px;
+}
+
+.container_status{
+    display: flex; 
+    align-items: center; 
+    gap: 15px;
+}
+
+.container_status div{
+    border-radius: 50%; 
+    width: 13px; 
+    height: 13px;
+    position: relative; 
+    left: 5px; 
+}
+
+.lista_agenda{
+    padding-bottom:150px;
+    height: 300px;
+    overflow-y: auto;
+}
+
+#mensagem_modalPreExcluir{
+    font-size: 1.3rem;
+}
+
+#mensagem_status{
+    text-align: center;
 }
