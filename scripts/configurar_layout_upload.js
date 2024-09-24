@@ -4,7 +4,6 @@ var agenda_id = 0;
 var origem_imagem = ''; // U-upload; L-layout
 
 $(document).ready(function() {
-  //alingDivPreviw();
   agenda_id = window.sessionStorage.getItem('agenda_id');
   get_agenda();
 });
@@ -77,18 +76,6 @@ function validarImagem(height, width){
   return retorno;
 }
 
-function alingDivPreviw(){
-  var alturaMenu = parseInt($(".header1").css("height").replace('px', ''));// 55;
-  var alturaImagemSelected = parseInt($("#imagem").css("height").replace('px', '')); //70;
-  var alturaPreVisualizar = parseInt($("#pre_visualizar").css("height").replace('px', ''));
-  var alturaDivs =  alturaMenu + alturaImagemSelected + alturaPreVisualizar;
-  console.log(alturaDivs);
-  var posicaoTextArea = parseInt($("#textArea").css("height").replace('px', ''));
-  console.log(posicaoTextArea);
-  //var alturaPreviw = parseInt($(document).height() - posicaoTextArea - alturaDivs);
-  //$("#imagem_selecionada").css("height", alturaPreviw+"px");
-
-}
 
 document.getElementById("imageFileInput").addEventListener("change", function() {
   verificarCampos();
@@ -132,32 +119,12 @@ function verificaBotaoImg(){
   }
 }
 
-$("#add_new_img").click(function(e){
-  $("#imageFileInput").click();
-});
-
-$("#add_new_img").click(function(e){
-  $("#modal_trocarImg").hide();
-});
-
 $("#trocar_img").click(function(e){
   window.location = "configurar-layout.html";
 });
 
-$("#trocar_img").click(function(e){
-  $("#modal_trocarImg").hide();
-});
-
-//$("#editImg").click(function(e){
-  //$("#modal_trocarImg").show();
-//});
-
 document.getElementById("editImg").addEventListener("click", function() {
   document.getElementById("imageFileInput").click();
-});
-
-$("#cancelar").click(function(e){
-  $("#modal_trocarImg").hide();
 });
 
 function salvar(flagLote){

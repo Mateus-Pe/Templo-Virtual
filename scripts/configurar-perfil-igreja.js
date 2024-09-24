@@ -186,7 +186,7 @@ function salvar(){
 
   var formData = new FormData();
   formData.append('igreja_id', igrejaId);
-  //formData.append('igreja_desc_resumida', $('#txt_desc_resumida').val());
+  formData.append('igreja_nome', $('#nome_igreja').val());
   formData.append('igreja_whats', $('#whatsapp_txt').val());
   formData.append('igreja_face', $('#facebook_txt').val());
   formData.append('igreja_instagram', $('#instagram_txt').val());

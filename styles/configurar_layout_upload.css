@@ -193,7 +193,6 @@
     position: absolute;
     width: 90%;
     max-height: 85%;
-    overflow-y: auto;
 }
 
 .feed_principal {
