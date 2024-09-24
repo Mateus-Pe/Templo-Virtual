@@ -45,8 +45,6 @@
     <meta name="twitter:image" content="https://www.pedeoferta.com.br/oferta/img/logo_pdo.png">
 
     <link rel="stylesheet" href="./styles/ion.css">
-    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <link rel="stylesheet" href="./styles/main-new.css">
 
@@ -60,7 +58,7 @@
 
 </head>
 
-<body style="background-color: white">
+<body>
 
     <div id="modalConfirmacao" class="modal">
         <div class="modal-content">
@@ -75,7 +73,7 @@
 
         <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn_close">
 
-            <span class="ion-android-close" id="btn_close" style="color: white; font-size: 24px;"></span>
+            <span class="ion-android-close" id="btn_close"></span>
         </div>
 
         <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn_close">
@@ -85,7 +83,7 @@
 
         <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn-salvar">
 
-        <span class="ion-android-done" id="btn_seguir" style="color: white; font-size: 24px;"></span>
+        <span class="ion-android-done" id="btn_seguir"></span>
         
         </div>
 
@@ -95,61 +93,74 @@
     <div id="divEventos" class="div_eventos">
     </div>
 
-    <main class="cadastro" id="gSignInWrapper" style="background-color: white; font-family: Exo; position: relative;">
+    <main id="gSignInWrapper">
 
-        <div id="divDiaSemana" style="width: 100%; background-color: white; display: flex; align-items: center; justify-content: center; margin-top: 5px;">
+        <div id="divDiaSemana">
             
         </div>
 
-        <div id="divLista" style="height: 370px;overflow-y: auto; 
-        position: relative;">
+        <div id="divLista">
 
             <div class="pesq">
-                <div class="add" style="display: flex; justify-content: space-between; padding-left: 40px; padding-right: 40px; align-items: center;" data-oferta_cod="14428">
-                    <div style="width: 80%; display: flex;"><span class="span_chk_dia">SEGUNDA-FEIRA
-                        </span></div><input type="checkbox" class="dias" name="dias[]" value="1" checked="">
+                <div data-oferta_cod="14428">
+                    <div>
+                        <span class="span_chk_dia">SEGUNDA-FEIRA</span>
+                    </div>
+                    <input type="checkbox" class="dias" name="dias[]" value="1" checked="">
                 </div>
             </div>
 
             <div class="pesq">
-                <div class="add" style="display: flex; justify-content: space-between; padding-left: 40px; padding-right: 40px; align-items: center;" data-oferta_cod="14380">
-                    <div style="width: 80%; display: flex;"><span class="span_chk_dia">TERÇA-FEIRA
-                        </span></div><input type="checkbox" class="dias" name="dias[]" value="2">
+                <div data-oferta_cod="14380">
+                    <div>
+                        <span class="span_chk_dia">TERÇA-FEIRA</span>
+                    </div>
+                    <input type="checkbox" class="dias" name="dias[]" value="2">
                 </div>
             </div>
 
             <div class="pesq">
-                <div class="add" style="display: flex; justify-content: space-between; padding-left: 40px; padding-right: 40px; align-items: center;" data-oferta_cod="14385">
-                    <div style="width: 80%; display: flex;"><span class="span_chk_dia">QUARTA-FEIRA
-                        </span></div><input type="checkbox" class="dias" name="dias[]" value="3">
+                <div data-oferta_cod="14385">
+                    <div>
+                        <span class="span_chk_dia">QUARTA-FEIRA</span>
+                    </div>
+                    <input type="checkbox" class="dias" name="dias[]" value="3">
                 </div>
             </div>
 
             <div class="pesq">
-                <div class="add" style="display: flex; justify-content: space-between; padding-left: 40px; padding-right: 40px; align-items: center;" data-oferta_cod="14405">
-                    <div style="width: 80%; display: flex;"><span class="span_chk_dia">QUINTA-FEIRA
-                        </span></div><input type="checkbox" class="dias" name="dias[]" value="4">
+                <div data-oferta_cod="14405">
+                    <div>
+                        <span class="span_chk_dia">QUINTA-FEIRA</span>
+                    </div>
+                    <input type="checkbox" class="dias" name="dias[]" value="4">
                 </div>
             </div>
 
             <div class="pesq">
-                <div class="add" style="display: flex; justify-content: space-between; padding-left: 40px; padding-right: 40px; align-items: center;" data-oferta_cod="14437">
-                    <div style="width: 80%; display: flex;"><span class="span_chk_dia">SEXTA-FEIRA
-                        </span></div><input type="checkbox" class="dias" name="dias[]" value="5">
+                <div data-oferta_cod="14437">
+                    <div>
+                        <span class="span_chk_dia">SEXTA-FEIRA</span>
+                    </div>
+                    <input type="checkbox" class="dias" name="dias[]" value="5">
                 </div>
             </div>
 
             <div class="pesq">
-                <div class="add" style="display: flex; justify-content: space-between; padding-left: 40px; padding-right: 40px; align-items: center;" data-oferta_cod="14384">
-                    <div style="width: 80%; display: flex;"><span class="span_chk_dia">SÁBADO
-                        </span></div><input type="checkbox" class="dias" name="dias[]" value="6" checked="">
+                <div data-oferta_cod="14384">
+                    <div>
+                        <span class="span_chk_dia">SÁBADO</span>
+                    </div>
+                    <input type="checkbox" class="dias" name="dias[]" value="6" checked="">
                 </div>
             </div>
 
             <div class="pesq">
-                <div class="add" style="display: flex; justify-content: space-between; padding-left: 40px; padding-right: 40px; align-items: center;" data-oferta_cod="14386">
-                    <div style="width: 80%; display: flex;"><span class="span_chk_dia">DOMINGO
-                        </span></div><input type="checkbox" class="dias" name="dias[]" value="0" checked="">
+                <div data-oferta_cod="14386">
+                    <div>
+                        <span class="span_chk_dia">DOMINGO</span>
+                    </div>
+                    <input type="checkbox" class="dias" name="dias[]" value="0" checked="">
                 </div>
             </div>
         </div>
@@ -158,15 +169,13 @@
 
         <div class="inputs_agenda">
 
-            <div id="divSelectEventos" style="margin-top: 10px ;width: 100%; display: none;">
+            <div id="divSelectEventos" class="contain_inputs_agendas" style="display: none;">
 
-                <div style="display: flex; justify-content: center; margin-left: -20px;">
+                <div class="contain_inputs">
     
                     <span class="ion-wand input-icon"></span>
         
-                    <select class="cadastro__input" id="select_evento" name="select_evento"
-                        style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 80%; padding-left: 4rem; height: 3.5rem;"
-                        required>
+                    <select class="cadastro__input" id="select_evento" name="select_evento" required>
                         <option value="0" selected>Selecione o evento</option>
                         <option value="Almoço">Almoço</option>
                         <option value="Quermesse">Quermesse</option>
@@ -183,18 +192,16 @@
                 </div>
             </div>
     
-            <div id="divTextEvento" style="margin-top: 10px ;width: 100%; display: none;">
+            <div id="divTextEvento" class="contain_inputs_agendas" style="display: none;">
     
-                <div style="display: flex; justify-content: center; margin-left: -20px;">
+                <div class="contain_inputs">
                     <span class="ion-document-text input-icon"></span>
         
-                    <input class="cadastro__input" id="text_evento" name="text_evento" placeholder="Digite o evento a ser realizado"
-                        style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 80%"
-                        required>
+                    <input class="cadastro__input" id="text_evento" name="text_evento" placeholder="Digite o evento a ser realizado" required>
                 </div>
             </div>
 
-            <div style="margin-top: 10px;">
+            <div class="contain_inputs_agendas">
 
                 <div class="div_inputs_agendas">
                     <span class="ion-android-calendar input-icon"></span>
@@ -218,7 +225,7 @@
                 </div>
             </div>
 
-            <div style="margin-top: 10px;">
+            <div class="contain_inputs_agendas">
 
                 <div class="div_inputs_agendas">
 
@@ -240,14 +247,12 @@
 
             </div>
 
-            <div style="margin-top: 10px; width: 100%; display: flex; justify-content: space-between; padding-bottom: 30px;">
+            <div class="contain_select_das_ate">
 
-                <div style="display: flex; width: 100%; justify-content: center; margin-left: -20px;">
+                <div class="contain_inputs" style="width: 100%;">
                     <span class="fa-solid fa-hourglass-start input-icon"></span>
 
-                    <select class="cadastro__input" id="agenda_de" name="agenda_de" placeholder="Das"
-                        style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 60%"
-                        required>
+                    <select class="cadastro__input" id="agenda_de" name="agenda_de" placeholder="Das" style="width: 60%" required>
                         <option value="0" selected>Das</option>
                         <option value="06:00">6:00</option>
                         <option value="06:30">6:30</option>
@@ -289,13 +294,11 @@
                     </select>
                 </div>
 
-                <div style="display: flex; width: 100%; justify-content: center;">
+                <div class="contain_input_ate">
 
                     <span class="fa-solid fa-hourglass-end input-icon"></span>
     
-                    <select class="cadastro__input" id="agenda_ate" name="agenda_ate" placeholder="Das"
-                        style="border: 0;  outline: 0;  background: transparent;  border-bottom: 1px solid darkred; width: 60%"
-                        required>
+                    <select class="cadastro__input" id="agenda_ate" name="agenda_ate" style="width: 60%" required>
                         <option value="0" selected>Até</option>
                         <option value="06:00">6:00</option>
                         <option value="06:30">6:30</option>

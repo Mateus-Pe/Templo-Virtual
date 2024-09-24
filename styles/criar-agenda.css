@@ -1,3 +1,9 @@
+main{
+    background-color: white; 
+    font-family: Exo; 
+    position: relative;
+}
+
 .perfil_ec_selected {
     opacity: 1 !important;
 }
@@ -42,6 +48,19 @@ input[type="checkbox"]:checked::before {
     display: grid;
 }
 
+.pesq div{
+    display: flex; 
+    justify-content: space-between; 
+    padding-left: 40px; 
+    padding-right: 40px; 
+    align-items: center;
+}
+
+.pesq div div{
+    width: 80%; 
+    display: flex;
+}
+
 .span_chk_dia {
     font-size: 1.5rem;
     color: black;
@@ -50,14 +69,6 @@ input[type="checkbox"]:checked::before {
 .inputs_agenda {
     position: relative;
     top: 15px;
-}
-
-.div_input {
-    margin-top: 3%;
-}
-
-.span_div {
-    font-family: Exo;
 }
 
 .modal-content {
@@ -105,20 +116,6 @@ input[type="checkbox"]:checked::before {
     height: 25px;
     font-size: 24px;
     width: 24px;
-}
-
-.span_input{
-    position: absolute;
-    color: lightgray !important; 
-    margin-top: 0.5rem;
-    left: 12%;
-}
-
-.span_input_ate{
-    position: absolute;
-    color: lightgray !important; 
-    margin-top: 0.5rem;
-    right: 32%;
 }
 
 .div_eventos{
@@ -201,4 +198,48 @@ input[type="checkbox"]:checked::before {
     width: 80%; 
     padding-left: 4rem; 
     height: 3.5rem;
+}
+
+#btn_close, #btn_seguir{
+    color: white; 
+    font-size: 24px;
+}
+
+#divDiaSemana{
+    width: 100%; 
+    background-color: white; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 5px;
+}
+
+#divLista{
+    height: 370px; 
+    overflow-y: auto; 
+    position: relative;
+}
+
+.contain_inputs{
+    display: flex; 
+    justify-content: center; 
+    margin-left: -20px;
+}
+
+.contain_input_ate{
+    display: flex; 
+    width: 100%; 
+    justify-content: center;
+}
+
+.contain_select_das_ate{
+    margin-top: 10px; 
+    width: 100%; 
+    display: flex; 
+    justify-content: space-between; 
+    padding-bottom: 30px;
+}
+
+.contain_inputs_agendas{
+    margin-top: 10px;
 }

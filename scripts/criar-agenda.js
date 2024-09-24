@@ -23,67 +23,67 @@ evento_agenda();
   });
 
 
-  function validacao_evento_agenda(){
-    var erro = false;
-    $('.dias:checked').each(function(i, e) {
-      dias_checked.push($(this).val());
-      
-    });
-
-    if($('#agenda_ate').val() == '0'){
-      texto_modal = "<p> Selecione quando o evento terminará. </p><br>";
-      $('#texto_confirmacao').html(texto_modal);
-      erro = true;
-    }
-    if($('#agenda_de').val() == '0'){
-      texto_modal = "<p> Selecione quando o evento iniciará.. </p><br>";
-      $('#texto_confirmacao').html(texto_modal);
-      erro = true;
-    }
-    if ($('#agenda_de').val() >= $('#agenda_ate').val()){
-      texto_modal = "<p> A hora de início deve ser menor que a hora do fim. </p><br>";
-      $('#texto_confirmacao').html(texto_modal);
-      erro = true;
-    }
-    if($('#tempo_duracao').val() == '0'){
-      texto_modal = "<p> Selecione o tempo de duração do evento. </p><br>";
-      $('#texto_confirmacao').html(texto_modal);
-      erro = true;
-    }
-    if($('#agenda_dias').val() == '0'){
-      texto_modal = "<p> Selecione para quais dias deseja agendar. </p><br>";
-      $('#texto_confirmacao').html(texto_modal);
-      erro = true;
-    }
-    if (dias_checked.length == 0) {
-      texto_modal = "<p> Selecione o(s) dia(s) que deseja agendar. </p><br>";
-      $('#texto_confirmacao').html(texto_modal);
-      erro = true;
-    } 
-    if (atual_evento_cod == 0) {
-      texto_modal = "<p> Selecione o evento que deseja. </p><br>";
-      $('#texto_confirmacao').html(texto_modal);
-      erro = true;
-    } 
-    if (atual_evento_cod == 3){
-      if($('#select_evento').val() == 0){
-        texto_modal = "<p> Selecione o evento que irá realizar. </p><br>";
-        $('#texto_confirmacao').html(texto_modal);
-        erro = true;
-      }
-      if($('#select_evento').val() == 'Outros' && $('#text_evento').val() == ''){
-        texto_modal = "<p> Digite qual evento irá realizar. </p><br>";
-        $('#texto_confirmacao').html(texto_modal);
-        erro = true;
-      }
-    }
+function validacao_evento_agenda(){
+  var erro = false;
+  $('.dias:checked').each(function(i, e) {
+    dias_checked.push($(this).val());
     
-    if(erro) {
-      $('#modalConfirmacao').show();
-    }else{  
-      gerar_agenda();
+  });
+
+  if($('#agenda_ate').val() == '0'){
+    texto_modal = "<p> Selecione quando o evento terminará. </p><br>";
+    $('#texto_confirmacao').html(texto_modal);
+    erro = true;
+  }
+  if($('#agenda_de').val() == '0'){
+    texto_modal = "<p> Selecione quando o evento iniciará.. </p><br>";
+    $('#texto_confirmacao').html(texto_modal);
+    erro = true;
+  }
+  if ($('#agenda_de').val() >= $('#agenda_ate').val()){
+    texto_modal = "<p> A hora de início deve ser menor que a hora do fim. </p><br>";
+    $('#texto_confirmacao').html(texto_modal);
+    erro = true;
+  }
+  if($('#tempo_duracao').val() == '0'){
+    texto_modal = "<p> Selecione o tempo de duração do evento. </p><br>";
+    $('#texto_confirmacao').html(texto_modal);
+    erro = true;
+  }
+  if($('#agenda_dias').val() == '0'){
+    texto_modal = "<p> Selecione para quais dias deseja agendar. </p><br>";
+    $('#texto_confirmacao').html(texto_modal);
+    erro = true;
+  }
+  if (dias_checked.length == 0) {
+    texto_modal = "<p> Selecione o(s) dia(s) que deseja agendar. </p><br>";
+    $('#texto_confirmacao').html(texto_modal);
+    erro = true;
+  } 
+  if (atual_evento_cod == 0) {
+    texto_modal = "<p> Selecione o evento que deseja. </p><br>";
+    $('#texto_confirmacao').html(texto_modal);
+    erro = true;
+  } 
+  if (atual_evento_cod == 3){
+    if($('#select_evento').val() == 0){
+      texto_modal = "<p> Selecione o evento que irá realizar. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
+    }
+    if($('#select_evento').val() == 'Outros' && $('#text_evento').val() == ''){
+      texto_modal = "<p> Digite qual evento irá realizar. </p><br>";
+      $('#texto_confirmacao').html(texto_modal);
+      erro = true;
     }
   }
+  
+  if(erro) {
+    $('#modalConfirmacao').show();
+  }else{  
+    gerar_agenda();
+  }
+}
 
   $('#confirmar').click(function (e) {
     $('#modalConfirmacao').hide();
@@ -94,7 +94,6 @@ evento_agenda();
     $.ajax({
       method: "POST",
       url: "https://pedeoferta.com.br/templo/index.php/welcome/get_evento_agenda",
-      
     })
     .done(function(ret) {
 
@@ -183,7 +182,7 @@ function gerar_agenda(){
 
 
       });
-  }
+}
 
 $('#especifica').click(function(e){
   window.location = "criar-agenda-especifica.html";
