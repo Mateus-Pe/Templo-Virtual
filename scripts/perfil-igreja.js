@@ -2,6 +2,7 @@ igrejaId = "" ;
 nomeIgrejaVerificado = "";
 
 $(document).ready(function() {
+  cidade_id = window.sessionStorage.getItem("cidade_id");
   igrejaId = window.sessionStorage.getItem('feed_igreja_id');
   if(igrejaId != null && igrejaId != ''){
     evento_agenda();
@@ -106,24 +107,46 @@ function evento_agenda(){
   $.ajax({
     method: "POST",
     url: "https://pedeoferta.com.br/templo/index.php/welcome/get_feed",
-    data: {feed_igreja_id : igrejaId}
+    data: { feed_igreja_id : igrejaId,
+            regiao_id : cidade_id,
+            cidade_id : cidade_id
+    }
    
   })
   .done(function(ret) {
     var html = '';
     var classVideo = 0;
     var obj = jQuery.parseJSON(ret);
-    $.each(obj.lista_feed, function (k, lpp) {
-      
-      classVideo ++;
-      html = montaHtmlVideo(classVideo);
-      if(classVideo < 2){
-        //$("#divHistoria").append(html);
-        //readyVideo(classVideo);
-      }
+
+    html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Eventos de "igreja"</div>'
+    $("#divFeed").append(html);
+    $.each(obj.lista_feed_igreja, function (k, lpp) {
       html = montaHtml(lpp, k);
       $("#divFeed").append(html);
     });
+
+
+    html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Eventos de "paroquia"</div>'
+      $("#divFeed").append(html);
+      $.each(obj.lista_feed_paroquia, function (k, lpp) {
+        html = montaHtml(lpp, k);
+        $("#divFeed").append(html);
+      });
+
+
+    html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Eventos de "cidade"</div>'
+      $("#divFeed").append(html);
+      $.each(obj.lista_feed_cidade, function (k, lpp) {
+        html = montaHtml(lpp, k);
+        $("#divFeed").append(html);
+      });
+
+      html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Eventos de "região"</div>'
+      $("#divFeed").append(html);
+      $.each(obj.lista_feed_regiao, function (k, lpp) {
+        html = montaHtml(lpp, k);
+        $("#divFeed").append(html);
+      });
     
 
    // configurarEventos();

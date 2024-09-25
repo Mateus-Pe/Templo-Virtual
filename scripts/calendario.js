@@ -37,7 +37,7 @@ $(document).ready(function() {
       window.location = 'configurar_layout_upload.html';
     }
     else{
-      window.location = 'escolha-layout.html';
+      window.location = 'configurar_layout_upload.html';
     }
     $('#modal_config').hide();
   })
@@ -367,7 +367,7 @@ function mock_agenda(){
               var agenda_id = $(this).data('agenda_id');
               window.sessionStorage.setItem('agenda_id', agenda_id);
               $('#modalStatus').hide();
-              window.location = 'escolha-layout.html';
+              window.location = 'configurar_layout_upload.html';
             });
 
             $('.remove-igreja').click(function () {
