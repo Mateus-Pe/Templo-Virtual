@@ -53,7 +53,7 @@ document.getElementById('imageFileInput').addEventListener('change', function(ev
 
 function validarImagem(height, width){
   retorno = true;
-
+  //verificar se realmente vai utilizar estas validações
   /*if ((1.5 * width) > height && height > width) { // antes 1.33
     $("#modalConfirmacao").show();
     texto_modal = "<p> Erro ao carregar a imagem, procure uma imagem com as dimensões de largura e altura próximas.</p><br>";

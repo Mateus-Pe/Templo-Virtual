@@ -67,11 +67,11 @@
     <header class="header1">
 
         <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn_close"> 
-            <span class="ion-android-close" id="btn_close" style="color: white; font-size: 24px;"></span>
+            <span class="ion-android-close" id="btn_close"></span>
         </div>
 
         <div class="page-menu--toggle page-menu__hamburger" href="#" id="div_btn-salvar">
-            <span class="ion-android-done" id="btn_salvar" style="color: white; font-size: 24px;"></span>
+            <span class="ion-android-done" id="btn_salvar"></span>
         </div>
 
     </header>
@@ -81,14 +81,14 @@
 
     <!--Selecionado imagem Local-->
 
-    <div style="display: flex; width: 100%; position: relative; height: 70px;">
+    <div class="div_contain_btn_select">
 
         <div id="editImg" class="select_local" style="display: none;">
 
             <div class="div_botao">
                 <button id="btn_editar" class="botao-imagem ion-android-settings"></button>
             </div>
-            <span id="addEdit" style="font-size: 1.5rem;">Trocar imagem</span>
+            <span id="addEdit">Trocar imagem</span>
 
         </div>
 
@@ -98,7 +98,7 @@
 
                 <button id="add_imagem" class="botao-imagem ion-image"></button>
             </div>
-            <span id="addEdit" style="font-size: 1.5rem;">Adicionar imagem</span>
+            <span id="addEdit">Adicionar imagem</span>
 
         </div>
 
@@ -108,20 +108,20 @@
 
                 <button id="btn_visualizar" class="botao-imagem ion-eye"></button>
             </div>
-            <span style="font-size: 1.5rem;">Visualizar publicação</span>
+            <span>Visualizar publicação</span>
 
         </div>
     </div>
 
-    <div id="pre_visualizar" style="height: 15px; position: relative; width: 100%; text-align: center; font-size: 10px; background-color: darkred; color: white;">
-        <span style="position: relative; top: 20%;">PRÉ VISUALIZAÇÃO</span>
+    <div id="pre_visualizar">
+        <span>PRÉ VISUALIZAÇÃO</span>
     </div>
 
-    <div id="imagem_selecionada" style="width: 100%; position: relative;">
-        <img id="previewImg" src="" style="width: 100%; height: 100%; display: none;">
+    <div id="imagem_selecionada">
+        <img id="previewImg" src="" style="display: none;">
     </div>
 
-    <div id="descricao_local" style="width: 100%; position: relative;">
+    <div id="descricao_local">
 
         <div id="textArea">
 
@@ -132,13 +132,12 @@
 
     </div>
 
-    <div id="modal_visualizar" class="modal" style="background-color: black;">
-        <span id="close_view" class="ion-android-close"
-            style="color: white;font-size: 3rem; position: absolute; right: 0.5rem; top: 0.5rem;">
+    <div id="modal_visualizar" class="modal">
+        <span id="close_view" class="ion-android-close">
 
         </span>
         <div class="modal-content">
-            <div class="div_feed_secundario">
+            <div class="div_feed">
                 <div class="div_perfil">
                     <div class="perfil_div" data-igreja_id="1">
                         <img class="img_igreja" src="/imgs/imgs-igreja/igreja.png">
@@ -172,9 +171,8 @@
         <div class="div_modal" style="width: 75% !important;">
             <div style="font-size: 1.3rem;" id="mensagem_modalPreSalvar"></div>
             <div class="modal-footer">
-                <button href="#!" id="confirmar_alteracao" style="font-size: 1.2rem !important;">Alterar todas</button>
-                <button href="#!" id="nao_confirmar_alteracao" style="font-size: 1.2rem !important;">Somente
-                    esta</button>
+                <button href="#!" id="confirmar_alteracao">Alterar todas</button>
+                <button href="#!" id="nao_confirmar_alteracao">Somente esta</button>
             </div>
         </div>
     </div>
