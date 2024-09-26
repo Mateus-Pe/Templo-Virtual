@@ -28,7 +28,7 @@ function getAgendaById(agenda_id){
                   '</div>'+
                 '</div>'+
 
-              '<div class="feed_principal">'+
+              '<div class="feed_principal" data-agenda_id="'+obj.agenda.agenda_id+'" data-igreja_id="'+obj.agenda.agenda_igreja_id+'">'+
                 '<div class="div_img_layout">'+
                     '<img id="visualiza_layout_feed" src="'+obj.agenda.agenda_img+'">'+
                 '</div>'+
@@ -87,5 +87,11 @@ function getAgendaById(agenda_id){
             $("#modalPublicacaoEvento").hide();
             $('body').css('overflow', 'auto');
         });
+
+        $(".feed_principal").click(function(e){
+          window.sessionStorage.setItem('feed_agenda_id', $(this).data('agenda_id'));
+          window.sessionStorage.setItem('feed_igreja_id', $(this).data('igreja_id'));
+          window.location = 'perfil-igreja.html';
+      });
 	  });
 }

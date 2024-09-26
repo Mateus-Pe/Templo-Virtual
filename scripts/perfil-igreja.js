@@ -1,9 +1,15 @@
 igrejaId = "" ;
 nomeIgrejaVerificado = "";
+var agenda_id = 0;
 
 $(document).ready(function() {
+  if(window.sessionStorage.getItem("feed_agenda_id") != null && window.sessionStorage.getItem("feed_agenda_id") != 'undefined'){
+    agenda_id = window.sessionStorage.getItem("feed_agenda_id");
+    window.sessionStorage.removeItem('feed_agenda_id');
+  }
   cidade_id = window.sessionStorage.getItem("cidade_id");
   igrejaId = window.sessionStorage.getItem('feed_igreja_id');
+  console.log(igrejaId);
   if(igrejaId != null && igrejaId != ''){
     evento_agenda();
     carregar_perfil();
@@ -16,10 +22,9 @@ $(document).ready(function() {
 
 function posicaoScrollEspecifica(){
   
-  agendaId = window.sessionStorage.getItem('feed_agenda_id');
-  console.log(agendaId);
-  if(agendaId != null && agendaId != ""){
-    scroll = $('body .div_publicacao[data-feed="'+agendaId+'"]').position().top;
+  console.log(agenda_id);
+  if(agenda_id != null && agenda_id != ""){
+    scroll = $('body .div_publicacao[data-feed="'+agenda_id+'"]').position().top;
     console.log(scroll);
     $('body').scrollTop(scroll + parseInt($("#divPerfil").css("height")) + 5);
   }
@@ -44,13 +49,7 @@ function carregar_perfil(){
     html += '</div>';
 
     html += '<div class="div_publicacao">';
-    html +=   '<div class="feed_principal">';
     html +=     '<div class="div_feed_secundario">';
-    html +=       '<div>';
-    html +=         '<div>';
-    html +=           '<div style="top: 3rem; position: relative;">';
-    html +=             '<h1 id="nome_da_igreja" class="nome_da_igreja">';
-    html +=             '</h1>';
     html +=             '<span class="abrir_hora_fixo">';
     html +=               '<span id="horarios_fixos">';
     html +=                 'Ver horários fixos';
@@ -58,8 +57,7 @@ function carregar_perfil(){
     html +=               '<span class="fa-regular fa-clock icone_editar ion_map">';
     html +=               '</span>';
     html +=             '</span>';
-    html +=            '</div>';
-    html +=             '<div class="a_div_perfil">';
+    
     html +=               '<span class="abrir_map">';
     html +=                 '<span id="localizacao" data-lat="" data-long="" >';
     html +=                   'Ver no mapa';
@@ -67,6 +65,8 @@ function carregar_perfil(){
     html +=                 '<span class="fa-solid fa-location-dot ion_local icone_editar ion_map">';
     html +=                 '</span>';
     html +=                '</span>';
+
+    html +=             '<div class="a_div_perfil">';
     html +=                '<span id="endereco_da_igreja" class="endereco_igreja">';
     html +=                 '';
     html +=                '</span>';
@@ -77,10 +77,8 @@ function carregar_perfil(){
     html +=                 '<span id="email_txt" class="contato"></span>';
     html +=                '</div>';
     html +=               '</div>';
-    html +=              '</div>';
-    html +=             '</div>';
+  
     html +=            '</div>';
-    html +=           '</div>';
     html +=         '</div>';
 
     html +=         '<div>'
@@ -109,7 +107,8 @@ function evento_agenda(){
     url: "https://pedeoferta.com.br/templo/index.php/welcome/get_feed",
     data: { feed_igreja_id : igrejaId,
             regiao_id : cidade_id,
-            cidade_id : cidade_id
+            cidade_id : cidade_id,
+            feed_agenda_id : agenda_id
     }
    
   })
@@ -117,6 +116,14 @@ function evento_agenda(){
     var html = '';
     var classVideo = 0;
     var obj = jQuery.parseJSON(ret);
+
+    html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Eventos de "agenda"</div>'
+      $("#divFeed").append(html);
+      $.each(obj.lista_feed_agenda, function (k, lpp) {
+        html = montaHtml(lpp, k);
+        $("#divFeed").append(html);
+      });
+
 
     html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Eventos de "igreja"</div>'
     $("#divFeed").append(html);
