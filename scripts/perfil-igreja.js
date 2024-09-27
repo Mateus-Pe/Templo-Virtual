@@ -14,7 +14,7 @@ $(document).ready(function() {
     evento_agenda();
     carregar_perfil();
     carregarIgreja();
-    getComunidade();
+    
   }
   //marker('-23.5909968','-48.0534713', null);
 
@@ -80,16 +80,8 @@ function carregar_perfil(){
   
     html +=            '</div>';
     html +=         '</div>';
-
-    html +=         '<div>'
-    html +=           '<div style="width: 100%; height: 20px; background-color: darkred; color: white; align-items: center; display: flex; justify-content: center; font-size: 13px; font-family: exo;" >';
-    html +=             '<span>';
-    html +=               'COMUNIDADES RELACIONADAS';
-    html +=             '</span>';
-    html +=           '</div>';
-    html +=           '<div class="div_comunidade">';
-    html +=           '</div>';
-    html +=         '</div>';
+    
+   
     $("#divPerfil").html(html);
 
     eventoPerfil();
@@ -99,6 +91,21 @@ function carregar_perfil(){
     
 }
 
+
+
+function htmlComunidadesRelacionadas(){
+  var html = '';
+  html +=         '<div">'
+  html +=           '<div style="width: 100%; height: 20px; background-color: darkred; color: white; align-items: center; display: flex; justify-content: center; font-size: 13px; font-family: exo;" >';
+  html +=             '<span>';
+  html +=               'COMUNIDADES RELACIONADAS';
+  html +=             '</span>';
+  html +=           '</div>';
+  html +=           '<div class="div_comunidade">';
+  html +=           '</div>';
+  html +=         '</div>';
+  return html;
+}
 
 
 function evento_agenda(){
@@ -117,7 +124,7 @@ function evento_agenda(){
     var classVideo = 0;
     var obj = jQuery.parseJSON(ret);
 
-    html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Eventos de "agenda"</div>'
+    html = '<div style="width: 100%; height: 20px; background-color: darkred; color: white; display: flex; align-items: center;justify-content: center; font-size: 12px; font-family: exo;">Porquê você pesquisou "agenda"</div>'
       $("#divFeed").append(html);
       $.each(obj.lista_feed_agenda, function (k, lpp) {
         html = montaHtml(lpp, k);
@@ -125,7 +132,7 @@ function evento_agenda(){
       });
 
 
-    html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Eventos de "igreja"</div>'
+    html = '<div style="width: 100%; height: 20px; background-color: darkred; color: white; display: flex; align-items: center;justify-content: center; font-size: 12px; font-family: exo;">Relacionados à '+obj.lista_feed_igreja[0].igreja_nome+'</div>'
     $("#divFeed").append(html);
     $.each(obj.lista_feed_igreja, function (k, lpp) {
       html = montaHtml(lpp, k);
@@ -133,22 +140,24 @@ function evento_agenda(){
     });
 
 
-    html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Eventos de "paroquia"</div>'
-      $("#divFeed").append(html);
+    $("#divFeed").append(htmlComunidadesRelacionadas());
+
+    //html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Porquê você pesquisou "paroquia"</div>'
+      //$("#divFeed").append(html);
       $.each(obj.lista_feed_paroquia, function (k, lpp) {
         html = montaHtml(lpp, k);
         $("#divFeed").append(html);
       });
 
 
-    html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Eventos de "cidade"</div>'
+    html = '<div style="width: 100%; height: 20px; background-color: darkred; color: white; display: flex; align-items: center;justify-content: center; font-size: 12px; font-family: exo;">Relacionadas à '+obj.lista_feed_cidade[0].cidade_nome+'</div>'
       $("#divFeed").append(html);
       $.each(obj.lista_feed_cidade, function (k, lpp) {
         html = montaHtml(lpp, k);
         $("#divFeed").append(html);
       });
 
-      html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Eventos de "região"</div>'
+      html = '<div style="width: 100%; height: 20px; background-color: darkred; color: white; display: flex; align-items: center;justify-content: center; font-size: 12px; font-family: exo;">Relacionadas a região de '+obj.lista_feed_cidade[0].cidade_nome+'</div>'
       $("#divFeed").append(html);
       $.each(obj.lista_feed_regiao, function (k, lpp) {
         html = montaHtml(lpp, k);
@@ -160,7 +169,7 @@ function evento_agenda(){
     //iniciarIntersectionObserver();
     posicaoScrollEspecifica();
     compartilha();
-    
+    getComunidade();
   });
 }
 
