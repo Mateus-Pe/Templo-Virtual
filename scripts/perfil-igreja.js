@@ -124,21 +124,24 @@ function evento_agenda(){
     var classVideo = 0;
     var obj = jQuery.parseJSON(ret);
 
-    html = '<div style="width: 100%; height: 20px; background-color: darkred; color: white; display: flex; align-items: center;justify-content: center; font-size: 12px; font-family: exo;">Porquê você pesquisou "agenda"</div>'
+    if(obj.lista_feed_agenda != ''){
+      html = '<div class="divisao_publi">Porquê você pesquisou "agenda"</div>'
+        $("#divFeed").append(html);
+        $.each(obj.lista_feed_agenda, function (k, lpp) {
+          html = montaHtml(lpp, k);
+          $("#divFeed").append(html);
+        });
+    }
+
+
+    if(obj.lista_feed_igreja != ''){
+      html = '<div class="divisao_publi">Relacionados à '+obj.lista_feed_igreja[0].igreja_nome+'</div>'
       $("#divFeed").append(html);
-      $.each(obj.lista_feed_agenda, function (k, lpp) {
+      $.each(obj.lista_feed_igreja, function (k, lpp) {
         html = montaHtml(lpp, k);
         $("#divFeed").append(html);
-      });
-
-
-    html = '<div style="width: 100%; height: 20px; background-color: darkred; color: white; display: flex; align-items: center;justify-content: center; font-size: 12px; font-family: exo;">Relacionados à '+obj.lista_feed_igreja[0].igreja_nome+'</div>'
-    $("#divFeed").append(html);
-    $.each(obj.lista_feed_igreja, function (k, lpp) {
-      html = montaHtml(lpp, k);
-      $("#divFeed").append(html);
     });
-
+  }
 
     $("#divFeed").append(htmlComunidadesRelacionadas());
 
@@ -150,14 +153,14 @@ function evento_agenda(){
       });
 
 
-    html = '<div style="width: 100%; height: 20px; background-color: darkred; color: white; display: flex; align-items: center;justify-content: center; font-size: 12px; font-family: exo;">Relacionadas à '+obj.lista_feed_cidade[0].cidade_nome+'</div>'
+    html = '<div class="divisao_publi">Relacionadas à '+obj.lista_feed_cidade[0].cidade_nome+'</div>'
       $("#divFeed").append(html);
       $.each(obj.lista_feed_cidade, function (k, lpp) {
         html = montaHtml(lpp, k);
         $("#divFeed").append(html);
       });
 
-      html = '<div style="width: 100%; height: 20px; background-color: darkred; color: white; display: flex; align-items: center;justify-content: center; font-size: 12px; font-family: exo;">Relacionadas a região de '+obj.lista_feed_cidade[0].cidade_nome+'</div>'
+      html = '<div class="divisao_publi">Relacionadas a região de '+obj.lista_feed_cidade[0].cidade_nome+'</div>'
       $("#divFeed").append(html);
       $.each(obj.lista_feed_regiao, function (k, lpp) {
         html = montaHtml(lpp, k);

@@ -467,3 +467,15 @@ body{
     text-align: center;
     margin-right: auto;
 }
+
+.divisao_publi{
+    width: 100%; 
+    height: 20px; 
+    background-color: darkred; 
+    color: white; 
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    font-size: 12px; 
+    font-family: exo;
+}
