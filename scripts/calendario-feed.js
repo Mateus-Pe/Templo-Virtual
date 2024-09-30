@@ -206,47 +206,21 @@ function configuraEventos(){
 
 
 function eventoPassou(hora, minuto, segundo) {
-  const dataAtual = new Date(); // Data atual
+  const dataAtual = new Date();
 
-  // Converte strings para números usando parseInt
   var horaInt = parseInt(hora);
   var minutoInt = parseInt(minuto);
   var segundoInt = parseInt(segundo);
 
-  // Cria uma data de referência para comparação (subtrai 1 do mês, pois começa em 0)
   var dataRef = new Date(arrDay.day.getFullYear(), arrDay.day.getMonth(), arrDay.day.getDate(), horaInt, minutoInt, segundoInt);
 
-  //console.log(horaInt, "hora");
-  //console.log(minutoInt, "minuto");
-  //console.log(segundoInt, "segundo");
-  //console.log(dataRef);
-
-  // Verifica se a data atual é maior que a data de referência
   if (dataAtual > dataRef) {
-    return false; // Evento já passou
+    return false;
   } else {
-    return true; // Evento ainda vai acontecer
+    return true;
   }
 }
 
-
-
-  
-/*function estiloEventoPassado(hora, minuto, segundo) {
-  const dataAtual = new Date();
-    var dataRef= new Date(dataAtual.getYear, dataAtual.getMonth, arrDay.numberDay, hora, minuto, segundo);
-    //dataRef.setHours(hora, minuto, segundo, 0);
-
-     var htmlAncoraHora = '';
-     
-     if(dataAtual > dataRef){
-       htmlAncoraHora = 'opacity: 50%;';
-       contLista += 1;
-     }
-
-    return htmlAncoraHora;
-    //return '';
-}*/
 
 function montaHorario(ch){
    
@@ -271,8 +245,7 @@ function get_calendario_hora(dtReferencia){
 	   method: "POST",
 	   url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_calendario_feed",
 	   data: {  'cidade_id': 9240, 
-                data_referencia: dtReferencia,
-                
+              data_referencia: dtReferencia
 			 }
 	 })
 	  .done(function(ret) {
@@ -288,10 +261,6 @@ function get_calendario_hora(dtReferencia){
 
 function configurarEventosCalendarioHora(){
   $('.pesq').click(function () {
-    var agenda_id = $(this).data('agenda_id');
-    //window.sessionStorage.setItem('feed_igreja_id', $(this).data('igreja_id'));
-    //window.sessionStorage.setItem('feed_agenda_id', $(this).data('agenda_id'));
-    //window.location = 'perfil-igreja.html';
     getAgendaById($(this).data('agenda_id'))
     $("#modalPublicacaoEvento").show();
 });
@@ -305,8 +274,8 @@ function montaHtmlCalendarioHora(listaCalendarioHora) {
   $('#divListaAgenda').html(''); // Limpa o conteúdo atual da lista
 
   if (listaCalendarioHora.length === 0) {
-      $('#divListaAgenda').html('<div class="sem-eventos">Nenhum evento disponível...</div>');
-      $('#divListaAgenda').css('display', 'flex');
+      $('#divListaAgenda').html('<div><div class="container_sem_agenda"><img src="./imgs/imgs-igreja/pesquisa_falha.gif"></div> <div class="sem-eventos">Nenhum evento disponível...</div></div>');
+      $('#divListaAgenda').css('display', 'flow');
       $('#divListaAgenda').css('justify-content', 'center');
   } else {
       $('#divListaAgenda').css('display', '');
@@ -327,7 +296,7 @@ function montaHtmlCalendarioHora(listaCalendarioHora) {
               estiloJaPassou = '';
           }
 
-          var html = '<div class="pesq" data-agenda_id="' + ch.agenda_id + '" data-igreja_id="' + ch.igreja_id + '" style="background-color: white; border-bottom: 1px solid #5b318a36; ' + estiloJaPassou + '">';
+          var html = '<div class="pesq" data-agenda_id="' + ch.agenda_id + '" data-igreja_id="' + ch.igreja_id + '" style="border-bottom: 1px solid #5b318a36; ' + estiloJaPassou + '">';
 
           html += '<div class="add" data-agenda_id="' + ch.agenda_id + '">' +
                       '<div class="agenda">' +

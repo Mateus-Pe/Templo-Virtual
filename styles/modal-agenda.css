@@ -127,3 +127,23 @@
     max-width: 100%;
     font-size: 10pt;
 }
+
+#back_modal{
+    font-size: 24px;
+}
+
+.contain_data_modal{
+    border: 1px solid black; 
+    align-items: center; 
+    display: grid; 
+    padding-right: 10px; 
+    padding-left: 10px; 
+    font-family: exo;
+}
+
+.contain_data_modal span{
+    font-size: 1.2rem; 
+    color: white; 
+    display: flex; 
+    justify-content: center;
+}

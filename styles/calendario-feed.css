@@ -184,3 +184,23 @@ body {
     align-items: center;
     font-size: 15px;
 }
+
+.contain_calendar_principal{
+    overflow: hidden; 
+    position: fixed; 
+    width: 100%; 
+    z-index: 3; 
+    background-color: white;
+}
+
+.container_sem_agenda{
+    margin-left: 25%;
+    width: 50%;
+    align-items: center;
+    display: flex;
+    margin-right: 25%;
+}
+
+.container_sem_agenda img{
+    width: 100%;
+}
