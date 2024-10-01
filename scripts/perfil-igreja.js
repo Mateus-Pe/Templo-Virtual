@@ -32,7 +32,6 @@ function posicaoScrollEspecifica(){
 }
 
 
-// Função para carregar o perfil
 function carregar_perfil(){
   var html = '';
 
@@ -82,13 +81,12 @@ function carregar_perfil(){
     html +=         '</div>';
     
    
-    $("#divPerfil").html(html);
+  $("#divPerfil").html(html);
 
-    eventoPerfil();
-    modalHorariosFixos();
-    modalVisualizarPerfil();
-    modalVisualizarImgFundo();
-    
+  eventoPerfil();
+  modalHorariosFixos();
+  modalVisualizarPerfil();
+  modalVisualizarImgFundo();
 }
 
 
@@ -117,11 +115,9 @@ function evento_agenda(){
             cidade_id : cidade_id,
             feed_agenda_id : agenda_id
     }
-   
   })
   .done(function(ret) {
     var html = '';
-    var classVideo = 0;
     var obj = jQuery.parseJSON(ret);
 
     if(obj.lista_feed_agenda != ''){
@@ -133,43 +129,39 @@ function evento_agenda(){
         });
     }
 
-
     if(obj.lista_feed_igreja != ''){
       html = '<div class="divisao_publi">Relacionados à '+obj.lista_feed_igreja[0].igreja_nome+'</div>'
       $("#divFeed").append(html);
       $.each(obj.lista_feed_igreja, function (k, lpp) {
         html = montaHtml(lpp, k);
         $("#divFeed").append(html);
-    });
-  }
+      });
+    }
 
     $("#divFeed").append(htmlComunidadesRelacionadas());
 
-    //html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Porquê você pesquisou "paroquia"</div>'
-      //$("#divFeed").append(html);
       $.each(obj.lista_feed_paroquia, function (k, lpp) {
         html = montaHtml(lpp, k);
         $("#divFeed").append(html);
       });
 
-
-    html = '<div class="divisao_publi">Relacionadas à '+obj.lista_feed_cidade[0].cidade_nome+'</div>'
-      $("#divFeed").append(html);
-      $.each(obj.lista_feed_cidade, function (k, lpp) {
-        html = montaHtml(lpp, k);
+      if(obj.lista_feed_cidade != ''){
+        html = '<div class="divisao_publi">Relacionadas à '+obj.lista_feed_cidade[0].cidade_nome+'</div>'
         $("#divFeed").append(html);
-      });
+        $.each(obj.lista_feed_cidade, function (k, lpp) {
+          html = montaHtml(lpp, k);
+          $("#divFeed").append(html);
+        });
+      }
 
-      html = '<div class="divisao_publi">Relacionadas a região de '+obj.lista_feed_cidade[0].cidade_nome+'</div>'
-      $("#divFeed").append(html);
-      $.each(obj.lista_feed_regiao, function (k, lpp) {
-        html = montaHtml(lpp, k);
+      if(obj.lista_feed_regiao != ''){
+        html = '<div class="divisao_publi">Relacionadas a região de '+obj.lista_feed_cidade[0].cidade_nome+'</div>'
         $("#divFeed").append(html);
-      });
-    
-
-   // configurarEventos();
-    //iniciarIntersectionObserver();
+        $.each(obj.lista_feed_regiao, function (k, lpp) {
+          html = montaHtml(lpp, k);
+          $("#divFeed").append(html);
+        });
+      }
     posicaoScrollEspecifica();
     compartilha();
     getComunidade();
@@ -193,7 +185,6 @@ function compartilha() {
         var postUrl = 'http://pedeoferta.com.br/site/servitus/compartilha.html'+parametros;
         console.log('Link compartilhado:', postUrl);
         
-        // Abre um menu de compartilhamento com opções para WhatsApp, Facebook e Instagram
         var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
         compartilhamentoMenu.style.display = 'flex';
 
@@ -213,7 +204,6 @@ function compartilha() {
           abrirLink('https://www.instagram.com/' + encodeURIComponent(postUrl));
         });
 
-        // Alternar a visibilidade dos botões de compartilhamento
         toggleShareButtons(compartilhamentoMenu);
         hideShareButtonsFromOtherPosts(compartilhamentoMenu);
       } else {
@@ -225,15 +215,13 @@ function compartilha() {
 
 function toggleShareButtons(compartilhamentoMenu) {
   compartilhamentoMenu.offsetHeight;
-  // Alterna a classe 'show' para controlar a exibição dos botões
   compartilhamentoMenu.classList.toggle('show_compartilha');
-  // Atualiza o estilo de exibição dos botões
   var shareButtons = compartilhamentoMenu.querySelectorAll('.btn-compartilhar');
   shareButtons.forEach(function(button) {
     if (compartilhamentoMenu.classList.contains('show_compartilha')) {
-      button.style.display = 'flex'; // Exibe os botões
+      button.style.display = 'flex';
     } else {
-      button.style.display = 'none'; // Oculta os botões
+      button.style.display = 'none';
     }
   });
 }
@@ -256,11 +244,9 @@ function hideShareButtonsFromOtherPosts(currentCompartilhamentoMenu) {
 function abrirLink(url) {
   var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-  if (isMobile) {
-    // Se estiver em um dispositivo móvel, tentamos abrir o link diretamente
+  if (isMobile){
     window.location.href = url;
-  } else {
-    // Se estiver em um computador, abrimos o link em uma nova aba do navegador
+  } else{
     window.open(url, '_blank');
   }
 }
@@ -268,19 +254,15 @@ function abrirLink(url) {
 function abrirLinkParaWhatsApp(url) {
   var whatsappLink = 'whatsapp://send?text=' + encodeURIComponent(url);
   var whatsappWebLink = 'https://web.whatsapp.com/send?text=' + encodeURIComponent(url);
-  
-  // Verifica se o navegador suporta o protocolo whatsapp://
   if (navigator.userAgent.match(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i)) {
     window.open(whatsappLink, '_blank');
   } else {
-    // Se não suportar, abre o link para o WhatsApp Web
     window.open(whatsappWebLink, '_blank');
   }
 }
 
 
 function extrairIdDaImagem(imagemUrl) {
-  // Extrai o ID da imagem do URL
   var idMatch = imagemUrl.match(/\/(\d+)\.jpg$/);
   if (idMatch) {
     return idMatch[1];
@@ -290,8 +272,6 @@ function extrairIdDaImagem(imagemUrl) {
 }
 
 
-
-
 function getComunidade(){
   $.ajax({
     method: "POST",
@@ -299,17 +279,14 @@ function getComunidade(){
     data: {igreja_id: igrejaId}
   })
   .done(function(ret) {
-
     var obj = jQuery.parseJSON(ret);
     console.log(obj);
-
     var html = '';
-
     $.each(obj.lista_igreja, function (k, lpp) {
 
         html += '<div class="comunidade_select" data-igreja_id="'+lpp.igreja_id+'">';
-              html += '<img  src="'+lpp.igreja_logo+'">';
-              html += '<span>'+lpp.igreja_nome+'</span>';
+          html += '<img  src="'+lpp.igreja_logo+'">';
+          html += '<span>'+lpp.igreja_nome+'</span>';
         html += '</div>';
     });
 
@@ -317,11 +294,9 @@ function getComunidade(){
 
     $('#carregando').hide();
     $('.produtos_perfil').click(function(e){
-
       var perfilId = $(this).data('evento_cod');
       window.sessionStorage.setItem('igreja_id', perfilId); 
       location.reload();
-                  
       atual_evento_cod = $(this).data('evento_cod');
       console.log(atual_evento_cod);
     });
@@ -329,12 +304,9 @@ function getComunidade(){
     $('.comunidade_select').click(function () {
       window.sessionStorage.setItem('feed_igreja_id', $(this).data('igreja_id'));
       window.location = 'perfil-igreja.html';
-      
     });
   });
 }
-
-
 
 
 function carregarIgreja(){
@@ -343,64 +315,53 @@ function carregarIgreja(){
     url: "https://pedeoferta.com.br/templo/index.php/welcome/get_igreja_by_id",
     data: {
       igreja_id : igrejaId
-     
     }
   })
-    .done(function (ret) {
-      var obj = jQuery.parseJSON(ret);
+  .done(function (ret) {
+    var obj = jQuery.parseJSON(ret);
+    console.log("Dados da igreja recebidos:", ret);
+    if(obj.status == '1'){
+      $('#whatsapp_txt').val(obj.igreja.igreja_whats);
+      $('#facebook_txt').val(obj.igreja.igreja_face);
+      $('#instagram_txt').val(obj.igreja.igreja_instagram);
+      $('#email_txt').val(obj.igreja.igreja_email);
+      $('#txt_desc_resumida').val(obj.igreja.igreja_desc_resumida);
+      $("#nome_igreja_fixo").text(obj.igreja.igreja_nome);
+      $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
+      $(".img_igreja1").attr('src', obj.igreja.igreja_logo_url);
+      $(".img_fundo1").attr('src', obj.igreja.igreja_fundo_url);
+      $("#horario_fixo").html(obj.igreja.igreja_horario_fixo);
+      $("#localizacao").data('lat',obj.igreja.endereco_latitude);
+      $("#localizacao").data('long',obj.igreja.endereco_longitude);
+      atualizarContatos();
+      nomeIgrejaVerificado = obj.igreja.igreja_nome;
 
-      console.log("Dados da igreja recebidos:", ret);
-      
-      if(obj.status == '1'){
-        $('#whatsapp_txt').val(obj.igreja.igreja_whats);
-        $('#facebook_txt').val(obj.igreja.igreja_face);
-        $('#instagram_txt').val(obj.igreja.igreja_instagram);
-        $('#email_txt').val(obj.igreja.igreja_email);
-        $('#txt_desc_resumida').val(obj.igreja.igreja_desc_resumida);
-        $("#nome_igreja_fixo").text(obj.igreja.igreja_nome);
-        $("#endereco_da_igreja").text(obj.igreja.igreja_endereco_logradouro + ", " + obj.igreja.igreja_endereco_numero + ", " + obj.igreja.igreja_endereco_bairro + ", " + obj.igreja.igreja_endereco_cidade);
-        $(".img_igreja1").attr('src', obj.igreja.igreja_logo_url);
-        $(".img_fundo1").attr('src', obj.igreja.igreja_fundo_url);
-        $("#horario_fixo").html(obj.igreja.igreja_horario_fixo);
-        $("#localizacao").data('lat',obj.igreja.endereco_latitude);
-        $("#localizacao").data('long',obj.igreja.endereco_longitude);
-        atualizarContatos();
-
-        nomeIgrejaVerificado = obj.igreja.igreja_nome;
-
-        var nomeIgreja = obj.igreja.igreja_nome;
-        $('#nome_igreja').val(nomeIgreja);
-        
-      }
-
-    });
-}
-
-
-  
-  function abreviarNomeIgreja(nome) {
-    var palavras = nome.split(' ');
-    var nomeAbreviado = '';
-
-    for (var i = 0; i < palavras.length; i++) {
-        if (nomeAbreviado.length + palavras[i].length <= 15) {
-            nomeAbreviado += palavras[i] + ' ';
-        } else {
-            nomeAbreviado = nomeAbreviado.trim() + ' ' + (palavras[i][0] || '') + '.';
-            for (var j = i + 1; j < palavras.length; j++) {
-                nomeAbreviado += ' ' + (palavras[j][0] || '') + '.';
-            }
-            break;
-        }
+      var nomeIgreja = obj.igreja.igreja_nome;
+      $('#nome_igreja').val(nomeIgreja);
     }
-
-    // Remover os pontos no final se não houverem mais palavras
-    nomeAbreviado = nomeAbreviado.trim().replace(/\.$/, '');
-
-    return nomeAbreviado.trim();
+  });
 }
 
 
+function abreviarNomeIgreja(nome) {
+  var palavras = nome.split(' ');
+  var nomeAbreviado = '';
+
+  for (var i = 0; i < palavras.length; i++) {
+    if (nomeAbreviado.length + palavras[i].length <= 15) {
+      nomeAbreviado += palavras[i] + ' ';
+    }else{
+      nomeAbreviado = nomeAbreviado.trim() + ' ' + (palavras[i][0] || '') + '.';
+      for (var j = i + 1; j < palavras.length; j++) {
+        nomeAbreviado += ' ' + (palavras[j][0] || '') + '.';
+      }
+      break;
+    }
+  }
+  // Remover os pontos no final se não houverem mais palavras
+  nomeAbreviado = nomeAbreviado.trim().replace(/\.$/, '');
+  return nomeAbreviado.trim();
+}
 
 
 function marker(lat, lng, img) {
@@ -459,98 +420,6 @@ function modalHorariosFixos(){
 }
 
 
-
-//menu
-
-$('.page-menu--toggle').click(function(e){
-
-  e.preventDefault();
-
-  if($(this).hasClass('page-menu__hamburger--open')){
-
-      
-      $('.mobile-nav').css('display', 'none');
-      $('#imagem_igreja').css('top', '2.6rem');
-      $('.div_btn-salvar').css('bottom', '30px');
-      
-  }
-  else{
-
-    $('.mobile-nav').css('display', 'block');
-    $('#imagem_igreja').css('top', '2.49rem');
-    $('.div_btn-salvar').css('bottom', '0px');
-
-  }
-
-  $(this).toggleClass('page-menu__hamburger--open');
-
-  $('.page-menu').toggleClass('disabled');
-
-  $('body').toggleClass('disabled');
-
-  $('body').toggleClass('no-scroll');
-
-
-  efeitoBlur()
-
-});
-
-
-
-
-
-
-
-function efeitoBlur(){
-
-  $('main').toggleClass('is-blur');
-
-  $('.show-search').toggleClass('is-blur');
-
-  $('.categories').toggleClass('is-blur');
-
-  $('.options').toggleClass('is-blur');
-
-  $('.search-market').toggleClass('is-blur');
-
-  $('.menu_ligado').toggleClass('is-blur');
-
-
-}
-
-
-
-//Verifica o item clicado no sidemenu
-
-$('.mobile-nav__items li a').click(function(){
-
-  var classeItemMenu = $(this).attr('class');
-
-
-
-  if(classeItemMenu == 'mobile-nav__link-produtos'   ||
-
-     classeItemMenu == 'mobile-nav__link-categorias' ||
-
-     classeItemMenu == 'mobile-nav__link-mercados'){
-
-      setStorageMenu(classeItemMenu);
-
-      window.location = 'vitrine-geral.html';
-
-  }
-
-});
-
-
-
-function setStorageMenu(item_menu) {
-
-  sessionStorage.setItem("item_menu", item_menu);
-
-}
-
-
 var didScroll;
 var lastScrollTop = 0;
 var delta = 5;
@@ -569,37 +438,34 @@ setInterval(function() {
 }, 250);
 
 function hasScrolled() {
-    var st = $(this).scrollTop();
+  var st = $(this).scrollTop();
 
-    if (Math.abs(lastScrollTop - st) <= delta)
-        return;
+  if (Math.abs(lastScrollTop - st) <= delta)
+    return;
 
-    if (st > lastScrollTop && st > headerHeight) {
-        // Rolagem para baixo
-        if (isVisible) {
-            $('#div_nome_igreja_fixo').removeClass('header-down').addClass('header-up');
-            isVisible = false;
-        }
-    } else {
-        // Rolagem para cima
-        if (st < lastScrollTop) {
-            $('#div_nome_igreja_fixo').removeClass('header-up').addClass('header-down');
-            isVisible = true;
-        }
+  if (st > lastScrollTop && st > headerHeight) {
+      if (isVisible) {
+        $('#div_nome_igreja_fixo').removeClass('header-down').addClass('header-up');
+        isVisible = false;
+      }
+  } else {
+      if (st < lastScrollTop) {
+        $('#div_nome_igreja_fixo').removeClass('header-up').addClass('header-down');
+        isVisible = true;
+      }
     }
-
-    lastScrollTop = st;
+  lastScrollTop = st;
 }
 
 
 function toggleDivVisibility(value, targetDiv) {
   if (value.trim() !== "") {
-      targetDiv.show();
-      targetDiv.css("display", "flex");
+    targetDiv.show();
+    targetDiv.css("display", "flex");
 
   } else {
-      targetDiv.hide();
-      targetDiv.css("display", "none");
+    targetDiv.hide();
+    targetDiv.css("display", "none");
   }
 }
 
@@ -635,16 +501,14 @@ function atualizarContatos() {
   });
 }
 
+
 function modalVisualizarPerfil(){
   $('.img_igreja1').click(function(){
     var imgSrc = $(this).attr('src');
-  
-    $('#imagem').attr('src', imgSrc);
-  
+    var newImgSrc = imgSrc.replace('mini', 'media');
+    $('#imagem').attr('src', newImgSrc);
     $('#modal_visualizar_img').show();
-
-   
-  });
+});
 
   $('.img_fundo1').click(function(){
     var imgSrc = $(this).attr('src');
@@ -659,8 +523,8 @@ function modalVisualizarPerfil(){
     $('#modal_visualizar_img').hide();
     $('#imagem').attr('src', '');
   });
-  
 }
+
 
 function modalVisualizarImgFundo(){
   $('.imgFundo_perfil').click(function(){
@@ -669,15 +533,14 @@ function modalVisualizarImgFundo(){
     $('#imagem').attr('src', imgSrc);
   
     $('#modal_visualizar_img').show();
-    
   });
-  
+
   $('.modal_close').click(function() {
     $('#modal_visualizar_img').hide();
     $('#imagem').attr('src', '');
   });
-  
 }
+
 
 $('#voltar_feed').click(function(){
   window.location = 'feed.html';

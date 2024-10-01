@@ -1,8 +1,4 @@
 body{
-    background-color: white;
-    height: 100%;
-    width: 100%;
-    font-size: 62.5%;
     overflow-x: hidden;
 }
 
@@ -35,11 +31,6 @@ body{
     margin-bottom: 0.1rem;
     background-color: white;
     width: 100%;
-}
-
-.div_perfil{
-    display: flex;
-    text-decoration: none;
 }
 
 .perfil_div{
@@ -107,11 +98,7 @@ body{
     color: lightslategray;
 }
 
-.perfil_ec_selected {
-    opacity: 1 !important;
-}
-
-.modal1 {
+.modal1{
     background-color: rgba(0, 0, 0, 0.4);
     color: #363636;
     display: none;
@@ -211,17 +198,6 @@ body{
     padding-top: 2rem;
 }
 
-.nome_da_igreja{
-    position: relative;
-    align-self: center; 
-    color: #363636; 
-    font-size: 1.7rem; 
-    font-family: exo;
-    max-width: 120px;
-    text-align: center;
-    left: 2.5rem;
-}
-
 .abrir_hora_fixo{
     position: relative;
     display: flex;
@@ -262,13 +238,6 @@ body{
     justify-content: center;
     text-align: center;
 }
-/*
-.div_whats,
-.div_face,
-.div_insta,
-.div_gmail {
-    
-}*/
 
 .contatos {
     text-align: center; 
@@ -331,20 +300,6 @@ body{
     overflow: hidden;
 }
 
-.div_feed{
-    font-size: 1.6rem;
-    margin-top: 0.5rem;
-    text-align: center;
-}
-
-.span_criar-igreja{
-    font-size: 2rem; 
-    color: #fff; 
-    position: absolute; 
-    padding: 1.5rem;
-    font-family: Exo;
-}
-
 .header-up {
     top: -100px; 
     transition: top 0.3s ease-in-out;
@@ -367,24 +322,6 @@ body{
     z-index: 100;
     background-color: white;
     border-bottom: 1px solid lightgrey;
-}
-
-.fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000; 
-}
-
-.mobile_nav {
-    background-color: darkred !important;
-    height: 100%;
-    left: 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
 }
 
 .modal-content {
@@ -422,40 +359,33 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Adicionando margem para separar os botões */
     margin: 0 5px;
 }
 
 .btn-whatsapp {
     background-color: #25D366;
-    /* Verde do WhatsApp */
 }
 
 .btn-facebook {
     background-color: #1877F2;
-    /* Azul do Facebook */
 }
 
 .btn-instagram {
     background-color: #E4405F;
-    /* Cor característica do Instagram */
 }
 
 .btn-instagram:hover {
     background-color: #CA3754;
-    /* Cor de destaque ao passar o mouse */
 }
 
 .btn-compartilhar img {
     width: 24px;
-    /* Tamanho dos ícones */
     height: 24px;
     filter: invert(1);
 }
 
 .btn-compartilhar:hover {
     opacity: 0.8;
-    /* Opacidade reduzida ao passar o mouse */
 }
 
 #nome_igreja_fixo{
