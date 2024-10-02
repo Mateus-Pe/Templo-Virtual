@@ -48,12 +48,18 @@ function listaEscolhida(data) {
             color = arrColor[ Math.floor(Math.random() * arrColor.length)];
         }
         
-        html += '<div class="div-igreja" style="display:flex; align-items:center; border-color: white; background-color: '+color+'">' +
-                    '<span class="span-igreja">' + data[i].tipo + '</span>' +
-                    '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined botao_adicionar" style="color:white; position:absolute; right:10%; font-size:2rem"> person_add </span>'+
-                    '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined editar-paroquia" style="color:white; position:absolute; right:20%; font-size:2rem"> edit </span>'+
-                    '<span class="material-symbols-outlined acToggle" style="position:absolute; right: 2%; color: white; font-size: 16px">expand_circle_right</span>' +
-                '</div>';
+        html +=     '<div class="div-igreja">'+
+                        '<div style="height: 40px; border-radius:0px; display: flex; font-weight: bold; cursor: pointer; position: relative; margin-top:0px; padding: 1.5em .5em 1.5em .7em; align-items:center; border-color: white; background-color: '+color+'">' +
+                            '<div class="list-line">'+
+                                '<span class="span-igreja"> <p style="display: inline; padding: 10px;">' + data[i].tipo + '</p></span>' +
+                                '<div style="display: flex; align-items: center; gap: 25px;">'+
+                                    '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined editar-paroquia" style="color:white; font-size:2rem; margin-left: 10px;"> edit </span>'+
+                                    '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined botao_adicionar" style="color:white; font-size:2rem"> person_add </span>'+
+                                    '<span class="ion-android-arrow-dropdown-circle" acToggle" style="color: white; font-size: 1.5rem"></span>' +
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>';
 
         html += '<div class="accordion div-igreja-detalhes" style="font-family: Exo; display: none">';
 
@@ -64,16 +70,16 @@ function listaEscolhida(data) {
                 span_remove = '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle remove-igreja">delete</span>' ;              
             }
 
-            html += '<h3 style="border: 1px solid #ddd; border-radius:0px; display: block; color: #484848; font-weight: bold; cursor: pointer; position: relative; margin-top:0px; padding: 1.5em .5em 1.5em .7em; background: white;">' +
+            html += '<div style="border: 1px solid #ddd; border-radius:0px; display: block; color: #484848; font-weight: bold; cursor: pointer; position: relative; margin-top:0px; padding: 1.5em .5em 1.5em .7em; background: white;">' +
                  '<div class="list-line">'+
                  '<label for="itens-check" class="label-lista">' +
                  '<p style="display:inline; padding:10px;">'+l.igreja_nome+'</p>' +
                  
                  
                  '</label>' +
-                 '<span class="material-symbols-outlined acToggle">expand_circle_right</span>' +
+                 '<span class="ion-android-arrow-dropdown-circle acToggle" style="font-size: 16px"></span>' +
                  '</div>'+
-                 '</h3>' +
+                 '</div>' +
                  '<div class="modal-container endereco-lista" >' +
                     '<div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 9px; font-size: 10px;">' +
                     '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_logradouro +', '+ l.igreja_endereco_numero + '</p>' +
