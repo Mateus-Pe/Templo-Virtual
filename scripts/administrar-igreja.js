@@ -1,22 +1,33 @@
 var cidade_id = '';
 
+$(document).ready(function () {
+    //solução provisória
+   // window.sessionStorage.setItem('cidade_id', 9240);
+   // window.sessionStorage.setItem("cidade_nome", "Itapetininga");
+    $('#cidade_nome').html(' ' + window.sessionStorage.getItem("cidade_nome"));
+    cidade_id = window.sessionStorage.getItem("cidade_id");
+    window.sessionStorage.setItem('igreja_id','');
+
+    if(cidade_id != null && cidade_id != ''){
+        get_paroquias(cidade_id);
+    }
+
+    $('#copy_link').click(function () {
+        $('#link_usuario').select();
+        document.execCommand("copy");
+        $('#link_usuario').blur();
+    });
+});
+
 
 function get_paroquias(cidadeId) {
-
     $.ajax({
-
         type: "POST",
-
         url: "https://pedeoferta.com.br/templo/index.php/welcome/get_lista_paroquia",
-
         cache: false,
-
         dataType: 'json',
-
         data: { 'cidade_id': cidadeId },
-
         success: function (data) {
-
             var rows = JSON.parse(data.length);
 
             if (rows == 0) {
@@ -25,8 +36,6 @@ function get_paroquias(cidadeId) {
             else {
                 listaEscolhida(data);
                 configurarEventos();
-                $('#divHeader').show();
-
             }
         }
     });
@@ -49,55 +58,46 @@ function listaEscolhida(data) {
         }
         
         html +=     '<div class="div-igreja">'+
-                        '<div style="height: 40px; border-radius:0px; display: flex; font-weight: bold; cursor: pointer; position: relative; margin-top:0px; padding: 1.5em .5em 1.5em .7em; align-items:center; border-color: white; background-color: '+color+'">' +
+                        '<div class="contain_lista_paroquia" style="background-color: '+color+'">' +
                             '<div class="list-line">'+
-                                '<span class="span-igreja"> <p style="display: inline; padding: 10px;">' + data[i].tipo + '</p></span>' +
-                                '<div style="display: flex; align-items: center; gap: 25px;">'+
-                                    '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined editar-paroquia" style="color:white; font-size:2rem; margin-left: 10px;"> edit </span>'+
-                                    '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="material-symbols-outlined botao_adicionar" style="color:white; font-size:2rem"> person_add </span>'+
-                                    '<span class="ion-android-arrow-dropdown-circle" acToggle" style="color: white; font-size: 1.5rem"></span>' +
+                                '<span class="span-igreja">'+
+                                    '<p>' + data[i].tipo + '</p>'+
+                                '</span>' +
+                                '<div class="contain_options_lista">'+
+                                    '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="fa-solid fa-pen-to-square editar-paroquia" style="margin-left: 10px;"></span>'+
+                                    '<span data-paroquia_id="'+ data[i].paroquia_id +'" class="fa-solid fa-user-plus botao_adicionar" ></span>'+
+                                    '<span class="ion-android-arrow-dropleft-circle" acToggle"></span>' +
                                 '</div>'+
                             '</div>'+
                         '</div>'+
                     '</div>';
 
-        html += '<div class="accordion div-igreja-detalhes" style="font-family: Exo; display: none">';
+        html += '<div class="accordion div-igreja-detalhes" style="display: none">';
 
         $.each(data[i].listabycat, function (k, l) {
-            var span_remove = '';
             if(data[i].tipo != 'MATRIZ'){
             
-                span_remove = '<span data-id="'+l.igreja_id+'" class="material-symbols-outlined acToggle remove-igreja">delete</span>' ;              
+                span_remove = '<span data-id="'+l.igreja_id+'" class="remove-igreja"></span>' ;              
             }
 
-            html += '<div style="border: 1px solid #ddd; border-radius:0px; display: block; color: #484848; font-weight: bold; cursor: pointer; position: relative; margin-top:0px; padding: 1.5em .5em 1.5em .7em; background: white;">' +
-                 '<div class="list-line">'+
-                 '<label for="itens-check" class="label-lista">' +
-                 '<p style="display:inline; padding:10px;">'+l.igreja_nome+'</p>' +
-                 
-                 
-                 '</label>' +
-                 '<span class="ion-android-arrow-dropdown-circle acToggle" style="font-size: 16px"></span>' +
-                 '</div>'+
-                 '</div>' +
-                 '<div class="modal-container endereco-lista" >' +
-                    '<div style="display: flex; flex-direction: column; align-items: flex-start; line-height: 9px; font-size: 10px;">' +
-                    '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_logradouro +', '+ l.igreja_endereco_numero + '</p>' +
-                    '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_bairro + '</p>' +
-                    '<p style="margin: 3px 0; text-align: left;">' + l.igreja_endereco_cidade + '</p>' +
+            html += '<div class="contain_lista_comunidade">' +
+                        '<div class="list-line">'+
+                            '<span for="itens-check" class="label-lista">' +
+                                '<p>'+l.igreja_nome+'</p>' +
+                            '</span>' +
+                            '<span class="ion-android-arrow-dropleft-circle acToggle" style="font-size: 1.5rem"></span>' +
+                        '</div>'+
                     '</div>' +
-                    '<div class="list-line">'+
-                    '</div>'+
-               '</div>';
-               
-
-                 
-                 
+                    '<div class="modal-container endereco-lista" >' +
+                        '<div>' +
+                            '<p>' + l.igreja_endereco_logradouro +', '+ l.igreja_endereco_numero + '</p>' +
+                            '<p>' + l.igreja_endereco_bairro + '</p>' +
+                            '<p>' + l.igreja_endereco_cidade + '</p>' +
+                        '</div>' +
+                    '</div>';
         });
-
         html += '</div>';
     }
-    
     $('#divListaPrincipal').html(html);
 
     $('.div-igreja').click(function () {
@@ -105,56 +105,24 @@ function listaEscolhida(data) {
     });
 
     configurarEventos();
-    $('#divHeader').show();
-
 };
 
 function configurarEventos(){
 
     $('.botao_adicionar').click(function () {
         $('#id_paroquia').val($(this).data('paroquia_id'));
-       
         $('#modalAdicionar').show();
-          
     });
-
 
     $('.editar-paroquia').click(function () {
         window.sessionStorage.setItem('paroquia_id', $(this).data('paroquia_id'));
         window.location = 'lista-igreja.html';
     });
 
-    $('.editar-igreja').click(function () {
-        window.sessionStorage.setItem('igreja_id', $(this).data('id'));
-        window.location = 'criar-igreja.html';
-    });
-
-    $('.configurar-igreja').click(function () {
-        window.sessionStorage.setItem('igreja_id', $(this).data('id'));
-        window.location = 'configurar-perfil-igreja.html';
-    });
-
+    //não implementado mas pode vir a ser útil
     $('.remove-igreja').click(function () {
-
         var id = $(this).data('id');
         remover(id);
-    });
-
-    $('.check_lista').click(function () {
-        if ($(this).data('listaitem_check') == 0)
-            auxCheck = 1;
-        else
-            auxCheck = 0;
-
-        check($(this).data('listaitem_cod'), auxCheck);
-    });
-
-    $('.minimiza').click(function () {
-        get_listaitem();
-    });
-
-    $('.remove').click(function () {
-        remove_item($(this).data('listaitem_cod'));
     });
 
     $(".accordion").accordion({
@@ -163,7 +131,7 @@ function configurarEventos(){
         heightStyle: "content"
     });
 
-    $(".accordion").find('h3').on('click', function(){
+    $(".accordion").find('div').on('click', function(){
 
         $(".ui-accordion-content").each(function() {
             if($(this).attr('aria-hidden')== 'false'){
@@ -210,25 +178,20 @@ $('#confirmarAdicao').click(function () {
             var linkCodificado = encodeURIComponent(link);
             window.open('https://api.whatsapp.com/send?text='+linkCodificado, '_blank');*/
         }
-        
-    }); 
+    });
 });
 
 $('#cancelarAdicao').click(function () {
     $('#modalAdicionar').hide();
- 
 });
 
 
-
+//no momento não está em uso mas pode vir a ser
 function remover(id){
-    
     $('#modalConfirmacao').show();
-
     $('#cancelarRemocao, .modal-background .modal-close').click(function(){
         $('#modalConfirmacao').hide();
     })
-
     $('#confirmarRemocao').click(function(){
 
         $.ajax({
@@ -236,50 +199,20 @@ function remover(id){
             url: "https://pedeoferta.com.br/templo/index.php/welcome/remove_igreja",
             data: {
                 igreja_id : id
-                
             }
         })
 
         .done(function (ret) {
             var obj = jQuery.parseJSON(ret);
-            
             if(obj.status == '1'){
-                
                 window.location = "lista-igreja.html";
-            
                 $('#modalConfirmacao').hide();
                 window.location = "lista-igreja.html";
             }
-            
         });
     });
-
-   
 }
 
-/*-------------------------NOVO JS APAGAR ACIMA-----------------*/
-
-$(document).ready(function () {
-    //solução provisória
-   // window.sessionStorage.setItem('cidade_id', 9240);
-   // window.sessionStorage.setItem("cidade_nome", "Itapetininga");
-    $('#cidade_nome').html(' ' + window.sessionStorage.getItem("cidade_nome"));
-    cidade_id = window.sessionStorage.getItem("cidade_id");
-    window.sessionStorage.setItem('igreja_id','');
-
-    if(cidade_id != null && cidade_id != ''){
-        get_paroquias(cidade_id);
-    }
-
-
-    $('#copy_link').click(function () {
-  
-        $('#link_usuario').select();
-        document.execCommand("copy");
-        $('#link_usuario').blur();
-    });
-
-}); 
 
 $('#cidade_nome').click(function () {
     //sessionStorage.setItem('origem', 'administrar-igreja');
@@ -289,16 +222,12 @@ $('#cidade_nome').click(function () {
 
 
 $('#add').click(function () {
-    
-
-
     $.ajax({
         method: "POST",
         url: "https://pedeoferta.com.br/templo/index.php/welcome/nova_paroquia",
         data: {
             paroquia_cidade_id : cidade_id,
             paroquia_nome : ''
-            
         }
     })
 
@@ -314,29 +243,20 @@ $('#add').click(function () {
     });
 });
 
-
-
-
+//verificar se vira a ser util
 function criarParametrosUrlUser(usuario_token){
-
     // Chave secreta
     var chaveSecreta = 'key-uri';
-    
     // Parâmetros a serem criptografados
     var parametros = {
         usuario_token : usuario_token
     };
-    
     // Converte os parâmetros para string JSON
     var parametrosString = JSON.stringify(parametros);
-    
     // Criptografa os parâmetros
     var parametrosCriptografados = CryptoJS.AES.encrypt(parametrosString, chaveSecreta).toString();
-    
     // Cria a URL com os parâmetros criptografados
     var parametrosGet = "dados=" + encodeURIComponent(parametrosCriptografados);
-    
     console.log("Link com Parâmetros Criptografados: " + parametrosGet);
-    
     return parametrosGet;
 }
