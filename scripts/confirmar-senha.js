@@ -1,5 +1,3 @@
-
-
 var chaveSecreta = "key-uri";
 
 // Extrai o valor dos parâmetros criptografados

@@ -1,3 +1,25 @@
+::-webkit-input-placeholder {
+    color:    lightgray;
+}
+:-moz-placeholder { 
+   color:    lightgray;
+   opacity:  1;
+}
+::-moz-placeholder { 
+   color:    lightgray;
+   opacity:  1;
+}
+:-ms-input-placeholder {
+   color:    lightgray;
+}
+::-ms-input-placeholder {
+   color:    lightgray;
+}
+
+::placeholder { 
+   color:    lightgray;
+}
+
 .div_header{
     background-color: darkred;
     border-bottom: 1px solid darkred;
@@ -20,6 +42,10 @@
     font-family: Exo;
 }
 
+.contain_alert{
+    margin-top: 10px;
+}
+
 .is-alert {
     color: #a94442;
     background-color: #f2dede;
@@ -40,6 +66,14 @@
     margin-top: 10px;
 }
 
+.cadastro{
+    padding-top: 70px
+}
+
+.cadastro div{
+    text-align: center;
+}
+
 .cadastro_input{
     border: 0;
     outline: 0;
@@ -48,6 +82,14 @@
     width: 80%;
     height: 3.5rem;
     padding-left: 4rem;
+}
+
+.container_input span{
+    color: lightgray; 
+    margin-top: 0.5rem; 
+    font-size: 20px; 
+    position: absolute; 
+    width: 4rem;
 }
 
 .container_senha{
@@ -71,20 +113,16 @@
     transition: 0.3s ease-in-out;
 }
 
-
-
-
-
 .success-animation {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background-color: #4CAF50; /* Verde */
+    background-color: #4CAF50;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    margin: 20px auto;
+    margin: 35% auto;
 }
 
 .checkmark {
