@@ -136,6 +136,7 @@ function nextMonth() {
     $('#calendarList').empty();
     $('#yearMonth').text(currentYear + ' ' + currentMonth);
     makeCalendar(currentYear, currentMonth);
+    $('#divListaAgenda').empty(); 
 }
 
 
@@ -148,6 +149,7 @@ function prevMonth() {
     $('#calendarList').empty();
     $('#yearMonth').text(currentYear + ' ' + currentMonth);
     makeCalendar(currentYear, currentMonth);
+    $('#divListaAgenda').empty(); 
 
 }
 
