@@ -174,6 +174,9 @@ function monta_endereco_cep(obj){
   });
   if(objCidade.length > 0){
     $('#cidade_id_instituicao').val(objCidade[0].id);
+    $('#cidade_instituicao').val(cidade).prop('disabled', true);
+    $('#bairro_instituicao').val(obj.bairro).prop('disabled', true);
+    $('#logradouro_instituicao').val(obj.logradouro).prop('disabled', true);
     $('.div_form').show();
     $('#numero_instituicao').focus();
   }
