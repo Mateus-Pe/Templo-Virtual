@@ -13,7 +13,7 @@ function carregar_perfil(){
     html += '</div>';
     html += '</div>';
     html += '<div id="imagem_igreja" class="div_img_igreja">';
-    html += '<img class="img_igreja1" src="https://www.pedeoferta.com.br/mercado/img/igreja/missa.png">';
+    html += '<img class="img_igreja1" src="https://flavorosa.com.br/mercado/img/igreja/missa.png">';
     html += '</div>';
     html += '<div class="div_publicacao">';
     html += '<div class="feed_principal">';
@@ -57,7 +57,7 @@ function carregar_perfil(){
   function carregarIgreja(igrejaId){
     $.ajax({
       method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_igreja_by_id",
+      url: "https://flavorosa.com.br/templo/index.php/welcome/get_igreja_by_id",
       data: {
         igreja_id : igrejaId
        

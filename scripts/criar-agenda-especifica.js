@@ -81,7 +81,7 @@ function formata_data(dateRef){
   function evento_agenda(){
     $.ajax({
       method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_evento_agenda",
+      url: "https://flavorosa.com.br/templo/index.php/welcome/get_evento_agenda",
       
     })
     .done(function(ret) {
@@ -135,7 +135,7 @@ function formata_data(dateRef){
   function gerar_agenda_especifica(){
     $.ajax({
       method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/gerar_agenda_especifica",
+      url: "https://flavorosa.com.br/templo/index.php/welcome/gerar_agenda_especifica",
       data: { 
         'agenda_igreja_id': igrejaId,
         'agenda_evento_id': atual_evento_cod,

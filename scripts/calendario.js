@@ -166,7 +166,7 @@ function configuraEventos(){
 function carregarCalendario(){
     $.ajax({
         method: "POST",
-        url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_calendario",
+        url: "https://flavorosa.com.br/templo/index.php/welcome/get_agenda_calendario",
         data : {igreja_id: igrejaId}
       })
       .done(function(ret) {
@@ -280,7 +280,7 @@ function mock_agenda(){
 
 	$.ajax({
 	   method: "POST",
-	   url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_calendario_hora",
+	   url: "https://flavorosa.com.br/templo/index.php/welcome/get_agenda_calendario_hora",
 	   data: {  'igreja_id': igrejaId, 
                 data_referencia: dtReferencia,
                 
@@ -426,7 +426,7 @@ $('.page-menu--toggle').click(function(e){
   function remover(id, flagLote){
   $.ajax({
       method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/remove_agenda",
+      url: "https://flavorosa.com.br/templo/index.php/welcome/remove_agenda",
       data: {
           agenda_id : id,
           flag_lote : flagLote
@@ -457,7 +457,7 @@ function pre_lote(){
 
 	$.ajax({
 	   method: "POST",
-	   url: "https://pedeoferta.com.br/templo/index.php/welcome/pre_lote",
+	   url: "https://flavorosa.com.br/templo/index.php/welcome/pre_lote",
 	   data: {  
               "agenda_id" : $("#hid_agenda_id").val()
 			 }

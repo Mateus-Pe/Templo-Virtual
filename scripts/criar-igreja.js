@@ -68,7 +68,7 @@ function getCidades(){
 
       type: "GET",
 
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_cidades_temp",
+      url: "https://flavorosa.com.br/templo/index.php/welcome/get_cidades_temp",
 
       cache: false,
 
@@ -224,7 +224,7 @@ function salvar(objGeo){
 
   $.ajax({
     method: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/incluir_igreja",
+    url: "https://flavorosa.com.br/templo/index.php/welcome/incluir_igreja",
     data: {
       endereco_cep : $('#cep_instituicao').val(),
       endereco_logradouro: $('#logradouro_instituicao').val(),

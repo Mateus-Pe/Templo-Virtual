@@ -203,7 +203,7 @@ function salvar(){
 
   $.ajax({
     method: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_perfil_igreja",
+    url: "https://flavorosa.com.br/templo/index.php/welcome/atualizar_perfil_igreja",
     data: formData, 
     processData: false,
     contentType: false
@@ -221,7 +221,7 @@ function salvar(){
 function carregarIgreja(){
   $.ajax({
     method: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_igreja_by_id",
+    url: "https://flavorosa.com.br/templo/index.php/welcome/get_igreja_by_id",
     data: {
       igreja_id : igrejaId
     }
@@ -444,7 +444,7 @@ function montaHtmlBancoImg(bancoImagem){
 function selecionaImgPerfil(){
   $.ajax({
   method: "POST",
-  url: "https://pedeoferta.com.br/templo/index.php/welcome/get_banco_imagem",
+  url: "https://flavorosa.com.br/templo/index.php/welcome/get_banco_imagem",
   data: {}, 
   processData: false,
   contentType: false

@@ -22,7 +22,7 @@ function get_paroquias(cidadeId) {
 
         type: "POST",
 
-        url: "https://pedeoferta.com.br/templo/index.php/welcome/get_lista_paroquia",
+        url: "https://flavorosa.com.br/templo/index.php/welcome/get_lista_paroquia",
 
         cache: false,
 
@@ -192,7 +192,7 @@ $('#confirmarAdicao').click(function () {
    
     $.ajax({
         method: "POST",
-        url: "https://pedeoferta.com.br/templo/index.php/welcome/novo_usuario",
+        url: "https://flavorosa.com.br/templo/index.php/welcome/novo_usuario",
         data: {
             usuario_paroquia_id :  $('#id_paroquia').val(),
             usuario_nome : $('#usuario_nome').val(),
@@ -237,7 +237,7 @@ function remover(id){
 
         $.ajax({
             method: "POST",
-            url: "https://pedeoferta.com.br/templo/index.php/welcome/remove_igreja",
+            url: "https://flavorosa.com.br/templo/index.php/welcome/remove_igreja",
             data: {
                 igreja_id : id
                 
@@ -274,7 +274,7 @@ $('#add').click(function () {
 
     $.ajax({
         method: "POST",
-        url: "https://pedeoferta.com.br/templo/index.php/welcome/nova_paroquia",
+        url: "https://flavorosa.com.br/templo/index.php/welcome/nova_paroquia",
         data: {
             paroquia_cidade_id : cidade_id,
             paroquia_nome : ''

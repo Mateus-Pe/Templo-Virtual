@@ -47,7 +47,7 @@ function getIgrejas() {
 
         type: "POST",
 
-        url: "https://pedeoferta.com.br/templo/index.php/welcome/get_lista_igreja_by_id",
+        url: "https://flavorosa.com.br/templo/index.php/welcome/get_lista_igreja_by_id",
 
         cache: false,
 

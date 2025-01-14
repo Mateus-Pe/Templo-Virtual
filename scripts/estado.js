@@ -37,7 +37,7 @@ function getCidades(){
 
         type: "GET",
 
-        url: "https://pedeoferta.com.br/oferta/welcome/get_cities_pdo",
+        url: "https://flavorosa.com.br/oferta/welcome/get_cities_pdo",
 
         cache: false,
 
@@ -182,7 +182,7 @@ $('#search-market').keyup(function (e) {
 function acesso_page(){
 $.ajax({
 
-    url: "https://www.pedeoferta.com.br/oferta/welcome/acesso_page",
+    url: "https://flavorosa.com.br/oferta/welcome/acesso_page",
 
     type: 'POST',
 

@@ -8,7 +8,7 @@ $(document).ready(function () {
 function eventos_principal(){
     $.ajax({
       method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_eventos_principal",
+      url: "https://flavorosa.com.br/templo/index.php/welcome/get_eventos_principal",
      
     })
     .done(function(ret) {

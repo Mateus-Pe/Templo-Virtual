@@ -25,7 +25,7 @@ function esqueciSenha(){
 
   $.ajax({
     type: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/esqueci_senha",
+    url: "https://flavorosa.com.br/templo/index.php/welcome/esqueci_senha",
     data: dados,
     dataType: "json",
     success: function (response) {

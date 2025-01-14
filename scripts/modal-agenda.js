@@ -2,7 +2,7 @@ function getAgendaById(agenda_id){
     $('body').css('overflow', 'hidden');
 	$.ajax({
 	   method: "POST",
-	   url: "https://pedeoferta.com.br/templo/index.php/welcome/get_evento_by_agenda_id",
+	   url: "https://flavorosa.com.br/templo/index.php/welcome/get_evento_by_agenda_id",
 	   data: {  'agenda_id': agenda_id
 			 }
 	 })

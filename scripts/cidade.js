@@ -46,7 +46,7 @@ function getCidades(){
 
         type: "GET",
 
-        url: "https://pedeoferta.com.br/oferta/welcome/get_cities_pdo",
+        url: "https://flavorosa.com.br/oferta/welcome/get_cities_pdo",
 
         cache: false,
 

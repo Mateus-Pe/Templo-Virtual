@@ -243,7 +243,7 @@ function get_calendario_hora(dtReferencia){
 
 	$.ajax({
 	   method: "POST",
-	   url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_calendario_feed",
+	   url: "https://flavorosa.com.br/templo/index.php/welcome/get_agenda_calendario_feed",
 	   data: {  'cidade_id': 9240, 
               data_referencia: dtReferencia
 			 }

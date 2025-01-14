@@ -43,7 +43,7 @@ function getMercados(){
 
         type: "POST",
 
-        url: "https://www.pedeoferta.com.br/oferta/index.php/welcome/get_ecs_mobile",
+        url: "https://flavorosa.com.br/oferta/index.php/welcome/get_ecs_mobile",
 
         data: {'cidade_id': window.sessionStorage.getItem("cidade_id")  },
 
@@ -151,7 +151,7 @@ $('#search-market').keyup(function (e) {
 
      method: "POST",
 
-     url: "https://www.pedeoferta.com.br/oferta/welcome/get_ec_by_desc",
+     url: "https://flavorosa.com.br/oferta/welcome/get_ec_by_desc",
 
      data: { pesquisa: $('#search-market').val().toUpperCase()
 

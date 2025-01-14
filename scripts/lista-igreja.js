@@ -14,7 +14,7 @@ function get_listaitem(paroquiaId) {
 
         type: "POST",
 
-        url: "https://pedeoferta.com.br/templo/index.php/welcome/get_lista_igreja",
+        url: "https://flavorosa.com.br/templo/index.php/welcome/get_lista_igreja",
 
         cache: false,
 
@@ -160,7 +160,7 @@ function remover(id, nome){
 
         $.ajax({
             method: "POST",
-            url: "https://pedeoferta.com.br/templo/index.php/welcome/remove_igreja",
+            url: "https://flavorosa.com.br/templo/index.php/welcome/remove_igreja",
             data: {
                 igreja_id : id
             }
@@ -180,7 +180,7 @@ function eventos_gerais(paroquia_id){
 
     $.ajax({
         method: "POST",
-        url: "https://pedeoferta.com.br/templo/index.php/welcome/get_estatistica",
+        url: "https://flavorosa.com.br/templo/index.php/welcome/get_estatistica",
         data: {
             paroquia_id : paroquia_id
         }
@@ -247,7 +247,7 @@ sessionStorage.setItem("item_menu", item_menu);
 function existeMatriz(igrejaNome, id){
     $.ajax({
         method: "POST",
-        url: "https://pedeoferta.com.br/templo/index.php/welcome/get_matriz",
+        url: "https://flavorosa.com.br/templo/index.php/welcome/get_matriz",
         data: { paroquia_id: window.sessionStorage.getItem('paroquia_id') },
     })
     .done(function (ret) {
@@ -267,7 +267,7 @@ function atualizar_matriz(igrejaId){
     if(igrejaId != null){
         $.ajax({
         method: "POST",
-        url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_matriz",
+        url: "https://flavorosa.com.br/templo/index.php/welcome/atualizar_matriz",
         data: {
             igreja_id : igrejaId,
             paroquia_id: window.sessionStorage.getItem('paroquia_id')

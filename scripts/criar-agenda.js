@@ -93,7 +93,7 @@ function validacao_evento_agenda(){
   function evento_agenda(){
     $.ajax({
       method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_evento_agenda",
+      url: "https://flavorosa.com.br/templo/index.php/welcome/get_evento_agenda",
     })
     .done(function(ret) {
 
@@ -149,7 +149,7 @@ function gerar_agenda(){
 
     $.ajax({
       method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/gerar_agenda",
+      url: "https://flavorosa.com.br/templo/index.php/welcome/gerar_agenda",
       data: { 
           'dias': dias_checked.join(),
           'agenda_igreja_id': igrejaId,

@@ -144,7 +144,7 @@ function salvar(flagLote){
 
   $.ajax({
     method: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/atualizar_layout_agenda_upload",
+    url: "https://flavorosa.com.br/templo/index.php/welcome/atualizar_layout_agenda_upload",
     data: formData,
     processData: false,
     contentType: false
@@ -163,7 +163,7 @@ function get_agenda(){
 
 	$.ajax({
 	   method: "POST",
-	   url: "https://pedeoferta.com.br/templo/index.php/welcome/get_agenda_by_id",
+	   url: "https://flavorosa.com.br/templo/index.php/welcome/get_agenda_by_id",
 	   data: {  
               "agenda_id" : agenda_id
               
@@ -200,7 +200,7 @@ function pre_salvar(){
 
 	$.ajax({
 	   method: "POST",
-	   url: "https://pedeoferta.com.br/templo/index.php/welcome/pre_lote",
+	   url: "https://flavorosa.com.br/templo/index.php/welcome/pre_lote",
 	   data: {  
               "agenda_id" : agenda_id
 			 }

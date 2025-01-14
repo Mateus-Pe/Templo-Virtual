@@ -38,7 +38,7 @@ function getUser(parametros){
 
   $.ajax({
     type: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_usuario",
+    url: "https://flavorosa.com.br/templo/index.php/welcome/get_usuario",
     data: dados,
     dataType: "json",
     success: function (response) {
@@ -65,7 +65,7 @@ function updateSenha(){
 
   $.ajax({
     type: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/alterar_senha",
+    url: "https://flavorosa.com.br/templo/index.php/welcome/alterar_senha",
     data: dados,
     dataType: "json",
     success: function (response) {

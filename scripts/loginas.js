@@ -22,7 +22,7 @@ function loginas(){
 
   $.ajax({
     type: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/login",
+    url: "https://flavorosa.com.br/templo/index.php/welcome/login",
     data: dados,
     dataType: "json",
     success: function (response) {

@@ -10,7 +10,7 @@
   
         type: "POST",
   
-        url: "https://pedeoferta.com.br/templo/index.php/welcome/get_layout_evento",
+        url: "https://flavorosa.com.br/templo/index.php/welcome/get_layout_evento",
   
         cache: false,
   

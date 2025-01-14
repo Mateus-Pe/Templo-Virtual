@@ -109,7 +109,7 @@ function htmlComunidadesRelacionadas(){
 function evento_agenda(){
   $.ajax({
     method: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_feed",
+    url: "https://flavorosa.com.br/templo/index.php/welcome/get_feed",
     data: { feed_igreja_id : igrejaId,
             regiao_id : cidade_id,
             cidade_id : cidade_id,
@@ -182,7 +182,7 @@ function compartilha() {
         var nomeInstituicao = postagem.querySelector('.nome_igreja').innerText;
         var timestamp = Date.now();
         var parametros = "?a="+encodeURIComponent(nomeInstituicao)+"&c="+imagemUrl+"&timestamp="+timestamp;
-        var postUrl = 'http://pedeoferta.com.br/site/servitus/compartilha.html'+parametros;
+        var postUrl = 'http://flavorosa.com.br/site/servitus/compartilha.html'+parametros;
         console.log('Link compartilhado:', postUrl);
         
         var compartilhamentoMenu = postagem.querySelector('.compartilhamento');
@@ -275,7 +275,7 @@ function extrairIdDaImagem(imagemUrl) {
 function getComunidade(){
   $.ajax({
     method: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_lista_igreja_by_id_completo",
+    url: "https://flavorosa.com.br/templo/index.php/welcome/get_lista_igreja_by_id_completo",
     data: {igreja_id: igrejaId}
   })
   .done(function(ret) {
@@ -312,7 +312,7 @@ function getComunidade(){
 function carregarIgreja(){
   $.ajax({
     method: "POST",
-    url: "https://pedeoferta.com.br/templo/index.php/welcome/get_igreja_by_id",
+    url: "https://flavorosa.com.br/templo/index.php/welcome/get_igreja_by_id",
     data: {
       igreja_id : igrejaId
     }
