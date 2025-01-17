@@ -1,8 +1,8 @@
 var players = {};
-
-
+var tokenFacebook = 'EAAEIeuHKBCEBO8jzZAHRCtg9mSqlonmZCWwyZCKDbAAkbijbZBZAFTn11H6IRmDgZBESStqNtckm0zT1h1WkebbFMkQbsA8xckjs0HqNlWZB8acIUnjD2IcnXkHlEtZAB9ac070iMBEmZAhYuVTqhPDwZBZBbkYuSx2NoalcW9Xa1cgPSygId51npXjuKFjc1ZA05dSI3vhBsDkW8A7jRCCQCf5qoH6opvfTynVtLZCEm7DmyJlwryv4wN35u';
 
 $(document).ready(function () {
+  
   //navigator.geolocation.getCurrentPosition(function(data){console.log(data)})
   $('#cidade_nome').html(' ' + window.sessionStorage.getItem("cidade_nome"));
   cidade_id = window.sessionStorage.getItem("cidade_id");
@@ -25,21 +25,27 @@ window.onload = function() {
 function evento_agenda(){
     $.ajax({
       method: "POST",
-      url: "https://pedeoferta.com.br/templo/index.php/welcome/get_feed",
-     
+      url: "https://flavorosa.com.br/templo/index.php/welcome/get_feed",
+      data: {
+        cidade_id : cidade_id
+    }
     })
     .done(function(ret) {
       var html = '';
       var classVideo = 0;
       var obj = jQuery.parseJSON(ret);
-      $.each(obj.lista_feed, function (k, lpp) {
-        
-        classVideo ++;
-        html = montaHtmlVideo(classVideo);
-        if(classVideo < 2){
-          //$("#divHistoria").append(html);
-          //readyVideo(classVideo);
-        }
+
+     // html = '<div style="width: 100%; height: 20px; background-color: lightgray; color: white; text-align: center; margin-top: 10px; margin-bottom: 10px;">Eventos de "cidade"</div>'
+      $("#divFeed").append(html);
+      $.each(obj.lista_feed_cidade, function (k, lpp) {
+        html = montaHtml(lpp, k);
+        $("#divFeed").append(html);
+      });
+      
+
+      html = '<div style="width: 100%; height: 65px; background-color: darkred; color: gold; align-items: center; display: flex; justify-content: center; margin-bottom: 6px; border-top: 1px solid darkred; border-bottom: 1px solid darkred">Outros eventos da região</div>'
+      $("#divFeed").append(html);
+      $.each(obj.lista_feed_regiao, function (k, lpp) {
         html = montaHtml(lpp, k);
         $("#divFeed").append(html);
       });
@@ -246,7 +252,7 @@ function compartilha() {
         console.log(dataFeed);
         var timestamp = Date.now();
         //var parametros = "?a="+encodeURIComponent(nomeInstituicao)+"&c="+imagemUrl+"&timestamp="+timestamp;
-        var postUrl = 'https://pedeoferta.com.br/site/new8/compartilha.html?a='+encodeURIComponent(nomeInstituicao)+'&b='+dataFeed+'&c='+imagemUrl+'';
+        var postUrl = 'https://flavorosa.com.br/site/new8/compartilha.html?a='+encodeURIComponent(nomeInstituicao)+'&b='+dataFeed+'&c='+imagemUrl+'';
         console.log('Link compartilhado:', postUrl);
         
         // Abre o menu de compartilhamento
@@ -261,7 +267,18 @@ function compartilha() {
         });
 
         facebookButton.addEventListener('click', function() {
-          abrirLinkParaFacebook(postUrl, imagemUrl); // Abre o Facebook diretamente no app se disponível
+          abrirLinkParaFacebook(imagemUrl);
+          //loginWithFacebook(); // Abre o Facebook diretamente no app se disponível
+            /*FB.ui({
+              method: 'share',
+              href: 'https://53c5-170-245-17-160.ngrok-free.app/teste10.html?a=https://flavorosa.com.br/templo/img/layout/5_lote_media.webp&b=teste', // URL que você deseja compartilhar
+          }, function(response){
+              if (response && !response.error_message) {
+                  alert('Compartilhado com sucesso!');
+              } else {
+                  alert('Erro ao compartilhar.');
+              }
+          });*/
         });
 
         instagramButton.addEventListener('click', function() {
@@ -269,7 +286,7 @@ function compartilha() {
         });
 
         // Alternar a visibilidade dos botões de compartilhamento
-        toggleShareButtons(compartilhamentoMenu);
+        toggleShareButtons(compartilhamentoMenu, event);
         hideShareButtonsFromOtherPosts(compartilhamentoMenu);
       } else {
         console.error('Erro ao obter o ID da publicação.');
@@ -284,8 +301,8 @@ function abrirLinkParaInstagram(imageUrl) {
   window.location.href = imageUrl; // Isso abrirá a imagem no navegador para o usuário baixar
 }
 
-function abrirLinkParaFacebook(postUrl, imageUrl) {
-  var facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(postUrl) + '&picture=' + encodeURIComponent(imageUrl);
+function abrirLinkParaFacebook(imageUrl) {
+  var facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + imageUrl;
   window.location.href = facebookUrl;
 }
 
@@ -297,7 +314,8 @@ function abrirLinkParaWhatsApp(postUrl) {
 
 
 
-function toggleShareButtons(compartilhamentoMenu) {
+function toggleShareButtons(compartilhamentoMenu, event) {
+  event.preventDefault();
   compartilhamentoMenu.offsetHeight;
   // Alterna a classe 'show' para controlar a exibição dos botões
   compartilhamentoMenu.classList.toggle('show_compartilha');
@@ -305,9 +323,16 @@ function toggleShareButtons(compartilhamentoMenu) {
   var shareButtons = compartilhamentoMenu.querySelectorAll('.btn-compartilhar');
   shareButtons.forEach(function(button) {
     if (compartilhamentoMenu.classList.contains('show_compartilha')) {
-      button.style.display = 'flex'; // Exibe os botões
+      $(".btn-compartilhar").css('display', 'flex');
+      $(".compartilhamento").css('display', 'flex');
     } else {
-      button.style.display = 'none'; // Oculta os botões
+      // Animação para ocultar suavemente
+      $(".btn-compartilhar").fadeOut(600, function() {
+        $(this).css('display', 'none'); // Certifique-se de que o display seja 'none' após a animação
+      });
+      $(".compartilhamento").fadeOut(600, function() {
+        $(this).css('display', 'none'); // Certifique-se de que o display seja 'none' após a animação
+      });
     }
   });
 }
@@ -401,4 +426,145 @@ function hasScrolled() {
     }
 
     lastScrollTop = st;
+}
+
+
+//teste compartilhamento
+
+// ngrok http 3001
+
+
+/*$('#shareBtn').click(function() {
+  FB.ui({
+      method: 'share',
+      href: 'https://88f2-170-245-17-160.ngrok-free.app/teste.html?a=https://flavorosa.com.br/templo/img/layout/5_lote_media.webp', // URL que você deseja compartilhar
+  }, function(response){
+      if (response && !response.error_message) {
+          alert('Compartilhado com sucesso!');
+      } else {
+          alert('Erro ao compartilhar.');
+      }
+  });
+});*/
+
+
+
+
+
+// - - - - - - - - - - - -- - - - - - - - -- - - - - -
+
+
+
+window.fbAsyncInit = function() {
+  FB.init({
+      appId      : '290798843855905', // Substitua pelo seu appId
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v11.0'
+  });
+};
+
+//$('#shareBtn').click(function() {
+  //testeCompartilhamento();
+//});
+
+$('#compartilhaFace').click(function() {
+  testeCompartilhamento();
+});
+
+function loginWithFacebook() {
+  const clientId = '290798843855905';
+  const redirectUri = 'https://88f2-170-245-17-160.ngrok-free.app/feed.html';
+  const state = 'xyz123';
+  const authUrl = `https://www.facebook.com/v11.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}`;
+  window.location.href = authUrl;
+}
+
+function testeCompartilhamento(){
+
+  $.ajax({
+    url: 'https://graph.facebook.com/v11.0/me/feed',
+    type: 'POST',
+    data: {
+        access_token: tokenFacebook,
+        message: 'Sua mensagem aqui'
+    },
+    success: function(response) {
+        console.log('Publicação criada com sucesso!', response);
+    },
+    error: function(error) {
+        console.error('Erro ao criar publicação', error);
+    }
+  });
+}
+
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+const code = getQueryParam('code');
+
+if (code) {
+  // Agora você deve trocar o código por um token de acesso
+  fetchAccessToken(code);
+}
+
+
+
+function fetchAccessToken(code) {
+  const clientId = '290798843855905';
+  const clientSecret = '457576dfb7884d973b09a8826af28436';
+  const redirectUri = 'https://88f2-170-245-17-160.ngrok-free.app/feed.html';
+
+  $.ajax({
+      url: `https://graph.facebook.com/v11.0/oauth/access_token`,
+      type: 'GET',
+      data: {
+          client_id: clientId,
+          redirect_uri: redirectUri,
+          client_secret: clientSecret,
+          code: code
+      },
+      success: function(data) {
+          if (data.access_token) {
+              // Armazene o token de acesso, por exemplo, em localStorage
+              //localStorage.setItem('fb_access_token', data.access_token);
+              tokenFacebook = data.access_token;
+              console.log('Access token:', data.access_token);
+              // Redirecionar ou realizar outra ação após o login
+          } else {
+              console.error('Erro ao obter token de acesso:', data);
+          }
+      },
+      error: function(xhr, status, error) {
+          console.error('Erro na requisição:', error);
+      }
+  });
+}
+
+
+
+
+
+
+
+// Função para publicar no Facebook
+function postToFacebook() {
+    // 1. Carregar a imagem para o Facebook
+    $.ajax({
+        url: `https://graph.facebook.com/v11.0/me/photos`,
+        type: 'POST',
+        data: {
+            access_token: tokenFacebook,
+            url: 'https://flavorosa.com.br/templo/img/layout/3_lote_media.webp', // URL da imagem
+            caption: 'Esta é a minha mensagem com uma imagem!' // Legenda da imagem
+        },
+        success: function (response) {
+            console.log('Publicação de imagem realizada com sucesso!', response);
+        },
+        error: function (error) {
+            console.error('Erro ao publicar imagem:', error);
+        }
+    });
 }

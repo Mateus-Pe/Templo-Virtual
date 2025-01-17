@@ -28,6 +28,7 @@ body {
     padding-top: 2px;
     padding-left: 2px;
     padding-right: 6px;
+    padding-bottom: 10px;
 }
 
 .div_feed_secundario {
@@ -159,10 +160,14 @@ body {
     overflow: hidden;
     max-height: 0px;
     transition: max-height 0.6s ease-in-out;
+    border-top: 1px solid lightgray;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .show_compartilha {
-    max-height: 200px;
+    max-height: 500px;
+    display: flex;
 }
 
 .btn-compartilhar {
@@ -172,8 +177,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Adicionando margem para separar os botões */
     margin: 0 5px;
+    margin-top: 5px;
 }
 
 .btn-whatsapp {
