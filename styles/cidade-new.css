@@ -1,0 +1,93 @@
+.header1 {
+    background-color: darkred;
+    height: 55px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+    align-items: center;
+}
+
+.btnVoltar{
+    margin-left: 10px;
+    color: white;
+    font-size: 30px;
+    align-items: center;
+    display: flex;
+}
+
+.pesquisaCidade{
+    background-color: white;
+    top: 0
+}
+
+.containInput{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.ionPesquisa{
+    font-size: 2.1rem;
+    align-items: center;
+    justify-content: center;
+    display: flex !important;
+    left: 3.5rem;
+    position: relative;
+    color: lightgrey;
+    width: 3.5rem;
+}
+
+.inputCidade{
+    padding-left: 3.5rem;
+    height: 4.2rem;
+    box-shadow: 0 0.2rem 1rem rgba(90, 14, 14, 0.74);
+    width: 70%;
+    border-radius: 10px;
+    border: 0px;
+    font-size: 1.6rem;
+    margin-right: 3.5rem;
+}
+
+input:focus {
+    outline: none;
+}
+
+.containLista{
+    position: relative;
+    padding-right: 0px;
+    padding-left: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.lista{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid lightgrey;
+    border-top: 0px;
+    border-radius: 10px;
+}
+
+.divPesq{
+    max-height:40px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    justify-content: center;
+    width: 90%
+}
+
+.containCidade{
+    margin-top: 10px;
+}
+
+.cidadeSelect{
+    font-size:1.4rem;
+    color: darkgoldenrod
+}

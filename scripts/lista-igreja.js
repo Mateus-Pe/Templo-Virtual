@@ -283,6 +283,11 @@ function atualizar_matriz(igrejaId){
     }
 }
 
+$(".goFeed").click(function(e){
+    window.sessionStorage.setItem('feed-origem-igreja', 'igrejas');
+    window.location = "feed.html";
+})
+
 $('#confirmarTransicao').click(function(e){
     atualizar_matriz($(this).data('id'));
 });

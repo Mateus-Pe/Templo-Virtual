@@ -8,10 +8,17 @@ $(document).ready(function () {
   cidade_id = window.sessionStorage.getItem("cidade_id");
   window.sessionStorage.setItem('igreja_id','');
 
+  if(cidade_id == null || cidade_id == ''){
+    cidade_id = '9240';
+    window.sessionStorage.setItem("cidade_nome", "Itapetininga");
+    $('#cidade_nome').html(' ' + window.sessionStorage.getItem("cidade_nome"));
+  }
+
   if(cidade_id != null && cidade_id != ''){
       //get_paroquias(cidade_id);
   }
   evento_agenda();
+  opcoesOrigemMenu()
 });
 
 window.onload = function() {
@@ -118,7 +125,13 @@ $('.page-menu--toggle').click(function(e){
 
   $('.page-menu').toggleClass('disabled');
 
-  $('body').toggleClass('disabled');
+  $('body').css('overflow', '');
+
+  $('html').toggleClass('no-scroll');
+
+  $('main').toggleClass('no-scroll');
+
+  $('#divFeed').toggleClass('no-scroll');
 
   $('body').toggleClass('no-scroll');
 
@@ -138,6 +151,8 @@ function efeitoBlur(){
   $('.options').toggleClass('is-blur');
 
   $('.search-market').toggleClass('is-blur');
+
+  $('#divCidadeNome').toggleClass('is-blur');
 
 
 
@@ -253,7 +268,7 @@ function compartilha() {
         var timestamp = Date.now();
         //var parametros = "?a="+encodeURIComponent(nomeInstituicao)+"&c="+imagemUrl+"&timestamp="+timestamp;
         var postUrl = 'https://flavorosa.com.br/site/new8/compartilha.html?a='+encodeURIComponent(nomeInstituicao)+'&b='+dataFeed+'&c='+imagemUrl+'';
-        console.log('Link compartilhado:', postUrl);
+        //console.log('Link compartilhado:', postUrl);
         
         // Abre o menu de compartilhamento
         compartilhamentoMenu.style.display = 'flex';
@@ -263,7 +278,7 @@ function compartilha() {
         var instagramButton = compartilhamentoMenu.querySelector('.btn-instagram');
 
         whatsappButton.addEventListener('click', function() {
-          abrirLinkParaWhatsApp(postUrl); // Abre o WhatsApp diretamente no app se disponível
+          abrirLinkParaWhatsApp(imagemUrl); // Abre o WhatsApp diretamente no app se disponível
         });
 
         facebookButton.addEventListener('click', function() {
@@ -281,9 +296,9 @@ function compartilha() {
           });*/
         });
 
-        instagramButton.addEventListener('click', function() {
-          abrirLinkParaInstagram(imagemUrl); // Avisa o usuário sobre o compartilhamento no Instagram
-        });
+        //instagramButton.addEventListener('click', function() {
+          //abrirLinkParaInstagram(imagemUrl); // Avisa o usuário sobre o compartilhamento no Instagram
+        //});
 
         // Alternar a visibilidade dos botões de compartilhamento
         toggleShareButtons(compartilhamentoMenu, event);
@@ -302,13 +317,32 @@ function abrirLinkParaInstagram(imageUrl) {
 }
 
 function abrirLinkParaFacebook(imageUrl) {
-  var facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + imageUrl;
-  window.location.href = facebookUrl;
+  var facebookAppUrl = 'fb://feed?link=' + encodeURIComponent(imageUrl);
+  var facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(imageUrl);
+
+  // Tenta abrir o app Facebook
+  var startTime = Date.now();
+  console.log("aqui");
+  // Tenta abrir o app com o deep link
+  window.location.href = facebookAppUrl;
+
+  // Verifica se o app foi aberto (espera 1500ms)
+  setTimeout(function() {
+    var elapsedTime = Date.now() - startTime;
+    console.log("ta");
+    console.log(elapsedTime);
+    // Se o tempo de resposta for muito curto (não mais que 1,5 segundos), significa que o app não foi aberto
+    if (elapsedTime < 1600) {
+      console.log("ta aqui");
+      // Caso não tenha aberto o app, abre o link no navegador
+      window.open(facebookUrl, '_blank');
+    }
+  }, 1500); // O tempo aqui deve ser o suficiente para um app ou navegador tentar abrir
 }
 
 
-function abrirLinkParaWhatsApp(postUrl) {
-  var whatsappUrl = 'https://api.whatsapp.com/send/?text=' + encodeURIComponent(postUrl);
+function abrirLinkParaWhatsApp(imageUrl) {
+  var whatsappUrl = 'https://api.whatsapp.com/send/?text=' + encodeURIComponent(imageUrl);
   window.open(whatsappUrl, '_blank');
 }
 
@@ -447,7 +481,13 @@ function hasScrolled() {
   });
 });*/
 
-
+function opcoesOrigemMenu(){
+  const origem = window.sessionStorage.getItem('feed-origem-igreja');
+  console.log(origem);
+  if(origem == "igrejas"){
+    $("#backLista").css('display', '');
+  }
+}
 
 
 

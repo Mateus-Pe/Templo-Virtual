@@ -14,7 +14,7 @@
 
     <meta name="robots" content="index,follow">
 
-    <title>Criar igreja</title>
+    <title>Servitus</title>
 
     <meta property="og:type" content="website">
 
@@ -56,25 +56,41 @@
 <body>
 
 
-   <!-- <nav class="mobile-nav mobile_nav" role="navigation" style="display: none;">
+    <nav class="mobile-nav mobile_nav" role="navigation" style="display: none;">
 
         <ul class="mobile-nav__items">
 
-            <li><a class="mobile-nav__link-produtos3" href="lista-igreja.html"><span
-                        class="material-symbols-outlined">lists</span>Igrejas</a></li>
+            <li><a class="mobile-nav__link-produtos1" href="principal.html"><span
+                        class="fa-solid fa-house"></span>Principal</a></li>
 
-            <li><a class="mobile-nav__link-categorias2" href="configurar-perfil-igreja.html"><span
-                        class="ion-grid"></span>Perfil</a></li>
+            <li><a class="mobile-nav__link-categorias2" href="calendario-feed.html"><span
+                        class="fa-solid fa-calendar"></span>Calendário</a></li>
+
+            <li><a class="mobile-nav__link-categorias3" href="cidade-new.html"><span
+                        class="fa-solid fa-magnifying-glass-location"></span><div id="cidade_nome"></div></a></li>
+
+            <li id="backLista" style="display: none;"><a class="mobile-nav__link-categorias4" href="lista-igreja.html"><span
+                        class="fa-solid fa-church"></span>Igrejas</a></li>
 
         </ul>
 
-    </nav>-->
+    </nav>
 
     <div class="page-menu" style="background-color: lightgray;">
 
         <header class="header1">
 
-            <div>
+            <div class="page-menu--toggle page-menu__hamburger" href="#" id="btnMenu">
+
+                <span class="page-menu__item"></span>
+
+                <span class="page-menu__item"></span>
+
+                <span class="page-menu__item"></span>
+
+            </div>
+
+            <!--<div>
                 <span id="calendario-feed" class="fa-regular fa-calendar-days" style="font-size: 3rem; position: relative; margin-left: 10px; color: white;">
                     
                 </span>
@@ -85,6 +101,7 @@
                     
                 </span>
             </div>
+            -->
       
       
          
@@ -97,44 +114,32 @@
         </header>
 
 
-
-        <div style="background-color: lightgray ;width: 100%;height: 20px;border-bottom: 1px solid lightgray; text-align: center;position: relative; top: 5.5rem;">
+        <!--
+        <div id="divCidadeNome" style="background-color: lightgray ;width: 100%;height: 20px;border-bottom: 1px solid lightgray; text-align: center;position: relative; margin-top: 5.5rem;">
             <span class="ion-ios-location" id="cidade_nome" style="font-size: 1.6rem; text-transform: none; color: darkred"> Selecione uma cidade</span>
-          </div>
-
-
-    <main class="feed_main feed_main_top">
-
-       
-
-        <!--<div style="background-color: white; width: 400px; height: 377px;">
-
-            <div id="player" style="width: 390px; height: 315px;"></div>
-        </div> -->
-
-
-        <!--<video id="meuVideo" class="video-hover-trigger" width="390" height="315" controls>
-            <source src="/imgs/imgs-igreja/Imagens Incríveis da Natureza (4k).AVI " type="video/mp4">
-            Seu navegador não suporta o elemento de vídeo.
-        </video>-->
-
-        <div id="divFeed">
-
         </div>
-        
-    
-    </main>
+        -->
+
+
+        <main class="feed_main">
+            <!--<div style="background-color: white; width: 400px; height: 377px;">
+
+                <div id="player" style="width: 390px; height: 315px;"></div>
+            </div> -->
+
+
+            <!--<video id="meuVideo" class="video-hover-trigger" width="390" height="315" controls>
+                <source src="/imgs/imgs-igreja/Imagens Incríveis da Natureza (4k).AVI " type="video/mp4">
+                Seu navegador não suporta o elemento de vídeo.
+            </video>-->
+
+            <div id="divFeed">
+
+            </div>
+        </main>
     </div>
 
-
-
-
-
-
     <footer>
-
-
-
         <script src="scripts/jquery/jquery-3.2.1.min.js"></script>
 
 

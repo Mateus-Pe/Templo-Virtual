@@ -41,7 +41,7 @@ function montaHtml(linha, i) {
   html += '</div>';
   html += '</a>';
 
-  html += '<div style="border: 1px solid black; align-items: center; display: grid; padding-right: 10px; padding-left: 10px; font-family: exo;">';
+  html += '<div style="border: 1px solid black; align-items: center; display: grid; padding-right: 10px; padding-left: 10px; font-family: exo; margin-top: 2px; margin-right: 2px;">';
   html += '<span id="dia_evento" style="font-size: 1.2rem; color: grey; display: flex; justify-content: center;">';
   html += formata_dia(linha.data_evento);
   html += '</span>';
@@ -73,9 +73,9 @@ function montaHtml(linha, i) {
   html += ' <a href="#" class="btn-compartilhar btn-facebook">';
   html += ' <img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/facebook.svg" alt="Compartilhar no Facebook">';
   html += '</a>';
-  html += ' <a href="#" class="btn-compartilhar btn-instagram">';
-  html += '<img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/instagram.svg" alt="Compartilhar no Instagram">';
-  html += '</a>';
+  //html += ' <a href="#" class="btn-compartilhar btn-instagram">';
+  //html += '<img src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/svgs/brands/instagram.svg" alt="Compartilhar no Instagram">';
+  //html += '</a>';
   html += '</div>';
   html += '</div>';
   html += '</div>';
