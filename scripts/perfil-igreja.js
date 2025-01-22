@@ -155,7 +155,7 @@ function evento_agenda(){
       }
 
       if(obj.lista_feed_regiao != ''){
-        html = '<div class="divisao_publi">Relacionadas a região de '+obj.lista_feed_cidade[0].cidade_nome+'</div>'
+        html = '<div class="divisao_publi">Relacionadas a região de '+obj.lista_feed_regiao[0].cidade_nome+'</div>'
         $("#divFeed").append(html);
         $.each(obj.lista_feed_regiao, function (k, lpp) {
           html = montaHtml(lpp, k);
