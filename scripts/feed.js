@@ -317,27 +317,11 @@ function abrirLinkParaInstagram(imageUrl) {
 }
 
 function abrirLinkParaFacebook(imageUrl) {
-  var facebookAppUrl = 'fb://feed?link=' + encodeURIComponent(imageUrl);
+  //var facebookAppUrl = 'fb://feed?link=' + encodeURIComponent(imageUrl);
   var facebookUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(imageUrl);
 
-  // Tenta abrir o app Facebook
-  var startTime = Date.now();
-  console.log("aqui");
-  // Tenta abrir o app com o deep link
-  window.location.href = facebookAppUrl;
-
-  // Verifica se o app foi aberto (espera 1500ms)
-  setTimeout(function() {
-    var elapsedTime = Date.now() - startTime;
-    console.log("ta");
-    console.log(elapsedTime);
-    // Se o tempo de resposta for muito curto (não mais que 1,5 segundos), significa que o app não foi aberto
-    if (elapsedTime < 1600) {
-      console.log("ta aqui");
-      // Caso não tenha aberto o app, abre o link no navegador
-      window.open(facebookUrl, '_blank');
-    }
-  }, 1500); // O tempo aqui deve ser o suficiente para um app ou navegador tentar abrir
+  
+  window.open(facebookUrl, '_blank');
 }
 
 
