@@ -1,3 +1,9 @@
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var headerHeight = $('.div_bottom_fixa').outerHeight();
+var isVisible = true;
+
 $(document).ready(function () {
   //solução provisória
     window.sessionStorage.setItem('cidade_id', 9240);
@@ -15,8 +21,9 @@ function eventos_principal(){
       var html = '';
       var obj = jQuery.parseJSON(ret);
       $.each(obj.eventos_agenda_principal, function (k, evento) {
+        var eventType = evento.evento_nome.toLowerCase();
         
-        html += '<div id="div_evento" class="div_evento">';
+        html += '<div id="'+eventType+'" class="div_evento">';
         html +=     '<div id="evento">';
         html +=         evento.evento_nome;
         html +=     '</div>';
@@ -73,6 +80,71 @@ function configurarEventos(){
     $("#modalPublicacaoEvento").show();
   });
 }
+
+$(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = $(this).scrollTop();
+
+    if (Math.abs(lastScrollTop - st) <= delta)
+        return;
+
+    if (st > lastScrollTop && st > headerHeight) {
+        // Rolagem para baixo
+        if (isVisible) {
+            $('.div_bottom_fixa').removeClass('faixa-down').addClass('faixa-up');
+            isVisible = false;
+        }
+    } else {
+        // Rolagem para cima
+        if (st < lastScrollTop) {
+            $('.div_bottom_fixa').removeClass('faixa-up').addClass('faixa-down');
+            isVisible = true;
+        }
+    }
+
+    lastScrollTop = st;
+}
+
+window.addEventListener('scroll', () => {
+  const fadeBox = document.querySelector('.fade-box');
+  const scrollPosition = window.scrollY; // Distância da rolagem
+  const fadeThreshold = 350; // Ajuste para o momento de começar a "sumir"
+
+  // Calcular opacidade baseada na rolagem
+  let opacity = 1 - scrollPosition / fadeThreshold;
+  if (opacity < 0) opacity = 0; // Não deixar a opacidade negativa
+  if (opacity > 1) opacity = 1; // Nem maior que 1
+
+  fadeBox.style.opacity = opacity;
+});
+
+$('.filterSelect').click(function () {
+  var selectedType = $(this).text().toLowerCase().trim(); // Obter o texto clicado, ex: "missas"
+  var target = document.getElementById(selectedType); // Pegar o elemento correspondente pelo ID
+  var targetPosition = target.offsetTop;
+  var offset = 50;
+
+  if (target) {
+      // Scroll suave até o elemento
+      target.scrollIntoView({
+          top: targetPosition - offset,
+          behavior: 'smooth', // Suaviza o movimento
+          //block: 'start', // Alinha o elemento no topo
+      });
+  } else {
+      console.warn('Nenhum evento correspondente encontrado.');
+  }
+});
 
 $('#pesquisar').click(function(e){
   window.location = 'pesquisa.html'
